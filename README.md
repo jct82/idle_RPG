@@ -25,7 +25,12 @@
     Bois: bûches pour faire des flèches / autre
     Minage : minerais ( fer / argent / or )
     Pêche : poissons pour te redonner de la vie,
-    Combat: 3 zones ( débutant / intermédiaire / expert )
+
+## Combat
+    3 zones ( débutant / intermédiaire / expert )
+    Système de boss qui peut drop de l'équipement
+    Combattable uniquement toutes les x heures
+    Dépendant de la zone
 
 ## Sauvegardes
     A chaque action, progrès hors ligne
