@@ -3,6 +3,7 @@
     Force,
     Dextérité,
     Endurance,
+    Défense(?),
     Magie ( si y'a le temps ),
     Potion d'énergie,
     Potion de vie,
@@ -15,10 +16,14 @@
     A l'affichage d'inventaire, on prend les objets 
 
 ## Or
-    Drop sur les monstres,
+    Drop sur les monstres une petite quantité d'or, dépensable en boutique
 
 ## Boutique
     Objets qui changent toutes les x heures
+    Les objets sont SOIT
+    Des équipements environ au niveau du joueur
+    OU
+    Matériaux ( minerais, bois, poissons... )
 
 ## Métiers
     Système de niveau
@@ -37,7 +42,7 @@
 
 ## Système d'énergie
     Tu en perds quand tu meurs,
-    perte d'énergie en faisant des métiers
+    perte d'énergie en faisant des métiers(?)
 
 ## Système de click (?)
     à chaque click, réduit le temps d'accomplir l'action de 0.1s(?)
@@ -46,7 +51,8 @@
     Stats sur les items
     Armure: Endurance,
     Bottes: Dextérité,
-    Épée/hache: Force / Arc: Dextérité // Besoin d'une certaine arme pour certaines zones
+    Épée/hache: Force / Arc: Dextérité
+    Besoin d'une certaine arme pour certaines zones(?)
     
 ## Objets
     Possibilité de vente / Démantelage ( pour avoir des matériaux )
