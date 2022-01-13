@@ -13,7 +13,8 @@
 
 ## Inventaire
     Lié au back, on envoie les objets dans la BDD de l'user
-    A l'affichage d'inventaire, on prend les objets 
+    A l'affichage d'inventaire, on prend les objets
+    Mettre en place un inventaire avec un nombre limite d'objets ou de poids (éviter un impact écologique trop fort -> éviter que les personnes laissent leur ordinateur tourner toute la nuit)
 
 ## Or
     Drop sur les monstres une petite quantité d'or, dépensable en boutique
