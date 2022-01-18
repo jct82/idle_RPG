@@ -10,6 +10,7 @@ import './styles.css';
 // == Composant
 const App = () => (
   <div className="app">
+
     <h1>Jeu IDLE</h1>
     <Routes>
       <Route exact path="/" element={<Character />} />
@@ -17,6 +18,7 @@ const App = () => (
       <Route exact path="/fight" element={<Fight />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
+
   </div>
 );
 
