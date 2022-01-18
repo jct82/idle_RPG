@@ -6,12 +6,14 @@ import Craft from 'src/components/Craft';
 import Fight from 'src/components/Fight';
 import NotFound from 'src/components/NotFound';
 import Menu from '../Menu';
+import Header from '../Header';
 import './styles.css';
 
 // == Composant
 const App = () => (
   <div className="app">
 
+   <Header title="Idle-Rpg"/>
     {/* <h1>Jeu IDLE</h1> */}
     <Menu />
     <Routes>
@@ -20,6 +22,7 @@ const App = () => (
       <Route exact path="/fight" element={<Fight />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
+
 
   </div>
 );
