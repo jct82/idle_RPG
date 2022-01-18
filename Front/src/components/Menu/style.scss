@@ -1,20 +1,19 @@
+@use 'src/styles/vars';
 @import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
 
 .navBarContainer {
   display: flex;
   flex-direction: column;
-  // justify-content: space-evenly;
   align-items: center;
   width: 20%;
   height: 100vh;
-  background: rgba(148, 207, 255, 0.5);
-  padding-top: 120px;
+  background: vars.$baseColor;
   & button {
     width: 15vw;
     height: 50px;
     border: 1px rgba(0, 0, 0, 0.2) solid;
     border-radius: 10px;
-    background: rgba(109, 189, 255, 0.5);
+    background: vars.$baseColor;
     font-family: 'Arvo', serif;
     font-size: 1.2rem;
     margin-bottom: 10px;
@@ -32,6 +31,10 @@
   & .navHidden {
     display: none;
   }
+  // & .logo-rpg {
+  //   width: 150px;
+  //   height: 150px;
+  // }
 }
 
 @media screen and (max-width: 1100px) {
@@ -47,6 +50,9 @@
       padding: 5px;
       border-radius: 50%;
       display: block;
+    }
+    & .logo-rpg {
+      display: none;
     }
   }
 }

@@ -1,5 +1,5 @@
-import './style.css';
-import logo from './Logo.png';
+import './style.scss';
+import titleLogo from  'src/assets/titleLogo.png';
 import {useState} from 'react';
 
 
@@ -18,8 +18,8 @@ export default function Header(props) {
 
   return (
     <div className="container">
-      <img className="logo-rpg" src ={logo} alt="Idle-RPG" />
-      <h1 className="title">{props.title}</h1>
+    <img className="titleLogo" src={titleLogo} alt="Logo Titre" />
+      {/* <h1 className="title">{props.title}</h1> */}
       
       <button onClick={modaleLog} 
       className="btn-log">

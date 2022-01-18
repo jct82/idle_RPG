@@ -14,13 +14,13 @@ const App = () => (
   <div className="app">
 
    <Header title="Idle-Rpg"/>
-    {/* <h1>Jeu IDLE</h1> */}
     <Menu />
+    {/* <h1>Jeu IDLE</h1> */}
     <Routes>
-      <Route exact path="/" element={<Character />} />
+      {/* <Route exact path="/" element={<Character />} />
       <Route exact path="/craft" element={<Craft />} />
       <Route exact path="/fight" element={<Fight />} />
-      <Route path="*" element={<NotFound />} />
+      <Route path="*" element={<NotFound />} /> */}
     </Routes>
 
 

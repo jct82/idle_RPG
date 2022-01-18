@@ -1,9 +1,11 @@
 import { NavLink } from 'react-router-dom';
+import logo from '../../assets/logo.png';
 import './style.scss';
 
 export default function Menu() {
   return (
     <div className="navBarContainer">
+      <img className="logo-rpg" src={logo} alt="Logo" />
       <NavLink
         key="/"
         to="/"
