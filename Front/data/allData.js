@@ -251,19 +251,19 @@ export default {
       metier_id: 1,
     },
     {
-      id: 1,
+      id: 2,
       niveau: 4,
       personnage_id:1,
       metier_id: 2,
     },
     {
-      id: 1,
+      id: 3,
       niveau: 2,
       personnage_id:2,
       metier_id: 1,
     },
     {
-      id: 1,
+      id: 4,
       niveau: 3,
       personnage_id:2,
       metier_id: 2,
