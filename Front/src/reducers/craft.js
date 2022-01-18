@@ -1,11 +1,14 @@
-import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../actions';
+import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../actions/character';
 
 const initialState = {
-  name: 'The Counter',
-  value: 0,
+  name: 'Minage',
+  type: 'minerai',
+  quantité: 0,
+  level: 0,
+  currentType: 'fer'
 };
 
-const counter = (state = initialState, action = {}) => {
+const craft = (state = initialState, action = {}) => {
   switch (action.type) {
     case INCREMENT_COUNTER:
       return {
@@ -22,4 +25,4 @@ const counter = (state = initialState, action = {}) => {
   }
 };
 
-export default counter;
+export default craft;
