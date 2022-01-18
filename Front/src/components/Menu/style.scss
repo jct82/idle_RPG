@@ -8,6 +8,7 @@
   width: 20%;
   height: 100vh;
   background: rgba(148, 207, 255, 0.5);
+  padding-top: 120px;
   & button {
     width: 15vw;
     height: 50px;
@@ -20,9 +21,7 @@
     box-shadow: inset 1px 1px 5px white;
     color: white;
     transition: background 100ms;
-    &:first-child {
-      margin-top: 15px;
-    }
+    margin-top: 15px;
     &:active {
       background: rgba(0, 140, 255, 0.5);
     }
@@ -44,6 +43,9 @@
       display: none;
     }
     & .navHidden {
+      border: 1px rgba(0,0,0,.1) solid;
+      padding: 5px;
+      border-radius: 50%;
       display: block;
     }
   }
