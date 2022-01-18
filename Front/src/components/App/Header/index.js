@@ -1,5 +1,7 @@
 import './style.css';
 import logo from './Logo.png';
+import mail from './icon-mail.png';
+import lock from './lock.png';
 import {useState} from 'react';
 
 
@@ -27,8 +29,29 @@ export default function Header(props) {
       </button> 
 
       {modale &&
-      <div className="popup">
-        <h1 className="text">Bonjour User</h1>
+      <div className="form-log">
+     
+
+<form className="container-form">
+    <img src={mail} alt="mail" />
+    <input
+       
+        type="text"
+        id="title"
+        placeholder="Entrez votre email"
+        className='inp-title'
+   />
+    <img src= {lock} alt="Mot de passe" />
+    <input
+       
+        type="text"
+        id="title"
+        placeholder="Entrez votre mot de passe"
+        className='inp-mdp'
+   />
+      <button className='btn-send'>Se connecter</button>
+
+</form> 
       </div>
       
       }
