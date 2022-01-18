@@ -1,5 +1,5 @@
 // == Import : npm
-import { BrowserRouter } from 'react-router-dom';
+
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -9,13 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from 'src/components/App';
 import store from './store';
 
-const rootReactElement = (
-  <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </BrowserRouter>
-);
+
 // == Render
 // 1. Élément React racine (celui qui contient l'ensemble de l'app)
 //    => crée une structure d'objets imbriqués (DOM virtuel)

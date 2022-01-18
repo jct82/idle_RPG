@@ -7,7 +7,7 @@ import Fight from 'src/components/Fight';
 import NotFound from 'src/components/NotFound';
 import Menu from '../Menu';
 import Header from '../Header';
-import './styles.css';
+import './style.scss';
 
 // == Composant
 const App = () => (
