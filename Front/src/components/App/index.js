@@ -5,13 +5,15 @@ import Character from 'src/components/Character';
 import Craft from 'src/components/Craft';
 import Fight from 'src/components/Fight';
 import NotFound from 'src/components/NotFound';
+import Menu from '../Menu';
 import './styles.css';
 
 // == Composant
 const App = () => (
   <div className="app">
 
-    <h1>Jeu IDLE</h1>
+    {/* <h1>Jeu IDLE</h1> */}
+    <Menu />
     <Routes>
       <Route exact path="/" element={<Character />} />
       <Route exact path="/craft" element={<Craft />} />
