@@ -1,5 +1,4 @@
 // == Import
-
 import Header from './Header';
 import './style.scss';
 

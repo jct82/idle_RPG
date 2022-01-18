@@ -20,6 +20,7 @@ export default function Header(props) {
     <div className="container">
       <img className="logo-rpg" src ={logo} alt="Idle-RPG" />
       <h1 className="title">{props.title}</h1>
+      
       <button onClick={modaleLog} 
       className="btn-log">
       Se connecter
