@@ -1,12 +1,45 @@
 export default {
   menu: [
-    Accueil, 
-    Boutique, 
-    Inventaire/stat, 
-    Combat, 
-    Craft, 
-    Minage, 
-    Pêche
+    {
+      id: 1,
+      nom: "Accueil",
+      route: "/",
+    }, 
+    { 
+      id: 2,
+      nom: "Boutique", 
+      route: "/shop",
+    },
+    { 
+      id: 3,
+      nom: "Inventaire/stat", 
+      route: "/inventory",
+    },
+    { 
+      id: 4,
+      nom: "Combat", 
+      route: "/fighting",
+    },
+    { 
+      id: 5,
+      nom: "Craft", 
+      route: "/craft",
+    },
+    { 
+      id: 6,
+      nom: "Minage", 
+      route: "/jobs/:nom",
+    },
+    { 
+      id: 7,
+      nom: "Pêche", 
+      route: "/jobs/:nom",
+    },
+    {
+      id: 8,
+      nom: "Contact",
+      route: "/contact"
+    }
   ],
   utilisateur:
   [
