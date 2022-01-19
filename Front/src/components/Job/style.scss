@@ -1,0 +1,144 @@
+@use 'src/styles/vars';
+
+.job {
+  &Container {
+    width: 80%;
+    height: 100%;
+    position: absolute;
+    left: 20%;
+    top: 30%;
+  }
+  &SecondaryContainer {
+    // margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    margin: 15px auto;
+    width: 85%;
+    height: 37%;
+  }
+  &Main {
+    width: 85%;
+    height: 250px;
+    background: url('../../assets/job_background.png');
+    background-position: bottom;
+    border: 1px rgba(0, 0, 0, 0.205) solid;
+    border-radius: 10px;
+    margin: auto;
+    overflow: hidden;
+    & button {
+      font-size: 1.2rem;
+      background: vars.$baseColor;
+      border: none;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      padding: 15px;
+      display: inherit;
+      width: 70%;
+      margin: auto;
+    }
+  }
+  &Small {
+    border: 1px rgba(0, 0, 0, 0.205) solid;
+    border-radius: 10px;
+    width: 48%;
+    height: 100%;
+    background: vars.$baseColor;
+  }
+  &Player {
+    width: 48px;
+    height: 48px;
+    // border: 1px #f0f solid;
+    position: absolute;
+    top: 22%;
+    left: 20%;
+    z-index: 2;
+  }
+  &ResourceList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.resource {
+  display: inline-block;
+  margin: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px black solid;
+  // background: limegreen;
+  &Name {
+    width: 32px;
+    height: 32px;
+    margin: auto;
+  }
+  & p {
+    margin-top: 20px;
+    text-align: center;
+  }
+}
+
+.currentOre {
+  position: absolute;
+  top: 23.8%;
+  left: 22%;
+  width: 32px;
+  height: 32px;
+  // border: 1px blue solid;
+}
+
+.playerMining {
+  background: url('../../assets/player/mining.png');
+  animation: mining 500ms steps(6) infinite;
+}
+
+.playerIdle {
+  background: url('../../assets/player/idle.png');
+  animation: idle 500ms steps(4) infinite;
+}
+
+.bronze {
+  background: url('../../assets/mining/bronze.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.or {
+  background: url('../../assets/mining/or.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+@media screen and (max-width: 1100px) {
+  .job {
+    &Container {
+      left: 10%;
+      width: 95%;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .jobContainer {
+    top: 35%;
+    left: 15%;
+  }
+}
+
+@keyframes mining {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: -288px;
+  }
+}
+
+@keyframes idle {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: -194px;
+  }
+}
