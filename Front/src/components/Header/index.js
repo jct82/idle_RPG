@@ -1,18 +1,33 @@
+import {useState} from 'react';
+import {useSelector,useDispatch} from 'react-redux';
 import './style.css';
 import logo from './Logo.png';
-import mail from './icon-mail.png';
+import mails from './icon-mail.png';
 import lock from './lock.png';
-import {useState} from 'react';
+import { logModale,setUpdateField} from '../../actions/user';
+
+
 
 
 export default function Header(props) {
 
-  const [modale,setModale] = useState(false);
+  const {log,mail,password} = useSelector((state) => state.user);
+  const dispatch = useDispatch() 
+  
 
-  const modaleLog = () => {
-    setModale(!modale)
+  const openModale = () => {
+    dispatch(logModale());
+
   }
-  console.log(modale);
+
+  const updateField = (e) => {
+    
+  dispatch(setUpdateField(e.target.name,e.target.value));
+
+  }
+
+
+  
 
 
 
@@ -24,21 +39,24 @@ export default function Header(props) {
       <h1 className="title">{props.title}</h1>
       
       <div className="btn">
-      {!modale &&
-      <button onClick={modaleLog} 
+      {!log &&
+     
+      <button onClick={openModale}  
       className="btn-log">
       Se connecter
       </button> 
       }
 </div>
-      {modale &&
+      {log &&
       <div className="form-log">
      
 
 <form className="container-form">
-    <img src={mail} alt="mail" />
+    <img src={mails} alt="mail" />
     <input
-       
+        name="mail"
+        value={mail}
+        onChange={updateField}
         type="text"
         id="title"
         placeholder="Entrez votre email"
@@ -46,7 +64,9 @@ export default function Header(props) {
    />
     <img src= {lock} alt="Mot de passe" />
     <input
-       
+        name="password"
+        value={password}
+        onChange={updateField}
         type="text"
         id="title"
         placeholder="Entrez votre mot de passe"
