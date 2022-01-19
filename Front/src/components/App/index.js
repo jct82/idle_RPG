@@ -10,13 +10,12 @@ import Menu from '../Menu';
 import Header from '../Header';
 import Job from '../Job';
 
-import imageTop from '../../assets/titleLogo.png';
+
 import './style.scss';
 
 // == Composant
 const App = () => (
   <div className="app">
-    <img className="title-logo" src={imageTop}/>
    <Header title="Idle-Rpg"/>
     <Menu />
     {/* <h1>Jeu IDLE</h1> */}

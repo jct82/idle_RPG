@@ -6,7 +6,7 @@ import mails from './icon-mail.png';
 import lock from './lock.png';
 import { logModale,setUpdateField} from '../../actions/user';
 
-
+import imageTop from '../../assets/titleLogo.png';
 
 
 export default function Header(props) {
@@ -24,16 +24,11 @@ export default function Header(props) {
 
   return (
     <div className="connect">
-      <div className="btn">
+      <img className="title-logo" src={imageTop}/>
       {!log &&
-     
-      <button onClick={openModale}  
-      className="btn-log">
-      Se connecter
-      </button> 
+        <button onClick={openModale} className="btn-log">Se connecter</button> 
       }
-      </div>
-        {log &&
+      {log &&
         <div className="form-log">
           <form className="connect-form">
             <img src={mails} alt="mail" />

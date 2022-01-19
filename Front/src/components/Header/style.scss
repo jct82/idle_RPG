@@ -1,25 +1,25 @@
 .connect {
-  position: absolute;
-  top: 40px;
-  right: 40px;
+  padding:15px 0;
+  text-align: center;
 }
 
-
-.btn {
-    display: flex;
-    width: 100px;
-    height: 20px;
-    justify-content: center; 
+.title-logo{
+  max-width: 270px;
 }
 
 .btn-log {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  padding: 5px 8px 6px;
+  line-height: 1;
   border-radius: 5%;
   background: chocolate;
 }
 
-
 .form-log{
   position: fixed;
+  z-index: 1;
   top: 45%;
   left: 0;
   right: 0;
@@ -45,33 +45,16 @@
   background-color: darkgrey;
 }
 
-@media screen and (max-width : 500px){
-  
-  .connect {
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid black;
-    background-color: aliceblue;
+@media screen and (max-width : 768px){
+  .title-logo{
+    max-width: 170px;
   }
-  
-  .title {
-    display: flex;
-    font-size: 16px;
-    margin: 16px;
-  }
-  
-  .logo-rpg {
-    width: 80px;
-    height: 80px;
-  }
-  
+
   .btn-log {
-   
-    border-radius: 6px;  
-    background: darkgray;
-    color: snow;  
+    right: 20px;
+    top: 20px;
   }
-  
+
   .form-log{
     display: flex;
     flex-direction: column;
@@ -80,8 +63,6 @@
   .connect-form {
     flex-direction: column;
     flex: auto;
-    border: 2px solid black;
-    background-color: aliceblue;
   }
  
 }

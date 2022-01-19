@@ -7,8 +7,10 @@ import image3 from '../../assets/mario3.jpg';
 export default function Home() {
   return (
     <div className="home">
-      <div className="video">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/JNl1_hRwpXE" title="YouTube video player" allowFullScreen />
+      <div className="video-wrapper">
+        <div className="video">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/JNl1_hRwpXE" title="YouTube video player" allowFullScreen />
+        </div>
       </div>
       <div className="slider">
         <div className="slides">
