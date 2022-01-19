@@ -8,6 +8,7 @@ import NotFound from 'src/components/NotFound';
 import Menu from '../Menu';
 import Header from '../Header';
 import './style.scss';
+import Job from '../Job';
 
 // == Composant
 const App = () => (
@@ -18,6 +19,7 @@ const App = () => (
     {/* <h1>Jeu IDLE</h1> */}
     <Routes>
       <Route exact path="/character" element={<Character />} />
+      <Route path="/jobs/mining" element={<Job />} />
       {/*<Route exact path="/craft" element={<Craft />} />
       <Route exact path="/fight" element={<Fight />} />
       <Route path="*" element={<NotFound />} /> */}
