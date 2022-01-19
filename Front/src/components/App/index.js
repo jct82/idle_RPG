@@ -17,8 +17,8 @@ const App = () => (
     <Menu />
     {/* <h1>Jeu IDLE</h1> */}
     <Routes>
-      {/* <Route exact path="/" element={<Character />} />
-      <Route exact path="/craft" element={<Craft />} />
+      <Route exact path="/character" element={<Character />} />
+      {/*<Route exact path="/craft" element={<Craft />} />
       <Route exact path="/fight" element={<Fight />} />
       <Route path="*" element={<NotFound />} /> */}
     </Routes>
