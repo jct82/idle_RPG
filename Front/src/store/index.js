@@ -9,18 +9,11 @@ import logMiddleware from '../middleware/logMiddleware';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const enhancers = composeEnhancers(
-  applyMiddleware(
-    logMiddleware,
-    // secondMiddleware,
-  ),
+  applyMiddleware(logMiddleware),
 );
 
 // == Store
-const store = createStore(
-  rootReducer,
-  // preloadedState,
-  enhancers,
-);
+const store = createStore(rootReducer,enhancers,);
 
 // == Export
 export default store;
