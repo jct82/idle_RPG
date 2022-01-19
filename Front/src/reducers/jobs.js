@@ -1,14 +1,12 @@
-import { SET_WORKING_MINE, DECREMENT_COUNTER } from '../actions/jobs';
+import { SET_WORKING_MINE, SET_CURRENT_ORE, DECREMENT_COUNTER } from '../actions/jobs';
 
 const initialState = {
-  job: {
-    mining: {
-      level: 1,
-      currentOre: '',
-      isWorking: false,
-      buttonTitle: 'Commencer à travailler'
-    },
-  }
+  mining: {
+    level: 1,
+    currentOre: '',
+    isWorking: false,
+    buttonTitle: 'Commencer à travailler'
+  },
 };
 
 const jobs = (state = initialState, action = {}) => {
@@ -16,12 +14,20 @@ const jobs = (state = initialState, action = {}) => {
     case SET_WORKING_MINE:
       return {
         ...state,
-        value: state.value + 1,
+        mining: {
+          ...state.mining,
+          isWorking: !state.mining.isWorking,
+          buttonTitle: !state.mining.isWorking ? `Vous récoltez "${state.mining.currentOre}"` : "Commencer à travailler",
+        }
       };
-    case DECREMENT_COUNTER:
+    case SET_CURRENT_ORE:
       return {
         ...state,
-        value: state.value - 1,
+        mining: {
+          ...state.mining,
+          currentOre: action.payload.currentOre,
+          buttonTitle: state.mining.isWorking ? `Vous récoltez "${action.payload.currentOre}"` : "Commencer à travailler",
+        }
       };
     default:
       return state;

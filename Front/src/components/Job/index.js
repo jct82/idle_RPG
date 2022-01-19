@@ -1,28 +1,24 @@
-import { useState } from 'react';
+// import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setWorking, setCurrentOre } from '../../actions/jobs';
 import './style.scss';
 
 export default function Job() {
   // State
   const arr = ['bronze', 'or', 'truc', 'machin', 'minerai', 'wow'];
-  const [currentOre, setCurrentOre] = useState('');
-  const [buttonTitle, setButtonTitle] = useState('Commencer à travailler');
-  const [workingState, setWorkingState] = useState(false);
 
-  // Click bouton
+  const {isWorking, buttonTitle, currentOre} = useSelector((state) => state.jobs.mining);
+
+  const dispatch = useDispatch();
+
+  // Click bouton pour lancer l'action
   const buttonOnClick = () => {
-    setWorkingState(!workingState);
-    // console.log(workingState);
-    if (workingState) {
-      setButtonTitle('Commencer à travailler');
-    } else {
-      setButtonTitle('Arrêter de travailler');
-    };
+    dispatch(setWorking());
   };
 
   // Choix de la ressource
   const switchResource = (e) => {
-    setCurrentOre(e.target.className.split(' ')[1])
-    // console.log(e.target.className.split(' ')[1]);
+    dispatch(setCurrentOre(e.target.className.split(' ')[1]));
   }
 
   // Remplissage de la liste des ressources
@@ -35,7 +31,7 @@ export default function Job() {
     <div className="jobContainer">
       <div className="jobMain">
         <button className="jobStartAction" onClick={buttonOnClick}>{buttonTitle}</button>
-        <div className={`jobPlayer ${workingState ? "playerMining" : "playerIdle"}`}></div>
+        <div className={`jobPlayer ${isWorking ? "playerMining" : "playerIdle"}`}></div>
         <div className={`currentOre ${currentOre}`}></div>
       </div>
       <div className="jobSecondaryContainer">
