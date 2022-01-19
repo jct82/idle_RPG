@@ -23,11 +23,14 @@ export default function Header(props) {
       <img className="logo-rpg" src ={logo} alt="Idle-RPG" />
       <h1 className="title">{props.title}</h1>
       
+      <div className="btn">
+      {!modale &&
       <button onClick={modaleLog} 
       className="btn-log">
       Se connecter
       </button> 
-
+      }
+</div>
       {modale &&
       <div className="form-log">
      
