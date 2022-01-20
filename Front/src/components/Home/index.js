@@ -3,15 +3,18 @@ import './style.scss';
 import image1 from '../../assets/mario1.jpg';
 import image2 from '../../assets/mario2.jpg';
 import image3 from '../../assets/mario3.jpg';
+import idleFrame1 from '../../assets/IdleFrame580x335.png';
 
 export default function Home() {
   return (
     <div className="home">
       <div className="video-wrapper">
         <div className="video">
+          <img src={idleFrame1} alt="frame" />
           <iframe src="https://www.youtube.com/embed/JNl1_hRwpXE" title="YouTube video player" allowFullScreen />
         </div>
       </div>
+      <img className="frame-slide" src={idleFrame1} alt="frame" />
       <div className="slider">
         <div className="slides">
           <div className="slide"><img src={image1} alt="slide mario et donkey kong" /></div>

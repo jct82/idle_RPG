@@ -4,22 +4,32 @@
 }
 
 .video-wrapper{
-  width: 560px;
-  max-width: 100%;
+  width: 540px;
+  max-width: 220%;
   margin: 0 auto 40px;
+  
   .video {
     position: relative;
     padding-bottom: 56%;
+    z-index: 2;
     iframe{
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      border-radius: 10px;
+    }
+    img {
+      position: absolute;
+      top:-5%;
+      left: -3.5%;
     }
   }
 }
-
+.frame-slide {
+margin: auto;
+}
 .slider {
  width: 600px;
  max-width: 100%;
@@ -30,9 +40,10 @@
    width: 700px;
    height: 300px;
    animation: glisse 10s infinite;
-     
      & .slide {
      flex-direction: row;
+     z-index: 2;
+     position: relative;
    }
  } 
 }
