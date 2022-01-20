@@ -9,7 +9,6 @@ const characters = [
       {nom:'botte', type:'equipement', description:' pour se chausser', image:'', quantite: 4, type_statistique: 'dexterité', réserve:[{valeur:150, stastistique: 10}]},
       {nom:'casque', type:'equipement', description:' pour se protéger', image:'', quantite: 2, type_statistique: 'endurance', réserve:[{valeur:200, stastistique: 20}]},
       {nom:'armure', type:'equipement', description:' pour se protéger', image:'', quantite: 1, type_statistique: 'endurance', réserve:[{valeur:400, stastistique: 40}]},
-
       {nom:'épée', type:'arme', description:'pour planter', image:'', valeur:200, quantite: 1, stastistique: 30, type_statistique: 'force'},
       {nom:'arbalette', type:'arme', description:'pour tirer des flêches', image:'', valeur:100, quantite: 1, stastistique: 15, type_statistique: 'force'},
       {nom:'plantes', type:'médicament', description:'pour se soigner', image:'', valeur:50, quantite: 0, stastistique: 10},
@@ -22,18 +21,6 @@ const characters = [
     endurance: 0, 
     dexterité: 0,
     argent: 0,
-  },
-  {
-    id: 2,
-
-  },
-  {
-    id: 3,
-    
-  },
-  {
-    id: 4,
-    
   },
 ];
 
