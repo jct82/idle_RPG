@@ -1,20 +1,38 @@
 // import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setWorking, setCurrentOre } from '../../actions/jobs';
+import { setWorking, setCurrentOre, alertPlayerOre, addLogMessage } from '../../actions/jobs';
 import './style.scss';
 
 export default function Job() {
-  // State
-  const arr = ['bronze', 'or', 'truc', 'machin', 'minerai', 'wow'];
-
-  const {isWorking, buttonTitle, currentOre} = useSelector((state) => state.jobs.mining);
+  const { isWorking, buttonTitle, currentOre, ores, baseReward, actionTime, logMessages, workingInterval } = useSelector((state) => state.jobs.mining);
 
   const dispatch = useDispatch();
 
+
   // Click bouton pour lancer l'action
   const buttonOnClick = () => {
-    dispatch(setWorking());
+    if (currentOre) {
+      dispatch(setWorking());
+      const oreExperience = ores.find(ore => ore.name === currentOre);
+      let interval = setInterval(() => {
+        dispatch(addLogMessage(oreExperience.experience, baseReward))
+      }, 500);
+      if (isWorking) {
+        clearInterval(interval);
+      }
+    }
+    else
+    {
+      console.log(isWorking);
+      dispatch(alertPlayerOre());
+    }
   };
+
+  // const isWorking && dispatch(addLogMessage(oreExperience.experience, baseReward))
+
+  // setInterval(() => {
+  //   console.log(isWorking);
+  // }, 500);
 
   // Choix de la ressource
   const switchResource = (e) => {
@@ -22,20 +40,24 @@ export default function Job() {
   }
 
   // Remplissage de la liste des ressources
-  const fillResources = arr.map(vein =>
-  <div className={`resource ${vein}`} key={vein} onClick={switchResource}>
+  const fillResources = ores.map(vein =>
+  <div className={`resource ${vein.name}`} key={vein.name} onClick={switchResource}>
+    <span className="oreTooltipText">{vein.name}<br /> {vein.desc}</span>
     {/* <div className={`resourceName ${vein}`} /> */}
     {/* <p>{vein}</p> */}
   </div> )
+
   return (
     <div className="jobContainer">
       <div className="jobMain">
         <button className="jobStartAction" onClick={buttonOnClick}>{buttonTitle}</button>
-        <div className={`jobPlayer ${isWorking ? "playerMining" : "playerIdle"}`}></div>
-        <div className={`currentOre ${currentOre}`}></div>
+        <div className="playerWorkContainer">
+          <div className={`jobPlayer ${isWorking ? "playerMining" : "playerIdle"}`}></div>
+          <div className={`currentOre ${currentOre}`}></div>
+        </div>
       </div>
       <div className="jobSecondaryContainer">
-        <div className="jobSmall jobLogs"></div>
+        <div className="jobSmall jobLogs">{logMessages}</div>
         <div className="jobSmall jobResourcesList">{fillResources}</div>
       </div>
     </div>

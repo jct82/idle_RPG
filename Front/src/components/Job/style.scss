@@ -43,26 +43,48 @@
     width: 48px;
     height: 48px;
     // border: 1px #f0f solid;
-    position: absolute;
-    bottom: 13%;
-    left: 20%;
+    // position: absolute;
+    // bottom: 13%;
+    // left: 20%;
     z-index: 2;
   }
   &ResourcesList {
+    max-height: 280px;
+    overflow-y: scroll;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
   }
 }
 
+.currentOre {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  // border: 1px blue solid;
+}
+
+.playerWorkContainer {
+  width: fit-content;
+  display: flex;
+  position: absolute;
+  bottom: 15%;
+  left: 15%;
+}
+
 .resource {
   display: inline-block;
   margin: 20px;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  border: 4px black solid;
-  // background: limegreen;
+  border: 2px black solid;
+  // test
+  &:hover .oreTooltipText {
+    display: inline;
+  }
   &Name {
     width: 32px;
     height: 32px;
@@ -72,15 +94,6 @@
     margin-top: 20px;
     text-align: center;
   }
-}
-
-.currentOre {
-  position: absolute;
-  top: 23.8%;
-  left: 22%;
-  width: 32px;
-  height: 32px;
-  // border: 1px blue solid;
 }
 
 .playerMining {
@@ -93,8 +106,8 @@
   animation: idle 500ms steps(4) infinite;
 }
 
-.bronze {
-  background: url('../../assets/mining/bronze.png');
+.fer {
+  background: url('../../assets/mining/fer.png');
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -104,6 +117,30 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.bronze {
+  background: url('../../assets/mining/bronze.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.oreTooltipText {
+  pointer-events: none;
+  display: none;
+  width: min-content;
+  text-align: center;
+  background: vars.$baseColor;
+  font-size: 0.8rem;
+  user-select: none;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 15px;
+  line-height: 1.5rem;
+  position: relative;
+  left: -25px;
+  z-index: 2;
+}
+
 @media screen and (max-width: 768px) {
   .jobSecondaryContainer{
     flex-wrap: wrap;
