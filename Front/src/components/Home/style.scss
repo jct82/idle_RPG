@@ -27,25 +27,53 @@
     }
   }
 }
-.frame-slide {
-margin: auto;
+.frame-wrapper {
+  width: 600px;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+   .frame-slide {
+   position: relative;
+   left: 2%;
+  } 
 }
-.slider {
- width: 600px;
- max-width: 100%;
- margin: 0 auto;
- overflow: hidden;
- & .slides {
-   display: flex;
-   width: 700px;
-   height: 300px;
-   animation: glisse 10s infinite;
-     & .slide {
-     flex-direction: row;
-     z-index: 2;
-     position: relative;
-   }
- } 
+.slider-wrapper{
+  width: 580px;
+  max-width: 100%;
+  margin: 0 auto;
+  .slider {
+  width: 100%;
+  padding: 3.2%;
+  border-radius: 10px;
+  background-image: url('../../assets/IdleFrame580x335.png');
+  background-repeat: no-repeat;
+  background-size :100%;
+  .slider-inner{
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  & .slides {
+    display: block;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    .slide-container{
+        width: 300%;
+        display: flex;
+        flex-direction: row;
+        animation: glisse 10s infinite;
+        & .slide {
+          position: relative;
+          width: calc(100% / 3);
+          img{
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+    } 
+  }
 }
 
 @keyframes glisse {
@@ -56,16 +84,16 @@ margin: auto;
    transform: translateX(0);
  }
  33% {
-   transform: translateX(-620px);
+   transform: translateX(-33.33%);
  }
  43% {
-   transform: translateX(-620px);
+   transform: translateX(-33.33%);
  }
  66% {
-   transform: translateX(-1240px);
+   transform: translateX(-66.66%);
  }
  76% {
-   transform: translateX(-1240px);
+   transform: translateX(-66.66%);
  }
  100% {
    transform: translateX(0);
@@ -84,6 +112,8 @@ margin: auto;
    .update-text {
      white-space: nowrap;
      animation: scrollTxt 25s linear infinite;
+     border-top: 1px solid yellow;
+     border-bottom: 1px solid yellow;
    }
 }
 
@@ -97,5 +127,7 @@ margin: auto;
 }
 
 @media screen and (max-width: 1100px) {
-
+  .frame-wrapper {
+    display: none;
+  }
 }

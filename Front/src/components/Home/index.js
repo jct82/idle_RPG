@@ -14,12 +14,17 @@ export default function Home() {
           <iframe src="https://www.youtube.com/embed/JNl1_hRwpXE" title="YouTube video player" allowFullScreen />
         </div>
       </div>
-      <img className="frame-slide" src={idleFrame1} alt="frame" />
-      <div className="slider">
-        <div className="slides">
-          <div className="slide"><img src={image1} alt="slide mario et donkey kong" /></div>
-          <div className="slide"><img src={image2} alt="slide mario et luigi" /></div>
-          <div className="slide"><img src={image3} alt="slide mario et une banane" /></div>
+      <div className="slider-wrapper">
+        <div className="slider">
+          <div className="slider-inner">
+            <div className="slides">
+              <div className="slide-container">
+                <div className="slide"><img src={image1} alt="slide mario et donkey kong" /></div>
+                <div className="slide"><img src={image2} alt="slide mario et luigi" /></div>
+                <div className="slide"><img src={image3} alt="slide mario et une banane" /></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="update">
