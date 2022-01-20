@@ -9,7 +9,7 @@ export default function Home() {
     <div className="home">
       <div className="video-wrapper">
         <div className="video">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/JNl1_hRwpXE" title="YouTube video player" allowFullScreen />
+          <iframe src="https://www.youtube.com/embed/JNl1_hRwpXE" title="YouTube video player" allowFullScreen />
         </div>
       </div>
       <div className="slider">

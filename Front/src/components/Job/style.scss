@@ -12,6 +12,7 @@
     justify-content: space-between;
   }
   &Main {
+    position: relative;
     flex-basis: 100%;
     height: 250px;
     margin-bottom: 40px;
@@ -43,7 +44,7 @@
     height: 48px;
     // border: 1px #f0f solid;
     position: absolute;
-    top: 22%;
+    bottom: 13%;
     left: 20%;
     z-index: 2;
   }
