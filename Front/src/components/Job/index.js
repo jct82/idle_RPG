@@ -11,19 +11,20 @@ export default function Job() {
 
   // Click bouton pour lancer l'action
   const buttonOnClick = () => {
+    
     if (currentOre) {
       dispatch(setWorking());
       const oreExperience = ores.find(ore => ore.name === currentOre);
       let interval = setInterval(() => {
         dispatch(addLogMessage(oreExperience.experience, baseReward))
-      }, 500);
+      }, 3000);
       if (isWorking) {
+        console.log('clear interval');
         clearInterval(interval);
       }
     }
     else
     {
-      console.log(isWorking);
       dispatch(alertPlayerOre());
     }
   };
