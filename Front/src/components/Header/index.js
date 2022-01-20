@@ -1,20 +1,21 @@
-import {useState} from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import './style.scss';
 import logo from './Logo.png';
 import mails from './icon-mail.png';
 import lock from './lock.png';
 import { logModale,setUpdateField} from '../../actions/user';
-
 import imageTop from '../../assets/titleLogo.png';
 
 
 export default function Header(props) {
 
   const {log,mail,password} = useSelector((state) => state.user);
+  // Je sélectionne log,mail,password qui se trouve dans mon reducer user
   const dispatch = useDispatch() 
+  // Je crée ma méthode useDispatch
   
   const openModale = () => {
+    // Je dispatch mon new state 
     dispatch(logModale());
   }
 
@@ -39,7 +40,7 @@ export default function Header(props) {
                 type="text"
                 id="title"
                 placeholder="Entrez votre email"
-                className='inp-title'
+                className="input-modal inp-title"
             />
             <img src= {lock} alt="Mot de passe" />
             <input
@@ -49,8 +50,9 @@ export default function Header(props) {
                 type="text"
                 id="title"
                 placeholder="Entrez votre mot de passe"
-                className='inp-mdp'
+                className="input-modal inp-mdp"
           />
+            {/* <button className='btn-inscription'>Inscription</button> */}
             <button className='btn-send'>Se connecter</button>
           </form> 
         </div>
