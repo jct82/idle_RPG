@@ -5,9 +5,9 @@ POST {{host}}/subscribe
 Content-Type: application/json
 
 {
-    "email": "lefoufou@lefouf.com",
+    "email": "user@email.com",
     "password": "123456",
-    "name": "Lefouf"
+    "name": "user"
 }
 
 ### Login
@@ -15,10 +15,10 @@ POST {{host}}/login
 Content-Type: application/json
 
 {
-    "email": "lefoufou@lefouf.com",
+    "email": "user@email.com",
     "password": "123456"
 }
 
 ### Get infos
 GET {{host}}/infos
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxLCJpYXQiOjE2NDI2ODI0NzgsImV4cCI6MTY0MjY4MjUzOH0.oqNyjxNFh6Vf9fAyHdOgWsm7DMyxGb3iZgvrnYeAyOA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxLCJpYXQiOjE2NDI2ODQ0MTAsImV4cCI6MTY0MjY4NDQ3MH0.g0FCtzO40RiI9ky8dZt0Pnp1kUUytSv_S5s__JGMqy0
