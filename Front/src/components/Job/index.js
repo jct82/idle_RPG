@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setWorking, setCurrentOre, alertPlayerOre, addLogMessage } from '../../actions/jobs';
 import './style.scss';
@@ -14,14 +14,6 @@ export default function Job() {
     
     if (currentOre) {
       dispatch(setWorking());
-      const oreExperience = ores.find(ore => ore.name === currentOre);
-      let interval = setInterval(() => {
-        dispatch(addLogMessage(oreExperience.experience, baseReward))
-      }, 3000);
-      if (isWorking) {
-        console.log('clear interval');
-        clearInterval(interval);
-      }
     }
     else
     {
@@ -29,11 +21,18 @@ export default function Job() {
     }
   };
 
-  // const isWorking && dispatch(addLogMessage(oreExperience.experience, baseReward))
+  // Pour afficher les logs
+  // https://devtrium.com/posts/set-interval-react
+  useEffect(() => {
+    if (isWorking) {
+      const interval = setInterval(() => {
+        const oreExperience = ores.find(ore => ore.name === currentOre);
+        dispatch(addLogMessage(oreExperience.experience, baseReward));
+      }, actionTime);
 
-  // setInterval(() => {
-  //   console.log(isWorking);
-  // }, 500);
+      return () => clearInterval(interval)
+    }
+  }, [isWorking])
 
   // Choix de la ressource
   const switchResource = (e) => {
@@ -51,7 +50,7 @@ export default function Job() {
   return (
     <div className="jobContainer">
       <div className="jobMain">
-        <button className="jobStartAction" onClick={buttonOnClick}>{buttonTitle}</button>
+        <button className="jobStartAction" onMouseDown={buttonOnClick}>{buttonTitle}</button>
         <div className="playerWorkContainer">
           <div className={`jobPlayer ${isWorking ? "playerMining" : "playerIdle"}`}></div>
           <div className={`currentOre ${currentOre}`}></div>

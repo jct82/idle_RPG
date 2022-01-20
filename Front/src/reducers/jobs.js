@@ -33,6 +33,26 @@ const initialState = {
         desc:'Niveau 40 requis',
         experience: 80,
       },
+      {
+        name: 'vvvv',
+        desc:'Niveau 1 requis',
+        experience: 5,
+      },
+      {
+        name: 'ccccc',
+        desc:'Niveau 5 requis',
+        experience: 15,
+      },
+      {
+        name: 'aaaaa',
+        desc:'Niveau 20 requis',
+        experience: 40,
+      },
+      {
+        name: 'dzdz',
+        desc:'Niveau 40 requis',
+        experience: 80,
+      },
     ]
   },
 };
@@ -72,8 +92,8 @@ const jobs = (state = initialState, action = {}) => {
               ...state.mining,
               experience: state.mining.experience + action.payload.experience,
               logMessages: [
+                <p key={state.mining.experience}>Vous avez récupéré {action.payload.amount} {state.mining.currentOre} et {action.payload.experience} points d'expérience</p>,
                 ...state.mining.logMessages,
-                `Vous avez récupéré ${action.payload.amount} ${state.mining.currentOre}`,
               ],
             }
           };

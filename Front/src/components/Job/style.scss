@@ -1,4 +1,5 @@
 @use 'src/styles/vars';
+@import url('https://fonts.googleapis.com/css2?family=Economica&display=swap');
 
 .job {
   &Container {
@@ -22,6 +23,7 @@
     border-radius: 10px;
     overflow: hidden;
     & button {
+      font-family: 'Economica', sans-serif;
       font-size: 1.2rem;
       background: vars.$baseColor;
       border: none;
@@ -54,6 +56,17 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+  }
+  &Logs {
+    padding: 10px;
+    line-height: 1.9rem;
+    max-height: 280px;
+    overflow-y: scroll;
+  }
+  &Logs p{
+    font-family: 'Economica', sans-serif;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
   }
 }
 
