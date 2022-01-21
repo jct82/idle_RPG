@@ -17,11 +17,16 @@
     flex-basis: 100%;
     height: 250px;
     margin-bottom: 40px;
-    background-image: url('../../assets/job_background.png');
-    background-position: bottom;
+    background-position: bottom left;
     border: 1px rgba(0, 0, 0, 0.205) solid;
     border-radius: 10px;
     overflow: hidden;
+    &-mining {
+      background-image: url('../../assets/job_background.png');
+    }
+    &-fishing {
+      background-image: url('../../assets/fishing_background.png');
+    }
     & button {
       font-family: 'Economica', sans-serif;
       font-size: 1.2rem;
@@ -68,6 +73,15 @@
     font-size: 1.4rem;
     margin-bottom: 20px;
   }
+  &Level {
+    width: fit-content;
+    margin: auto;
+    font-family: 'Economica', sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+  }
 }
 #progressContainer {
   border: 1px rgba(0, 0, 0, 0.205) solid;
@@ -82,11 +96,12 @@
   display: block;
   height: 100%;
   // width: 50%;
+  max-width: 100%;
   background-color: green;
   transition: width 100ms;
 }
 
-.currentOre {
+.currentResource {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -142,6 +157,11 @@
   animation: mining 500ms steps(6) infinite;
 }
 
+.playerFishing {
+  background: url('../../assets/player/fishing.png');
+  animation: fishing 2000ms steps(10) infinite;
+}
+
 .playerIdle {
   background: url('../../assets/player/idle.png');
   animation: idle 500ms steps(4) infinite;
@@ -161,6 +181,33 @@
 
 .bronze {
   background: url('../../assets/mining/bronze.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.fishingResource {
+  position: absolute;
+  bottom: -35px;
+  left: 30px;
+  width: 32px;
+  height: 32px;
+  // border: 1px blue solid;
+}
+
+.grenouille {
+  background: url('../../assets/fishing/frog.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.crabe {
+  background: url('../../assets/fishing/crab.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.blobfish {
+  background: url('../../assets/fishing/blobfish.png');
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -199,6 +246,15 @@
   }
   100% {
     background-position: -288px;
+  }
+}
+
+@keyframes fishing {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: -480px;
   }
 }
 

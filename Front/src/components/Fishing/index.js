@@ -1,10 +1,30 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setWorking, setCurrentOre, alertPlayerOre, addLogMessage, addLevelUpMessage, levelUpJob, updateExpBar } from '../../actions/jobs';
-import './style.scss';
+import {
+  setWorking,
+  setCurrentResource,
+  alertPlayerResource,
+  addLogMessage,
+  addLevelUpMessage,
+  levelUpJob,
+  updateExpBar
+} from '../../actions/fishing';
+import '../Mining/style.scss';
 
-export default function Job() {
-  const { isWorking, buttonTitle, currentOre, ores, baseReward, actionTime, logMessages, experience, level, levelUpReq, experiencePercentage, } = useSelector((state) => state.jobs.mining);
+export default function Fishing({job}) {
+  const {
+    isWorking,
+    buttonTitle,
+    currentResource,
+    resources,
+    baseReward,
+    actionTime,
+    logMessages,
+    experience,
+    level,
+    levelUpReq,
+    experiencePercentage,
+  } = useSelector((state) => job === 'mining' ? state.mining : state.fishing);
 
   const dispatch = useDispatch();
 
@@ -15,12 +35,12 @@ export default function Job() {
   // Click bouton pour lancer l'action
   const buttonOnClick = () => {
     
-    if (currentOre) {
+    if (currentResource) {
       dispatch(setWorking());
     }
     else
     {
-      dispatch(alertPlayerOre());
+      dispatch(alertPlayerResource());
     }
   };
 
@@ -34,10 +54,10 @@ export default function Job() {
           dispatch(levelUpJob());
           dispatch(addLevelUpMessage());
         };
-        const oreExperience = ores.find(ore => ore.name === currentOre);
-        dispatch(addLogMessage(oreExperience.experience, baseReward));
+        const workingResource = resources.find(resource => resource.name === currentResource);
+        dispatch(addLogMessage(workingResource.experience, baseReward));
         dispatch(updateExpBar(percentage(experience, levelUpReq)));
-      }, 2000);
+      }, actionTime);
 
       return () => clearInterval(interval)
     }
@@ -45,29 +65,29 @@ export default function Job() {
 
   // Choix de la ressource
   const switchResource = (e) => {
-    const currentOre = ores.find(ore => ore.name === e.target.className.split(' ')[1]);
-    if (level >= currentOre.level) {
-      dispatch(setCurrentOre(e.target.className.split(' ')[1], currentOre.experience));
+    const workingResource = resources.find(resource => resource.name === e.target.className.split(' ')[1]);
+    if (level >= workingResource.level) {
+      dispatch(setCurrentResource(e.target.className.split(' ')[1], workingResource.experience));
     }
   }
 
   // Remplissage de la liste des ressources
-  const fillResources = ores.map(vein =>
+  const fillResources = resources.map(vein =>
   <div className={`${level >= vein.level ? "resource" : "resource--not-allowed"} ${vein.name}`} key={vein.name} onClick={switchResource}>
     <span className="oreTooltipText">{vein.name}<br /> {vein.desc}</span>
   </div> );
 
   return (
     <div className="jobContainer">
-      <div className="jobMain">
+      <div className="jobMain jobMain-fishing">
         <button className="jobStartAction" onMouseDown={buttonOnClick}>{buttonTitle}</button>
         <span id="progressContainer">
           <span id="progress" style={{width: experiencePercentage + "%"}}></span>
         </span>
-        {/* <progress className="jobExperienceBar" max="100" value={experiencePurcentage}></progress> */}
+        <p className="jobLevel">Niveau {level}</p>
         <div className="playerWorkContainer">
-          <div className={`jobPlayer ${isWorking ? "playerMining" : "playerIdle"}`}></div>
-          <div className={`currentOre ${currentOre}`}></div>
+          <div className={`jobPlayer ${isWorking ? "playerFishing" : "playerIdle"}`}></div>
+          <div className={`fishingResource ${currentResource}`}></div>
         </div>
       </div>
       <div className="jobSecondaryContainer">
