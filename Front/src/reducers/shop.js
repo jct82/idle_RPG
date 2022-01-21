@@ -1,4 +1,4 @@
-import { RANDOM_STUFF, MODALE_OPEN } from '../actions/shop';
+import { RANDOM_STUFF, MODALE_OPEN, MODALE_CLOSE } from '../actions/shop';
 
 const initialState = {
   isOpen: false,
@@ -86,8 +86,13 @@ const shop = (state = initialState, action = {}) => {
     case MODALE_OPEN:
       return {
         ...state,
-        isOpen: !state.isOpen,
+        isOpen: true,
       };
+    case MODALE_CLOSE:
+      return {
+        ...state,
+        isOpen: false,
+      }
     default:
       return state;
   }

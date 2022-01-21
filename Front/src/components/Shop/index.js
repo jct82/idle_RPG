@@ -1,20 +1,23 @@
 import './style.scss';
-import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { randomStuff, modaleOpen } from '../../actions/shop';
+import { modaleOpen, modaleClose } from '../../actions/shop';
 
 export default function Shop() {
-  const { stuffs } = useSelector((state) => state.shop);
+  const { stuffs, isOpen } = useSelector((state) => state.shop);
   // console.log(stuffs);
   // on force le tableau à n'avoir qu'un nombre limité d'élément
   stuffs.length = 9;
   // console.log(stuffs.length);
   const dispatch = useDispatch();
+  // gestion de l'ouverture de la modale
   const openModale = () => {
     dispatch(modaleOpen());
   };
-
+  // gestion de la fermeture de la modale
+  const closeModale = () => {
+    dispatch(modaleClose());
+  };
   return (
     <div className="shopContainer">
       <div className="shopMain">
@@ -29,6 +32,7 @@ export default function Shop() {
             <button onClick={openModale} className="buyButton" type="button"> Acheter </button>
           </div>
         ))}
+        {isOpen ? <div>coucou<button type="button" onClick={closeModale}>fermer</button></div> : ''}
       </div>
     </div>
   );
