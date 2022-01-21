@@ -6,6 +6,7 @@ export const ADD_LOG_MESSAGE = 'ADD_LOG_MESSAGE';
 export const ADD_LEVEL_UP_MESSAGE = 'ADD_LEVEL_UP_MESSAGE';
 export const ADD_ORE_EXPERIENCE_TO_PLAYER = 'ADD_ORE_EXPERIENCE_TO_PLAYER';
 export const LEVEL_UP_PLAYER_JOB = 'LEVEL_UP_PLAYER_JOB';
+export const UPDATE_EXPERIENCE_BAR_PROGRESS = 'UPDATE_EXPERIENCE_BAR_PROGRESS';
 export const ALLOW_GATHER_RESOURCES = 'ALLOW_GATHER_RESOURCES';
 
 export const setWorking = () => ({
@@ -24,6 +25,13 @@ export const addExperienceToPlayer = (experience) => ({
   type: ADD_ORE_EXPERIENCE_TO_PLAYER,
   payload: {
     experience,
+  }
+});
+
+export const updateExpBar = (newExpPercentage) => ({
+  type: UPDATE_EXPERIENCE_BAR_PROGRESS,
+  payload: {
+    newExpPercentage,
   }
 });
 

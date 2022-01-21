@@ -69,6 +69,22 @@
     margin-bottom: 20px;
   }
 }
+#progressContainer {
+  border: 1px rgba(0, 0, 0, 0.205) solid;
+  margin: 15px auto;
+  display: block;
+  width: 70%;
+  height: 8px;
+  background-color: rgba(0, 0, 255, 0.24);
+}
+
+#progress {
+  display: block;
+  height: 100%;
+  // width: 50%;
+  background-color: green;
+  transition: width 100ms;
+}
 
 .currentOre {
   position: absolute;

@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setWorking, setCurrentOre, alertPlayerOre, addLogMessage, addLevelUpMessage, levelUpJob } from '../../actions/jobs';
+import { setWorking, setCurrentOre, alertPlayerOre, addLogMessage, addLevelUpMessage, levelUpJob, updateExpBar } from '../../actions/jobs';
 import './style.scss';
 
 export default function Job() {
-  const { isWorking, buttonTitle, currentOre, ores, baseReward, actionTime, logMessages, experience, level, levelUpReq } = useSelector((state) => state.jobs.mining);
+  const { isWorking, buttonTitle, currentOre, ores, baseReward, actionTime, logMessages, experience, level, levelUpReq, experiencePercentage, } = useSelector((state) => state.jobs.mining);
 
   const dispatch = useDispatch();
 
+  const percentage = (partialValue, totalValue) => {
+    return (100 * partialValue) / totalValue;
+  } 
 
   // Click bouton pour lancer l'action
   const buttonOnClick = () => {
@@ -33,7 +36,8 @@ export default function Job() {
         };
         const oreExperience = ores.find(ore => ore.name === currentOre);
         dispatch(addLogMessage(oreExperience.experience, baseReward));
-      }, 150);
+        dispatch(updateExpBar(percentage(experience, levelUpReq)));
+      }, 2000);
 
       return () => clearInterval(interval)
     }
@@ -57,6 +61,10 @@ export default function Job() {
     <div className="jobContainer">
       <div className="jobMain">
         <button className="jobStartAction" onMouseDown={buttonOnClick}>{buttonTitle}</button>
+        <span id="progressContainer">
+          <span id="progress" style={{width: experiencePercentage + "%"}}></span>
+        </span>
+        {/* <progress className="jobExperienceBar" max="100" value={experiencePurcentage}></progress> */}
         <div className="playerWorkContainer">
           <div className={`jobPlayer ${isWorking ? "playerMining" : "playerIdle"}`}></div>
           <div className={`currentOre ${currentOre}`}></div>

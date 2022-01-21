@@ -1,10 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
-import { SET_WORKING_MINE, SET_CURRENT_ORE, ALERT_PLAYER_NEEDS_ORE, ADD_LOG_MESSAGE, ALLOW_GATHER_RESOURCES, DECREMENT_COUNTER, ADD_ORE_EXPERIENCE_TO_PLAYER, LEVEL_UP_PLAYER_JOB, ADD_LEVEL_UP_MESSAGE } from '../actions/jobs';
+import { SET_WORKING_MINE, SET_CURRENT_ORE, ALERT_PLAYER_NEEDS_ORE, ADD_LOG_MESSAGE, ALLOW_GATHER_RESOURCES, DECREMENT_COUNTER, ADD_ORE_EXPERIENCE_TO_PLAYER, LEVEL_UP_PLAYER_JOB, ADD_LEVEL_UP_MESSAGE, UPDATE_EXPERIENCE_BAR_PROGRESS } from '../actions/jobs';
 
 const initialState = {
   mining: {
     level: 1,
     experience: 0,
+    experiencePurcentage: 0,
     levelUpReq: 100,
     currentOre: '',
     currentOreExperience: 0,
@@ -130,7 +131,15 @@ const jobs = (state = initialState, action = {}) => {
                 experience: 0,
                 levelUpReq: state.mining.levelUpReq * 1.10,
               }
-            }
+            };
+          case UPDATE_EXPERIENCE_BAR_PROGRESS:
+            return {
+              ...state,
+              mining: {
+                ...state.mining,
+                experiencePercentage: action.payload.newExpPercentage,
+              }
+            };
           case ALLOW_GATHER_RESOURCES:
             return {
               ...state,
