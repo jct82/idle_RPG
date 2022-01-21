@@ -17,10 +17,26 @@
     background-color: #f0f;
     display: flex;
     width: 70%;
-    height: 70%;
+    height: 50%;
     margin: 10% auto;
-    
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+  &Stuff{
+    padding: 10%;
+    display: flex;
   }
 
   
 }
+.stuff{
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  height: 30%;
+  padding: 1em;
+  .buyButton {
+  display: flex;
+}
+}
+

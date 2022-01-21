@@ -1,6 +1,7 @@
-import { RANDOM_STUFF } from '../actions/shop';
+import { RANDOM_STUFF, MODALE_OPEN } from '../actions/shop';
 
 const initialState = {
+  isOpen: false,
   stuffs: [
     {
       id: 1,
@@ -81,6 +82,11 @@ const shop = (state = initialState, action = {}) => {
     case RANDOM_STUFF:
       return {
         ...state,
+      };
+    case MODALE_OPEN:
+      return {
+        ...state,
+        isOpen: !state.isOpen,
       };
     default:
       return state;
