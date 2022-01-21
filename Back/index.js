@@ -8,8 +8,12 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: 'localhost'
+    origin: process.env.ALLOWED_DOMAINS.split(", ")
 }));
+
+// app.use(cors({
+//     origin: 'localhost'
+// }));
 
 app.use(express.json());
 
