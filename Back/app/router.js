@@ -1,6 +1,7 @@
 const {Router} = require('express');
 const userController = require('./controllers/userController');
-const jwtMW = require('./middlewares/jwtMW')
+const jwtMW = require('./middlewares/jwtMW');
+
 
 const router = Router();
 

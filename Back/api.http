@@ -21,4 +21,4 @@ Content-Type: application/json
 
 ### Get infos
 GET {{host}}/infos
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxLCJpYXQiOjE2NDI2ODQ0MTAsImV4cCI6MTY0MjY4NDQ3MH0.g0FCtzO40RiI9ky8dZt0Pnp1kUUytSv_S5s__JGMqy0
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoyLCJpYXQiOjE2NDI3NjExNTMsImV4cCI6MTY0Mjc3NTU1M30.TlzC9WTdpEMavqAfqqKlg6u0vOfiwQ3EXbXWq1dMfnI
