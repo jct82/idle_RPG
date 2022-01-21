@@ -12,11 +12,13 @@ import Job from '../Job';
 
 
 import './style.scss';
+import Register from '../Header/register';
 
 // == Composant
 const App = () => (
   <div className="app">
    <Header title="Idle-Rpg"/>
+   <Register />
     <Menu />
     {/* <h1>Jeu IDLE</h1> */}
     <Routes>

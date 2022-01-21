@@ -3,13 +3,13 @@ import './style.scss';
 import logo from './Logo.png';
 import mails from './icon-mail.png';
 import lock from './lock.png';
-import { logModale,setUpdateField} from '../../actions/user';
+import { logModale,setUpdateField,registerModale} from '../../actions/user';
 import imageTop from '../../assets/titleLogo.png';
 
 
 export default function Header(props) {
 
-  const {log,mail,password} = useSelector((state) => state.user);
+  const {log,mail,password,} = useSelector((state) => state.user);
   // Je sélectionne log,mail,password qui se trouve dans mon reducer user
   const dispatch = useDispatch() 
   // Je crée ma méthode useDispatch
@@ -23,12 +23,18 @@ export default function Header(props) {
     dispatch(setUpdateField(e.target.name,e.target.value));
   }
 
+  const registerLog = (e) => {
+    e.preventDefault();
+    dispatch(registerModale())
+  }
+
   return (
     <div className="connect">
       <img className="title-logo" src={imageTop}/>
       {!log &&
         <button onClick={openModale} className="btn-log">Se connecter</button> 
       }
+
       {log &&
         <div className="form-log">
           <form className="connect-form">
@@ -52,11 +58,31 @@ export default function Header(props) {
                 placeholder="Entrez votre mot de passe"
                 className="input-modal inp-mdp"
           />
+          
             {/* <button className='btn-inscription'>Inscription</button> */}
             <button className='btn-send'>Se connecter</button>
+            
+            
+          
+            
+            
+            
+
+            
+
+         
+          
+            
+            
+           
+             
+            
+
+          
           </form> 
         </div>
       }
+      
     </div>
   )
 }
