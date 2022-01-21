@@ -1,15 +1,23 @@
 // == Import : npm
 import { useSelector, useDispatch } from 'react-redux';
 // == Import : local
-import './styles.css';
+import './style.scss';
 
 // == Composant
 const Character = () => {
 
 
   return (
-    <div className="counter">
-      CHARACTER
+    <div className="character">
+      <div className="panel inventory-panel">
+        <div className="inner-panel"></div>
+      </div>
+      <div className="panel equipement-panel">
+        <div className="inner-panel"></div>
+      </div>
+      <div className="panel stat-panel">
+        <div className="inner-panel"></div>
+      </div>
     </div>
   );
 };

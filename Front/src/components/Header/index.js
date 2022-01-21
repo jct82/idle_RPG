@@ -1,42 +1,88 @@
+import {useSelector,useDispatch} from 'react-redux';
 import './style.scss';
-import titleLogo from  'src/assets/titleLogo.png';
-import {useState} from 'react';
+import logo from './Logo.png';
+import mails from './icon-mail.png';
+import lock from './lock.png';
+import { logModale,setUpdateField,registerModale} from '../../actions/user';
+import imageTop from '../../assets/titleLogo.png';
 
 
 export default function Header(props) {
 
-  const [modale,setModale] = useState(false);
-
-  const modaleLog = () => {
-    setModale(!modale)
+  const {log,mail,password,} = useSelector((state) => state.user);
+  // Je sélectionne log,mail,password qui se trouve dans mon reducer user
+  const dispatch = useDispatch() 
+  // Je crée ma méthode useDispatch
+  
+  const openModale = () => {
+    // Je dispatch mon new state 
+    dispatch(logModale());
   }
-  console.log(modale);
 
+  const updateField = (e) => {
+    dispatch(setUpdateField(e.target.name,e.target.value));
+  }
 
-
-
+  const registerLog = (e) => {
+    e.preventDefault();
+    dispatch(registerModale())
+  }
 
   return (
-    <div className="container">
-    <img className="titleLogo" src={titleLogo} alt="Logo Titre" />
-      {/* <h1 className="title">{props.title}</h1> */}
-      
-      <button onClick={modaleLog} 
-      className="btn-log">
-      Se connecter
-      </button> 
-
-      {modale &&
-      <div className="popup">
-        <h1 className="text">Bonjour User</h1>
-      </div>
-      
+    <div className="connect">
+      <img className="title-logo" src={imageTop}/>
+      {!log &&
+        <button onClick={openModale} className="btn-log">Se connecter</button> 
       }
-    
+
+      {log &&
+        <div className="form-log">
+          <form className="connect-form">
+            <img src={mails} alt="mail" />
+            <input
+                name="mail"
+                value={mail}
+                onChange={updateField}
+                type="text"
+                id="title"
+                placeholder="Entrez votre email"
+                className="input-modal inp-title"
+            />
+            <img src= {lock} alt="Mot de passe" />
+            <input
+                name="password"
+                value={password}
+                onChange={updateField}
+                type="text"
+                id="title"
+                placeholder="Entrez votre mot de passe"
+                className="input-modal inp-mdp"
+          />
+          
+            {/* <button className='btn-inscription'>Inscription</button> */}
+            <button className='btn-send'>Se connecter</button>
+            
+            
+          
+            
+            
+            
+
+            
+
+         
+          
+            
+            
+           
+             
+            
+
+          
+          </form> 
+        </div>
+      }
+      
     </div>
-    
-
-
-
   )
 }

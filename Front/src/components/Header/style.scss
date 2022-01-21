@@ -1,63 +1,120 @@
-@use 'src/styles/vars';
-@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
-
-.container {
-  display: flex;
-  justify-content: space-between;
-  // border-bottom: 1px solid black;
-  // background: rgba(148, 207, 255, 0.5);
-  width: 80%;
-  position: absolute;
-  right: 0;
-  & .title {
-    position: relative;
-    font-size: 60px;
-    margin: auto;
-    text-align: center;
-    font-size: 6rem;
-    color: white;
-    text-shadow: 5px 2px 1px vars.$baseColor;
-    font-family: 'Courgette', cursive;
-  }
-  & .btn-log {
-    display: flex;
-    width: 100px;
-    height: fit-content;
-    margin: 42px;
-    justify-content: center;
-    border-radius: 6px;
-    background: darkgray;
-    color: snow;
-  }
-  & .popup {
-    display: flex;
-  }
-  & .titleLogo {
-    margin: auto;
-  }
+.connect {
+  padding:15px 0;
+  text-align: center;
 }
 
-@media screen and (max-width : 500px){
+.title-logo{
+  max-width: 270px;
+}
+
+.btn-log {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  padding: 5px 8px 6px;
+  line-height: 1;
+  border-radius: 5%;
+  background: chocolate;
+}
+
+.form-log{
+     border: 2px solid black;
+     box-shadow: 0px 0px 20px 4px #000;
+     left: 22%;
+     margin: 0 auto;
+     max-width: 555px;
+     padding: 8px;
+     position: fixed;
+     right: 0px;
+     top: 38%;
+     z-index: 1;
+}
+
+.connect-form {
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between;
+  align-items: center;
+ 
+}
+
+.input-modal{
+  margin: 15px 0 15px 0;
+  padding: 8px;
+}
+
+
+.btn-send {
+  background-color: #72d872;
+    border-radius: 15px;
+    font-size: 18px;
+    margin: 6%;
+    padding: 2%;
+
+}
+
+.register {
+  background: #FAFAFA;
+    border-radius: 5%;
+    line-height: 1;
+    padding: 5px 8px 6px;
+    position: absolute;
+    right: 45px;
+    top: 70px;
+}
+    
+    
+    
+        
+    
+  .title-register{
+    background-color:#B9E523 ;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    font-size: 18px;
+  }
+
+
+.modale-register {
+  display: flex;
+  flex-direction: column;
+  max-width: min-content;
+
   
-  .container {
+  
+  
+  
+  
+}
+
+.btn-register-send{
+  background-color: #b9e523;
+    width: 50%;
+    margin: auto;
+    width: 80%;
+
+ 
+}
+
+@media screen and (max-width : 768px){
+  .title-logo{
+    max-width: 170px;
+  }
+
+  .btn-log {
+    right: 20px;
+    top: 20px;
+  }
+
+  .form-log{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
-    & .title {
-      display: flex;
-      font-size: 16px;
-      margin: 16px;
-    }
-    & .btn-log {
-      margin: 0 auto;
-      border-radius: 6px;  
-      background: darkgray;
-      color: snow;  
-    }
-    & .popup {
-      display: flex;
-      flex-direction: column;
-    }
   }
+
+  .connect-form {
+    flex-direction: column;
+    flex: auto;
+  }
+ 
 }

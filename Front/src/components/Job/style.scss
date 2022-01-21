@@ -1,0 +1,184 @@
+@use 'src/styles/vars';
+@import url('https://fonts.googleapis.com/css2?family=Economica&display=swap');
+
+.job {
+  &Container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 80px 40px;
+  }
+  &SecondaryContainer {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  &Main {
+    position: relative;
+    flex-basis: 100%;
+    height: 250px;
+    margin-bottom: 40px;
+    background-image: url('../../assets/job_background.png');
+    background-position: bottom;
+    border: 1px rgba(0, 0, 0, 0.205) solid;
+    border-radius: 10px;
+    overflow: hidden;
+    & button {
+      font-family: 'Economica', sans-serif;
+      font-size: 1.2rem;
+      background: vars.$baseColor;
+      border: none;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      padding: 15px;
+      display: inherit;
+      width: 70%;
+      margin: auto;
+    }
+  }
+  &Small {
+    border: 1px rgba(0, 0, 0, 0.205) solid;
+    border-radius: 10px;
+    width: calc(50% - 20px);
+    background: vars.$baseColor;
+  }
+  &Player {
+    width: 48px;
+    height: 48px;
+    // border: 1px #f0f solid;
+    // position: absolute;
+    // bottom: 13%;
+    // left: 20%;
+    z-index: 2;
+  }
+  &ResourcesList {
+    max-height: 280px;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  &Logs {
+    padding: 10px;
+    line-height: 1.9rem;
+    max-height: 280px;
+    overflow-y: scroll;
+  }
+  &Logs p{
+    font-family: 'Economica', sans-serif;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+}
+
+.currentOre {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  // border: 1px blue solid;
+}
+
+.playerWorkContainer {
+  width: fit-content;
+  display: flex;
+  position: absolute;
+  bottom: 15%;
+  left: 15%;
+}
+
+.resource {
+  display: inline-block;
+  margin: 20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px black solid;
+  // test
+  &:hover .oreTooltipText {
+    display: inline;
+  }
+  &Name {
+    width: 32px;
+    height: 32px;
+    margin: auto;
+  }
+  & p {
+    margin-top: 20px;
+    text-align: center;
+  }
+}
+
+.playerMining {
+  background: url('../../assets/player/mining.png');
+  animation: mining 500ms steps(6) infinite;
+}
+
+.playerIdle {
+  background: url('../../assets/player/idle.png');
+  animation: idle 500ms steps(4) infinite;
+}
+
+.fer {
+  background: url('../../assets/mining/fer.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.or {
+  background: url('../../assets/mining/or.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.bronze {
+  background: url('../../assets/mining/bronze.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.oreTooltipText {
+  pointer-events: none;
+  display: none;
+  width: min-content;
+  text-align: center;
+  background: vars.$baseColor;
+  font-size: 0.8rem;
+  user-select: none;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 15px;
+  line-height: 1.5rem;
+  position: relative;
+  left: -25px;
+  z-index: 2;
+}
+
+@media screen and (max-width: 768px) {
+  .jobSecondaryContainer{
+    flex-wrap: wrap;
+  }
+  .jobSmall {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+}
+
+
+@keyframes mining {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: -288px;
+  }
+}
+
+@keyframes idle {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: -194px;
+  }
+}

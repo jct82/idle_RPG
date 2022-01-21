@@ -1,0 +1,133 @@
+.home{
+  position: relative;
+  padding: 100px 40px 40px;
+}
+
+.video-wrapper{
+  width: 540px;
+  max-width: 220%;
+  margin: 0 auto 40px;
+  
+  .video {
+    position: relative;
+    padding-bottom: 56%;
+    z-index: 2;
+    iframe{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+    img {
+      position: absolute;
+      top:-5%;
+      left: -3.5%;
+    }
+  }
+}
+.frame-wrapper {
+  width: 600px;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+   .frame-slide {
+   position: relative;
+   left: 2%;
+  } 
+}
+.slider-wrapper{
+  width: 580px;
+  max-width: 100%;
+  margin: 0 auto;
+  .slider {
+  width: 100%;
+  padding: 3.2%;
+  border-radius: 10px;
+  background-image: url('../../assets/IdleFrame580x335.png');
+  background-repeat: no-repeat;
+  background-size :100%;
+  .slider-inner{
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  & .slides {
+    display: block;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    .slide-container{
+        width: 300%;
+        display: flex;
+        flex-direction: row;
+        animation: glisse 10s infinite;
+        & .slide {
+          position: relative;
+          width: calc(100% / 3);
+          img{
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+    } 
+  }
+}
+
+@keyframes glisse {
+ 0% {
+   transform: translateX(0);
+ }
+ 10% {
+   transform: translateX(0);
+ }
+ 33% {
+   transform: translateX(-33.33%);
+ }
+ 43% {
+   transform: translateX(-33.33%);
+ }
+ 66% {
+   transform: translateX(-66.66%);
+ }
+ 76% {
+   transform: translateX(-66.66%);
+ }
+ 100% {
+   transform: translateX(0);
+ }
+}
+
+.update {
+ background-color: rgba(0,0,0,0.3);
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ overflow: hidden;
+ display: flex;
+ font-size: 1.5rem;
+   .update-text {
+     white-space: nowrap;
+     animation: scrollTxt 25s linear infinite;
+     border-top: 1px solid yellow;
+     border-bottom: 1px solid yellow;
+   }
+}
+
+@keyframes scrollTxt {
+ 0%{
+   transform: translate(0, 0);
+ }
+ 100% {
+   transform: translate(-100%, 0)
+ }
+}
+
+@media screen and (max-width: 1100px) {
+  .frame-wrapper {
+    display: none;
+  }
+}

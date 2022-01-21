@@ -1,4 +1,13 @@
 import { NavLink } from 'react-router-dom';
+import {
+  accueilLogo,
+  boutiqueLogo,
+  combatLogo,
+  craftLogo,
+  fishingLogo,
+  inventoryLogo,
+  miningLogo
+} from 'src/assets/idleMenuIcons';
 import logo from '../../assets/logo.png';
 import './style.scss';
 
@@ -10,49 +19,49 @@ export default function Menu() {
         key="/"
         to="/"
       >
-        <i className="fas fa-home navHidden"></i>
+        <img className="navHidden" src={accueilLogo}></img>
         <button>Accueil</button>
       </NavLink>
       <NavLink
         key="/shop"
         to="/shop"
       >
-        <i className="fas fa-coins navHidden"></i>
+        <img className="navHidden" src={boutiqueLogo}></img>
         <button>Boutique</button>
       </NavLink>
       <NavLink
         key="/inventory"
         to="/inventory"
       >
-        <i className="fas fa-briefcase navHidden"></i>
+        <img className="navHidden" src={inventoryLogo}></img>
         <button>Inventaire / Stats</button>
       </NavLink>
       <NavLink
         key="/fighting"
         to="/fighting"
       >
-        <i className="fas fa-fist-raised navHidden"></i>
+        <img className="navHidden" src={combatLogo}></img>
         <button>Combat</button>
       </NavLink>
       <NavLink
         key="/craft"
         to="/craft"
       >
-        <i className="fas fa-hammer navHidden"></i>
+        <img className="navHidden" src={craftLogo}></img>
         <button>Craft</button>
       </NavLink>
       <NavLink
         key="/jobs/mining"
         to="/jobs/mining"
       >
-        <i className="fas fa-toilet-paper navHidden"></i>
+        <img className="navHidden" src={miningLogo}></img>
         <button>Minage</button>
       </NavLink>
       <NavLink
         key="/jobs/fishing"
         to="/jobs/fishing"
       >
-        <i className="fas fa-fish navHidden"></i>
+        <img className="navHidden" src={fishingLogo}></img>
         <button>Pêche</button>
       </NavLink>
     </div>
