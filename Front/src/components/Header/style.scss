@@ -18,31 +18,39 @@
 }
 
 .form-log{
-  position: fixed;
-  z-index: 1;
-  top: 45%;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  background-color: ghostwhite;
-  padding: 8px;
-  border-radius:3px;
-  max-width: 335px;
+     border: 2px solid black;
+     box-shadow: 0px 0px 20px 4px #000;
+     left: 22%;
+     margin: 0 auto;
+     max-width: 555px;
+     padding: 8px;
+     position: fixed;
+     right: 0px;
+     top: 38%;
+     z-index: 1;
 }
 
 .connect-form {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
+ 
+}
+
+.input-modal{
+  margin: 15px 0 15px 0;
+  padding: 8px;
 }
 
 
 .btn-send {
-  border-radius: 15px;
-  font-size: 18px;
-  margin:8px;
-  background-color: darkgrey;
+  background-color: #72d872;
+    border-radius: 15px;
+    font-size: 18px;
+    margin: 6%;
+    padding: 2%;
+
 }
 
 @media screen and (max-width : 768px){
