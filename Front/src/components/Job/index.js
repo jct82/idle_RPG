@@ -27,6 +27,7 @@ export default function Job() {
     if (isWorking) {
       const interval = setInterval(() => {
         const oreExperience = ores.find(ore => ore.name === currentOre);
+        console.log(oreExperience);
         dispatch(addLogMessage(oreExperience.experience, baseReward));
       }, actionTime);
 
