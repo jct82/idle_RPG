@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setWorking, setCurrentOre, alertPlayerOre, addLogMessage } from '../../actions/jobs';
+import { setWorking, setCurrentOre, alertPlayerOre, addLogMessage, addLevelUpMessage, levelUpJob } from '../../actions/jobs';
 import './style.scss';
 
 export default function Job() {
-  const { isWorking, buttonTitle, currentOre, ores, baseReward, actionTime, logMessages, workingInterval } = useSelector((state) => state.jobs.mining);
+  const { isWorking, buttonTitle, currentOre, ores, baseReward, actionTime, logMessages, experience, level, levelUpReq } = useSelector((state) => state.jobs.mining);
 
   const dispatch = useDispatch();
 
@@ -23,30 +23,35 @@ export default function Job() {
 
   // Pour afficher les logs
   // https://devtrium.com/posts/set-interval-react
+  // Et gérer la montée de niveau
   useEffect(() => {
     if (isWorking) {
       const interval = setInterval(() => {
+        if (experience >= levelUpReq) {
+          dispatch(levelUpJob());
+          dispatch(addLevelUpMessage());
+        };
         const oreExperience = ores.find(ore => ore.name === currentOre);
-        console.log(oreExperience);
         dispatch(addLogMessage(oreExperience.experience, baseReward));
-      }, actionTime);
+      }, 150);
 
       return () => clearInterval(interval)
     }
-  }, [isWorking])
+  }, [isWorking, experience])
 
   // Choix de la ressource
   const switchResource = (e) => {
-    dispatch(setCurrentOre(e.target.className.split(' ')[1]));
+    const currentOre = ores.find(ore => ore.name === e.target.className.split(' ')[1]);
+    if (level >= currentOre.level) {
+      dispatch(setCurrentOre(e.target.className.split(' ')[1], currentOre.experience));
+    }
   }
 
   // Remplissage de la liste des ressources
   const fillResources = ores.map(vein =>
-  <div className={`resource ${vein.name}`} key={vein.name} onClick={switchResource}>
+  <div className={`${level >= vein.level ? "resource" : "resource--not-allowed"} ${vein.name}`} key={vein.name} onClick={switchResource}>
     <span className="oreTooltipText">{vein.name}<br /> {vein.desc}</span>
-    {/* <div className={`resourceName ${vein}`} /> */}
-    {/* <p>{vein}</p> */}
-  </div> )
+  </div> );
 
   return (
     <div className="jobContainer">
