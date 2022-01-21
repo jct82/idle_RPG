@@ -15,12 +15,12 @@ const character = (state = initialState, action = {}) => {
         ...state,
         log: !state.log,
       };
-      case UPDATE_FIELD:
+    case UPDATE_FIELD:
       return {
         ...state,
         [action.name]: action.value,
       };
-      case REGISTER_MODALE:
+    case REGISTER_MODALE:
       return {
         ...state,
         register: !state.register,
