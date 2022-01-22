@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import './style.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
@@ -6,9 +7,19 @@ import { modaleOpen, modaleClose } from '../../actions/shop';
 export default function Shop() {
   const dispatch = useDispatch();
   const { stuffs, isOpen } = useSelector((state) => state.shop);
+  const newShopArray = [];
   // console.log(stuffs);
-  // on force le tableau à n'avoir qu'un nombre limité d'élément
-  stuffs.length = 9;
+  // on gère le fait d'avoir un équipement de manière aléatoire à mettre dans la boutique
+  const getRandomStuff = () => {
+    for (let i = 0; i < 9; i++) {
+      const randomNumber = Math.floor(Math.random() * stuffs.length);
+      // console.log(randomNumber);
+      const randomStuff = stuffs[randomNumber].nom;
+      console.log(randomStuff);
+      newShopArray.push(randomStuff);
+    }
+  };
+  getRandomStuff();
   // console.log(stuffs.length);
   // gestion de l'ouverture de la modale
   const openModale = () => {
@@ -24,10 +35,10 @@ export default function Shop() {
         <p>Boutique</p>
       </div>
       <div className="shopInventory">
-        {stuffs.map((stuff) => (
+        { newShopArray.map((stuff) => (
           <div className="stuff" key={uuidv4()}>
             <div className="shopStuff">
-              {stuff.nom}
+              {stuff}
             </div>
             <button onClick={openModale} className="buyButton" type="button"> Acheter </button>
           </div>
