@@ -9,6 +9,7 @@ import {
   levelUpJob,
   updateExpBar
 } from '../../actions/fishing';
+import { sendResourceToInventory } from '../../actions/mining';
 import '../Mining/style.scss';
 
 export default function Fishing({job}) {
@@ -55,6 +56,8 @@ export default function Fishing({job}) {
           dispatch(addLevelUpMessage());
         };
         const workingResource = resources.find(resource => resource.name === currentResource);
+        const { name, type, description, baseReward } = workingResource;
+        dispatch(sendResourceToInventory(name, type, description, baseReward));
         dispatch(addLogMessage(workingResource.experience, baseReward));
         dispatch(updateExpBar(percentage(experience, levelUpReq)));
       }, actionTime);
@@ -74,7 +77,7 @@ export default function Fishing({job}) {
   // Remplissage de la liste des ressources
   const fillResources = resources.map(vein =>
   <div className={`${level >= vein.level ? "resource" : "resource--not-allowed"} ${vein.name}`} key={vein.name} onClick={switchResource}>
-    <span className="oreTooltipText">{vein.name}<br /> {vein.desc}</span>
+    <span className="oreTooltipText">{vein.name}<br /> {vein.gatherDescription}</span>
   </div> );
 
   return (

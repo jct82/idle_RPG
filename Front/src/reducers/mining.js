@@ -7,7 +7,7 @@ import {
   ADD_RESOURCE_EXPERIENCE_TO_PLAYER_MINE,
   LEVEL_UP_PLAYER_JOB_MINE,
   ADD_LEVEL_UP_MESSAGE_MINE,
-  UPDATE_EXPERIENCE_BAR_PROGRESS_MINE
+  UPDATE_EXPERIENCE_BAR_PROGRESS_MINE,
 } from '../actions/mining';
 
 const initialState = {
@@ -27,21 +27,30 @@ const initialState = {
     resources: [
       {
         name: 'fer',
+        type: 'resource',
         level: 1,
-        desc:'Niveau 1 requis',
+        gatherDescription:'Niveau 1 requis',
+        description: 'Minerai commun et facile à récolter',
         experience: 5,
+        baseReward: 2,
       },
       {
         name: 'or',
+        type: 'resource',
         level: 5,
-        desc:'Niveau 5 requis',
+        gatherDescription:'Niveau 5 requis',
+        description: 'Minerai plus cher mais reste fragile',
         experience: 15,
+        baseReward: 2,
       },
       {
         name: 'bronze',
+        type: 'resource',
         level: 20,
-        desc:'Niveau 20 requis',
+        gatherDescription:'Niveau 20 requis',
+        description: 'Minerai solide mais très lourd',
         experience: 40,
+        baseReward: 2,
       },
     ]
 };

@@ -27,21 +27,30 @@ const initialState = {
     resources: [
       {
         name: 'grenouille',
+        type: 'food',
         level: 1,
-        desc:'Niveau 1 requis',
+        gatherDescription:'Niveau 1 requis',
+        description: 'Vraiment peu ragoûtant...',
         experience: 5,
+        baseReward: 2,
       },
       {
         name: 'crabe',
+        type: 'food',
         level: 5,
-        desc:'Niveau 5 requis',
+        gatherDescription:'Niveau 5 requis',
+        description: 'Un très petit crabe, mais délicieux !',
         experience: 15,
+        baseReward: 2,
       },
       {
         name: 'blobfish',
+        type: 'food',
         level: 20,
-        desc:'Niveau 20 requis',
+        gatherDescription:'Niveau 20 requis',
+        description: 'On dirait pas mais c\'est très bon !',
         experience: 40,
+        baseReward: 2,
       },
     ]
 };

@@ -58,7 +58,3 @@ export const addLogMessage = (experience, amount) => ({
 export const addLevelUpMessage = () => ({
   type: ADD_LEVEL_UP_MESSAGE_FISH,
 });
-
-export const decrement = () => ({
-  type: DECREMENT_COUNTER_FISH,
-});

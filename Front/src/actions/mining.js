@@ -7,7 +7,7 @@ export const ADD_LEVEL_UP_MESSAGE_MINE = 'ADD_LEVEL_UP_MESSAGE_MINE';
 export const ADD_RESOURCE_EXPERIENCE_TO_PLAYER_MINE = 'ADD_RESOURCE_EXPERIENCE_TO_PLAYER_MINE';
 export const LEVEL_UP_PLAYER_JOB_MINE = 'LEVEL_UP_PLAYER_JOB_MINE';
 export const UPDATE_EXPERIENCE_BAR_PROGRESS_MINE = 'UPDATE_EXPERIENCE_BAR_PROGRESS_MINE';
-export const ALLOW_GATHER_RESOURCES = 'ALLOW_GATHER_RESOURCES_MINE';
+export const SEND_RESOURCE_TO_INVENTORY_MINE = 'SEND_RESOURCE_TO_INVENTORY_MINE';
 
 export const setWorking = () => ({
   type: SET_WORKING_MINE,
@@ -43,10 +43,6 @@ export const setCurrentResource = (currentResource, currentResourceExperience) =
   }
 });
 
-export const allowGatherResources = () => ({
-  type: ALLOW_GATHER_RESOURCES_MINE,
-});
-
 export const addLogMessage = (experience, amount) => ({
   type: ADD_LOG_MESSAGE_MINE,
   payload: {
@@ -59,6 +55,12 @@ export const addLevelUpMessage = () => ({
   type: ADD_LEVEL_UP_MESSAGE_MINE,
 });
 
-export const decrement = () => ({
-  type: DECREMENT_COUNTER_MINE,
+export const sendResourceToInventory = (name,type, description, quantity) => ({
+  type: SEND_RESOURCE_TO_INVENTORY_MINE,
+  payload: {
+    name,
+    type,
+    description,
+    quantity,
+  }
 });

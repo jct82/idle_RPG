@@ -7,7 +7,8 @@ import {
   addLogMessage,
   addLevelUpMessage,
   levelUpJob,
-  updateExpBar
+  updateExpBar,
+  sendResourceToInventory,
 } from '../../actions/mining';
 import './style.scss';
 
@@ -17,7 +18,7 @@ export default function Mining({job}) {
     buttonTitle,
     currentResource,
     resources,
-    baseReward,
+    // baseReward,
     actionTime,
     logMessages,
     experience,
@@ -25,6 +26,8 @@ export default function Mining({job}) {
     levelUpReq,
     experiencePercentage,
   } = useSelector((state) => job === 'mining' ? state.mining : state.fishing);
+
+  const { inventory } = useSelector((state) => state.character);
 
   const dispatch = useDispatch();
 
@@ -50,12 +53,15 @@ export default function Mining({job}) {
   useEffect(() => {
     if (isWorking) {
       const interval = setInterval(() => {
+        console.log(inventory);
         if (experience >= levelUpReq) {
           dispatch(levelUpJob());
           dispatch(addLevelUpMessage());
         };
         const workingResource = resources.find(resource => resource.name === currentResource);
-        dispatch(addLogMessage(workingResource.experience, baseReward));
+        const { name, type, description, baseReward } = workingResource;
+        dispatch(sendResourceToInventory(name, type, description, baseReward));
+        dispatch(addLogMessage(workingResource.experience, workingResource.baseReward));
         dispatch(updateExpBar(percentage(experience, levelUpReq)));
       }, actionTime);
 
@@ -74,7 +80,7 @@ export default function Mining({job}) {
   // Remplissage de la liste des ressources
   const fillResources = resources.map(vein =>
   <div className={`${level >= vein.level ? "resource" : "resource--not-allowed"} ${vein.name}`} key={vein.name} onClick={switchResource}>
-    <span className="oreTooltipText">{vein.name}<br /> {vein.desc}</span>
+    <span className="oreTooltipText">{vein.name}<br /> {vein.gatherDescription}</span>
   </div> );
 
   return (
