@@ -1,24 +1,17 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "./style.scss";
-import { LOGMODALE, registerModale } from "../../actions/user";
+import background from "src/assets/ImgModal/Modale-Register.png";
 
 export default function Register() {
-  const { log, mail, password, register } = useSelector((state) => state.user);
-
-  const dispatch = useDispatch();
-
-  const openModal = () => {
-    // Je dispatch mon new state
-    dispatch(registerModale());
-    console.log(openModal);
-  };
+  const { modal, mail, password } = useSelector((state) => state.user);
   return (
     <div className="register">
-      {register && (
+      {modal == "inscription" && (
         <div className="open-register">
           <form className="modale-register">
+            <img src={background} alt="Image de fond" />
             <h1 className="title-register"> créez votre compte </h1>
-            <label>
+            <label className="pseudo-register">
               Pseudo*
               <input
                 className="text-form"
@@ -27,7 +20,7 @@ export default function Register() {
                 placeholder="Pseudo"
               />
             </label>
-            <label>
+            <label className="mail-register">
               E-mail*
               <input
                 className="text-form"
@@ -36,7 +29,7 @@ export default function Register() {
                 placeholder="E-mail"
               />
             </label>
-            <label>
+            <label className="password-register">
               Mot de passe*
               <input
                 className="text-form"

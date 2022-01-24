@@ -7,6 +7,10 @@
   max-width: 270px;
 }
 
+.img-log{
+  width: 100%;
+}
+
 .btn-log {
   position: absolute;
   top: 40px;
@@ -26,8 +30,9 @@
   padding: 8px;
   position: fixed;
   right: 0px;
-  top: 38%;
-  z-index: 1;
+  // top: 38%;
+  z-index: 3;
+  background-color: #34374e
 }
 
 .connect-form {
@@ -69,18 +74,44 @@
   text-transform: uppercase;
   color: white;
   font-size: 18px;
+  margin: 8px auto;
+}
+
+.pseudo-register {
+  margin: 16px;
 }
 
 .modale-register {
   display: flex;
   flex-direction: column;
-  max-width: min-content;
+  border: 2px solid #000;
+  box-shadow: 0 0 20px 4px #000;
+  left: 22%;
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 32px;
+  position: fixed;
+  right: 0;
+  top: 25%;
+  z-index: 2;
+  background:#7d7c66;
+  z-index: 3;
 }
 
+.pseudo-register {
+  margin: 8px;
+}
+
+.mail-register {
+  margin: 8px;
+}
+.password-register {
+  margin: 8px;
+}
 .btn-register-send {
   background-color: #b9e523;
+  margin: 12px auto;
   width: 50%;
-  margin: auto;
   width: 80%;
 }
 
