@@ -27,6 +27,7 @@ const App = () => (
       <Route exact path="/character" element={<Character />} />
       <Route path="/jobs/mining" element={<Mining job="mining"/>} />
       <Route path="/jobs/fishing" element={<Fishing job="fishing"/>} />
+      <Route path="/craft" element={<Craft />} />
       {/*<Route exact path="/craft" element={<Craft />} />
       <Route exact path="/fight" element={<Fight />} />
       <Route path="*" element={<NotFound />} /> */}

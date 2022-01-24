@@ -1,4 +1,4 @@
-import { SEND_RESOURCE_TO_INVENTORY_MINE } from "../actions/mining";
+import { SEND_RESOURCE_TO_INVENTORY } from "../actions/mining";
 
 
 const initialState = {
@@ -50,8 +50,9 @@ const initialState = {
 
 const character = (state = initialState, action = {}) => {
   switch (action.type) {
-  case SEND_RESOURCE_TO_INVENTORY_MINE:
+  case SEND_RESOURCE_TO_INVENTORY:
     const findExistingItem = state.inventory.find(elem => elem.name === action.payload.name);
+    // Si l'objet existe déjà
     if (findExistingItem) {
       return {
         ...state,
@@ -59,21 +60,19 @@ const character = (state = initialState, action = {}) => {
           (item) => item.name === action.payload.name ?
           {...item, quantity: item.quantity + action.payload.quantity}
           : item)
-      }
+      };
     } else {
+      // Sinon crée un objet
       return {
         ...state,
         inventory: [
           ...state.inventory,
           {
-            name: action.payload.name,
-            type: action.payload.type,
-            description: action.payload.description,
-            quantity: action.payload.quantity,
+            ...action.payload
           }
         ]
       };
-    }
+    };
     default:
       return state;
   }

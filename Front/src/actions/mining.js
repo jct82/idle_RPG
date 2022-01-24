@@ -7,7 +7,7 @@ export const ADD_LEVEL_UP_MESSAGE_MINE = 'ADD_LEVEL_UP_MESSAGE_MINE';
 export const ADD_RESOURCE_EXPERIENCE_TO_PLAYER_MINE = 'ADD_RESOURCE_EXPERIENCE_TO_PLAYER_MINE';
 export const LEVEL_UP_PLAYER_JOB_MINE = 'LEVEL_UP_PLAYER_JOB_MINE';
 export const UPDATE_EXPERIENCE_BAR_PROGRESS_MINE = 'UPDATE_EXPERIENCE_BAR_PROGRESS_MINE';
-export const SEND_RESOURCE_TO_INVENTORY_MINE = 'SEND_RESOURCE_TO_INVENTORY_MINE';
+export const SEND_RESOURCE_TO_INVENTORY = 'SEND_RESOURCE_TO_INVENTORY';
 
 export const setWorking = () => ({
   type: SET_WORKING_MINE,
@@ -56,7 +56,7 @@ export const addLevelUpMessage = () => ({
 });
 
 export const sendResourceToInventory = (name,type, description, quantity) => ({
-  type: SEND_RESOURCE_TO_INVENTORY_MINE,
+  type: SEND_RESOURCE_TO_INVENTORY,
   payload: {
     name,
     type,
