@@ -14,12 +14,7 @@ export default function Register() {
   };
   return (
     <div className="register">
-      
-   
-
-
-      {
-        register && (
+      {register && (
         <div className="open-register">
           <form className="modale-register">
             <h1 className="title-register"> créez votre compte </h1>
