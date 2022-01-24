@@ -1,4 +1,4 @@
-import { RANDOM_STUFF, MODALE_OPEN, MODALE_CLOSE } from '../actions/shop';
+import { RANDOM_STUFF, MODALE_OPEN, MODALE_CLOSE, EMPTY_ARRAY } from '../actions/shop';
 
 const initialState = {
   newShopArray: [],
@@ -83,6 +83,15 @@ const shop = (state = initialState, action = {}) => {
     case RANDOM_STUFF:
       return {
         ...state,
+        newShopArray: [
+          ...state.newShopArray,
+          action.payload.stuffs,
+        ],
+      };
+    case EMPTY_ARRAY:
+      return {
+        ...state,
+        newShopArray: [],
       };
     case MODALE_OPEN:
       return {
@@ -93,7 +102,7 @@ const shop = (state = initialState, action = {}) => {
       return {
         ...state,
         isOpen: false,
-      }
+      };
     default:
       return state;
   }

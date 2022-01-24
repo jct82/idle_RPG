@@ -3,7 +3,7 @@ import './style.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
-import { modaleOpen, modaleClose } from '../../actions/shop';
+import { modaleOpen, modaleClose, randomStuff, emptyArray } from '../../actions/shop';
 
 export default function Shop() {
   const dispatch = useDispatch();
@@ -14,16 +14,26 @@ export default function Shop() {
     for (let i = 0; i < 9; i++) {
       const randomNumber = Math.floor(Math.random() * stuffs.length);
       // console.log(randomNumber);
-      const randomStuff = stuffs[randomNumber].nom;
+      const randomStuffs = stuffs[randomNumber].nom;
       //console.log(randomStuff);
-      newShopArray.push(randomStuff);
+      dispatch(randomStuff(randomStuffs));
+      // newShopArray.push(randomStuffs);
     }
   };
+  // PSEUDO CODE
+  //  action payload avec 1 équipement,
+  // dispatch action avec l'équipement,
+  // reducer : ...state, équipement
 
-  // getRandomStuff();
+  // console.log(getRandomStuff());
+  // const shopInventory = () => {
+  //   dispatch(randomStuff(getRandomStuff()));
+  // };
+
   // je veux que le chargement de la boutique ne se fasse qu'une fois,
   // au chargement initial de la page
   useEffect(() => {
+    dispatch(emptyArray());
     getRandomStuff();
   }, []);
   // console.log(stuffs.length);
