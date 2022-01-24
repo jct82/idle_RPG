@@ -1,7 +1,9 @@
 
-export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
+export const SET_INVENTORY = 'SET_INVENTORY';
 
 
-export const decrement = () => ({
-  type: DECREMENT_COUNTER,
+export const setInventoryObjects = (inventory) => ({
+  type: SET_INVENTORY,
+  inventory: inventory
 });
+

@@ -1,9 +1,9 @@
 .connect {
-  padding:15px 0;
+  padding: 15px 0;
   text-align: center;
 }
 
-.title-logo{
+.title-logo {
   max-width: 270px;
 }
 
@@ -17,17 +17,17 @@
   background: chocolate;
 }
 
-.form-log{
-     border: 2px solid black;
-     box-shadow: 0px 0px 20px 4px #000;
-     left: 22%;
-     margin: 0 auto;
-     max-width: 555px;
-     padding: 8px;
-     position: fixed;
-     right: 0px;
-     top: 38%;
-     z-index: 1;
+.form-log {
+  border: 2px solid black;
+  box-shadow: 0px 0px 20px 4px #000;
+  left: 22%;
+  margin: 0 auto;
+  max-width: 555px;
+  padding: 8px;
+  position: fixed;
+  right: 0px;
+  top: 38%;
+  z-index: 1;
 }
 
 .connect-form {
@@ -35,70 +35,57 @@
   flex-direction: column;
   // justify-content: space-between;
   align-items: center;
- 
 }
 
-.input-modal{
+.input-modal {
   margin: 15px 0 15px 0;
   padding: 8px;
 }
 
-
 .btn-send {
   background-color: #72d872;
-    border-radius: 15px;
-    font-size: 18px;
-    margin: 6%;
-    padding: 2%;
-
+  border-radius: 15px;
+  font-size: 18px;
+  margin: 6%;
+  padding: 2%;
 }
 
 .register {
-  background: #FAFAFA;
-    border-radius: 5%;
-    line-height: 1;
-    padding: 5px 8px 6px;
-    position: absolute;
-    right: 45px;
-    top: 70px;
-}
-    
-    
-    
-        
-    
-  .title-register{
-    background-color:#B9E523 ;
-    text-align: center;
-    text-transform: uppercase;
-    color: white;
-    font-size: 18px;
-  }
+  border-radius: 5%;
+  line-height: 1;
+  padding: 32px 8px 6px;
 
+  right: 45px;
+  top: 70px;
+}
+.open-register {
+  display: flex;
+  justify-content: center;
+}
+
+.title-register {
+  background-color: #b9e523;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  font-size: 18px;
+}
 
 .modale-register {
   display: flex;
   flex-direction: column;
   max-width: min-content;
-
-  
-  
-  
-  
-  
 }
 
-.btn-register-send{
+.btn-register-send {
   background-color: #b9e523;
-    width: 50%;
-    margin: auto;
-    width: 80%;
-
- 
+  width: 50%;
+  margin: auto;
+  width: 80%;
 }
 
-@media screen and (max-width : 768px){
-  .title-logo{
+@media screen and (max-width: 768px) {
+  .title-logo {
     max-width: 170px;
   }
 
@@ -107,7 +94,7 @@
     top: 20px;
   }
 
-  .form-log{
+  .form-log {
     display: flex;
     flex-direction: column;
   }
@@ -116,5 +103,4 @@
     flex-direction: column;
     flex: auto;
   }
- 
 }

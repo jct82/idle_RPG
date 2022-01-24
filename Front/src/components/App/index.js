@@ -1,7 +1,7 @@
 // == Import
 import { Route, Routes } from 'react-router-dom';
 
-import Character from 'src/components/Character';
+
 import Craft from 'src/components/Craft';
 import Fight from 'src/components/Fight';
 import NotFound from 'src/components/NotFound';
@@ -15,6 +15,7 @@ import Mining from '../Mining';
 
 import './style.scss';
 import Register from '../Header/register';
+import Inventory from '../Character';
 
 // == Composant
 const App = () => (
@@ -25,7 +26,7 @@ const App = () => (
     {/* <h1>Jeu IDLE</h1> */}
     <Routes>
       <Route exact path="/" element={<Home />} />
-      <Route exact path="/character" element={<Character />} />
+      <Route exact path="/inventory" element={<Inventory />} />
       <Route path="/shop" element={<Shop />} />
       <Route path="/jobs/mining" element={<Mining job="mining"/>} />
       <Route path="/jobs/fishing" element={<Fishing job="fishing"/>} />

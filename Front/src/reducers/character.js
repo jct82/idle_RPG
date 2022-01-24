@@ -1,45 +1,17 @@
 import { SEND_RESOURCE_TO_INVENTORY } from "../actions/mining";
 
+import { SET_INVENTORY } from '../actions/character';
 
 const initialState = {
   nom: 'The Counter',
   experience: 0,
   level: 0,
-  inventory: [
-    {
-      nom:'', 
-      type:'', 
-      description:'', 
-      image:'', 
-      valeur:0, 
-      quantite: 0,
-    }
-  ],
+  inventory: [],
   equipement : {
-    casque: {
-      nom:'', 
-      statistique:'', 
-      description:'', 
-      image:''
-    }, 
-    armure: {
-      nom:'', 
-      statistique:'', 
-      description:'', 
-      image:''
-    }, 
-    bottes:{
-      nom:'', 
-      statistique:'', 
-      description:'', 
-      image:''
-    }, arme :{
-      nom:'', 
-      type:'',
-      statistique:'', 
-      description:'', 
-      image:''
-    }
+    casque: 1, 
+    armure: 1, 
+    bottes:1, 
+    arme :1,
   },
   life: 0,
   strength: 10, 
@@ -73,6 +45,11 @@ const character = (state = initialState, action = {}) => {
         ]
       };
     };
+    case SET_INVENTORY:
+      return {
+        ...state,
+        inventory: action.inventory,
+      };
     default:
       return state;
   }

@@ -1,0 +1,24 @@
+
+.character{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  .panel{
+    padding: 15px;
+    box-sizing: border-box;
+    .inner-panel{
+      height: 300px;
+      background-color:#d4d3d3;
+    }
+  }
+  .inventory-panel{
+    flex-basis: 100%;
+  }
+  .equipement-panel{
+    flex-basis: 50%;
+  }
+  .stat-panel{
+    flex-basis: 50%;
+  }
+}
+

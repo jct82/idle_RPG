@@ -7,10 +7,20 @@ const characters = [
       {
         nom:'poisson', 
         type:'vivre', 
-        description:'pour manger', 
-        image:'', 
+        description:'pour manger. Apporte 10 points de vie', 
+        image:'./images/vivre/poisson.png', 
         valeur:15, 
         quantite: 8, 
+        stastistique: 10, 
+        type_statistique: 'vie'
+      },
+      {
+        nom:'viande', 
+        type:'vivre', 
+        description:'pour manger. Apporte 20 points de vie', 
+        image:'./images/vivre/viande.png', 
+        valeur:15, 
+        quantite: 12, 
         stastistique: 10, 
         type_statistique: 'vie'
       },
@@ -26,7 +36,7 @@ const characters = [
             nom:'bottes légères', 
             valeur:150, 
             stastistique: 10,
-            image:'',
+            image:'./images/equipement/bottes/botte1.png', 
           },
           {
             id:2,
@@ -112,18 +122,22 @@ const characters = [
       },
       {
         nom:'curare', 
-        type:'plantes', 
+        type:'ressources',
+        categorie:'plante', 
         description:'pour se soigner', 
         image:'', 
         valeur:50, 
-        quantite: 0, 
+        quantite: 0,
+        craft: 'alchimiste', 
       },
       {
         nom:'fer', 
-        type:'minerai', 
+        type:'ressources',
+        categorie:'minerai', 
         description:'pour forger', 
         image:'', 
         valeur:50, 
+        craft:'forgeron',
         quantite: 6, 
       },
     ],
@@ -142,4 +156,4 @@ const characters = [
   },
 ];
 
-export default character;
+export default characters;
