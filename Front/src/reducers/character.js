@@ -1,5 +1,6 @@
 import { SEND_RESOURCE_TO_INVENTORY } from "../actions/mining";
 import { SET_INVENTORY, CHECK_EQUIPMENT, POSTER_CATEGORY, POSTER_EQUIP} from '../actions/character';
+import { SEND_CRAFTED_ITEM_TO_PLAYER, SPEND_RESOURCES_FOR_CRAFT } from "../actions/craft";
 
 const initialState = {
   nom: 'The Counter',
@@ -66,28 +67,59 @@ const initialState = {
 const character = (state = initialState, action = {}) => {
   switch (action.type) {
   case SEND_RESOURCE_TO_INVENTORY:
-    const findExistingItem = state.inventory.find(elem => elem.name === action.payload.name);
+    const findExistingItem = state.inventory.ressources.find((i) => i.nom === action.payload.nom);
     // Si l'objet existe déjà
     if (findExistingItem) {
+      console.log('yes');
       return {
         ...state,
-        inventory: state.inventory.map(
-          (item) => item.name === action.payload.name ?
-          {...item, quantity: item.quantity + action.payload.quantity}
-          : item)
+        inventory: {
+          ...state.inventory,
+          ressources: state.inventory.ressources.map(
+            (item) => item.nom === action.payload.nom ?
+            {...item, quantite: item.quantite + action.payload.quantite}
+            : item)
+        } 
       };
     } else {
+      console.log('no');
       // Sinon crée un objet
       return {
         ...state,
-        inventory: [
+        inventory: {
           ...state.inventory,
-          {
-            ...action.payload
-          }
-        ]
+          ressources: [
+            ...state.inventory.ressources,
+            {...action.payload}
+          ]
+        }
       };
     };
+    case SPEND_RESOURCES_FOR_CRAFT:
+      return {
+        ...state,
+        inventory: {
+          ...state.inventory,
+          ressources: state.inventory.ressources.map(
+            (item) => item.nom === action.payload.name ?
+            {...item, quantite: item.quantite - action.payload.quantity}
+            : item)
+        }
+      };
+      case SEND_CRAFTED_ITEM_TO_PLAYER:
+        return {
+          ...state,
+          inventory: {
+            ...state.inventory,
+            equipment: state.inventory.equipment.map(
+              (item) => item.nom === action.payload.name ?
+              {...item, quantite: item.quantite + 1}
+              :
+              // TODO DOESNT WORK AS INTENDED
+              [...state.inventory.equipment, {...action.payload}]),
+              
+          }
+        }
     case SET_INVENTORY:
       return {
         ...state,

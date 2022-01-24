@@ -1,10 +1,19 @@
-export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
-export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
+export const SPEND_RESOURCES_FOR_CRAFT = 'SPEND_RESOURCES_FOR_CRAFT';
+export const SEND_CRAFTED_ITEM_TO_PLAYER = 'SEND_CRAFTED_ITEM_TO_PLAYER';
 
-export const increment = () => ({
-  type: INCREMENT_COUNTER,
+export const craftItem = (name, quantity) => ({
+  type: SPEND_RESOURCES_FOR_CRAFT,
+  payload: {
+    name,
+    quantity,
+  }
 });
 
-export const decrement = () => ({
-  type: DECREMENT_COUNTER,
+export const sendCraftedItem = (name, type, desc) => ({
+  type: SEND_CRAFTED_ITEM_TO_PLAYER,
+  payload: {
+    name,
+    type,
+    desc
+  }
 });
