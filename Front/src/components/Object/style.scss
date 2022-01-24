@@ -22,3 +22,94 @@
   }
 }
 
+.menu-inventory{
+  position: relative;
+  width: 390px;
+  font-size: 0px;
+  .cat-name{
+    display: inline-block;
+    width: 130px;
+    height: 40px;
+    background-repeat:no-repeat;
+    background-position: center;
+    &.vivres{
+      background-image: url('../../../public/images/vivre/vivre.png');
+    }
+    &.ressources{
+      background-image: url('../../../public/images/ressources/ressources.png');
+    }
+    &.equipement{
+      background-image: url('../../../public/images/equipement/equipement.png');
+    }
+    &:hover{
+      background-color: rgba(0, 0, 0, 0.5);
+      & > span{
+        display: block;
+      }
+    }
+    & > span{
+      display: none;
+      position:absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      text-align: center;
+      span{
+        line-height: 1;
+        padding: 5px 12px;
+        font-size:14px;
+        color: #ffffff;
+        background: #000000;
+      }
+    }
+  }
+}
+
+.object{
+  position: relative;
+  text-align: center;
+  display: inline-block;
+  .view{
+    width: 50px;
+    height: auto;
+    &:hover{
+      background-color: rgba(0, 0, 0, 0.5);
+      & + .name-wrapper{
+        display: block;
+      }
+    }
+  }
+  .name-wrapper{
+    display: none;
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+    .name{
+      padding: 2px 4px 3px;
+      background: #000000;
+      color: #ffffff;
+      line-height: 1;
+    }
+  }
+  .details{
+    display: none;
+    padding: 8px 12px;
+    background: #000000;
+    color:#ffffff;
+    text-align: left;
+  }
+  .details-name{
+    margin-bottom: 10px;
+  }
+  .detail-description{
+    margin-bottom: 10px;
+  }
+  .quantity{
+    
+  }
+}
+
