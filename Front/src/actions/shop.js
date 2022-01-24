@@ -14,8 +14,11 @@ export const emptyArray = () => ({
   type: EMPTY_ARRAY,
 });
 
-export const modaleOpen = () => ({
+export const modaleOpen = (id) => ({
   type: MODALE_OPEN,
+  payload: {
+    id,
+  },
 });
 
 export const modaleClose = () => ({
