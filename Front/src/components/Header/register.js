@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import "./style.scss";
-import { registerModale } from "../../actions/user";
+import { LOGMODALE, registerModale } from "../../actions/user";
 
 export default function Register() {
   const { log, mail, password, register } = useSelector((state) => state.user);
@@ -14,8 +14,12 @@ export default function Register() {
   };
   return (
     <div className="register">
-      {!register && <button onClick={openModal}>Inscription</button>}
-      {register && (
+      
+   
+
+
+      {
+        register && (
         <div className="open-register">
           <form className="modale-register">
             <h1 className="title-register"> créez votre compte </h1>

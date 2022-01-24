@@ -24,6 +24,7 @@ const character = (state = initialState, action = {}) => {
       return {
         ...state,
         register: !state.register,
+        log:false,
       };
 
    
