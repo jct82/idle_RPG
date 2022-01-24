@@ -2,12 +2,12 @@
 import './style.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import { useEffect } from 'react';
 import { modaleOpen, modaleClose } from '../../actions/shop';
 
 export default function Shop() {
   const dispatch = useDispatch();
-  const { stuffs, isOpen } = useSelector((state) => state.shop);
-  const newShopArray = [];
+  const { newShopArray, stuffs, isOpen } = useSelector((state) => state.shop);
   // console.log(stuffs);
   // on gère le fait d'avoir un équipement de manière aléatoire à mettre dans la boutique
   const getRandomStuff = () => {
@@ -15,11 +15,17 @@ export default function Shop() {
       const randomNumber = Math.floor(Math.random() * stuffs.length);
       // console.log(randomNumber);
       const randomStuff = stuffs[randomNumber].nom;
-      console.log(randomStuff);
+      //console.log(randomStuff);
       newShopArray.push(randomStuff);
     }
   };
-  getRandomStuff();
+
+  // getRandomStuff();
+  // je veux que le chargement de la boutique ne se fasse qu'une fois,
+  // au chargement initial de la page
+  useEffect(() => {
+    getRandomStuff();
+  }, []);
   // console.log(stuffs.length);
   // gestion de l'ouverture de la modale
   const openModale = () => {

@@ -1,6 +1,7 @@
 import { RANDOM_STUFF, MODALE_OPEN, MODALE_CLOSE } from '../actions/shop';
 
 const initialState = {
+  newShopArray: [],
   isOpen: false,
   stuffs: [
     {
