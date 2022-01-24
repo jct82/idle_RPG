@@ -9,6 +9,7 @@ import Home from 'src/components/Home';
 import Menu from '../Menu';
 import Header from '../Header';
 import Job from '../Job';
+import Shop from '../Shop';
 
 
 import './style.scss';
@@ -25,6 +26,7 @@ const App = () => (
       <Route exact path="/" element={<Home />} />
       <Route exact path="/character" element={<Character />} />
       <Route path="/jobs/mining" element={<Job />} />
+      <Route path="/shop" element={<Shop />} />
       {/*<Route exact path="/craft" element={<Craft />} />
       <Route exact path="/fight" element={<Fight />} />
       <Route path="*" element={<NotFound />} /> */}
