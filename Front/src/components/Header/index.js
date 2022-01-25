@@ -6,7 +6,7 @@ import { setModale, setUpdateField } from "../../actions/user";
 import imageTop from "../../assets/titleLogo.png";
 import Register from "./register";
 import ModalImgLog from "/src/assets/ImgModal/Modal-Log.png";
-import DarkMode from "../DarkMode";
+
 
 export default function Header(props) {
   const { modal, mail, password } = useSelector((state) => state.user);
@@ -67,7 +67,7 @@ export default function Header(props) {
           </form>
         </div>
       )}
-      <DarkMode />
+      
       <Register />
     </div>
   );
