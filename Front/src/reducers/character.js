@@ -117,7 +117,6 @@ const character = (state = initialState, action = {}) => {
         const findExistingEquipment = state.inventory.equipment.find((i) => i.name === action.payload.name);
     // Si l'objet existe déjà
     if (findExistingEquipment) {
-      console.log('equipmentyes');
       return {
         ...state,
         inventory: {
@@ -129,7 +128,6 @@ const character = (state = initialState, action = {}) => {
         } 
       };
     } else {
-      console.log('equipmentno');
       // Sinon crée un objet
       return {
         ...state,

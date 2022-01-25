@@ -15,6 +15,85 @@ const initialState = {
       classLink: 'rusted-armor',
       recipe: {
         fer: 5,
+        test: 15,
+        wow: 20,
+        // bronze: 2,
+      }
+    },
+    {
+      name: 'armure rouillée',
+      type: 'armor',
+      desc: 'armure claquée au sol',
+      className: 'rustedArmor',
+      classLink: 'rusted-armor',
+      recipe: {
+        fer: 5,
+        // bronze: 2,
+      }
+    },
+    {
+      name: 'armure rouillée',
+      type: 'armor',
+      desc: 'armure claquée au sol',
+      className: 'rustedArmor',
+      classLink: 'rusted-armor',
+      recipe: {
+        fer: 5,
+        // bronze: 2,
+      }
+    },
+    {
+      name: 'armure rouillée',
+      type: 'armor',
+      desc: 'armure claquée au sol',
+      className: 'rustedArmor',
+      classLink: 'rusted-armor',
+      recipe: {
+        fer: 5,
+        // bronze: 2,
+      }
+    },
+    {
+      name: 'armure rouillée',
+      type: 'armor',
+      desc: 'armure claquée au sol',
+      className: 'rustedArmor',
+      classLink: 'rusted-armor',
+      recipe: {
+        fer: 5,
+        // bronze: 2,
+      }
+    },
+    {
+      name: 'armure rouillée',
+      type: 'armor',
+      desc: 'armure claquée au sol',
+      className: 'rustedArmor',
+      classLink: 'rusted-armor',
+      recipe: {
+        fer: 5,
+        // bronze: 2,
+      }
+    },
+    {
+      name: 'armure rouillée',
+      type: 'armor',
+      desc: 'armure claquée au sol',
+      className: 'rustedArmor',
+      classLink: 'rusted-armor',
+      recipe: {
+        fer: 5,
+        // bronze: 2,
+      }
+    },
+    {
+      name: 'armure rouillée',
+      type: 'armor',
+      desc: 'armure claquée au sol',
+      className: 'rustedArmor',
+      classLink: 'rusted-armor',
+      recipe: {
+        fer: 5,
         // bronze: 2,
       }
     },
