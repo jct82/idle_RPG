@@ -88,13 +88,15 @@ export default function Shop() {
             <button onClick={getIdOfButtonParent} className="buyButton" type="button"> Acheter </button>
           </div>
         ))}
-        {isOpen.open && stuffs.find((stuff) => stuff.id == isOpen.id)
-          ? (
-            <div className="BuyingModal">êtes-vous sûr de vouloir acheter {stuffs.find((stuff) => stuff.id == isOpen.id).nom}
-              <button type="button" onClick={buyingItem}>oui</button><button type="button" onClick={closeModale}>non</button>
-            </div>
-          ) : ''}
       </div>
+      {isOpen.open && stuffs.find((stuff) => stuff.id == isOpen.id)
+        ? (
+          <div className="buyingModal">êtes-vous sûr de vouloir acheter {stuffs.find((stuff) => stuff.id == isOpen.id).nom}
+            <div className="button-container"><button className="buying-button" type="button" onClick={buyingItem}>oui</button>
+              <button className="buying-button" type="button" onClick={closeModale}>non</button>
+            </div>
+          </div>
+        ) : ''}
     </div>
   );
 }

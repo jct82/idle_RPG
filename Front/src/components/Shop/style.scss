@@ -26,8 +26,22 @@
     padding: 10%;
     display: flex;
   }
-
-  
+}
+.buyingModal{
+  background-color: green;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+  .button-container {
+    text-align: center;
+    .buying-button {
+      padding: 1rem;
+      margin: 1rem;
+    }
+  }
 }
 .stuff{
   display: flex;
@@ -49,5 +63,10 @@
 @media screen and (max-width: 800px) {
   .stuff{
     width: 100%;
+  }
+  .buyingModal{
+    position: absolute;
+    top: 40%;
+    left: 30%;
   }
 }
