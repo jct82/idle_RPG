@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./style.scss";
 import mails from "./icon-mail.png";
 import lock from "./lock.png";
-import { setModale, setUpdateField } from "../../actions/user";
+import { setModale, setUpdateField, connectUser } from "../../actions/user";
 import imageTop from "../../assets/titleLogo.png";
 import Register from "./register";
 import ModalImgLog from "/src/assets/ImgModal/Modal-Log.png";
@@ -22,6 +22,12 @@ export default function Header(props) {
   const updateField = (e) => {
     dispatch(setUpdateField(e.target.name, e.target.value));
   };
+
+  const getConnected = (e) => {
+    e.preventDefault();
+    dispatch(connectUser());
+  }
+  
   return (
     <div className="connect">
       <img className="title-logo" src={imageTop} />
@@ -33,10 +39,10 @@ export default function Header(props) {
       {modal == "connexion" && (
         <div className="form-log">
           <img className="img-log" src={ModalImgLog} alt="image-de-fond" />
-          <form className="connect-form">
+          <form className="connect-form" onSubmit={getConnected} encType="multipart/form-data">
             <img src={mails} alt="mail" />
             <input
-              name="mail"
+              name="email"
               value={mail}
               onChange={updateField}
               type="text"
@@ -49,12 +55,12 @@ export default function Header(props) {
               name="password"
               value={password}
               onChange={updateField}
-              type="text"
+              type="password"
               id="title"
               placeholder="Entrez votre mot de passe"
               className="input-modal inp-mdp"
             />
-            <button onClick={displayModale} className="btn-send">
+            <button type="submit" className="btn-send">
               Se connecter
             </button>
             <button
