@@ -9,5 +9,5 @@ import user from './user';
 import shop from './shop';
 
 export default combineReducers({
-  character, craft, monstre, mining, user, fishing,
+  character, craft, monstre, mining, user, fishing, shop,
 });
