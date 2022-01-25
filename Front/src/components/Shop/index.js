@@ -28,16 +28,6 @@ export default function Shop() {
       // newShopArray.push(randomStuffs);
     }
   };
-  // PSEUDO CODE
-  //  action payload avec 1 équipement,
-  // dispatch action avec l'équipement,
-  // reducer : ...state, équipement
-
-  // console.log(getRandomStuff());
-  // const shopInventory = () => {
-  //   dispatch(randomStuff(getRandomStuff()));
-  // };
-
   // je veux que le chargement de la boutique ne se fasse qu'une fois,
   // au chargement initial de la page
   useEffect(() => {
@@ -45,9 +35,6 @@ export default function Shop() {
     getRandomStuff();
   }, []);
   // console.log(stuffs.length);
-  // gestion de l'ouverture de la modale
-  // const openModale = (e) => {
-  //   dispatch(modaleOpen(e.target.parentElement.id));
   // };
   // gestion de la fermeture de la modale
   const closeModale = () => {
@@ -63,8 +50,6 @@ export default function Shop() {
     }
   };
 
-  const test = stuffs.find((stuff) => stuff.id == isOpen.id);
-  console.log(test);
   // Ici on récupère l'id de l'élément parent du boutton ajouté pour comparé cet id
   // avec l'id de l'objet actuellement présent dans le shop
   const getIdOfButtonParent = (e) => {
@@ -100,6 +85,3 @@ export default function Shop() {
     </div>
   );
 }
-
-// isOpen === id objet
-// à chaque ouverture de modale, clear isOpen
