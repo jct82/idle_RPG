@@ -1,16 +1,17 @@
 import { useSelector } from "react-redux";
 import "./style.scss";
+import background from "src/assets/ImgModal/Modale-Register.png";
 
 export default function Register() {
   const { modal, mail, password } = useSelector((state) => state.user);
-
   return (
     <div className="register">
-      {modal == 'inscription' && 
+      {modal == "inscription" && (
         <div className="open-register">
           <form className="modale-register">
+            <img src={background} alt="Image de fond" />
             <h1 className="title-register"> créez votre compte </h1>
-            <label>
+            <label className="pseudo-register">
               Pseudo*
               <input
                 className="text-form"
@@ -19,7 +20,7 @@ export default function Register() {
                 placeholder="Pseudo"
               />
             </label>
-            <label>
+            <label className="mail-register">
               E-mail*
               <input
                 className="text-form"
@@ -28,7 +29,7 @@ export default function Register() {
                 placeholder="E-mail"
               />
             </label>
-            <label>
+            <label className="password-register">
               Mot de passe*
               <input
                 className="text-form"
@@ -53,7 +54,7 @@ export default function Register() {
             />
           </form>
         </div>
-      }
+      )}
     </div>
   );
 }

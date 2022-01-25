@@ -1,12 +1,10 @@
-import { LOGMODALE, UPDATE_FIELD} from '../actions/user';
-
+import { LOGMODALE, UPDATE_FIELD } from "../actions/user";
 const initialState = {
-   modal:'',
-   mail:'',
-   password:'',
-   pseudo: '',
+  modal: "",
+  mail: "",
+  password: "",
+  pseudo: "",
 };
-
 const character = (state = initialState, action = {}) => {
   switch (action.type) {
     case LOGMODALE:
@@ -20,11 +18,8 @@ const character = (state = initialState, action = {}) => {
         ...state,
         [action.name]: action.value,
       };
-
-   
     default:
       return state;
   }
 };
-
 export default character;
