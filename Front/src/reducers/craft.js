@@ -1,5 +1,4 @@
 
-
 const initialState = {
   name: 'Minage',
   type: 'minerai',
@@ -10,20 +9,21 @@ const initialState = {
   recipes: [
     {
       name: 'armure rouillée',
+      type: 'armor',
+      desc: 'armure claquée au sol',
       className: 'rustedArmor',
+      classLink: 'rusted-armor',
       recipe: {
-        fer: 2,
-        bronze: 2,
+        fer: 5,
+        // bronze: 2,
       }
-    }
+    },
   ],
 };
 
 const craft = (state = initialState, action = {}) => {
   switch (action.type) {
-    
-    
-    
+
     default:
       return state;
   }
