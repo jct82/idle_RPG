@@ -1,8 +1,9 @@
 import {
-  RANDOM_STUFF, MODALE_OPEN, MODALE_CLOSE, EMPTY_ARRAY,
+  RANDOM_STUFF, MODALE_OPEN, MODALE_CLOSE, EMPTY_ARRAY, BUY_ITEM,
 } from '../actions/shop';
 
 const initialState = {
+  money: 400,
   newShopArray: [],
   isOpen: {
     open: false,
@@ -15,6 +16,7 @@ const initialState = {
       objet_type_id: 6,
       objet_caractéristiques_id: 2,
       métier_id: '',
+      price: 150,
     },
     {
       id: 2,
@@ -22,6 +24,7 @@ const initialState = {
       objet_type_id: 3,
       objet_caractéristiques_id: 1,
       métier_id: '',
+      price: 245,
     },
     {
       id: 3,
@@ -29,6 +32,7 @@ const initialState = {
       objet_type_id: 6,
       objet_caractéristiques_id: 8,
       métier_id: '',
+      price: 145,
     },
     {
       id: 4,
@@ -36,6 +40,7 @@ const initialState = {
       objet_type_id: 2,
       objet_caractéristiques_id: 7,
       métier_id: 2,
+      price: 4,
     },
     {
       id: 5,
@@ -43,6 +48,7 @@ const initialState = {
       objet_type_id: 2,
       objet_caractéristiques_id: 5,
       métier_id: 2,
+      price: 5,
     },
     {
       id: 6,
@@ -50,6 +56,7 @@ const initialState = {
       objet_type_id: 4,
       objet_caractéristiques_id: 3,
       métier_id: '',
+      price: 150,
     },
     {
       id: 7,
@@ -57,6 +64,7 @@ const initialState = {
       objet_type_id: 5,
       objet_caractéristiques_id: 4,
       métier_id: '',
+      price: 10,
     },
     {
       id: 8,
@@ -64,6 +72,7 @@ const initialState = {
       objet_type_id: 1,
       objet_caractéristiques_id: 6,
       métier_id: 1,
+      price: 45,
     },
     {
       id: 9,
@@ -71,6 +80,7 @@ const initialState = {
       objet_type_id: 1,
       objet_caractéristiques_id: 9,
       métier_id: 1,
+      price: 25,
     },
     {
       id: 10,
@@ -78,6 +88,7 @@ const initialState = {
       objet_type_id: 3,
       objet_caractéristiques_id: 5,
       métier_id: '',
+      price: 100,
     },
 
   ],
@@ -114,6 +125,22 @@ const shop = (state = initialState, action = {}) => {
           open: false,
         },
       };
+    case BUY_ITEM:
+      return {
+        ...state,
+        isOpen: {
+          ...state.isOpen,
+          open: false,
+        },
+        money: state.money - action.payload.price,
+       /*money: state.stuffs.find(
+          (item) => item.id === state.isOpen.id ?
+          {...state.money, money: state.money - item.price}
+          :
+          {...state.money}*/
+        // ),
+      };
+
     default:
       return state;
   }

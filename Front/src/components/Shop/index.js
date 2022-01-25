@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
 import {
-  modaleOpen, modaleClose, randomStuff, emptyArray,
+  modaleOpen, modaleClose, randomStuff, emptyArray, buyItem,
 } from '../../actions/shop';
 
 export default function Shop() {
@@ -14,6 +14,7 @@ export default function Shop() {
     newShopArray,
     stuffs,
     isOpen,
+    money,
   } = useSelector((state) => state.shop);
   // console.log(stuffs);
   // on gère le fait d'avoir un équipement de manière aléatoire à mettre dans la boutique
@@ -53,6 +54,17 @@ export default function Shop() {
     dispatch(modaleClose());
   };
 
+  const buyingItem = () => {
+    if (money >= stuffs.find((stuff) => stuff.id == isOpen.id).price) {
+      dispatch(buyItem(stuffs.find((stuff) => stuff.id == isOpen.id).price));
+    }
+    else {
+      dispatch(modaleClose());
+    }
+  };
+
+  const test = stuffs.find((stuff) => stuff.id == isOpen.id);
+  console.log(test);
   // Ici on récupère l'id de l'élément parent du boutton ajouté pour comparé cet id
   // avec l'id de l'objet actuellement présent dans le shop
   const getIdOfButtonParent = (e) => {
@@ -64,6 +76,9 @@ export default function Shop() {
       <div className="shopMain">
         <p>Boutique</p>
       </div>
+      <div className="money">
+        {money} or
+      </div>
       <div className="shopInventory">
         { newShopArray.map((stuff) => (
           <div className="stuff" id={stuff.id} key={uuidv4()}>
@@ -73,7 +88,12 @@ export default function Shop() {
             <button onClick={getIdOfButtonParent} className="buyButton" type="button"> Acheter </button>
           </div>
         ))}
-        {isOpen.open && stuffs.find((stuff) => stuff.id == isOpen.id) ? <div className="BuyingModal">êtes-vous sûr de vouloir acheter {stuffs.find((stuff) => stuff.id == isOpen.id).nom}  <button type="button" onClick={closeModale}>oui</button><button type="button" onClick={closeModale}>non</button></div> : ''}
+        {isOpen.open && stuffs.find((stuff) => stuff.id == isOpen.id)
+          ? (
+            <div className="BuyingModal">êtes-vous sûr de vouloir acheter {stuffs.find((stuff) => stuff.id == isOpen.id).nom}
+              <button type="button" onClick={buyingItem}>oui</button><button type="button" onClick={closeModale}>non</button>
+            </div>
+          ) : ''}
       </div>
     </div>
   );
