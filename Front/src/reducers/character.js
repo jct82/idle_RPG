@@ -114,19 +114,47 @@ const character = (state = initialState, action = {}) => {
         }
       };
       case SEND_CRAFTED_ITEM_TO_PLAYER:
-        return {
-          ...state,
-          inventory: {
-            ...state.inventory,
-            equipment: state.inventory.equipment.map(
-              (item) => item.nom === action.payload.name ?
-              {...item, quantite: item.quantite + 1}
-              :
-              // TODO DOESNT WORK AS INTENDED
-              [...state.inventory.equipment, {...action.payload}]),
+        const findExistingEquipment = state.inventory.equipment.find((i) => i.name === action.payload.name);
+    // Si l'objet existe déjà
+    if (findExistingEquipment) {
+      console.log('equipmentyes');
+      return {
+        ...state,
+        inventory: {
+          ...state.inventory,
+          equipment: state.inventory.equipment.map(
+            (item) => item.name === action.payload.name ?
+            {...item, quantite: item.quantite + 1}
+            : item)
+        } 
+      };
+    } else {
+      console.log('equipmentno');
+      // Sinon crée un objet
+      return {
+        ...state,
+        inventory: {
+          ...state.inventory,
+          equipment: [
+            ...state.inventory.equipment,
+            {...action.payload}
+          ]
+        },
+      };
+    };
+        // return {
+        //   ...state,
+        //   inventory: {
+        //     ...state.inventory,
+        //     equipment: state.inventory.equipment.map(
+        //       (item) => item.nom === action.payload.name ?
+        //       {...item, quantite: item.quantite + 1}
+        //       :
+        //       // TODO DOESNT WORK AS INTENDED
+        //       [...state.inventory.equipment, {...action.payload}]),
               
-          }
-        }
+        //   }
+        // }
     case SET_INVENTORY:
       return {
         ...state,
