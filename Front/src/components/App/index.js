@@ -14,14 +14,12 @@ import Mining from '../Mining';
 
 
 import './style.scss';
-import Register from '../Header/register';
 import Inventory from '../Character';
 
 // == Composant
 const App = () => (
   <div className="app">
    <Header title="Idle-Rpg"/>
-   <Register />
     <Menu />
     {/* <h1>Jeu IDLE</h1> */}
     <Routes>

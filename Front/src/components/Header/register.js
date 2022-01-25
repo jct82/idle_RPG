@@ -1,20 +1,12 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "./style.scss";
-import { LOGMODALE, registerModale } from "../../actions/user";
 
 export default function Register() {
-  const { log, mail, password, register } = useSelector((state) => state.user);
+  const { modal, mail, password } = useSelector((state) => state.user);
 
-  const dispatch = useDispatch();
-
-  const openModal = () => {
-    // Je dispatch mon new state
-    dispatch(registerModale());
-    console.log(openModal);
-  };
   return (
     <div className="register">
-      {register && (
+      {modal == 'inscription' && 
         <div className="open-register">
           <form className="modale-register">
             <h1 className="title-register"> créez votre compte </h1>
@@ -61,7 +53,7 @@ export default function Register() {
             />
           </form>
         </div>
-      )}
+      }
     </div>
   );
 }

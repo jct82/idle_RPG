@@ -3,40 +3,37 @@ import "./style.scss";
 import logo from "./Logo.png";
 import mails from "./icon-mail.png";
 import lock from "./lock.png";
-import { logModale, setUpdateField, registerModale } from "../../actions/user";
+import { setModale, setUpdateField } from "../../actions/user";
 import imageTop from "../../assets/titleLogo.png";
 import Register from "./register";
 
 export default function Header(props) {
-  const { log, mail, password, register } = useSelector((state) => state.user);
+  const { modal, mail, password } = useSelector((state) => state.user);
   // Je sélectionne log,mail,password qui se trouve dans mon reducer user
   const dispatch = useDispatch();
   // Je crée ma méthode useDispatch
 
-  const openModale = () => {
+  const displayModale = (e) => {
     // Je dispatch mon new state
-    dispatch(logModale());
+    const modalOn = e.target.name;
+    modalOn == undefined ? '' : e.target.name
+    dispatch(setModale(modalOn));
   };
 
   const updateField = (e) => {
     dispatch(setUpdateField(e.target.name, e.target.value));
   };
 
-  const registerLog = (e) => {
-    e.preventDefault();
-    dispatch(registerModale());
-  };
-
   return (
     <div className="connect">
       <img className="title-logo" src={imageTop} />
-      {!log && (
-        <button onClick={openModale} className="btn-log">
+      {modal == '' && (
+        <button onClick={displayModale} name="connexion" className="btn-log">
           Se connecter
         </button>
       )}
 
-      {log && (
+      {modal == 'connexion' && 
         <div className="form-log">
           <form className="connect-form">
             <img src={mails} alt="mail" />
@@ -60,15 +57,17 @@ export default function Header(props) {
               className="input-modal inp-mdp"
             />
 
-            <button onClick={openModale} className="btn-send">
+            <button onClick={displayModale} className="btn-send">
               Se connecter
             </button>
-            <button onClick={registerLog} className="btn-send">
+            <button onClick={displayModale} name="inscription" className="btn-send">
               Inscription
             </button>
           </form>
         </div>
-      )}
+      }
+
+      <Register />
     </div>
   );
 }

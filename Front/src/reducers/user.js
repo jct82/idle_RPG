@@ -1,8 +1,7 @@
-import { LOGMODALE, UPDATE_FIELD,REGISTER_MODALE } from '../actions/user';
+import { LOGMODALE, UPDATE_FIELD} from '../actions/user';
 
 const initialState = {
-   log:false,
-   register:false,
+   modal:'',
    mail:'',
    password:'',
    pseudo: '',
@@ -11,20 +10,15 @@ const initialState = {
 const character = (state = initialState, action = {}) => {
   switch (action.type) {
     case LOGMODALE:
+      
       return {
         ...state,
-        log: !state.log,
+        modal: action.modal,
       };
     case UPDATE_FIELD:
       return {
         ...state,
         [action.name]: action.value,
-      };
-    case REGISTER_MODALE:
-      return {
-        ...state,
-        register: !state.register,
-        log:false,
       };
 
    

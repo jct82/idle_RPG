@@ -1,15 +1,12 @@
 export const SET_INVENTORY = 'SET_INVENTORY';
-export const CHECK_EQUIPMENT = 'CHECK_EQUIPMENT';
 export const POSTER_CATEGORY = 'POSTER_CATEGORY';
 export const POSTER_EQUIP = 'POSTER_EQUIP';
+export const SET_DETAILS = 'SET_DETAILS';
+export const POSTER_DETAILS = 'POSTER_DETAILS';
 
 export const setInventoryObjects = (inventory) => ({
   type: SET_INVENTORY,
-  inventory: inventory
-});
-
-export const checkEquipment = () => ({
-  type: CHECK_EQUIPMENT,
+  inventory: inventory,
 });
 
 export const posterCategory = (category) => ({
@@ -17,8 +14,18 @@ export const posterCategory = (category) => ({
   category: category,
 });
 
-export const posterEquip = (equipThumb) => ({
+export const posterEquipment = (posterEquip) => ({
   type: POSTER_EQUIP,
-  equipThumb: equipThumb,
+  posterEquip: posterEquip,
+});
+
+export const setDetails = (detailsObj) => ({
+  type: SET_DETAILS,
+  detailsObj: detailsObj,
+});
+
+export const posterDetails = (open) => ({
+  type: POSTER_DETAILS,
+  open: open,
 });
 
