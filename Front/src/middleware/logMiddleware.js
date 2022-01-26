@@ -16,7 +16,6 @@ const logMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log(response);
           if (response.status === 201) {
             store.dispatch(logUser(response.headers.authorization, {...response.data}));
           }
@@ -39,7 +38,6 @@ const logMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
             store.dispatch(logUser(response.headers.authorization, {...response.data}));
           }

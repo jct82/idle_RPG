@@ -1,5 +1,5 @@
 import { SEND_RESOURCE_TO_INVENTORY } from "../actions/mining";
-import { SET_INVENTORY, CHECK_EQUIPMENT, POSTER_CATEGORY, POSTER_EQUIP, SET_DETAILS, POSTER_DETAILS} from '../actions/character';
+import { SET_INVENTORY, POSTER_CATEGORY, POSTER_EQUIP, SET_DETAILS, CLOSE_DETAILS, UPDATE_EQUIPMENT } from '../actions/character';
 import { SEND_CRAFTED_ITEM_TO_PLAYER, SPEND_RESOURCES_FOR_CRAFT } from "../actions/craft";
 
 const initialState = {
@@ -55,11 +55,13 @@ const initialState = {
     arme: 1,
   },
   detailsObj: {
+    id: 0,
     nom: '',
     image: '',
     description: '',
     statistique: 0,
     quantite: 0,
+    type:'',
   },
   life: 0,
   strength: 10,
@@ -68,7 +70,7 @@ const initialState = {
   argent: 0,
   posterCat: 'vivres',
   posterEquip: '',
-  details: '',
+  selected: '',
 };
 
 const character = (state = initialState, action = {}) => {
@@ -165,6 +167,7 @@ const character = (state = initialState, action = {}) => {
         ...state,
         posterCat: action.category,
         details: catDetails,
+        selected: '',
       };
     case POSTER_EQUIP:
       let equipDetails;
@@ -173,9 +176,10 @@ const character = (state = initialState, action = {}) => {
         ...state,
         posterEquip: action.posterEquip,
         details: equipDetails,
+        selected: '',
       };
     case SET_DETAILS:
-      const { nom, image, description } = action.detailsObj;
+      const { id, nom, image, description, type } = action.detailsObj;
       let quantite, statistique;
       if (action.detailsObj.reserve == undefined) {
         quantite = action.detailsObj.quantite;
@@ -188,19 +192,33 @@ const character = (state = initialState, action = {}) => {
       return {
         ...state,
         detailsObj: {
+          id : id,
           nom: nom,
           image: image,
           description: description,
           statistique: statistique,
           quantite: quantite,
+          type: type,
         },
+        selected:nom,
       };
-    case POSTER_DETAILS:
-      let newDetails;
-      action.open == true ? newDetails = '' : newDetails = state.posterCat + state.posterEquip;
+    case CLOSE_DETAILS:
       return {
         ...state,
-        details: newDetails,
+        selected: '',
+      };
+    case UPDATE_EQUIPMENT:
+      console.log('action.type', action.objType);
+      console.log('action.id', action.id);
+      let newEquipment = {
+        ...state.equipment,
+        [action.objType]: action.id,
+      }
+      console.log('newEquipment', newEquipment);
+      return {
+        ...state,
+        equipment: newEquipment,
+        selected: '',
       };
     default:
       return state;

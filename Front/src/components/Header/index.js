@@ -15,10 +15,13 @@ export default function Header(props) {
   // Je crée ma méthode useDispatch
   const displayModale = (e) => {
     // Je dispatch mon new state
-    const modalOn = e.target.name;
-    modalOn == undefined ? "" : e.target.name;
-    dispatch(setModale(modalOn));
+    dispatch(setModale(e.target.name));
   };
+
+  const shutModal = (e) => {
+    dispatch(setModale(''));
+  };
+
   const updateField = (e) => {
     dispatch(setUpdateField(e.target.name, e.target.value));
   };
@@ -38,6 +41,7 @@ export default function Header(props) {
       )}
       {modal == "connexion" && (
         <div className="form-log">
+          <div className="close-modal" onClick={shutModal}>X</div>
           <img className="img-log" src={ModalImgLog} alt="image-de-fond" />
           <form className="connect-form" onSubmit={getConnected} encType="multipart/form-data">
             <img src={mails} alt="mail" />

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { subscribeUser, setUpdateField } from  "src/actions/user";
+import { subscribeUser, setUpdateField, setModale } from  "src/actions/user";
 import "./style.scss";
 import background from "src/assets/ImgModal/Modale-Register.png";
 
@@ -12,6 +12,10 @@ export default function Register() {
     dispatch(subscribeUser());
   }
 
+  const shutModal = (e) => {
+    dispatch(setModale(''));
+  };
+
   const updateField = (e) => {
     dispatch(setUpdateField(e.target.name, e.target.value));
   };
@@ -20,6 +24,7 @@ export default function Register() {
       {modal == "inscription" && (
         <div className="open-register">
           <form className="modale-register" onSubmit={loginUser} encType="multipart/form-data" >
+            <div className="close-modal" onClick={shutModal}>X</div>
             <img src={background} alt="Image de fond" />
             <h1 className="title-register"> créez votre compte </h1>
             <label className="pseudo-register">
