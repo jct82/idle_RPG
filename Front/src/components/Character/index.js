@@ -117,15 +117,16 @@ const Inventory = () => {
           {details.length > 0 && <Details object={detailsObj}/>}
         </div>
       </div>
-      <div className="panel equipement-panel">
+      <div className="panel stat-panel">
         <div className="inner-panel">
         <Stats /> 
         </div>
       </div>
-      <div className="panel stat-panel">
+      <div className="panel equipement-panel">
       
         <div className="inner-panel">
-        <InventoryItem /></div>
+        <InventoryItem />
+        </div>
       </div>
       
     </div>
