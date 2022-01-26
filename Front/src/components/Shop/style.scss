@@ -20,7 +20,6 @@
     height: 50%;
     margin: 10% auto;
     flex-wrap: wrap;
-    align-items: flex-end;
   }
   &Stuff{
     padding: 10%;
@@ -56,9 +55,11 @@
   display: flex;
   flex-direction: column;
   width: 33.33%;
-  height: 30%;
+  min-height: 33.33%;
+  max-height: 33.33%;
   padding: 1em;
   border: 1px solid black;
+
   .buyButton {
   display: flex;
 }
@@ -94,8 +95,8 @@
 }
 @media screen and (max-width: 600px) {
   .money{
-    top: 19%;
-    right: 32%; 
+    top: 25%;
+    right: 14%; 
   }
 }
 

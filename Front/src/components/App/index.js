@@ -18,14 +18,13 @@ const App = () => (
     {/* <h1>Jeu IDLE</h1> */}
     <Routes>
       <Route exact path="/" element={<Home />} />
-      <Route exact path="/inventory" element={<Inventory />} />
       <Route path="/shop" element={<Shop />} />
+      <Route exact path="/inventory" element={<Inventory />} />
+      <Route exact path="/fighting" element={<Fight />} />
+      <Route path="/craft" element={<Craft />} />
       <Route path="/jobs/mining" element={<Mining job="mining" />} />
       <Route path="/jobs/fishing" element={<Fishing job="fishing" />} />
-      <Route path="/craft" element={<Craft />} />
-      {/*<Route exact path="/craft" element={<Craft />} />
-      <Route exact path="/fight" element={<Fight />} />
-      <Route path="*" element={<NotFound />} /> */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   </div>
 );

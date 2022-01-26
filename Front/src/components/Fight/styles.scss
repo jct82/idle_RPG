@@ -1,0 +1,140 @@
+.fight {
+  &-container {
+    border: 1px black solid;
+    width: 80vw;
+    margin: 10px auto;
+    background-color: hotpink;
+    padding-top: 15px;
+    &--characters {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  }
+  &-profile {
+    width: 25%;
+    text-align: center;
+    border: 1px black solid;
+    padding: 1rem;
+  }
+  &-player {
+
+    &--img {
+      width: 80px;
+      height: 80px;
+      margin: auto;
+      border: 1px red solid;
+      border-radius: 50%;
+    }
+  }
+  &-enemy {
+
+    &--img{
+      width: 80px;
+      height: 80px;
+      margin: auto;
+      border: 1px red solid;
+      border-radius: 50%;
+    }
+
+  }
+  &-container{
+
+    &--stats{
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+  &--logs {
+    padding: 15px;
+    width: 40%;
+    margin: 1.5% 0;
+    border: 1px solid black;
+  }
+  &--stats {
+    padding: 15px;
+    margin: 1.5% 0;
+    border: 1px solid black;
+    width: 40%;
+  }
+}
+
+#healthBarContainer--player {
+  border: 1px rgba(0, 0, 0, 0.205) solid;
+  margin: 15px auto;
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.24);
+}
+
+#healthBar--player {
+  display: block;
+  height: 100%;
+  border-radius: 10px;
+  width: 50%;
+  max-width: 100%;
+  background-color: rgb(255, 0, 0);
+  transition: width 100ms;
+}
+
+#atkSpeedContainer--player {
+  border: 1px rgba(0, 0, 0, 0.205) solid;
+  margin: 15px auto;
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  height: 10px;
+  background-color: rgba(0, 0, 0, 0.24);
+}
+
+#atkSpeed--player {
+  display: block;
+  height: 100%;
+  border-radius: 10px;
+  width: 50%;
+  max-width: 100%;
+  background-color: rgba(0, 17, 255, 0.377);
+  transition: width 100ms;
+}
+
+#healthBarContainer--enemy {
+  border: 1px rgba(0, 0, 0, 0.205) solid;
+  margin: 15px auto;
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.24);
+}
+
+#healthBar--enemy {
+  display: block;
+  height: 100%;
+  border-radius: 10px;
+  width: 50%;
+  max-width: 100%;
+  background-color: rgb(255, 0, 0);
+  transition: width 100ms;
+}
+
+#atkSpeedContainer--enemy {
+  border: 1px rgba(0, 0, 0, 0.205) solid;
+  margin: 15px auto;
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  height: 10px;
+  background-color: rgba(0, 0, 0, 0.24);
+}
+
+#atkSpeed--enemy {
+  display: block;
+  height: 100%;
+  border-radius: 10px;
+  width: 50%;
+  max-width: 100%;
+  background-color: rgba(0, 17, 255, 0.377);
+  transition: width 100ms;
+}

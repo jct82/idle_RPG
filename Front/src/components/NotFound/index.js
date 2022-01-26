@@ -7,7 +7,7 @@ function NotFound() {
         <h1 className="error_404">404</h1>
       </div>
       <div className="error-subtitle">
-        <h2>La page que vous demandez n'existe pas.</h2>
+        <h2>La page que vous demandez n'existe pas</h2>
       </div>
     </div>
   )
