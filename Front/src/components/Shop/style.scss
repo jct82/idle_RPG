@@ -1,5 +1,18 @@
 @use 'src/styles/vars';
 
+.background-shop {
+  background-image: url('../../assets/idleShop.png');
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  background-repeat: repeat;
+  top: 0;
+  left:0;
+}
+
 .shop {
   &-container {
     width: 100%;
@@ -48,7 +61,7 @@
 }
 .buying-modal{
   font-size: 1.3rem;
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   text-align: center;

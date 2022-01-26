@@ -4,10 +4,10 @@ import './style.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
+import { boutiqueLogo } from 'src/assets/idleMenuIcons';
 import {
   modaleOpen, modaleClose, randomStuff, emptyArray, buyItem,
 } from '../../actions/shop';
-import { boutiqueLogo } from 'src/assets/idleMenuIcons';
 
 export default function Shop() {
   const dispatch = useDispatch();
@@ -58,31 +58,34 @@ export default function Shop() {
     dispatch(modaleOpen(selectedId));
   };
   return (
-    <div className="shop-container">
-      <div className="shop-main">
-        <p>Boutique</p>
-      </div>
-      <div className="money">
-        {money} <img className="money-image" src={boutiqueLogo} alt="or"/>
-      </div>
-      <div className="shop-inventory">
-        { newShopArray.map((stuff) => (
-          <div className="stuff" id={stuff.id} key={uuidv4()}>
-            <div className="shop-stuff">
-              {stuff.nom}
+    <>
+      <div className="background-shop" />
+      <div className="shop-container">
+        <div className="shop-main">
+          <p>Boutique</p>
+        </div>
+        <div className="money">
+          {money} <img className="money-image" src={boutiqueLogo} alt="or" />
+        </div>
+        <div className="shop-inventory">
+          { newShopArray.map((stuff) => (
+            <div className="stuff" id={stuff.id} key={uuidv4()}>
+              <div className="shop-stuff">
+                {stuff.nom}
+              </div>
+              <button onClick={getIdOfButtonParent} className="buy-button" type="button"> Acheter </button>
             </div>
-            <button onClick={getIdOfButtonParent} className="buy-button" type="button"> Acheter </button>
-          </div>
-        ))}
-      </div>
-      {isOpen.open && stuffs.find((stuff) => stuff.id == isOpen.id)
-        ? (
-          <div className="buying-modal">Êtes-vous sûr de vouloir acheter "{stuffs.find((stuff) => stuff.id == isOpen.id).nom}"
-            <div className="button-container"><button className="buying-button" type="button" onClick={buyingItem}>oui</button>
-              <button className="buying-button" type="button" onClick={closeModale}>non</button>
+          ))}
+        </div>
+        {isOpen.open && stuffs.find((stuff) => stuff.id == isOpen.id)
+          ? (
+            <div className="buying-modal">Êtes-vous sûr de vouloir acheter "{stuffs.find((stuff) => stuff.id == isOpen.id).nom}"
+              <div className="button-container"><button className="buying-button" type="button" onClick={buyingItem}>oui</button>
+                <button className="buying-button" type="button" onClick={closeModale}>non</button>
+              </div>
             </div>
-          </div>
-        ) : ''}
-    </div>
+          ) : ''}
+      </div>
+    </>
   );
 }
