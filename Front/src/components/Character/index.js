@@ -9,6 +9,7 @@ import activeThumb from "../../utils/activeBox";
 // == Import : local
 import "./style.scss";
 import Stats from "./Stats";
+import InventoryItem from "./Inventory-item";
 
 // == Composant
 const Inventory = () => {
@@ -122,7 +123,9 @@ const Inventory = () => {
         </div>
       </div>
       <div className="panel stat-panel">
-        <div className="inner-panel"></div>
+      
+        <div className="inner-panel">
+        <InventoryItem /></div>
       </div>
       
     </div>

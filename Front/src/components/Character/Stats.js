@@ -7,7 +7,7 @@ import force from "/src/assets/Force/force.png";
 export default function Stats() {
   const dispatch = useDispatch();
 
-  const { vie, xp, level, metier, argent } = useSelector(
+  const { vie, xp, level, metier, argent,dexterite } = useSelector(
     (state) => state.stats
   );
 
@@ -21,6 +21,10 @@ export default function Stats() {
         <li>
           <span>{vie}</span>
           <img src={imgLife} alt="Coeur" />
+        </li>
+        <li>
+          <span> Dextérité : {dexterite}</span>
+          
         </li>
         <li>
           {/* <span>Force</span> */}
