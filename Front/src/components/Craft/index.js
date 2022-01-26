@@ -21,13 +21,14 @@ const Craft = () => {
     console.log(currentRecipe);
     for (const [key, value] of Object.entries(currentRecipe.recipe)) {
       console.log(equipment);
+      console.log(ressources);
       // ressources.find((resource) => resource === key);
       const neededResource = ressources.find((resource) => resource.nom === key);
       console.log(currentRecipe);
       if (neededResource)
       {
         if (neededResource.quantite >= value) {
-          dispatch(craftItem(neededResource.nom, neededResource.quantite))
+          dispatch(craftItem(neededResource.nom, currentRecipe.recipe[key]))
           dispatch(sendCraftedItem(currentRecipe.name, currentRecipe.type, currentRecipe.desc));
         }
       }
