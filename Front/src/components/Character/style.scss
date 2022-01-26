@@ -24,6 +24,8 @@
 
 .inventory-category{
   position: relative;
+  display: inline-block;
+  vertical-align: top;
   width: 362px;
   border: 1px solid #000;
   border-bottom: none;
@@ -118,14 +120,20 @@
   &:nth-child(5n) {
     border-right: none;
   }
-  .view{
-    width: 50px;
-    height: auto;
+  .view-wrapper{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
     &:hover{
       & + .name-wrapper{
         display: block;
       }
     }
+  }
+  .view{
+    width: 50px;
+    height: auto;
   }
   .name-wrapper{
     display: none;
@@ -147,6 +155,8 @@
 
 .details{
   position: relative;
+  display: inline-block;
+  vertical-align: top;
   padding: 8px 12px;
   background: #000000;
   color:#ffffff;
@@ -175,6 +185,22 @@
   }
   .quantity{
     
+  }
+}
+
+.equipement-panel .inner-panel{
+  display: flex;
+  flex-wrap:wrap;
+  align-items: center;
+  justify-content: center;
+  .equip-block{
+    flex-basis: 50%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    text-align: center;
+    .img-equip img{
+      width: 80px;
+    }
   }
 }
 

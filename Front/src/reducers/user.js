@@ -12,7 +12,6 @@ const initialState = {
 const character = (state = initialState, action = {}) => {
   switch (action.type) {
     case LOGMODALE:
-      
       return {
         ...state,
         modal: action.modal,
@@ -26,7 +25,8 @@ const character = (state = initialState, action = {}) => {
       localStorage.setItem('profile', JSON.stringify(action.token));
       localStorage.setItem('name', action.userData.name);
       localStorage.setItem('userId', action.userData.id);
-      return {...state,
+      return {
+        ...state,
         loggedName : action.userData.name,
         userId: action.userData.id,
         name:'',
@@ -34,6 +34,7 @@ const character = (state = initialState, action = {}) => {
         password: '',
         logged: true,
         logError: '',
+        modal: '',
       };
     default:
       return state;

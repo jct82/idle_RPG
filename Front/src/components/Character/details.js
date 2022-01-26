@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { posterDetails } from "../../actions/character";
+import { closeDetails, updateEquip } from "../../actions/character";
 
 import './style.scss';
 
@@ -9,16 +9,15 @@ const Details = ({object}) => {
   let equipObject;
   object.quantite == undefined ? equipObject = true : equipObject = false;
 
-  
   const dispatch = useDispatch();
 
   const shutDetails = () => {
-    dispatch(posterDetails(true));
+    dispatch(closeDetails());
   }
-  
-  // const { inventory, posterCat, posterEquip, detailsObj } = useSelector(
-  //   (state) => state.character
-  // );
+
+  const changeEquip = () => {
+    dispatch(updateEquip(object.id, object.type));
+  }
 
   return (
       <div className="details">
@@ -29,9 +28,9 @@ const Details = ({object}) => {
           {object.description}
         </div>
         { equipObject ?
-        <><div className="statistique">{object.statistique}</div>
-        <button className="cta">Enfiler</button></> 
-        : <><div className="quantity">{object.quantite}</div>
+        <><div className="statistique">Stats : {object.statistique}</div>
+        <button className="cta" onClick={changeEquip}>Enfiler</button></> 
+        : <><div className="quantity">Quantité : {object.quantite}</div>
         <button className="cta">Consommer</button></>}
       </div>
   );

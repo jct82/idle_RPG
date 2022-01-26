@@ -5,6 +5,7 @@ import characterData from "../../../data/character";
 import { setInventoryObjects, posterCategory, posterEquipment } from "../../actions/character";
 import Objects from "../Object";
 import Details from "./details";
+import Equipment from "./equipment";
 import activeThumb from "../../utils/activeBox";
 // == Import : local
 import "./style.scss";
@@ -12,14 +13,16 @@ import "./style.scss";
 // == Composant
 const Inventory = () => {
   const dispatch = useDispatch();
-  const { inventory, posterCat, posterEquip, detailsObj, details } = useSelector(
+  const { inventory, posterCat, posterEquip, detailsObj, selected, equipment } = useSelector(
     (state) => state.character
   );
   
   const inventoryData = characterData[0].inventory;
+  const equipmentData = inventoryData.equipment
 
   useEffect(() => {
     dispatch(setInventoryObjects(inventoryData));
+    //setEquipment(inventoryEquipData);
   }, []);
 
   inventory.ressources.sort((a, b) => a.categorie - b.categorie);
@@ -41,19 +44,19 @@ const Inventory = () => {
   inventory.equipment.forEach((equip) => {
     if (equip.nom == "casque") {
       jsxHelmet = equip.reserve.map((item) => (
-        <Objects key={item.id} {...item}/>
+        <Objects key={item.id} {...item} type={equip.nom}/>
       ));
     } else if (equip.nom == "armure") {
       jsxArmor = equip.reserve.map((item) => (
-        <Objects key={item.id} {...item} />
+        <Objects key={item.id} {...item} type={equip.nom}/>
       ));
     } else if (equip.nom == "arme") {
       jsxWeapon = equip.reserve.map((item) => (
-        <Objects key={item.id} {...item} />
+        <Objects key={item.id} {...item} type={equip.nom} />
       ));
     } else if (equip.nom == "bottes") {
       jsxShoes = equip.reserve.map((item) => (
-        <Objects key={item.id} {...item} />
+        <Objects key={item.id} {...item} type={equip.nom} />
       ));
     }
   });
@@ -65,6 +68,16 @@ const Inventory = () => {
     if (e.target.getAttribute("name") != 'equipement') dispatch(posterEquipment(''));
     activeThumb(e.target);
   };
+
+    console.log('equipment', equipment);
+
+  const JSXaccessories = Object.keys(equipment).map(function(key) {
+    let equipType = equipmentData.find(item => item.nom == key);
+    let equipObj = equipType.reserve.find(item => item.id == equipment[key]);
+    return (
+      <Equipment key={equipObj.nom} {...equipObj} />
+    )
+  });
 
   return (
     <div className="character">
@@ -112,14 +125,16 @@ const Inventory = () => {
               </>
             )}
           </div>
-          {details.length > 0 && <Details object={detailsObj}/>}
+          {selected.length > 0 && <Details object={detailsObj}/>}
         </div>
-      </div>
-      <div className="panel equipement-panel">
-        <div className="inner-panel"></div>
       </div>
       <div className="panel stat-panel">
         <div className="inner-panel"></div>
+      </div>
+      <div className="panel equipement-panel">
+        <div className="inner-panel">
+          {JSXaccessories}
+        </div>
       </div>
     </div>
   );
