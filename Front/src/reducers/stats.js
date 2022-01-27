@@ -4,6 +4,8 @@ import { LEVEL } from "../actions/stats";
 import { JOB } from "../actions/stats";
 import { MONEY } from "../actions/stats";
 import { DEXTERITE } from "../actions/stats";
+import { FORCE } from "../actions/stats";
+
 
 
 
@@ -57,6 +59,11 @@ const statsReducer = (state = initialState, action) => {
               return {
                 ...state,
                 money:state.dexterite,
+              };
+              case FORCE:
+              return {
+                ...state,
+                force:state.force,
               };
     default:
       return state;

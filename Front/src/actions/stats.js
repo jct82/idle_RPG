@@ -4,6 +4,8 @@ export const LEVEL = 'LEVEL';
 export const JOB = 'JOB';
 export const MONEY = 'MONEY';
 export const DEXTERITE  = "DEXTERITE";
+export const FORCE  = "FORCE";
+
 
 
 
@@ -43,6 +45,12 @@ export const moneyor = () => ({
 export const dexterite = () => ({
   type: DEXTERITE,
   dexterite: dexterite,
+  
+});
+
+export const force = () => ({
+  type: FORCE,
+  force: force,
   
 });
 
