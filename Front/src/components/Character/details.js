@@ -1,10 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
-import { closeDetails, updateEquip } from "../../actions/character";
+import { closeDetails, updateEquip, updateVivre } from "../../actions/character";
 
 import './style.scss';
 
 // == Composant
 const Details = ({object}) => {
+
+  const vivres  = useSelector((state) => state.character.inventory.vivres);
 
   let equipObject;
   object.quantite == undefined ? equipObject = true : equipObject = false;
@@ -18,6 +20,11 @@ const Details = ({object}) => {
   const changeEquip = () => {
     dispatch(updateEquip(object.id, object.type));
   }
+  
+  const consommer = () => {
+    console.log('vivresvivres', vivres);
+    dispatch(updateVivre(object.nom,object.statistique));
+  }
 
   return (
       <div className="details">
@@ -27,11 +34,12 @@ const Details = ({object}) => {
         <div className="detail-description">
           {object.description}
         </div>
-        { equipObject ?
+        { 
+          equipObject ?
         <><div className="statistique">Stats : {object.statistique}</div>
         <button className="cta" onClick={changeEquip}>Enfiler</button></> 
         : <><div className="quantity">Quantité : {object.quantite}</div>
-        <button className="cta">Consommer</button></>}
+        <button className="cta" onClick={consommer}>Consommer</button></>}
       </div>
   );
 };

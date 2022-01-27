@@ -1,10 +1,10 @@
 import { SEND_RESOURCE_TO_INVENTORY } from "../actions/mining";
-import { SET_INVENTORY, POSTER_CATEGORY, POSTER_EQUIP, SET_DETAILS, CLOSE_DETAILS, UPDATE_EQUIPMENT } from '../actions/character';
+import { SET_INVENTORY, POSTER_CATEGORY, POSTER_EQUIP, SET_DETAILS, CLOSE_DETAILS, UPDATE_EQUIPMENT,UPDATE_VIVRE } from '../actions/character';
 import { SEND_CRAFTED_ITEM_TO_PLAYER, SPEND_RESOURCES_FOR_CRAFT } from "../actions/craft";
 
 const initialState = {
   nom: 'The Counter',
-  experience: 0,
+  experience: 10,
   level: 0,
   inventory: {
     vivres: [
@@ -14,7 +14,7 @@ const initialState = {
         image: '',
         valeur: 0,
         quantite: 0,
-        stastistique: 0,
+        statistique: 0,
         type_statistique: '',
       },
     ],
@@ -30,7 +30,7 @@ const initialState = {
             id: 1,
             nom: '',
             valeur: 0,
-            stastistique: 0,
+            statistique: 0,
             description: '',
             image: '',
           },
@@ -63,10 +63,10 @@ const initialState = {
     quantite: 0,
     type:'',
   },
-  life: 0,
+  life: 50,
   strength: 10,
   endurance: 0,
-  dexterité: 0,
+  dexterite: 0,
   argent: 0,
   posterCat: 'vivres',
   posterEquip: '',
@@ -179,16 +179,9 @@ const character = (state = initialState, action = {}) => {
         selected: '',
       };
     case SET_DETAILS:
-      const { id, nom, image, description, type } = action.detailsObj;
-      let quantite, statistique;
-      if (action.detailsObj.reserve == undefined) {
-        quantite = action.detailsObj.quantite;
-        statistique = 0;
-      }
-      else {
-        statistique = action.detailsObj.statistique;
-        quantite = 0;
-      }
+      const { id, nom, image, description, type, statistique } = action.detailsObj;
+      let quantite;
+      action.detailsObj.reserve == undefined ? quantite = action.detailsObj.quantite : quantite = 0;
       return {
         ...state,
         detailsObj: {
@@ -208,18 +201,48 @@ const character = (state = initialState, action = {}) => {
         selected: '',
       };
     case UPDATE_EQUIPMENT:
-      console.log('action.type', action.objType);
-      console.log('action.id', action.id);
       let newEquipment = {
         ...state.equipment,
         [action.objType]: action.id,
       }
-      console.log('newEquipment', newEquipment);
       return {
         ...state,
         equipment: newEquipment,
         selected: '',
       };
+      case UPDATE_VIVRE:
+        
+        let newInventory = state.inventory;
+        let newLife = state.life;
+
+        if (state.life == 100) {
+          return {...state, selected:''};
+        } else if (state.life + action.statistique > 100) {
+          newLife = 100;
+        } else {
+          newLife = state.life + action.statistique;
+        }
+        let stockVivre = state.inventory.vivres;
+        //trouver le vivre correspondant au nom dans les vivres de l'inventaire
+        stockVivre = stockVivre.find(item => item.nom == action.nom);
+        //enlever 1 à la quantité de l'inventaire trouvé
+        stockVivre.quantite -= 1;
+        //mettre à jour vivres de l'inventaire avec le vivre mis à jour
+        let newVivres = state.inventory.vivres.map(vivre => {
+          if (vivre.nom == action.nom) vivre.quantite = stockVivre.quantite;
+          return vivre;
+        });
+        //mettre à jour l'inventaire avec les vivres mis à jour
+        newInventory = {
+          ...state.inventory,
+          newVivres,
+        }
+        return {
+          ...state,
+          inventory : newInventory,
+          life: newLife,
+          selected: '',
+        };
     default:
       return state;
   }

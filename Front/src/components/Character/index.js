@@ -18,7 +18,7 @@ const Inventory = () => {
   const { inventory, posterCat, posterEquip, detailsObj, selected, equipment } = useSelector(
     (state) => state.character
   );
-  
+
   const inventoryData = characterData[0].inventory;
   const equipmentData = inventoryData.equipment
 
@@ -28,15 +28,9 @@ const Inventory = () => {
 
   inventory.ressources.sort((a, b) => a.categorie - b.categorie);
 
-  const jsxRessource = inventory.ressources.map((object) => (
-    <Objects key={object.nom} {...object} />
-  ));
-  const jsxVivre = inventory.vivres.map((object) => (
-    <Objects key={object.nom} {...object} />
-  ));
-  const jsxEquipement = inventory.equipment.map((object) => (
-    <Objects key={object.nom} {...object}/>
-  ));
+  const jsxRessource = inventory.ressources.map((object) => {if (object.quantite > 0) return <Objects key={object.nom} {...object} />});
+  const jsxVivre = inventory.vivres.map((object) => {if (object.quantite > 0) return <Objects key={object.nom} {...object} />});
+  const jsxEquipement = inventory.equipment.map((object) => <Objects key={object.nom} {...object}/>);
 
   let jsxHelmet = [],
     jsxArmor = [],
@@ -128,14 +122,6 @@ const Inventory = () => {
           </div>
           <div className="details-wrapper">
             {selected.length > 0 && <Details object={detailsObj}/>}
-            <div className="test-form">
-
-              <input type="text" placeholder="bouton"></input>
-              <button className="">button</button>
-              <button className="menu-button boutique">button</button>
-              <button className="menu-button combat">button</button>
-              <button className="menu-button craft">button</button>
-            </div>
           </div>
         </div>
       </div>

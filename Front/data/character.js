@@ -7,21 +7,21 @@ const characters = [
       vivres : [
         {
           nom:'poisson', 
-          description:'pour manger. Apporte 10 points de vie', 
+          description:'pour manger. Apporte 5 points de vie', 
           image:'./images/vivre/poisson.png', 
           valeur:15, 
           quantite: 8, 
-          stastistique: 10, 
-          type_statistique: 'vie'
+          statistique: 5, 
+          type_statistique: 'vie',
         },
         {
           nom:'viande', 
-          description:'pour manger. Apporte 20 points de vie', 
+          description:'pour manger. Apporte 5 points de vie', 
           image:'./images/vivre/viande.png', 
           valeur:15, 
           quantite: 12, 
-          stastistique: 10, 
-          type_statistique: 'vie'
+          statistique: 5, 
+          type_statistique: 'vie',
         },
       ],
       equipment: [
@@ -36,7 +36,7 @@ const characters = [
               id:1,
               nom:'bottes légères', 
               valeur:150, 
-              stastistique: 30,
+              statistique: 30,
               description: 'pour se déplacer vite',
               image:'./images/equipement/bottes/botte1.png', 
             },
@@ -44,7 +44,7 @@ const characters = [
               id:2,
               nom:'bottes classes', 
               valeur:150, 
-              stastistique: 5, 
+              statistique: 5, 
               description: 'pour combattre avec élégance',
               image:'./images/equipement/bottes/botte2.png', 
             },
@@ -52,7 +52,7 @@ const characters = [
               id:3,
               nom:'bottes d\'hiver', 
               valeur:150, 
-              stastistique: 10, 
+              statistique: 10, 
               description: 'pour avoir chaud aux pieds',
               image:'./images/equipement/bottes/botte3.png', 
             }
@@ -69,7 +69,7 @@ const characters = [
               id:1,
               nom:'casque moyen', 
               valeur:200, 
-              stastistique: 20, 
+              statistique: 20, 
               description: 'casque pas mal',
               image:'./images/equipement/casque/casque2.png', 
             },
@@ -77,7 +77,7 @@ const characters = [
               id:2,
               nom:'casque solide', 
               valeur:250, 
-              stastistique: 25, 
+              statistique: 25, 
               description: 'casque résistant avec double amortisseur',
               image:'./images/equipement/casque/casque3.png', 
             }
@@ -94,7 +94,7 @@ const characters = [
               id: 1,
               nom:'armure solide', 
               valeur:400, 
-              stastistique: 40, 
+              statistique: 40, 
               description: 'armure en titane',
               image:'./images/equipement/armure/armure1.png', 
             }
@@ -113,7 +113,7 @@ const characters = [
               nom:'épée de la force obscure', 
               description:'pour trancher tous types d\'adversaire',
               valeur:200, 
-              stastistique: 30, 
+              statistique: 30, 
               image:'./images/equipement/armes/epee/epee.png', 
             }, 
             {
@@ -122,7 +122,7 @@ const characters = [
               nom: 'arbalette-po',
               description:'pour tirer des flêches',
               valeur:150, 
-              stastistique: 15, 
+              statistique: 15, 
               image:'./images/equipement/armes/arbalette/arbalette1.png', 
             }
           ]

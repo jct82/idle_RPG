@@ -9,57 +9,64 @@
 
 .img-log{
   width: 100%;
+  margin-bottom: 25px;
 }
 
 .btn-log {
   position: absolute;
   top: 40px;
   right: 40px;
-  padding: 5px 8px 6px;
-  line-height: 1;
-  border-radius: 5%;
-  background: chocolate;
 }
 
 .form-log {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  margin: auto;
+  height: 500px;
+  max-height:80%;
+  max-width: 500px;
+  padding: 8px;
   border: 2px solid black;
   box-shadow: 0px 0px 20px 4px #000;
-  left: 22%;
-  margin: 0 auto;
-  max-width: 555px;
-  padding: 8px;
-  position: fixed;
-  right: 0px;
-  // top: 38%;
-  z-index: 3;
   background-color: #34374e
 }
 
-.connect-form {
+.field-wrapper{
+  padding-left: 50px;
+  background-position: left center;
+  background-repeat:no-repeat;
+  background-size: auto 30px;
+  margin-bottom: 20px;
+  &.mail{
+    background-image:url('../../../public/images/icon-mail.png');
+  }
+  &.pwd{
+    background-image:url('../../../public/images/lock.png');
+  }
+}
+
+.button-wrapper{
+  margin:10px 0px;
+  button{
+    margin: 0 8px;
+  }
+}
+
+.connect-form, .modale-register {
   display: flex;
   flex-direction: column;
   // justify-content: space-between;
   align-items: center;
 }
 
-.input-modal {
-  margin: 15px 0 15px 0;
-  padding: 8px;
-}
-
-.btn-send {
-  background-color: #72d872;
-  border-radius: 15px;
-  font-size: 18px;
-  margin: 6%;
-  padding: 2%;
-}
-
 .register {
   border-radius: 5%;
   line-height: 1;
   padding: 32px 8px 6px;
-
   right: 45px;
   top: 70px;
 }
@@ -82,20 +89,24 @@
 }
 
 .modale-register {
-  display: flex;
-  flex-direction: column;
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  top :0;
+  bottom: 0;
+  margin: auto;
+  max-width: 500px;
+  height: 615px;
+  max-height:80%;
+  padding: 20px;
   border: 2px solid #000;
   box-shadow: 0 0 20px 4px #000;
-  left: 22%;
-  margin: 0 auto;
-  max-width: 500px;
-  padding: 32px;
-  position: fixed;
-  right: 0;
-  top: 25%;
-  z-index: 2;
   background:#7d7c66;
-  z-index: 3;
+  img{
+    width:100%;
+    margin-bottom: 25px;
+  }
 }
 
 .pseudo-register {

@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 
 import character from './character';
 import inventoryitem from './inventoryitem';
-import stats from './stats';
 import craft from './craft';
 import monstre from './monstre';
 import mining from './mining';
@@ -12,5 +11,5 @@ import shop from './shop';
 import fight from './fight';
 
 export default combineReducers({
-  character, craft, monstre, mining, user, fishing, shop, fight,stats,inventoryitem,
+  character, craft, monstre, mining, user, fishing, shop, fight,inventoryitem,
 });

@@ -13,11 +13,22 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
   font-family: 'Retro', sans-serif;
 }
 
-button, input[type="text"]{
+button{
+  padding: 8px 12px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgba(148,207,255,.5);
+  border: 1px solid rgba(0,0,0,.2);
+}
+button, input[type="text"], input[type="password"], input[type="email"]{
   font-family: 'Retro', sans-serif;
+}
+
+input[type="text"], input[type="password"], input[type="email"]{
+  padding: 8px;
+  border-radius: 5px;
 }
 

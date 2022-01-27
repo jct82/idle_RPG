@@ -9,7 +9,7 @@ const Equipment = (object) => {
       <div className="img-equip">
         <img src={object.image}/>
       </div>
-      <div className="stat-equip">{object.stastistique} XP</div>
+      <div className="stat-equip">{object.statistique} XP</div>
     </div>
   );
 };

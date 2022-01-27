@@ -1,58 +1,46 @@
 import { useSelector, useDispatch } from "react-redux";
-import {
-  lifePoints,
-  experience,
-  level,
-  joblevel,
-  force,
-} from "../../actions/stats";
 import "./style.scss";
-import imgLife from "/src/assets/LifePoint/LifePoint.png";
-import imgForce from "/src/assets/Force/force.png";
+
 
 export default function Stats() {
   const dispatch = useDispatch();
-
-  const { vie, xp, level, metier, argent, dexterite, force } = useSelector(
-    (state) => state.stats
+  
+  const { life, strength, endurance, dexterite, argent, level, experience } = useSelector(
+    (state) => state.character
   );
-
+  
   const lifeCount = () => {
     dispatch(lifePoints());
   };
 
   return (
     <div className="container-stat">
-      <ul>
-        <li className="stat-life">
-          <span>{vie}</span>
-          <img src={imgLife} alt="Coeur" />
+      <ul className="stat-wrapper">
+        <li className="stat-block stat-life">
+          <div className="gauge">
+            <div className="filled" style={{width:`${life}%`}}></div>
+            <span>Vie : {life}</span>
+          </div>
         </li>
-
-        <li className="stat-dexterite">
-          <span> {dexterite} Dextérité </span>
+        <li className="stat-block stat-experience">
+          <div className="gauge">
+            <div className="filled" style={{width:`${experience}%`}}></div>
+            <span>Experience : {experience}</span>
+          </div>
         </li>
-
-        <li className="stat-force">
-          <span>{force}</span>
-          <img src={imgForce} alt="force" />
+        <li className="stat-block stat-dexterite">
+          <span> Dextérité: {dexterite} </span>
         </li>
-
-        <li className="stat-experience">
-          <span>{xp}</span>
+        <li className="stat-block stat-force">
+          <span> Force : {strength}</span>
         </li>
-
-        <li className="stat-level">
+        <li className="stat-block stat-endurance">
+          <span> Endurance : {endurance}</span>
+        </li>
+        <li className="stat-block stat-level">
           <span> Niveau : {level}</span>
         </li>
-
-        <li className="stat-job">
-          <span>
-            {metier} {level}
-          </span>
-        </li>
-
-        <li className="stat-money">
+        <li className="stat-block stat-money">
           <span>Stock d'or : {argent}</span>
         </li>
       </ul>

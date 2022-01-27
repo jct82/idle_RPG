@@ -26,53 +26,41 @@ export default function Register() {
           <form className="modale-register" onSubmit={loginUser} encType="multipart/form-data" >
             <div className="close-modal" onClick={shutModal}>X</div>
             <img src={background} alt="Image de fond" />
-            <h1 className="title-register"> créez votre compte </h1>
-            <label className="pseudo-register">
-              Pseudo*
+            <div className="field-wrapper">
               <input
-                className="text-form"
                 type="text"
                 name="name"
                 placeholder="Pseudo"
                 onChange={updateField}
               />
-            </label>
-            <label className="mail-register">
-              E-mail*
+            </div>
+            <div className="field-wrapper mail">
               <input
-                className="text-form"
                 type="email"
                 name="email"
                 placeholder="E-mail"
                 onChange={updateField}
               />
-            </label>
-            <label className="password-register">
-              Mot de passe*
+            </div>
+            <div className="field-wrapper pwd">
               <input
-                className="text-form"
                 type="password"
                 name="password"
                 placeholder="Mot de passe"
                 onChange={updateField}
-
               />
-            </label>
-            <label className="text-form">
-              Confirmation du mot de passe*
+            </div>
+            <div className="field-wrapper">
               <input
-                className="text-form"
-                type="confirm-mdp"
+                type="password"
                 name="confirm-password"
                 placeholder="Confirmation du mot de passe"
                 onChange={updateField}
               />
-            </label>
-            <input
-              className="btn-register-send"
-              type="submit"
-              value="Terminer l'inscription"
-            />
+            </div>
+            <div className="button-wrapper">
+              <button type="submit">Valider</button>
+            </div>
           </form>
         </div>
       )}

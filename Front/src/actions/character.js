@@ -4,6 +4,8 @@ export const POSTER_EQUIP = 'POSTER_EQUIP';
 export const SET_DETAILS = 'SET_DETAILS';
 export const CLOSE_DETAILS = 'CLOSE_DETAILS';
 export const UPDATE_EQUIPMENT = 'UPDATE_EQUIPMENT';
+export const UPDATE_VIVRE = 'UPDATE_VIVRE';
+
 
 export const setInventoryObjects = (inventory) => ({
   type: SET_INVENTORY,
@@ -35,3 +37,8 @@ export const updateEquip = (id, objType) => ({
   objType: objType,
 });
 
+export const updateVivre = (nom, statistique) => ({
+  type: UPDATE_VIVRE,
+  nom:nom,
+  statistique: statistique,
+});
