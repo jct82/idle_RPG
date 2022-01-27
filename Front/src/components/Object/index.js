@@ -6,12 +6,13 @@ import './style.scss';
 
 // == Composant
 const Objects = (object) => {
+
   const dispatch = useDispatch();
   const  selected  = useSelector(state => state.character.selected);
 
   const posterEquipMenu = (e) => {
-    dispatch(posterEquipment(e.target.getAttribute('name')));
-    activeThumb(e.target.parentElement);
+    dispatch(posterEquipment(object.nom));
+    activeThumb(e.currentTarget.parentElement);
   }
 
   let equipObject;
@@ -23,11 +24,14 @@ const Objects = (object) => {
 
   return (
     <div className={selected == object.nom ? "object on" : "object"}>
-      <div className="view-wrapper">
-        { equipObject ?
-        <img className="view" src={object.image} name={object.nom} onClick={posterEquipMenu}/> :
-        <img className="view" src={object.image} onClick={updateDetails} /> }
-      </div>
+      { equipObject ?
+      <div className="view-wrapper" onClick={posterEquipMenu}>
+          <img className="view" src={object.image} />
+      </div> :
+      <div className="view-wrapper" onClick={updateDetails}>
+          <img className="view" src={object.image} />
+      </div>}
+      { object.quantite && <div className="nbr">{object.quantite}</div>}
       <div className="name-wrapper">
         <span className="name">{object.nom}</span>
       </div>

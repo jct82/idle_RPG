@@ -34,7 +34,7 @@ export default function Menu() {
         to="/inventory"
       >
         <img className="navHidden" src={inventoryLogo}></img>
-        <button>Inventaire / Stats</button>
+        <button>Profil</button>
       </NavLink>
       <NavLink
         key="/fighting"
