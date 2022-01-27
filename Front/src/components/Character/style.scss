@@ -8,6 +8,8 @@
     box-sizing: border-box;
     .inner-panel{
       height: 300px;
+      background-image: url('../../../public/images/bg/leather5.jpg');
+      background-size: cover;
       background-color:#d4d3d3;
     }
   }
@@ -22,11 +24,23 @@
   }
 }
 
+.inventory-panel .inner-panel{
+  padding: 30px;
+  font-size: 0px;
+  & > div{
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    height: 100%;
+    padding: 0px 15px;
+    font-size: 14px;
+  }
+}
+
 .inventory-category{
   position: relative;
-  display: inline-block;
-  vertical-align: top;
   width: 362px;
+  margin: 0 auto;
   border: 1px solid #000;
   border-bottom: none;
   &:after{
@@ -131,6 +145,19 @@
       }
     }
   }
+  .nbr{
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    width: 18px;
+    height: 18px;
+    border-radius: 15px;;
+    text-align: center;
+    line-height: 18px;
+    background-color: #ab120d;
+    color: #ffffff;
+    font-size: 10px;
+  }
   .view{
     width: 50px;
     height: auto;
@@ -155,8 +182,8 @@
 
 .details{
   position: relative;
-  display: inline-block;
-  vertical-align: top;
+  width: 362px;
+  margin: 0 auto;
   padding: 8px 12px;
   background: #000000;
   color:#ffffff;
@@ -183,8 +210,8 @@
   .detail-description{
     margin-bottom: 10px;
   }
-  .quantity{
-    
+  .quantity, .statistique{
+    margin-bottom: 15px;
   }
 }
 
@@ -215,6 +242,63 @@
     text-align: center;
     .img-equip img{
       width: 80px;
+    }
+  }
+}
+
+.test-form{
+  input[type="text"]{
+    margin: 0 0 15px;
+    padding: 8px;
+    border-radius: 5px;
+  }
+  button{
+    padding: 8px 12px;
+    border-radius: 5px;
+    color: white;
+    background-image: url('../../../public/images/bg/bois.jpeg');
+    background-size: 100% auto;
+    background-position: center;
+  }
+
+  .menu-button{
+    height: 50px;
+    width: 15vw;
+    margin: 0 0 15px;
+    padding-left: 48px;
+    background-color: rgba(148,207,255,.5);
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 10px;
+    -webkit-box-shadow: inset 1px 1px 5px #fff;
+    box-shadow: inset 1px 1px 5px #fff;
+    color: #fff;
+    font-size: 1.2rem;
+    -webkit-transition: background .1s;
+    transition: background .1s;
+    text-align: left;
+    background-repeat: no-repeat;
+    background-position: left 12px center;
+    background-size: 28px;
+    &.accueil{
+      background-image: url('../../../public/images/idleMenuIcons/accueil.png');
+    }
+    &.boutique{
+      background-image: url('../../../public/images/idleMenuIcons/boutique.png');
+    }
+    &.combat{
+      background-image: url('../../../public/images/idleMenuIcons/combat.png');
+    }
+    &.craft{
+      background-image: url('../../../public/images/idleMenuIcons/craft.png');
+    }
+    &.fishing{
+      background-image: url('../../../public/images/idleMenuIcons/fishing.png');
+    }
+    &.inventory{
+      background-image: url('../../../public/images/idleMenuIcons/inventory.png');
+    }
+    &.minerai{
+      background-image: url('../../../public/images/idleMenuIcons/mining.png');
     }
   }
 }

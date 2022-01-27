@@ -24,7 +24,6 @@ const Inventory = () => {
 
   useEffect(() => {
     dispatch(setInventoryObjects(inventoryData));
-    //setEquipment(inventoryEquipData);
   }, []);
 
   inventory.ressources.sort((a, b) => a.categorie - b.categorie);
@@ -36,7 +35,7 @@ const Inventory = () => {
     <Objects key={object.nom} {...object} />
   ));
   const jsxEquipement = inventory.equipment.map((object) => (
-    <Objects key={object.nom} {...object} />
+    <Objects key={object.nom} {...object}/>
   ));
 
   let jsxHelmet = [],
@@ -71,8 +70,6 @@ const Inventory = () => {
     activeThumb(e.target);
   };
 
-    console.log('equipment', equipment);
-
   const JSXaccessories = Object.keys(equipment).map(function(key) {
     let equipType = equipmentData.find(item => item.nom == key);
     let equipObj = equipType.reserve.find(item => item.id == equipment[key]);
@@ -85,49 +82,61 @@ const Inventory = () => {
     <div className="character">
       <div className="panel inventory-panel">
         <div className="inner-panel">
-          <div className="inventory-category">
-            <ul className="menu-inventory" onClick={posterCatMenu}>
-              <li className="cat-name vivres" type="obj" name="vivre">
-                <span>
-                  <span>Vivre</span>
-                </span>
-              </li>
-              <li className="cat-name ressources" name="ressources">
-                <span>
-                  <span>Ressources</span>
-                </span>
-              </li>
-              <li className="cat-name equipement" name="equipement">
-                <span>
-                  <span>Equipement</span>
-                </span>
-              </li>
-            </ul>
-            {posterCat == "vivre" && (
-              <div className="category-block vivre">{jsxVivre}</div>
-            )}
-            {posterCat == "ressources" && (
-              <div className="category-block ressources">{jsxRessource}</div>
-            )}
-            {posterCat == "equipement" && (
-              <>
-                <div className="category-block equipement">{jsxEquipement}</div>
-                {posterEquip == "arme" && (
-                  <div className="category-block arme">{jsxWeapon}</div>
-                )}
-                {posterEquip == "armure" && (
-                  <div className="category-block armure">{jsxArmor}</div>
-                )}
-                {posterEquip == "casque" && (
-                  <div className="category-block casque">{jsxHelmet}</div>
-                )}
-                {posterEquip == "bottes" && (
-                  <div className="category-block shoes">{jsxShoes}</div>
-                )}
-              </>
-            )}
+          <div className="inventory-wrapper">
+            <div className="inventory-category">
+              <ul className="menu-inventory" onClick={posterCatMenu}>
+                <li className="cat-name vivres" type="obj" name="vivre">
+                  <span>
+                    <span>Vivre</span>
+                  </span>
+                </li>
+                <li className="cat-name ressources" name="ressources">
+                  <span>
+                    <span>Ressources</span>
+                  </span>
+                </li>
+                <li className="cat-name equipement" name="equipement">
+                  <span>
+                    <span>Equipement</span>
+                  </span>
+                </li>
+              </ul>
+              {posterCat == "vivre" && (
+                <div className="category-block vivre">{jsxVivre}</div>
+              )}
+              {posterCat == "ressources" && (
+                <div className="category-block ressources">{jsxRessource}</div>
+              )}
+              {posterCat == "equipement" && (
+                <>
+                  <div className="category-block equipement">{jsxEquipement}</div>
+                  {posterEquip == "arme" && (
+                    <div className="category-block arme">{jsxWeapon}</div>
+                  )}
+                  {posterEquip == "armure" && (
+                    <div className="category-block armure">{jsxArmor}</div>
+                  )}
+                  {posterEquip == "casque" && (
+                    <div className="category-block casque">{jsxHelmet}</div>
+                  )}
+                  {posterEquip == "bottes" && (
+                    <div className="category-block shoes">{jsxShoes}</div>
+                  )}
+                </>
+              )}
+            </div>
           </div>
-          {selected.length > 0 && <Details object={detailsObj}/>}
+          <div className="details-wrapper">
+            {selected.length > 0 && <Details object={detailsObj}/>}
+            <div className="test-form">
+
+              <input type="text" placeholder="bouton"></input>
+              <button className="">button</button>
+              <button className="menu-button boutique">button</button>
+              <button className="menu-button combat">button</button>
+              <button className="menu-button craft">button</button>
+            </div>
+          </div>
         </div>
       </div>
       <div className="panel stat-panel">

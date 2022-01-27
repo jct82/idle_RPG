@@ -25,7 +25,7 @@ const initialState = {
         image: '',
         quantite: 3,
         type_statistique: '',
-        réserve: [
+        reserve: [
           {
             id: 1,
             nom: '',
