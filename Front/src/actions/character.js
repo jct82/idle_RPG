@@ -5,7 +5,8 @@ export const SET_DETAILS = 'SET_DETAILS';
 export const CLOSE_DETAILS = 'CLOSE_DETAILS';
 export const UPDATE_EQUIPMENT = 'UPDATE_EQUIPMENT';
 export const UPDATE_VIVRE = 'UPDATE_VIVRE';
-
+export const SPARE_POINTS = 'SPARE_POINTS';
+export const UPDATE_NBR_FIELD = 'UPDATE_NBR_FIELD';
 
 export const setInventoryObjects = (inventory) => ({
   type: SET_INVENTORY,
@@ -41,4 +42,18 @@ export const updateVivre = (nom, statistique) => ({
   type: UPDATE_VIVRE,
   nom:nom,
   statistique: statistique,
+});
+
+export const sparePoints = (nom, statistique) => ({
+  type: SPARE_POINTS,
+  nom:nom,
+  statistique: statistique,
+});
+
+export const updateNbrField = (value, nom, min, max) => ({
+  type: UPDATE_NBR_FIELD,
+  value : value, 
+  nom: nom,
+  min: min, 
+  max: max,
 });

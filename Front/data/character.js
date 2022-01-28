@@ -3,6 +3,7 @@ const characters = [
     nom: 'The Counter',
     experience: 100,
     level: 1,
+    points:50,
     inventory: {
       vivres : [
         {

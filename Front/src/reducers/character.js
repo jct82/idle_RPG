@@ -1,5 +1,6 @@
 import { SEND_RESOURCE_TO_INVENTORY } from "../actions/mining";
-import { SET_INVENTORY, POSTER_CATEGORY, POSTER_EQUIP, SET_DETAILS, CLOSE_DETAILS, UPDATE_EQUIPMENT,UPDATE_VIVRE } from '../actions/character';
+import { SET_INVENTORY, POSTER_CATEGORY, POSTER_EQUIP, SET_DETAILS, 
+  CLOSE_DETAILS, UPDATE_EQUIPMENT,UPDATE_VIVRE, SPARE_POINTS, UPDATE_NBR_FIELD } from '../actions/character';
 import { SEND_CRAFTED_ITEM_TO_PLAYER, SPEND_RESOURCES_FOR_CRAFT } from "../actions/craft";
 
 const initialState = {
@@ -63,14 +64,18 @@ const initialState = {
     quantite: 0,
     type:'',
   },
-  vie: 50,
+  vie: 60,
   force: 40,
   endurance: 75,
   dexterite: 35,
-  argent: 0,
+  argent: 6500,
+  points: 50,
   posterCat: 'vivres',
   posterEquip: '',
   selected: '',
+  pointsendurance: 0,
+  pointsforce: 0,
+  pointsdexterite: 0,
 };
 
 const character = (state = initialState, action = {}) => {
@@ -209,28 +214,47 @@ const character = (state = initialState, action = {}) => {
         [stuffType.type_statistique]: state[stuffType.type_statistique] + (newVal.statistique - oldVal.statistique),
         selected: '',
       };
-      case UPDATE_VIVRE:
-        let stockVivre = state.inventory.vivres;
-        //trouver le vivre correspondant au nom dans les vivres de l'inventaire
-        stockVivre = stockVivre.find(item => item.nom == action.nom);
-        //enlever 1 à la quantité de l'inventaire trouvé
-        stockVivre.quantite -= 1;
-        //mettre à jour vivres de l'inventaire avec le vivre mis à jour
-        let newVivres = state.inventory.vivres.map(vivre => {
-          if (vivre.nom == action.nom) vivre.quantite = stockVivre.quantite;
-          return vivre;
-        });
-        //mettre à jour l'inventaire avec les vivres mis à jour
-        let newInventory = {
-          ...state.inventory,
-          newVivres,
-        }
-        return {
-          ...state,
-          inventory : newInventory,
-          vie: state.life + action.statistique > 100 ?  100 : state.vie + action.statistique,
-          selected: '',
-        };
+    case UPDATE_VIVRE:
+      let stockVivre = state.inventory.vivres;
+      //trouver le vivre correspondant au nom dans les vivres de l'inventaire
+      stockVivre = stockVivre.find(item => item.nom == action.nom);
+      //enlever 1 à la quantité de l'inventaire trouvé
+      stockVivre.quantite -= 1;
+      //mettre à jour vivres de l'inventaire avec le vivre mis à jour
+      let newVivres = state.inventory.vivres.map(vivre => {
+        if (vivre.nom == action.nom) vivre.quantite = stockVivre.quantite;
+        return vivre;
+      });
+      //mettre à jour l'inventaire avec les vivres mis à jour
+      let newInventory = {
+        ...state.inventory,
+        newVivres,
+      }
+      return {
+        ...state,
+        inventory : newInventory,
+        vie: state.life + action.statistique > 100 ?  100 : state.vie + action.statistique,
+        selected: '',
+      };
+    case SPARE_POINTS:
+      let statProp = 'points' + action.nom;
+      return {
+        ...state,
+        [action.nom]: state[action.nom] + action.statistique,
+        points: state.points - action.statistique,
+        [statProp]: 0,
+      };
+    case UPDATE_NBR_FIELD:
+      let newValStat = action.value;
+      if (action.value > action.max) {
+        newValStat = action.max;
+      } else if (action.value < action.min) {
+        newValStat = action.min;
+      }
+      return {
+        ...state,
+        [action.nom]: newValStat,
+      };
     default:
       return state;
   }
