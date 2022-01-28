@@ -1,4 +1,7 @@
-import { ALL_OBJECT, randomStuff } from '../actions/shop';
+import {
+  ALL_OBJECT,
+  randomStuff,
+} from '../actions/shop';
 import API from './api';
 
 const shopMiddleware = (store) => (next) => (action) => {
@@ -22,7 +25,7 @@ const shopMiddleware = (store) => (next) => (action) => {
           };
           // store.dispatch(allBuyableObject(response.data));
           getRandomStuff();
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch((error) => {
           console.log(error);

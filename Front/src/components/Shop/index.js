@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
 import { boutiqueLogo } from 'src/assets/idleMenuIcons';
 import {
-  modaleOpen, modaleClose, randomStuff, emptyArray, buyItem, allObject,
+  modaleOpen, modaleClose, emptyArray, buyItem, allObject, getCharacterMoney,
 } from '../../actions/shop';
 
 export default function Shop() {
@@ -17,24 +17,12 @@ export default function Shop() {
     isOpen,
     money,
   } = useSelector((state) => state.shop);
-  // console.log(stuffs);
-  // on gère le fait d'avoir un équipement de manière aléatoire à mettre dans la boutique
-  /* const getRandomStuff = () => {
-    for (let i = 0; i < 9; i++) {
-      const randomNumber = Math.floor(Math.random() * stuffs.length);
-      // console.log(randomNumber);
-      const randomStuffs = stuffs[randomNumber];
-      // console.log(randomStuff);
-      dispatch(randomStuff(randomStuffs));
-      // newShopArray.push(randomStuffs);
-    }
-  }; */
   // je veux que le chargement de la boutique ne se fasse qu'une fois,
   // au chargement initial de la page
   useEffect(() => {
+    dispatch(getCharacterMoney());
     dispatch(emptyArray());
     dispatch(allObject());
-    // getRandomStuff();
   }, []);
   // console.log(stuffs.length);
   // };

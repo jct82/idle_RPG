@@ -1,5 +1,6 @@
 import { GET_ITEMS } from "../actions/craft";
-import { SUBSCRIBE_USER, LOG_USER, LOGIN_USER, logUser } from "../actions/user";
+import { SUBSCRIBE_USER, LOG_USER, LOGIN_USER, logUser, } from "../actions/user";
+import { characterMoney } from '../actions/shop';
 import API from './api';
 
 const logMiddleware = (store) => (next) => (action) => {
@@ -40,8 +41,9 @@ const logMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           if (response.status === 200) {
-            console.log(response.data)
+            console.log(response.data);
             store.dispatch(logUser(response.headers.authorization, {...response.data}));
+            store.dispatch(characterMoney(response.data.character.gold));
           }
         })
         .catch((error) => {
@@ -77,4 +79,3 @@ const logMiddleware = (store) => (next) => (action) => {
 };
 
 export default logMiddleware;
-
