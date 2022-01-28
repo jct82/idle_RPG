@@ -4,8 +4,8 @@ import { SEND_CRAFTED_ITEM_TO_PLAYER, SPEND_RESOURCES_FOR_CRAFT } from "../actio
 
 const initialState = {
   nom: 'The Counter',
-  experience: 10,
-  level: 0,
+  experience: 50,
+  level: 1,
   inventory: {
     vivres: [
       {
@@ -63,10 +63,10 @@ const initialState = {
     quantite: 0,
     type:'',
   },
-  life: 50,
-  strength: 10,
-  endurance: 0,
-  dexterite: 0,
+  vie: 50,
+  force: 40,
+  endurance: 75,
+  dexterite: 35,
   argent: 0,
   posterCat: 'vivres',
   posterEquip: '',
@@ -161,21 +161,15 @@ const character = (state = initialState, action = {}) => {
         inventory: action.inventory,
       };
     case POSTER_CATEGORY:
-      let catDetails;
-      state.details != action.category + state.posterEquip ? catDetails = '' : catDetails = state.details;
       return {
         ...state,
         posterCat: action.category,
-        details: catDetails,
         selected: '',
       };
     case POSTER_EQUIP:
-      let equipDetails;
-      state.details != state.posterCat + action.posterEquip ? equipDetails = '' : equipDetails = state.details;
       return {
         ...state,
         posterEquip: action.posterEquip,
-        details: equipDetails,
         selected: '',
       };
     case SET_DETAILS:
@@ -201,6 +195,10 @@ const character = (state = initialState, action = {}) => {
         selected: '',
       };
     case UPDATE_EQUIPMENT:
+      let oldStuff = state.equipment[action.objType];
+      let stuffType = state.inventory.equipment.find(item => item.nom == action.objType);
+      let oldVal = stuffType.reserve.find(item => item.id == oldStuff);
+      let newVal = stuffType.reserve.find(item => item.id == action.id);
       let newEquipment = {
         ...state.equipment,
         [action.objType]: action.id,
@@ -208,20 +206,10 @@ const character = (state = initialState, action = {}) => {
       return {
         ...state,
         equipment: newEquipment,
+        [stuffType.type_statistique]: state[stuffType.type_statistique] + (newVal.statistique - oldVal.statistique),
         selected: '',
       };
       case UPDATE_VIVRE:
-        
-        let newInventory = state.inventory;
-        let newLife = state.life;
-
-        if (state.life == 100) {
-          return {...state, selected:''};
-        } else if (state.life + action.statistique > 100) {
-          newLife = 100;
-        } else {
-          newLife = state.life + action.statistique;
-        }
         let stockVivre = state.inventory.vivres;
         //trouver le vivre correspondant au nom dans les vivres de l'inventaire
         stockVivre = stockVivre.find(item => item.nom == action.nom);
@@ -233,14 +221,14 @@ const character = (state = initialState, action = {}) => {
           return vivre;
         });
         //mettre à jour l'inventaire avec les vivres mis à jour
-        newInventory = {
+        let newInventory = {
           ...state.inventory,
           newVivres,
         }
         return {
           ...state,
           inventory : newInventory,
-          life: newLife,
+          vie: state.life + action.statistique > 100 ?  100 : state.vie + action.statistique,
           selected: '',
         };
     default:

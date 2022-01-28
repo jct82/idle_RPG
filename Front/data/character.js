@@ -1,8 +1,8 @@
 const characters = [
   {
     nom: 'The Counter',
-    experience: 200,
-    level: 4,
+    experience: 100,
+    level: 1,
     inventory: {
       vivres : [
         {
@@ -30,7 +30,7 @@ const characters = [
           description:' pour se chausser. Augmente la dexterité', 
           image:'./images/equipement/bottes/botte1.png',  
           quantite: 3, 
-          type_statistique: 'dexterité', 
+          type_statistique: 'dexterite', 
           reserve:[
             {
               id:1,
@@ -154,10 +154,10 @@ const characters = [
       bottes: 1,
       arme : 1,
     },
-    vie: 30,
+    vie: 50,
     force: 10, 
     endurance: 15, 
-    dexterité: 0,
+    dexterite: 5,
     argent: 0,
   },
 ];

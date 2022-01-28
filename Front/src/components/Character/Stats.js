@@ -5,7 +5,7 @@ import "./style.scss";
 export default function Stats() {
   const dispatch = useDispatch();
   
-  const { life, strength, endurance, dexterite, argent, level, experience } = useSelector(
+  const { vie, force, endurance, dexterite, argent, level, experience } = useSelector(
     (state) => state.character
   );
   
@@ -18,8 +18,8 @@ export default function Stats() {
       <ul className="stat-wrapper">
         <li className="stat-block stat-life">
           <div className="gauge">
-            <div className="filled" style={{width:`${life}%`}}></div>
-            <span>Vie : {life}</span>
+            <div className="filled" style={{width:`${vie}%`}}></div>
+            <span>Vie : {vie}</span>
           </div>
         </li>
         <li className="stat-block stat-experience">
@@ -32,7 +32,7 @@ export default function Stats() {
           <span> Dextérité: {dexterite} </span>
         </li>
         <li className="stat-block stat-force">
-          <span> Force : {strength}</span>
+          <span> Force : {force}</span>
         </li>
         <li className="stat-block stat-endurance">
           <span> Endurance : {endurance}</span>

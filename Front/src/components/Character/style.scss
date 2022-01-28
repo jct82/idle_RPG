@@ -259,6 +259,8 @@
   background-position: 0px center;
   margin: 10px 0;
   font-size: 22px;
+  line-height:1.3;
+  min-height: 32px;
   &.stat-life{
     background-image: url('../../../public/images/vivre/vivre.png');
     .filled{

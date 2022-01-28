@@ -6,11 +6,7 @@ import './style.scss';
 // == Composant
 const Details = ({object}) => {
 
-  const vivres  = useSelector((state) => state.character.inventory.vivres);
-
-  let equipObject;
-  object.quantite == undefined ? equipObject = true : equipObject = false;
-
+  const vie = useSelector((state) => state.character.vie);
   const dispatch = useDispatch();
 
   const shutDetails = () => {
@@ -22,7 +18,6 @@ const Details = ({object}) => {
   }
   
   const consommer = () => {
-    console.log('vivresvivres', vivres);
     dispatch(updateVivre(object.nom,object.statistique));
   }
 
@@ -34,12 +29,11 @@ const Details = ({object}) => {
         <div className="detail-description">
           {object.description}
         </div>
-        { 
-          equipObject ?
+        { object.quantite == undefined ?
         <><div className="statistique">Stats : {object.statistique}</div>
-        <button className="cta" onClick={changeEquip}>Enfiler</button></> 
-        : <><div className="quantity">Quantité : {object.quantite}</div>
-        <button className="cta" onClick={consommer}>Consommer</button></>}
+        <button className="cta" onClick={changeEquip}>Enfiler</button></> :
+        <><div className="quantity">Quantité : {object.quantite}</div></> }
+        { object.type == 'vivres' && vie < 100 && <><button className="cta" onClick={consommer}>Consommer</button></>}
       </div>
   );
 };

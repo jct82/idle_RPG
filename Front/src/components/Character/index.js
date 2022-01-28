@@ -6,11 +6,10 @@ import { setInventoryObjects, posterCategory, posterEquipment } from "../../acti
 import Objects from "../Object";
 import Details from "./details";
 import Equipment from "./equipment";
+import Stats from "./Stats";
 import activeThumb from "../../utils/activeBox";
 // == Import : local
 import "./style.scss";
-import Stats from "./Stats";
-import InventoryItem from "./Inventory-item";
 
 // == Composant
 const Inventory = () => {
@@ -20,7 +19,8 @@ const Inventory = () => {
   );
 
   const inventoryData = characterData[0].inventory;
-  const equipmentData = inventoryData.equipment
+  const equipmentData = inventoryData.equipment;
+  
 
   useEffect(() => {
     dispatch(setInventoryObjects(inventoryData));
@@ -28,8 +28,8 @@ const Inventory = () => {
 
   inventory.ressources.sort((a, b) => a.categorie - b.categorie);
 
-  const jsxRessource = inventory.ressources.map((object) => {if (object.quantite > 0) return <Objects key={object.nom} {...object} />});
-  const jsxVivre = inventory.vivres.map((object) => {if (object.quantite > 0) return <Objects key={object.nom} {...object} />});
+  const jsxRessource = inventory.ressources.map((object) => {if (object.quantite > 0) return <Objects key={object.nom} {...object} type="ressources" />});
+  const jsxVivre = inventory.vivres.map((object) => {if (object.quantite > 0) return <Objects key={object.nom} {...object} type="vivres" />});
   const jsxEquipement = inventory.equipment.map((object) => <Objects key={object.nom} {...object}/>);
 
   let jsxHelmet = [],
