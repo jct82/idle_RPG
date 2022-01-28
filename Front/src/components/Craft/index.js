@@ -3,28 +3,29 @@ import { v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
 // == Import : local
 import './style.scss';
-import { craftItem, sendCraftedItem } from '../../actions/craft';
+import { craftItem, sendCraftedItem, getCraftableItems } from '../../actions/craft';
+import { useEffect } from 'react';
 
 // == Composant
 const Craft = () => {
   const dispatch = useDispatch();
   const { recipes } = useSelector((state) => state.craft);
   const { ressources, equipment } = useSelector((state) => state.character.inventory);
-  console.log(recipes);
+  // console.log(recipes);
+  useEffect(() => {
+    dispatch(getCraftableItems());
+  }, []);
+  
   const craftButtonOnClick = (e) => {
+    
     const currentRecipe = recipes.find((recipe) => recipe.classLink === e.target.className);
-    // Object.entries(currentRecipe.recipe).map(([key, value]) => (
-      // TODO chercher dans inventaire si y'a key et assez de value
-      // dispatch(someAction(key, value))
-    // ))
-
-    console.log(currentRecipe);
+    // console.log(currentRecipe);
     for (const [key, value] of Object.entries(currentRecipe.recipe)) {
-      console.log(equipment);
-      console.log(ressources);
+      // console.log(equipment);
+      // console.log(ressources);
       // ressources.find((resource) => resource === key);
       const neededResource = ressources.find((resource) => resource.nom === key);
-      console.log(currentRecipe);
+      // console.log(currentRecipe);
       if (neededResource)
       {
         if (neededResource.quantite >= value) {
@@ -43,8 +44,8 @@ const Craft = () => {
         </h2>
         <div className={item.className} />
         <div className="craft-display-recipe">
-        { Object.entries(item.recipe).map(([key, value]) => (
-          <p className="craft-display-text" key={uuidv4()}>{value} {key}</p>
+        { item.ingredients.map((ingredient) => (
+          <p className="craft-display-text" key={uuidv4()}>{ingredient.quantity} {ingredient.name}</p>
         )) }
           <button className={item.classLink} onClick={craftButtonOnClick}>Craft</button>
         </div>
@@ -52,7 +53,7 @@ const Craft = () => {
   )
   return (
     <div className="craft-container">
-      {fillRecipes}
+      {recipes && fillRecipes}
     </div>
   );
 };

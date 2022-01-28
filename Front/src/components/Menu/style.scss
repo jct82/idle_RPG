@@ -11,6 +11,7 @@
   width: 20%;
   height: 100vh;
   background: vars.$baseColor;
+
   & button {
     width: 15vw;
     height: 50px;
@@ -24,16 +25,20 @@
     transition: background 100ms;
     // margin-top: 15px;
     margin: 25px 15px auto;
+
     &:active {
       background: rgba(0, 140, 255, 0.5);
     }
   }
+
   & .hidden {
     display: none;
   }
+
   & .navHidden {
     display: none;
   }
+
   & .logo-rpg {
     width: 150px;
     height: 150px;
@@ -44,11 +49,13 @@
   .navBarContainer {
     justify-content: space-evenly;
     width: 50px;
+
     & button {
       display: none;
     }
+
     & .navHidden {
-      border: 1px rgba(0,0,0,.1) solid;
+      border: 1px rgba(0, 0, 0, .1) solid;
       padding: 5px;
       border-radius: 50%;
       display: block;
@@ -57,8 +64,39 @@
       width: fit-content;
       margin: auto;
     }
+
     & .logo-rpg {
       display: none;
     }
   }
+}
+
+.g-background-default {
+  background: green;
+}
+
+.mbr-gallery{
+  background-color: green;
+  }
+
+.SC1 {
+  font-size: 10px;
+  color: #cccccc;
+  line-break: anywhere;
+  word-break: normal;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda, Verdana, Tahoma, sans-serif;
+  font-weight: 100;
+}
+
+.SC2 {
+  color: #cccccc;
+  text-decoration: none;
+}
+
+.SC3 {
+  color: #cccccc;
+  text-decoration: none;
 }
