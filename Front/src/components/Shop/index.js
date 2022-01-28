@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
 import { boutiqueLogo } from 'src/assets/idleMenuIcons';
 import {
-  modaleOpen, modaleClose, randomStuff, emptyArray, buyItem,
+  modaleOpen, modaleClose, randomStuff, emptyArray, buyItem, allObject,
 } from '../../actions/shop';
 
 export default function Shop() {
@@ -19,7 +19,7 @@ export default function Shop() {
   } = useSelector((state) => state.shop);
   // console.log(stuffs);
   // on gère le fait d'avoir un équipement de manière aléatoire à mettre dans la boutique
-  const getRandomStuff = () => {
+  /* const getRandomStuff = () => {
     for (let i = 0; i < 9; i++) {
       const randomNumber = Math.floor(Math.random() * stuffs.length);
       // console.log(randomNumber);
@@ -28,12 +28,13 @@ export default function Shop() {
       dispatch(randomStuff(randomStuffs));
       // newShopArray.push(randomStuffs);
     }
-  };
+  }; */
   // je veux que le chargement de la boutique ne se fasse qu'une fois,
   // au chargement initial de la page
   useEffect(() => {
     dispatch(emptyArray());
-    getRandomStuff();
+    dispatch(allObject());
+    // getRandomStuff();
   }, []);
   // console.log(stuffs.length);
   // };
@@ -43,8 +44,8 @@ export default function Shop() {
   };
 
   const buyingItem = () => {
-    if (money >= stuffs.find((stuff) => stuff.id == isOpen.id).price) {
-      dispatch(buyItem(stuffs.find((stuff) => stuff.id == isOpen.id).price));
+    if (money >= stuffs.find((stuff) => stuff.id == isOpen.id).attribute[0].value) {
+      dispatch(buyItem(stuffs.find((stuff) => stuff.id == isOpen.id).attribute[0].value));
     }
     else {
       dispatch(modaleClose());
@@ -71,7 +72,7 @@ export default function Shop() {
           { newShopArray.map((stuff) => (
             <div className="stuff" id={stuff.id} key={uuidv4()}>
               <div className="shop-stuff">
-                {stuff.nom}
+                {stuff.name}
               </div>
               <button onClick={getIdOfButtonParent} className="buy-button" type="button"> Acheter </button>
             </div>
@@ -79,7 +80,7 @@ export default function Shop() {
         </div>
         {isOpen.open && stuffs.find((stuff) => stuff.id == isOpen.id)
           ? (
-            <div className="buying-modal">Êtes-vous sûr de vouloir acheter "{stuffs.find((stuff) => stuff.id == isOpen.id).nom}"
+            <div className="buying-modal">Êtes-vous sûr de vouloir acheter "{stuffs.find((stuff) => stuff.id == isOpen.id).name}"
               <div className="button-container"><button className="buying-button" type="button" onClick={buyingItem}>oui</button>
                 <button className="buying-button" type="button" onClick={closeModale}>non</button>
               </div>

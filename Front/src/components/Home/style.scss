@@ -1,3 +1,5 @@
+@use 'src/styles/vars';
+
 .home{
   position: relative;
   padding: 100px 40px 40px;
@@ -101,7 +103,6 @@
 }
 
 .update {
- background-color: rgba(0,0,0,0.3);
  position: absolute;
  top: 0;
  left: 0;
@@ -109,11 +110,13 @@
  overflow: hidden;
  display: flex;
  font-size: 1.5rem;
+ border: 1px rgba(0, 4, 255, 0.2) solid;
+ background: vars.$baseColor;
+ box-shadow: inset 1px 1px 5px white;
+
    .update-text {
      white-space: nowrap;
      animation: scrollTxt 25s linear infinite;
-     border-top: 1px solid yellow;
-     border-bottom: 1px solid yellow;
    }
 }
 
