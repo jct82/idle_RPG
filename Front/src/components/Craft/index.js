@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
 // == Import : local
 import './style.scss';
+import '../../styles/allitems.scss';
 import { craftItem, sendCraftedItem, getCraftableItems } from '../../actions/craft';
 import { useEffect } from 'react';
 
@@ -39,15 +40,16 @@ const Craft = () => {
   
   const fillRecipes = recipes.map(item => 
     <div className="craft-display" key={uuidv4()}>
-        <h2 className={`craft-display-title ${item.classLink}`}>
+        <h2 className={`craft-display-title`}>
           {item.name}
         </h2>
-        <div className={item.className} />
+                         {/* vvvv enlève les quotes et les espaces vvvvvv */}
+        <div className={item.name.replace(/['"]+/g, "").replace(/\s/g, "")} />
         <div className="craft-display-recipe">
         { item.ingredients.map((ingredient) => (
           <p className="craft-display-text" key={uuidv4()}>{ingredient.quantity} {ingredient.name}</p>
         )) }
-          <button className={item.classLink} onClick={craftButtonOnClick}>Craft</button>
+          <button className={`item-${item.id}`} onClick={craftButtonOnClick}>Craft</button>
         </div>
       </div>
   )

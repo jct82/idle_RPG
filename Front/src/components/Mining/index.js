@@ -9,7 +9,9 @@ import {
   levelUpJob,
   updateExpBar,
   sendResourceToInventory,
+  getAllMineResources,
 } from '../../actions/mining';
+import '../../styles/allitems.scss'
 import './style.scss';
 
 export default function Mining({job}) {
@@ -34,6 +36,10 @@ export default function Mining({job}) {
   const percentage = (partialValue, totalValue) => {
     return (100 * partialValue) / totalValue;
   } 
+
+  useEffect(() => {
+    dispatch(getAllMineResources());
+  }, []);
 
   // Click bouton pour lancer l'action
   const buttonOnClick = () => {
@@ -61,7 +67,9 @@ export default function Mining({job}) {
         const workingResource = resources.find(resource => resource.name === currentResource);
         const { name, type, description, baseReward } = workingResource;
         dispatch(sendResourceToInventory(name, type, description, baseReward));
-        dispatch(addLogMessage(workingResource.experience, workingResource.baseReward));
+        // TODO A MODIFIER QUAND LA BDD SERA FINALISÉE
+        //-------------------------------------vvv quantité récupérée -----------vvv exp récupérée
+        dispatch(addLogMessage(workingResource.attribute[0].value, workingResource.attribute[0].value));
         dispatch(updateExpBar(percentage(experience, levelUpReq)));
       }, actionTime);
 
@@ -72,15 +80,16 @@ export default function Mining({job}) {
   // Choix de la ressource
   const switchResource = (e) => {
     const workingResource = resources.find(resource => resource.name === e.target.className.split(' ')[1]);
-    if (level >= workingResource.level) {
-      dispatch(setCurrentResource(e.target.className.split(' ')[1], workingResource.experience));
-    }
-  }
+    if (level >= workingResource.attribute[0].value) {
+      dispatch(setCurrentResource(e.target.className.split(' ')[1], workingResource.attribute[0].value));
+    }; //------------------------------------------------------------^^^^^^^^ Peut-être à modifier
+      // l'exp qu'on récupère est pareil que le niveau requis
+  };
 
   // Remplissage de la liste des ressources
   const fillResources = resources.map(vein =>
-  <div className={`${level >= vein.level ? "resource" : "resource--not-allowed"} ${vein.name}`} key={vein.name} onClick={switchResource}>
-    <span className="oreTooltipText">{vein.name}<br /> {vein.gatherDescription}</span>
+  <div className={`${level >= vein.attribute[0].value ? "resource" : "resource--not-allowed"} ${vein.name}`} key={vein.name} onClick={switchResource}>
+    <span className="oreTooltipText">{vein.name}<br /> {`Niveau ${vein.attribute[0].value} requis`}</span>
   </div> );
 
   return (
@@ -98,7 +107,7 @@ export default function Mining({job}) {
       </div>
       <div className="jobSecondaryContainer">
         <div className="jobSmall jobLogs">{logMessages}</div>
-        <div className="jobSmall jobResourcesList">{fillResources}</div>
+        <div className="jobSmall jobResourcesList">{resources && fillResources}</div>
       </div>
     </div>
   );

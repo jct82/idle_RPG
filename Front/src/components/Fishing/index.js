@@ -10,6 +10,7 @@ import {
   updateExpBar
 } from '../../actions/fishing';
 import { sendResourceToInventory } from '../../actions/mining';
+import '../../styles/allitems.scss';
 import '../Mining/style.scss';
 
 export default function Fishing({job}) {

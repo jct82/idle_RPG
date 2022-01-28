@@ -167,24 +167,6 @@
   animation: idle 500ms steps(4) infinite;
 }
 
-.fer {
-  background: url('../../assets/mining/fer.png');
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.or {
-  background: url('../../assets/mining/or.png');
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.bronze {
-  background: url('../../assets/mining/bronze.png');
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
 .fishingResource {
   position: absolute;
   opacity: .5;
@@ -193,24 +175,6 @@
   width: 32px;
   height: 32px;
   // border: 1px blue solid;
-}
-
-.grenouille {
-  background: url('../../assets/fishing/frog.png');
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.crabe {
-  background: url('../../assets/fishing/crab.png');
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.blobfish {
-  background: url('../../assets/fishing/blobfish.png');
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 .oreTooltipText {

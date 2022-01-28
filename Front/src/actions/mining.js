@@ -8,6 +8,8 @@ export const ADD_RESOURCE_EXPERIENCE_TO_PLAYER_MINE = 'ADD_RESOURCE_EXPERIENCE_T
 export const LEVEL_UP_PLAYER_JOB_MINE = 'LEVEL_UP_PLAYER_JOB_MINE';
 export const UPDATE_EXPERIENCE_BAR_PROGRESS_MINE = 'UPDATE_EXPERIENCE_BAR_PROGRESS_MINE';
 export const SEND_RESOURCE_TO_INVENTORY = 'SEND_RESOURCE_TO_INVENTORY';
+export const GET_ALL_MINE_RESOURCES = 'GET_ALL_MINE_RESOURCES';
+export const UPDATE_MINE_RESOURCES = 'UPDATE_MINE_RESOURCES';
 
 export const setWorking = () => ({
   type: SET_WORKING_MINE,
@@ -64,3 +66,14 @@ export const sendResourceToInventory = (nom,categorie, description, quantite) =>
     quantite,
   }
 });
+
+export const getAllMineResources = () => ({
+  type: GET_ALL_MINE_RESOURCES,
+});
+
+export const updateMineResources = (ores) => ({
+  type: UPDATE_MINE_RESOURCES,
+  payload: {
+    ores,
+  }
+})
