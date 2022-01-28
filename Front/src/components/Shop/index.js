@@ -30,10 +30,11 @@ export default function Shop() {
   const closeModale = () => {
     dispatch(modaleClose());
   };
-
+  // je compare si l'utilisateur a assez d'argent ou pas pour acheter un objet,
+  // si c'est positif, ça retire l'argent de sa bourse, sinon ça ferme juste la modale sans action
   const buyingItem = () => {
-    if (money >= stuffs.find((stuff) => stuff.id == isOpen.id).attribute[0].value) {
-      dispatch(buyItem(stuffs.find((stuff) => stuff.id == isOpen.id).attribute[0].value));
+    if (money >= stuffs.find((stuff) => stuff.id == isOpen.id).attribute[1].value) {
+      dispatch(buyItem(stuffs.find((stuff) => stuff.id == isOpen.id).attribute[1].value));
     }
     else {
       dispatch(modaleClose());
@@ -46,6 +47,7 @@ export default function Shop() {
     const selectedId = document.getElementById(e.target.parentElement.id).id;
     dispatch(modaleOpen(selectedId));
   };
+
   return (
     <>
       <div className="background-shop" />
@@ -60,15 +62,20 @@ export default function Shop() {
           { newShopArray.map((stuff) => (
             <div className="stuff" id={stuff.id} key={uuidv4()}>
               <div className="shop-stuff">
-                {stuff.name}
+                <p>{stuff.name} </p>
+                <p className="stuff-stat">
+                  {
+                    stuff.attribute.map((elem) => elem.name !== "prix" ? `${elem.name.replace('_', ' ')}: ${elem.value} ` : '')
+                }
+                </p>
               </div>
-              <button onClick={getIdOfButtonParent} className="buy-button" type="button"> Acheter </button>
+              <button onClick={getIdOfButtonParent} className="buy-button" type="button"> Acheter pour {stuff.attribute[1].value} <img className="money-image" src={boutiqueLogo} alt="or" /></button>
             </div>
           ))}
         </div>
         {isOpen.open && stuffs.find((stuff) => stuff.id == isOpen.id)
           ? (
-            <div className="buying-modal">Êtes-vous sûr de vouloir acheter "{stuffs.find((stuff) => stuff.id == isOpen.id).name}"
+            <div className="buying-modal">Êtes-vous sûr de vouloir acheter "{stuffs.find((stuff) => stuff.id == isOpen.id).name}" pour {stuffs.find((stuff) => stuff.id == isOpen.id).attribute[1].value}<img src={boutiqueLogo} alt="or" />
               <div className="button-container"><button className="buying-button" type="button" onClick={buyingItem}>oui</button>
                 <button className="buying-button" type="button" onClick={closeModale}>non</button>
               </div>
