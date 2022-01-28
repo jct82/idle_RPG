@@ -35,7 +35,7 @@ const characters = [
           reserve:[
             {
               id:1,
-              nom:'bottes légères', 
+              nom:'Bottes Lothbrok', 
               valeur:150, 
               statistique: 30,
               description: 'pour se déplacer vite',
@@ -68,7 +68,7 @@ const characters = [
           reserve:[
             {
               id:1,
-              nom:'casque moyen', 
+              nom:'Casque spartiate', 
               valeur:200, 
               statistique: 20, 
               description: 'casque pas mal',
@@ -93,7 +93,7 @@ const characters = [
           reserve:[
             {
               id: 1,
-              nom:'armure solide', 
+              nom:'Armure du viking ', 
               valeur:400, 
               statistique: 40, 
               description: 'armure en titane',
@@ -111,7 +111,7 @@ const characters = [
             {
               id:1,
               type:'épée', 
-              nom:'épée de la force obscure', 
+              nom:'Excalibur', 
               description:'pour trancher tous types d\'adversaire',
               valeur:200, 
               statistique: 30, 
