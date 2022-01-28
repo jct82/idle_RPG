@@ -7,7 +7,8 @@ import {
   addLogMessage,
   addLevelUpMessage,
   levelUpJob,
-  updateExpBar
+  updateExpBar,
+  getAllFishResources
 } from '../../actions/fishing';
 import { sendResourceToInventory } from '../../actions/mining';
 import '../../styles/allitems.scss';
@@ -34,6 +35,10 @@ export default function Fishing({job}) {
     return (100 * partialValue) / totalValue;
   } 
 
+  useEffect(() => {
+    dispatch(getAllFishResources());
+  }, []);
+
   // Click bouton pour lancer l'action
   const buttonOnClick = () => {
     
@@ -59,7 +64,8 @@ export default function Fishing({job}) {
         const workingResource = resources.find(resource => resource.name === currentResource);
         const { name, type, description, baseReward } = workingResource;
         dispatch(sendResourceToInventory(name, type, description, baseReward));
-        dispatch(addLogMessage(workingResource.experience, baseReward));
+        // QUANTITÉ ET EXP RÉCUPÉRÉE vvvv
+        dispatch(addLogMessage(workingResource.attribute[0].value, workingResource.attribute[0].value));
         dispatch(updateExpBar(percentage(experience, levelUpReq)));
       }, actionTime);
 
@@ -69,16 +75,16 @@ export default function Fishing({job}) {
 
   // Choix de la ressource
   const switchResource = (e) => {
-    const workingResource = resources.find(resource => resource.name === e.target.className.split(' ')[1]);
-    if (level >= workingResource.level) {
-      dispatch(setCurrentResource(e.target.className.split(' ')[1], workingResource.experience));
+    const workingResource = resources.find(resource => resource.name.replace(/['"]+/g, "").replace(/\s/g, "") === e.target.className.split(' ')[1]);
+    if (level >= workingResource.attribute[0].value) {
+      dispatch(setCurrentResource(e.target.className.split(' ')[1], workingResource.attribute[0].value )); // EXP GAGNÉE
     }
   }
 
   // Remplissage de la liste des ressources
-  const fillResources = resources.map(vein =>
-  <div className={`${level >= vein.level ? "resource" : "resource--not-allowed"} ${vein.name}`} key={vein.name} onClick={switchResource}>
-    <span className="oreTooltipText">{vein.name}<br /> {vein.gatherDescription}</span>
+  const fillResources = resources.map(fish =>
+  <div className={`${level >= fish.attribute[0].value ? "resource" : "resource--not-allowed"} ${fish.name.replace(/['"]+/g, "").replace(/\s/g, "")}`} key={fish.name} onClick={switchResource}>
+    <span className="oreTooltipText">{fish.name}<br /> {`Niveau ${fish.attribute[0].value} requis`}</span>
   </div> );
 
   return (

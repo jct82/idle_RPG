@@ -8,6 +8,8 @@ export const ADD_RESOURCE_EXPERIENCE_TO_PLAYER_FISH = 'ADD_RESOURCE_EXPERIENCE_T
 export const LEVEL_UP_PLAYER_JOB_FISH = 'LEVEL_UP_PLAYER_JOB_FISH';
 export const UPDATE_EXPERIENCE_BAR_PROGRESS_FISH = 'UPDATE_EXPERIENCE_BAR_PROGRESS_FISH';
 export const ALLOW_GATHER_RESOURCES = 'ALLOW_GATHER_RESOURCES_FISH';
+export const GET_ALL_FISH_RESOURCES = 'GET_ALL_FISH_RESOURCES';
+export const UPDATE_FISH_RESOURCES = 'UPDATE_FISH_RESOURCES';
 
 export const setWorking = () => ({
   type: SET_WORKING_FISH,
@@ -57,4 +59,15 @@ export const addLogMessage = (experience, amount) => ({
 
 export const addLevelUpMessage = () => ({
   type: ADD_LEVEL_UP_MESSAGE_FISH,
+});
+
+export const getAllFishResources = () => ({
+  type: GET_ALL_FISH_RESOURCES,
+});
+
+export const updateFishResources = (fishes) => ({
+  type: UPDATE_FISH_RESOURCES,
+  payload: {
+    fishes,
+  }
 });

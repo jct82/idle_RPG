@@ -39,7 +39,8 @@ const Craft = () => {
   }
   
   const fillRecipes = recipes.map(item => 
-    <div className="craft-display" key={uuidv4()}>
+    
+    <div className={`craft-display`} key={uuidv4()}>
         <h2 className={`craft-display-title`}>
           {item.name}
         </h2>

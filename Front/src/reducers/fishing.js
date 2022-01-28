@@ -7,7 +7,8 @@ import {
   ADD_RESOURCE_EXPERIENCE_TO_PLAYER_FISH,
   LEVEL_UP_PLAYER_JOB_FISH,
   ADD_LEVEL_UP_MESSAGE_FISH,
-  UPDATE_EXPERIENCE_BAR_PROGRESS_FISH
+  UPDATE_EXPERIENCE_BAR_PROGRESS_FISH,
+  UPDATE_FISH_RESOURCES
 } from '../actions/fishing';
 
 const initialState = {
@@ -24,35 +25,7 @@ const initialState = {
     actionTime: 2000,
     baseReward: 2,
     logMessages: [],
-    resources: [
-      {
-        name: 'grenouille',
-        type: 'food',
-        level: 1,
-        gatherDescription:'Niveau 1 requis',
-        description: 'Vraiment peu ragoûtant...',
-        experience: 5,
-        baseReward: 2,
-      },
-      {
-        name: 'crabe',
-        type: 'food',
-        level: 5,
-        gatherDescription:'Niveau 5 requis',
-        description: 'Un très petit crabe, mais délicieux !',
-        experience: 15,
-        baseReward: 2,
-      },
-      {
-        name: 'blobfish',
-        type: 'food',
-        level: 20,
-        gatherDescription:'Niveau 20 requis',
-        description: 'On dirait pas mais c\'est très bon !',
-        experience: 40,
-        baseReward: 2,
-      },
-    ]
+    resources: [],
 };
 
 const jobs = (state = initialState, action = {}) => {
@@ -109,6 +82,13 @@ const jobs = (state = initialState, action = {}) => {
               ...state,
                 experiencePercentage: action.payload.newExpPercentage,
             };
+          case UPDATE_FISH_RESOURCES:
+            return {
+              ...state,
+              resources: [
+                ...action.payload.fishes,
+              ]
+            }
     default:
       return state;
 };

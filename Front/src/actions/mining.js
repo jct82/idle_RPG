@@ -76,4 +76,4 @@ export const updateMineResources = (ores) => ({
   payload: {
     ores,
   }
-})
+});

@@ -1,4 +1,5 @@
 import { craftItem, GET_CRAFTABLE_ITEMS, updateRecipes } from "../actions/craft";
+import { GET_ALL_FISH_RESOURCES, updateFishResources } from "../actions/fishing";
 import { GET_ALL_MINE_RESOURCES, updateMineResources } from "../actions/mining";
 import API from './api';
 
@@ -33,6 +34,21 @@ const inventoryMiddleware = (store) => (next) => (action) => {
         const allOres = response.data.filter((item) => item.item_type_id === 2);
         console.log(allOres);
         store.dispatch(updateMineResources(allOres));
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    };
+    case GET_ALL_FISH_RESOURCES: {
+      const config = {
+        method: 'get',
+        url: '/items',
+      };
+      API(config)
+      .then((response) => {
+        const allFishes = response.data.filter((item) => item.item_type_id === 1);
+        console.log(allFishes);
+        store.dispatch(updateFishResources(allFishes));
       })
       .catch((error) => {
         console.log(error);

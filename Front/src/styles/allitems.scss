@@ -122,19 +122,25 @@
 }
 // FISHING
 .grenouille {
-  background: url('../assets/fishing/frog.png');
+  background: url('../../public/images/vivre/grenouille.png');
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.crabe {
-  background: url('../assets/fishing/crab.png');
+.calamar {
+  background: url('../../public/images/vivre/calamar.png');
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.blobfish {
-  background: url('../assets/fishing/blobfish.png');
+.carpedorée {
+  background: url('../../public/images/vivre/carpedorée.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.saumon {
+  background: url('../../public/images/vivre/saumon.png');
   background-repeat: no-repeat;
   background-position: center;
 }
