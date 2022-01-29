@@ -91,36 +91,13 @@ const initialState = {
 const character = (state = initialState, action = {}) => {
   switch (action.type) {
     case SEND_RESOURCE_TO_INVENTORY:
-      const findExistingItem = state.inventory.ressources.find((i) => i.nom === action.payload.nom);
-      // Si l'objet existe déjà
-      if (findExistingItem) {
         return {
           ...state,
-          inventory: {
+          inventory: [
             ...state.inventory,
-            ressources: state.inventory.ressources.map(
-              (item) => item.nom === action.payload.nom ? {
-                ...item,
-                quantite: item.quantite + action.payload.quantite
-              } :
-              item)
-          }
+            {...action.payload},
+          ]
         };
-      } else {
-        // Sinon crée un objet
-        return {
-          ...state,
-          inventory: {
-            ...state.inventory,
-            ressources: [
-              ...state.inventory.ressources,
-              {
-                ...action.payload
-              }
-            ]
-          }
-        };
-      };
     case SPEND_RESOURCES_FOR_CRAFT:
       // clone l'inventaire, enlève le nbr de resources requises, et le remet dans le state
       const newInventoryAfterCraft = [...state.inventory];

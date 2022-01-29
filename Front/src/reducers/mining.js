@@ -8,12 +8,13 @@ import {
   LEVEL_UP_PLAYER_JOB_MINE,
   ADD_LEVEL_UP_MESSAGE_MINE,
   UPDATE_EXPERIENCE_BAR_PROGRESS_MINE,
-  UPDATE_MINE_RESOURCES
+  UPDATE_MINE_RESOURCES,
+  GET_MINE_NAME_AND_LEVEL
 } from '../actions/mining';
 
 const initialState = {
-    name: 'Minage',
-    level: 1,
+    name: '',
+    level: 5,
     experience: 0,
     experiencePurcentage: 0,
     levelUpReq: 100,
@@ -82,12 +83,20 @@ const jobs = (state = initialState, action = {}) => {
                 experiencePercentage: action.payload.newExpPercentage,
             };
           case UPDATE_MINE_RESOURCES:
+            console.log(action.payload.ores);
             return {
               ...state,
               resources: [
                 ...action.payload.ores,
               ]
-            }
+            };
+          case GET_MINE_NAME_AND_LEVEL:
+            return {
+              ...state,
+              name: action.payload.data.name,
+              level: action.payload.data.level,
+              experience: action.payload.data.exp,
+            };
     default:
       return state;
 };

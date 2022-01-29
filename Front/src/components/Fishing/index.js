@@ -29,6 +29,8 @@ export default function Fishing({job}) {
     experiencePercentage,
   } = useSelector((state) => job === 'mining' ? state.mining : state.fishing);
 
+  const { inventory } = useSelector((state) => state.character);
+
   const dispatch = useDispatch();
 
   const percentage = (partialValue, totalValue) => {
@@ -57,14 +59,17 @@ export default function Fishing({job}) {
   useEffect(() => {
     if (isWorking) {
       const interval = setInterval(() => {
+        // TODO A MODIFIER QUAND LA BDD SERA FINALISÉE
+        console.log(inventory);
         if (experience >= levelUpReq) {
           dispatch(levelUpJob());
           dispatch(addLevelUpMessage());
         };
         const workingResource = resources.find(resource => resource.name === currentResource);
-        const { name, type, description, baseReward } = workingResource;
-        dispatch(sendResourceToInventory(name, type, description, baseReward));
-        // QUANTITÉ ET EXP RÉCUPÉRÉE vvvv
+        console.log(workingResource);
+        const { name, id, item_type_id, type } = workingResource;
+        dispatch(sendResourceToInventory(name, id, item_type_id, type));
+        //-------------------------------------vvv quantité récupérée -----------vvv exp récupérée
         dispatch(addLogMessage(workingResource.attribute[0].value, workingResource.attribute[0].value));
         dispatch(updateExpBar(percentage(experience, levelUpReq)));
       }, actionTime);

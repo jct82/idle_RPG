@@ -19,12 +19,15 @@ const Craft = () => {
   const craftButtonOnClick = (e) => {
     const currentRecipe = recipes.find((recipe) => recipe.id == e.target.id);
     const neededResource = inventory.filter((resource) => resource.name === currentRecipe.ingredients[0].name);
-    if (neededResource) {
+    if (neededResource.length !== 0) {
       if (neededResource.length + 1 >= currentRecipe.ingredients[0].quantity) {
         dispatch(craftItem(neededResource[0].name, currentRecipe.ingredients[0].quantity));
         dispatch(sendCraftedItem(currentRecipe.name, currentRecipe.type, currentRecipe.item_type_id));
+        console.log(inventory);
       };
-    };
+    } else {
+      e.target.style.backgroundColor = 'red';
+    }
   };
   
   const fillRecipes = recipes.map(item => 

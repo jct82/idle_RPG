@@ -59,15 +59,16 @@ export default function Mining({job}) {
   useEffect(() => {
     if (isWorking) {
       const interval = setInterval(() => {
+        // TODO A MODIFIER QUAND LA BDD SERA FINALISÉE
         console.log(inventory);
         if (experience >= levelUpReq) {
           dispatch(levelUpJob());
           dispatch(addLevelUpMessage());
         };
         const workingResource = resources.find(resource => resource.name === currentResource);
-        const { name, type, description, baseReward } = workingResource;
-        dispatch(sendResourceToInventory(name, type, description, baseReward));
-        // TODO A MODIFIER QUAND LA BDD SERA FINALISÉE
+        console.log(workingResource);
+        const { name, id, item_type_id, type } = workingResource;
+        dispatch(sendResourceToInventory(name, id, item_type_id, type));
         //-------------------------------------vvv quantité récupérée -----------vvv exp récupérée
         dispatch(addLogMessage(workingResource.attribute[0].value, workingResource.attribute[0].value));
         dispatch(updateExpBar(percentage(experience, levelUpReq)));
