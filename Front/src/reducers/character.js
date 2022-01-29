@@ -1,53 +1,68 @@
-import { SEND_RESOURCE_TO_INVENTORY } from "../actions/mining";
-import { SET_INVENTORY, POSTER_CATEGORY, POSTER_EQUIP, SET_DETAILS, CLOSE_DETAILS, UPDATE_EQUIPMENT,UPDATE_VIVRE } from '../actions/character';
-import { SEND_CRAFTED_ITEM_TO_PLAYER, SPEND_RESOURCES_FOR_CRAFT } from "../actions/craft";
+import {
+  SEND_RESOURCE_TO_INVENTORY
+} from "../actions/mining";
+import {
+  SET_INVENTORY,
+  POSTER_CATEGORY,
+  POSTER_EQUIP,
+  SET_DETAILS,
+  CLOSE_DETAILS,
+  UPDATE_EQUIPMENT,
+  UPDATE_VIVRE,
+  GET_INVENTORY_ON_LOGIN
+} from '../actions/character';
+import {
+  SEND_CRAFTED_ITEM_TO_PLAYER,
+  SPEND_RESOURCES_FOR_CRAFT
+} from "../actions/craft";
 
 const initialState = {
   nom: 'The Counter',
   experience: 50,
   level: 1,
-  inventory: {
-    vivres: [
-      {
-        nom: '',
-        description: '',
-        image: '',
-        valeur: 0,
-        quantite: 0,
-        statistique: 0,
-        type_statistique: '',
-      },
-    ],
-    equipment: [
-      {
-        nom: '',
-        description: '',
-        image: '',
-        quantite: 3,
-        type_statistique: '',
-        reserve: [
-          {
-            id: 1,
-            nom: '',
-            valeur: 0,
-            statistique: 0,
-            description: '',
-            image: '',
-          },
-        ],
-      },
-    ],
-    ressources: [
-      {
-        nom: '',
-        categorie: '',
-        description: '',
-        image: '',
-        valeur: 0,
-        quantite: 0,
-      },
-    ],
-  },
+  inventory: [],
+  // inventory: {
+  //   vivres: [
+  //     {
+  //       nom: '',
+  //       description: '',
+  //       image: '',
+  //       valeur: 0,
+  //       quantite: 0,
+  //       statistique: 0,
+  //       type_statistique: '',
+  //     },
+  //   ],
+  //   equipment: [
+  //     {
+  //       nom: '',
+  //       description: '',
+  //       image: '',
+  //       quantite: 3,
+  //       type_statistique: '',
+  //       reserve: [
+  //         {
+  //           id: 1,
+  //           nom: '',
+  //           valeur: 0,
+  //           statistique: 0,
+  //           description: '',
+  //           image: '',
+  //         },
+  //       ],
+  //     },
+  //   ],
+  //   ressources: [
+  //     {
+  //       nom: '',
+  //       categorie: '',
+  //       description: '',
+  //       image: '',
+  //       valeur: 0,
+  //       quantite: 0,
+  //     },
+  //   ],
+  // },
   equipment: {
     casque: 1,
     armure: 1,
@@ -61,7 +76,7 @@ const initialState = {
     description: '',
     statistique: 0,
     quantite: 0,
-    type:'',
+    type: '',
   },
   vie: 50,
   force: 40,
@@ -75,86 +90,56 @@ const initialState = {
 
 const character = (state = initialState, action = {}) => {
   switch (action.type) {
-  case SEND_RESOURCE_TO_INVENTORY:
-    const findExistingItem = state.inventory.ressources.find((i) => i.nom === action.payload.nom);
-    // Si l'objet existe déjà
-    if (findExistingItem) {
-      console.log('yes');
-      return {
-        ...state,
-        inventory: {
-          ...state.inventory,
-          ressources: state.inventory.ressources.map(
-            (item) => item.nom === action.payload.nom ?
-            {...item, quantite: item.quantite + action.payload.quantite}
-            : item)
-        } 
+    case SEND_RESOURCE_TO_INVENTORY:
+      const findExistingItem = state.inventory.ressources.find((i) => i.nom === action.payload.nom);
+      // Si l'objet existe déjà
+      if (findExistingItem) {
+        return {
+          ...state,
+          inventory: {
+            ...state.inventory,
+            ressources: state.inventory.ressources.map(
+              (item) => item.nom === action.payload.nom ? {
+                ...item,
+                quantite: item.quantite + action.payload.quantite
+              } :
+              item)
+          }
+        };
+      } else {
+        // Sinon crée un objet
+        return {
+          ...state,
+          inventory: {
+            ...state.inventory,
+            ressources: [
+              ...state.inventory.ressources,
+              {
+                ...action.payload
+              }
+            ]
+          }
+        };
       };
-    } else {
-      console.log('no');
-      // Sinon crée un objet
-      return {
-        ...state,
-        inventory: {
-          ...state.inventory,
-          ressources: [
-            ...state.inventory.ressources,
-            {...action.payload}
-          ]
-        }
-      };
-    };
     case SPEND_RESOURCES_FOR_CRAFT:
+      // clone l'inventaire, enlève le nbr de resources requises, et le remet dans le state
+      const newInventoryAfterCraft = [...state.inventory];
+      const firstIndexOfResource = state.inventory.findIndex(item => item.name === action.payload.name);
+      newInventoryAfterCraft.splice(firstIndexOfResource, action.payload.quantity);
       return {
         ...state,
-        inventory: {
-          ...state.inventory,
-          ressources: state.inventory.ressources.map(
-            (item) => item.nom === action.payload.name ?
-            {...item, quantite: item.quantite - action.payload.quantity}
-            : item)
-        }
+        inventory: newInventoryAfterCraft,
       };
-      case SEND_CRAFTED_ITEM_TO_PLAYER:
-        const findExistingEquipment = state.inventory.equipment.find((i) => i.name === action.payload.name);
-    // Si l'objet existe déjà
-    if (findExistingEquipment) {
+    case SEND_CRAFTED_ITEM_TO_PLAYER:
       return {
         ...state,
-        inventory: {
+        inventory: [
           ...state.inventory,
-          equipment: state.inventory.equipment.map(
-            (item) => item.name === action.payload.name ?
-            {...item, quantite: item.quantite + 1}
-            : item)
-        } 
+          {
+            ...action.payload
+          },
+        ]
       };
-    } else {
-      // Sinon crée un objet
-      return {
-        ...state,
-        inventory: {
-          ...state.inventory,
-          equipment: [
-            ...state.inventory.equipment,
-            {...action.payload}
-          ]
-        },
-      };
-    };
-        // return {
-        //   ...state,
-        //   inventory: {
-        //     ...state.inventory,
-        //     equipment: state.inventory.equipment.map(
-        //       (item) => item.nom === action.payload.name ?
-        //       {...item, quantite: item.quantite + 1}
-        //       :
-        //       // TODO DOESNT WORK AS INTENDED
-        //       [...state.inventory.equipment, {...action.payload}]),
-              
-        //   }
-        // }
     case SET_INVENTORY:
       return {
         ...state,
@@ -164,30 +149,32 @@ const character = (state = initialState, action = {}) => {
       return {
         ...state,
         posterCat: action.category,
-        selected: '',
+          selected: '',
       };
     case POSTER_EQUIP:
       return {
         ...state,
         posterEquip: action.posterEquip,
-        selected: '',
+          selected: '',
       };
     case SET_DETAILS:
-      const { id, nom, image, description, type, statistique } = action.detailsObj;
+      const {
+        id, nom, image, description, type, statistique
+      } = action.detailsObj;
       let quantite;
       action.detailsObj.reserve == undefined ? quantite = action.detailsObj.quantite : quantite = 0;
       return {
         ...state,
         detailsObj: {
-          id : id,
-          nom: nom,
-          image: image,
-          description: description,
-          statistique: statistique,
-          quantite: quantite,
-          type: type,
-        },
-        selected:nom,
+            id: id,
+            nom: nom,
+            image: image,
+            description: description,
+            statistique: statistique,
+            quantite: quantite,
+            type: type,
+          },
+          selected: nom,
       };
     case CLOSE_DETAILS:
       return {
@@ -206,33 +193,40 @@ const character = (state = initialState, action = {}) => {
       return {
         ...state,
         equipment: newEquipment,
-        [stuffType.type_statistique]: state[stuffType.type_statistique] + (newVal.statistique - oldVal.statistique),
-        selected: '',
-      };
-      case UPDATE_VIVRE:
-        let stockVivre = state.inventory.vivres;
-        //trouver le vivre correspondant au nom dans les vivres de l'inventaire
-        stockVivre = stockVivre.find(item => item.nom == action.nom);
-        //enlever 1 à la quantité de l'inventaire trouvé
-        stockVivre.quantite -= 1;
-        //mettre à jour vivres de l'inventaire avec le vivre mis à jour
-        let newVivres = state.inventory.vivres.map(vivre => {
-          if (vivre.nom == action.nom) vivre.quantite = stockVivre.quantite;
-          return vivre;
-        });
-        //mettre à jour l'inventaire avec les vivres mis à jour
-        let newInventory = {
-          ...state.inventory,
-          newVivres,
-        }
-        return {
-          ...state,
-          inventory : newInventory,
-          vie: state.life + action.statistique > 100 ?  100 : state.vie + action.statistique,
+          [stuffType.type_statistique]: state[stuffType.type_statistique] + (newVal.statistique - oldVal.statistique),
           selected: '',
-        };
-    default:
-      return state;
+      };
+    case UPDATE_VIVRE:
+      let stockVivre = state.inventory.vivres;
+      //trouver le vivre correspondant au nom dans les vivres de l'inventaire
+      stockVivre = stockVivre.find(item => item.nom == action.nom);
+      //enlever 1 à la quantité de l'inventaire trouvé
+      stockVivre.quantite -= 1;
+      //mettre à jour vivres de l'inventaire avec le vivre mis à jour
+      let newVivres = state.inventory.vivres.map(vivre => {
+        if (vivre.nom == action.nom) vivre.quantite = stockVivre.quantite;
+        return vivre;
+      });
+      //mettre à jour l'inventaire avec les vivres mis à jour
+      let newInventory = {
+        ...state.inventory,
+        newVivres,
+      }
+      return {
+        ...state,
+        inventory: newInventory,
+          vie: state.life + action.statistique > 100 ? 100 : state.vie + action.statistique,
+          selected: '',
+      };
+    case GET_INVENTORY_ON_LOGIN:
+      return {
+        ...state,
+        inventory: [
+          ...action.payload.inv,
+        ]
+      }
+      default:
+        return state;
   }
 };
 

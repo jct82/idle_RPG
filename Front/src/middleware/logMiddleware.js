@@ -1,3 +1,4 @@
+import { getInventoryOnLogin } from "../actions/character";
 import { GET_ITEMS } from "../actions/craft";
 import { SUBSCRIBE_USER, LOG_USER, LOGIN_USER, logUser } from "../actions/user";
 import API from './api';
@@ -40,7 +41,7 @@ const logMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           if (response.status === 200) {
-            console.log(response.data)
+            store.dispatch(getInventoryOnLogin(response.data.character.inventory));
             store.dispatch(logUser(response.headers.authorization, {...response.data}));
           }
         })

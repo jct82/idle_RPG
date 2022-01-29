@@ -5,6 +5,7 @@ export const SET_DETAILS = 'SET_DETAILS';
 export const CLOSE_DETAILS = 'CLOSE_DETAILS';
 export const UPDATE_EQUIPMENT = 'UPDATE_EQUIPMENT';
 export const UPDATE_VIVRE = 'UPDATE_VIVRE';
+export const GET_INVENTORY_ON_LOGIN = 'GET_INVENTORY_ON_LOGIN';
 
 
 export const setInventoryObjects = (inventory) => ({
@@ -41,4 +42,11 @@ export const updateVivre = (nom, statistique) => ({
   type: UPDATE_VIVRE,
   nom:nom,
   statistique: statistique,
+});
+
+export const getInventoryOnLogin = (inv) => ({
+  type: GET_INVENTORY_ON_LOGIN,
+  payload: {
+    inv,
+  },
 });

@@ -20,40 +20,11 @@ const initialState = {
     currentResource: '',
     currentResourceExperience: 0,
     isWorking: false,
-    allowGather: false,
     buttonTitle: 'Commencer à travailler',
     actionTime: 2000,
     baseReward: 2,
     logMessages: [],
-    resources: [
-      // {
-      //   name: 'fer',
-      //   type: 'resource',
-      //   level: 1,
-      //   gatherDescription:'Niveau 1 requis',
-      //   description: 'Minerai commun et facile à récolter',
-      //   experience: 5,
-      //   baseReward: 2,
-      // },
-      // {
-      //   name: 'or',
-      //   type: 'resource',
-      //   level: 5,
-      //   gatherDescription:'Niveau 5 requis',
-      //   description: 'Minerai plus cher mais reste fragile',
-      //   experience: 15,
-      //   baseReward: 2,
-      // },
-      // {
-      //   name: 'bronze',
-      //   type: 'resource',
-      //   level: 20,
-      //   gatherDescription:'Niveau 20 requis',
-      //   description: 'Minerai solide mais très lourd',
-      //   experience: 40,
-      //   baseReward: 2,
-      // },
-    ]
+    resources: [],
 };
 
 const jobs = (state = initialState, action = {}) => {

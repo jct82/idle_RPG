@@ -32,7 +32,6 @@ const inventoryMiddleware = (store) => (next) => (action) => {
       API(config)
       .then((response) => {
         const allOres = response.data.filter((item) => item.item_type_id === 2);
-        console.log(allOres);
         store.dispatch(updateMineResources(allOres));
       })
       .catch((error) => {
@@ -47,7 +46,6 @@ const inventoryMiddleware = (store) => (next) => (action) => {
       API(config)
       .then((response) => {
         const allFishes = response.data.filter((item) => item.item_type_id === 1);
-        console.log(allFishes);
         store.dispatch(updateFishResources(allFishes));
       })
       .catch((error) => {
