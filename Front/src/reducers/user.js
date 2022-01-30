@@ -1,4 +1,4 @@
-import { LOGMODALE, UPDATE_FIELD, LOG_USER } from "../actions/user";
+import { LOGMODALE, UPDATE_FIELD, LOG_USER, POSTER_MENU } from "../actions/user";
 const initialState = {
   modal: "",
   email: "",
@@ -8,6 +8,7 @@ const initialState = {
   logError:'',
   loggedName:'',
   userId:0,
+  mobMenu: false,
 };
 const character = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -35,6 +36,11 @@ const character = (state = initialState, action = {}) => {
         logged: true,
         logError: '',
         modal: '',
+      };
+    case POSTER_MENU:
+      return {
+        ...state,
+        mobMenu: !state.mobMenu,
       };
     default:
       return state;

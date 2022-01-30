@@ -59,9 +59,9 @@ const Inventory = () => {
   jsxWeapon.sort((a, b) => a.type - b.type);
 
   const posterCatMenu = (e) => {
-    dispatch(posterCategory(e.target.getAttribute("name")));
-    if (e.target.getAttribute("name") != 'equipement') dispatch(posterEquipment(''));
-    activeThumb(e.target);
+    dispatch(posterCategory(e.currentTarget.getAttribute("name")));
+    if (e.currentTarget.getAttribute("name") != 'equipement') dispatch(posterEquipment(''));
+    activeThumb(e.currentTarget);
   };
 
   const JSXaccessories = Object.keys(equipment).map(function(key) {
@@ -77,22 +77,26 @@ const Inventory = () => {
       <div className="panel inventory-panel">
         <div className="inner-panel">
           <div className="inventory-wrapper">
+            <div className="category-title">{posterCat}</div>
             <div className="inventory-category">
-              <ul className="menu-inventory" onClick={posterCatMenu}>
-                <li className="cat-name vivres" type="obj" name="vivre">
-                  <span>
+              <ul className="menu-inventory">
+                <li className="cat-name vivres" onClick={posterCatMenu} name="vivre">
+                  <div className="inner"></div>
+                  {/* <span>
                     <span>Vivre</span>
-                  </span>
+                  </span> */}
                 </li>
-                <li className="cat-name ressources" name="ressources">
-                  <span>
+                <li className="cat-name ressources" onClick={posterCatMenu} name="ressources">
+                <div className="inner"></div>
+                  {/* <span>
                     <span>Ressources</span>
-                  </span>
+                  </span> */}
                 </li>
-                <li className="cat-name equipement" name="equipement">
-                  <span>
+                <li className="cat-name equipement" onClick={posterCatMenu} name="equipement">
+                <div className="inner"></div>
+                  {/* <span>
                     <span>Equipement</span>
-                  </span>
+                  </span> */}
                 </li>
               </ul>
               {posterCat == "vivre" && (

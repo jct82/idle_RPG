@@ -70,7 +70,7 @@ const initialState = {
   dexterite: 35,
   argent: 6500,
   points: 50,
-  posterCat: 'vivres',
+  posterCat: '',
   posterEquip: '',
   selected: '',
   pointsendurance: 0,

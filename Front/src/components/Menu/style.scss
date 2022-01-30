@@ -3,6 +3,7 @@
 
 .navBarContainer {
   position: fixed;
+  z-index: 10;
   top: 0;
   left: 0;
   display: flex;
@@ -45,35 +46,9 @@
   }
 }
 
-@media screen and (max-width: 1100px) {
-  .navBarContainer {
-    justify-content: space-evenly;
-    width: 50px;
-
-    & button {
-      display: none;
-    }
-
-    & .navHidden {
-      border: 1px rgba(0, 0, 0, .1) solid;
-      padding: 5px;
-      border-radius: 50%;
-      display: block;
-      // MODIFS TEST
-      text-align: center;
-      width: fit-content;
-      margin: auto;
-    }
-
-    & .logo-rpg {
-      display: none;
-    }
-  }
-}
-
 .g-background-default {
   background: green;
-}
+} 
 
 .mbr-gallery{
   background-color: green;
@@ -100,3 +75,143 @@
   color: #cccccc;
   text-decoration: none;
 }
+
+.mobile-menu{
+  display: none;
+  position: absolute;
+  z-index: 11;
+  top: 15px;
+  left: 25px;
+  width: 50px;
+  transform: translateX(0px);
+  transition-duration: 0.5s;
+  span{
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    transition-duration: 0.5s;
+    transform: rotate(0deg);
+    &:not(:last-child){
+      margin-bottom: 6px;
+    }
+  }
+  &.on{
+    width: 42px;
+    transform: translateX(146px);
+    span:first-child{
+      transform: rotate(45deg);
+    }
+    span:last-child{
+      transform: rotate(-45deg);
+    }
+    span:first-child, span:last-child{
+        transform-origin: bottom left;
+        width: 22px;
+    }
+    span:first-child + span{
+      width: 0;
+    }
+    & + .navBarContainer{
+      transform: translateX(0px);
+    }
+  }
+}
+
+@media screen and (max-width: 1240px) and (min-width: 1100px){
+  .navBarContainer {
+    width: 15%;
+    button{
+      width:12vw;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+@media screen and (min-width: 550px) and (max-width: 1100px)  {
+  .navBarContainer {
+    justify-content: space-evenly;
+    width: 50px;
+    & button {
+      display: none;
+    }
+
+    & .navHidden {
+      border: 1px rgba(0, 0, 0, .1) solid;
+      padding: 5px;
+      border-radius: 50%;
+      display: block;
+      // MODIFS TEST
+      text-align: center;
+      width: fit-content;
+      margin: auto;
+    }
+
+    & .logo-rpg {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .mobile-menu{
+    display: block;
+  }
+  .navBarContainer{
+    transform: translateX(-240px);
+    transition-duration: 0.5s;
+    width: 240px;
+    padding-top: 66px;
+    padding-left: 25px;
+    align-items: flex-start;
+    background: rgba(148,207,255,.8);
+    .logo-rpg{
+      display: none;
+    }
+    button{
+      width: 190px;
+      height: 45px;
+      margin: 0 0 15px;
+      padding-left: 48px;
+      background-color: rgba(148,207,255,.5);
+      border: 1px solid rgba(0,0,0,.2);
+      border-radius: 10px;
+      -webkit-box-shadow: inset 1px 1px 5px #fff;
+      box-shadow: inset 1px 1px 5px #fff;
+      color: #fff;
+      font-size: 1.2rem;
+      -webkit-transition: background .1s;
+      transition: background .1s;
+      text-align: left;
+      background-repeat: no-repeat;
+      background-position: left 12px center;
+      background-size: 28px;
+      &.accueil{
+        background-image: url('../../../public/images/idleMenuIcons/accueil.png');
+      }
+      &.boutique{
+        background-image: url('../../../public/images/idleMenuIcons/boutique.png');
+      }
+      &.combat{
+        background-image: url('../../../public/images/idleMenuIcons/combat.png');
+      }
+      &.craft{
+        background-image: url('../../../public/images/idleMenuIcons/craft.png');
+      }
+      &.fishing{
+        background-image: url('../../../public/images/idleMenuIcons/fishing.png');
+      }
+      &.inventory{
+        background-image: url('../../../public/images/idleMenuIcons/inventory.png');
+      }
+      &.minerai{
+        background-image: url('../../../public/images/idleMenuIcons/mining.png');
+      }
+    }
+  }
+}
+
+
+
+

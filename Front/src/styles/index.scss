@@ -18,10 +18,12 @@ body {
 
 button{
   padding: 8px 12px;
-  border-radius: 5px;
-  color: white;
-  background-color: rgba(148,207,255,.5);
+  background: rgba(148,207,255,.5);
   border: 1px solid rgba(0,0,0,.2);
+  border-radius: 5px;
+  -webkit-box-shadow: inset 1px 1px 5px #fff;
+  box-shadow: inset 1px 1px 5px #fff;
+  color: white;
 }
 button, input[type="text"], input[type="password"], input[type="email"], input[type="number"]{
   font-family: 'Retro', sans-serif;

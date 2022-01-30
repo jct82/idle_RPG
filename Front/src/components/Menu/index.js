@@ -1,3 +1,4 @@
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import {
   accueilLogo,
@@ -8,61 +9,74 @@ import {
   inventoryLogo,
   miningLogo
 } from 'src/assets/idleMenuIcons';
+import { posterMenu } from "../../actions/user";
 import logo from '../../assets/logo.png';
 import './style.scss';
 
 export default function Menu() {
+  const dispatch = useDispatch();
+  const mobMenu  = useSelector((state) => state.user.mobMenu);
+
+  const seeMenu = (e) => {
+    dispatch(posterMenu());
+    let btnMob = e.currentTarget;
+    btnMob.classList.contains('on') ? btnMob.classList.remove('on') : btnMob.classList.add('on');
+  }
+
   return (
+    <><button className="mobile-menu" onClick={seeMenu}>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <div className="navBarContainer">
-      <img className="logo-rpg" src={logo} alt="Logo" />
       <NavLink
         key="/"
         to="/"
       >
-        <img className="navHidden" src={accueilLogo}></img>
-        <button>Accueil</button>
+        <img className="logo-rpg" src={logo} alt="Logo" />
       </NavLink>
       <NavLink
         key="/shop"
         to="/shop"
       >
         <img className="navHidden" src={boutiqueLogo}></img>
-        <button>Boutique</button>
+        <button className="boutique">Boutique</button>
       </NavLink>
       <NavLink
         key="/inventory"
         to="/inventory"
       >
         <img className="navHidden" src={inventoryLogo}></img>
-        <button>Profil</button>
+        <button className="inventory">Profil</button>
       </NavLink>
       <NavLink
         key="/fighting"
         to="/fighting"
       >
         <img className="navHidden" src={combatLogo}></img>
-        <button>Combat</button>
+        <button className="combat">Combat</button>
       </NavLink>
       <NavLink
         key="/craft"
         to="/craft"
       >
         <img className="navHidden" src={craftLogo}></img>
-        <button>Craft</button>
+        <button className="craft">Craft</button>
       </NavLink>
       <NavLink
         key="/jobs/mining"
         to="/jobs/mining"
       >
         <img className="navHidden" src={miningLogo}></img>
-        <button>Minage</button>
+        <button className="minerai">Minage</button>
       </NavLink>
       <NavLink
         key="/jobs/fishing"
         to="/jobs/fishing"
       >
         <img className="navHidden" src={fishingLogo}></img>
-        <button>Pêche</button>
+        <button className="fishing">Pêche</button>
       </NavLink>
       {/* <iframe width="100%" height="450" scrolling="no" allow="autoplay"
       src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1233926452&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
@@ -72,6 +86,6 @@ export default function Menu() {
       </iframe>
       <div className="SC1"><a href="https://soundcloud.com/xdeviruchi" title="xDeviruchi" target="_blank" className="SC2">xDeviruchi</a> · <a href="https://soundcloud.com/xdeviruchi/sets/8-bit-fantasy-adventure" title="8-Bit Fantasy &amp; Adventure" target="_blank" className="SC3">
       8-Bit Fantasy &amp; Adventure</a></div> */}
-    </div>
+    </div></>
   );
 }

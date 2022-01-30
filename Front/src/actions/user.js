@@ -3,6 +3,7 @@ export const UPDATE_FIELD = "UPDATE_FIELD";
 export const SUBSCRIBE_USER = "SUBSCRIBE_USER";
 export const LOG_USER = "LOG_USER";
 export const LOGIN_USER = "LOGIN_USER";
+export const POSTER_MENU = "POSTER_MENU";
 
 
 export const setModale = (modal) => ({
@@ -28,5 +29,9 @@ export const logUser = (token, userData) => ({
 
 export const connectUser = () => ({
   type: LOGIN_USER,
+})
+
+export const posterMenu = () => ({
+  type: POSTER_MENU,
 })
 
