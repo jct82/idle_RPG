@@ -10,6 +10,8 @@ import Fishing from "../Fishing";
 import Mining from "../Mining";
 import "./style.scss";
 import Inventory from "../Character";
+import BtnDark from "../BtnDark/BtnDark";
+
 
 // == Composant
 const App = () => {
@@ -18,8 +20,11 @@ const App = () => {
   // audio.play();
   return (
     <div className="app">
+      <BtnDark/>
+      
       <Header title="Idle-Rpg" />
       <Menu />
+    
       {/* <h1>Jeu IDLE</h1> */}
       <Routes>
         <Route exact path="/" element={<Home />} />

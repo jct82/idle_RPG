@@ -8,11 +8,14 @@ import Register from "./register";
 import ModalImgLog from "/src/assets/ImgModal/Modal-Log.png";
 
 
+
+
 export default function Header(props) {
   const { modal, mail, password } = useSelector((state) => state.user);
   // Je sélectionne log,mail,password qui se trouve dans mon reducer user
   const dispatch = useDispatch();
   // Je crée ma méthode useDispatch
+  
   const displayModale = (e) => {
     // Je dispatch mon new state
     dispatch(setModale(e.target.name));
@@ -91,6 +94,9 @@ export default function Header(props) {
       )}
       
       {modal == "inscription" &&<Register />}
+      
+      
+      
     </div>
   );
 }
