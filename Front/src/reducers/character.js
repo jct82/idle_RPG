@@ -21,48 +21,6 @@ const initialState = {
   experience: 50,
   level: 1,
   inventory: [],
-  // inventory: {
-  //   vivres: [
-  //     {
-  //       nom: '',
-  //       description: '',
-  //       image: '',
-  //       valeur: 0,
-  //       quantite: 0,
-  //       statistique: 0,
-  //       type_statistique: '',
-  //     },
-  //   ],
-  //   equipment: [
-  //     {
-  //       nom: '',
-  //       description: '',
-  //       image: '',
-  //       quantite: 3,
-  //       type_statistique: '',
-  //       reserve: [
-  //         {
-  //           id: 1,
-  //           nom: '',
-  //           valeur: 0,
-  //           statistique: 0,
-  //           description: '',
-  //           image: '',
-  //         },
-  //       ],
-  //     },
-  //   ],
-  //   ressources: [
-  //     {
-  //       nom: '',
-  //       categorie: '',
-  //       description: '',
-  //       image: '',
-  //       valeur: 0,
-  //       quantite: 0,
-  //     },
-  //   ],
-  // },
   equipment: {
     casque: 1,
     armure: 1,
