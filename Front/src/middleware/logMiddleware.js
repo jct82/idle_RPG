@@ -1,6 +1,8 @@
+import { getInventoryOnLogin } from "../actions/character";
 import { GET_ITEMS } from "../actions/craft";
 import { SUBSCRIBE_USER, LOG_USER, LOGIN_USER, logUser, } from "../actions/user";
 import { characterMoney } from '../actions/shop';
+import { getMineNameAndLvl } from "../actions/mining";
 import API from './api';
 
 const logMiddleware = (store) => (next) => (action) => {
@@ -19,6 +21,7 @@ const logMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           if (response.status === 201) {
+            store.dispatch(getInventoryOnLogin(response.data.character.inventory));
             store.dispatch(logUser(response.headers.authorization, {...response.data}));
           }
         })
@@ -41,7 +44,9 @@ const logMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           if (response.status === 200) {
-            console.log(response.data);
+            console.log(response.data.character);
+            store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
+            store.dispatch(getInventoryOnLogin(response.data.character.inventory));
             store.dispatch(logUser(response.headers.authorization, {...response.data}));
             store.dispatch(characterMoney(response.data.character.gold));
           }
@@ -53,26 +58,6 @@ const logMiddleware = (store) => (next) => (action) => {
       next(action);
       break;
     };
-    // TODO mettre dans un MW exprès (inventory par ex)
-    // case GET_ITEMS: {
-    //   const config = {
-    //     method: 'get',
-    //     url: '/items',
-    //   };
-    //   API(config)
-    //     .then((response) => {
-    //       console.log(response);
-    //       // if (response.status === 201) {
-    //       //   store.dispatch(logUser(response.headers.authorization, {...response.data}));
-    //       // }
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //       //store.dispatch(loginErrors(error.response.data));
-    //     });
-    //   next(action);
-    //   break;
-    // }
     default:
       next(action);
   }

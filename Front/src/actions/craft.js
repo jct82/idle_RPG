@@ -12,13 +12,12 @@ export const craftItem = (name, quantity) => ({
   }
 });
 
-export const sendCraftedItem = (name, type, desc, quantite = 1) => ({
+export const sendCraftedItem = (name, type_name, item_type_id) => ({
   type: SEND_CRAFTED_ITEM_TO_PLAYER,
   payload: {
     name,
-    type,
-    desc,
-    quantite,
+    type_name,
+    item_type_id,
   }
 });
 

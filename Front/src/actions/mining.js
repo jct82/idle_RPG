@@ -8,6 +8,9 @@ export const ADD_RESOURCE_EXPERIENCE_TO_PLAYER_MINE = 'ADD_RESOURCE_EXPERIENCE_T
 export const LEVEL_UP_PLAYER_JOB_MINE = 'LEVEL_UP_PLAYER_JOB_MINE';
 export const UPDATE_EXPERIENCE_BAR_PROGRESS_MINE = 'UPDATE_EXPERIENCE_BAR_PROGRESS_MINE';
 export const SEND_RESOURCE_TO_INVENTORY = 'SEND_RESOURCE_TO_INVENTORY';
+export const GET_ALL_MINE_RESOURCES = 'GET_ALL_MINE_RESOURCES';
+export const UPDATE_MINE_RESOURCES = 'UPDATE_MINE_RESOURCES';
+export const GET_MINE_NAME_AND_LEVEL = 'GET_MINE_NAME_AND_LEVEL';
 
 export const setWorking = () => ({
   type: SET_WORKING_MINE,
@@ -55,12 +58,30 @@ export const addLevelUpMessage = () => ({
   type: ADD_LEVEL_UP_MESSAGE_MINE,
 });
 
-export const sendResourceToInventory = (nom,categorie, description, quantite) => ({
+export const sendResourceToInventory = (name, item_id, type_id, type_name = 'ressource') => ({
   type: SEND_RESOURCE_TO_INVENTORY,
   payload: {
-    nom,
-    categorie,
-    description,
-    quantite,
+    name,
+    item_id,
+    type_id,
+    type_name,
+  }
+});
+
+export const getAllMineResources = () => ({
+  type: GET_ALL_MINE_RESOURCES,
+});
+
+export const updateMineResources = (ores) => ({
+  type: UPDATE_MINE_RESOURCES,
+  payload: {
+    ores,
+  }
+});
+
+export const getMineNameAndLvl = (data) => ({
+  type: GET_MINE_NAME_AND_LEVEL,
+  payload: {
+    data,
   }
 });

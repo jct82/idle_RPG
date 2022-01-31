@@ -10,7 +10,7 @@ const initialState = {
   userId:0,
   mobMenu: false,
 };
-const character = (state = initialState, action = {}) => {
+const user = (state = initialState, action = {}) => {
   switch (action.type) {
     case LOGMODALE:
       return {
@@ -46,4 +46,4 @@ const character = (state = initialState, action = {}) => {
       return state;
   }
 };
-export default character;
+export default user;

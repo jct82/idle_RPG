@@ -1,8 +1,7 @@
 import { SEND_RESOURCE_TO_INVENTORY } from "../actions/mining";
-import { SET_INVENTORY, POSTER_CATEGORY, POSTER_EQUIP, SET_DETAILS, 
+import { SET_INVENTORY, POSTER_CATEGORY, POSTER_EQUIP, SET_DETAILS,
   CLOSE_DETAILS, UPDATE_EQUIPMENT,UPDATE_VIVRE, SPARE_POINTS, UPDATE_NBR_FIELD } from '../actions/character';
 import { SEND_CRAFTED_ITEM_TO_PLAYER, SPEND_RESOURCES_FOR_CRAFT } from "../actions/craft";
-
 const initialState = {
   nom: 'The Counter',
   experience: 50,
@@ -77,7 +76,6 @@ const initialState = {
   pointsforce: 0,
   pointsdexterite: 0,
 };
-
 const character = (state = initialState, action = {}) => {
   switch (action.type) {
   case SEND_RESOURCE_TO_INVENTORY:
@@ -93,7 +91,7 @@ const character = (state = initialState, action = {}) => {
             (item) => item.nom === action.payload.nom ?
             {...item, quantite: item.quantite + action.payload.quantite}
             : item)
-        } 
+        }
       };
     } else {
       console.log('no');
@@ -132,7 +130,7 @@ const character = (state = initialState, action = {}) => {
             (item) => item.name === action.payload.name ?
             {...item, quantite: item.quantite + 1}
             : item)
-        } 
+        }
       };
     } else {
       // Sinon crée un objet
@@ -157,7 +155,6 @@ const character = (state = initialState, action = {}) => {
         //       :
         //       // TODO DOESNT WORK AS INTENDED
         //       [...state.inventory.equipment, {...action.payload}]),
-              
         //   }
         // }
     case SET_INVENTORY:
@@ -259,5 +256,4 @@ const character = (state = initialState, action = {}) => {
       return state;
   }
 };
-
 export default character;

@@ -7,6 +7,7 @@ export const UPDATE_EQUIPMENT = 'UPDATE_EQUIPMENT';
 export const UPDATE_VIVRE = 'UPDATE_VIVRE';
 export const SPARE_POINTS = 'SPARE_POINTS';
 export const UPDATE_NBR_FIELD = 'UPDATE_NBR_FIELD';
+export const GET_INVENTORY_ON_LOGIN = 'GET_INVENTORY_ON_LOGIN';
 
 export const setInventoryObjects = (inventory) => ({
   type: SET_INVENTORY,
@@ -56,4 +57,11 @@ export const updateNbrField = (value, nom, min, max) => ({
   nom: nom,
   min: min, 
   max: max,
+});
+
+export const getInventoryOnLogin = (inv) => ({
+  type: GET_INVENTORY_ON_LOGIN,
+  payload: {
+    inv,
+  },
 });
