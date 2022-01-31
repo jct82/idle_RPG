@@ -5,10 +5,6 @@ body {
   background-color: #f2f2f2;
     color: #2d2d2d;
   
-  
-  
-
-  
   // &:before {
   //   content: "";
   //   position: absolute;
@@ -32,7 +28,7 @@ body {
   padding-left: 20%;
 }
 
-body.dark {
+.app.dark {
     background-color: #2d2d2d;
     color: #f2f2f2;
   }

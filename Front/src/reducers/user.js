@@ -1,4 +1,4 @@
-import { LOGMODALE, UPDATE_FIELD, LOG_USER, POSTER_MENU,  } from "../actions/user";
+import { LOGMODALE, UPDATE_FIELD, LOG_USER, POSTER_MENU, DARK_MODE } from "../actions/user";
 const initialState = {
   modal: "",
   email: "",
@@ -9,7 +9,7 @@ const initialState = {
   loggedName:'',
   userId:0,
   mobMenu: false,
-  // darkMode:false,
+  darkMode:false,
 };
 const user = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -43,11 +43,11 @@ const user = (state = initialState, action = {}) => {
         ...state,
         mobMenu: !state.mobMenu,
       };
-      // case DARK_MODE:
-      //   return {
-      //     ...state,
-      //     darkMode: !state.darkMode,
-      //   };
+    case DARK_MODE:
+      return {
+        ...state,
+        darkMode: !state.darkMode,
+      };
     default:
       return state;
   }

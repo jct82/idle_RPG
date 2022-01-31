@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import Craft from "src/components/Craft";
 import Fight from "src/components/Fight";
 import NotFound from "src/components/NotFound";
@@ -18,11 +19,15 @@ const App = () => {
   // const audio = new Audio('https://api.soundcloud.com/tracks/1018153165');
   // audio.volume = 0.10;
   // audio.play();
+  const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.user.darkMode);
+
   return (
-    <div className="app">
+    <div className={darkMode ? "app dark" : "app"}>
       <BtnDark/>
       
-      <Header title="Idle-Rpg" />
+      
+      <Header/>
       <Menu />
     
       {/* <h1>Jeu IDLE</h1> */}
