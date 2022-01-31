@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
 import { boutiqueLogo } from 'src/assets/idleMenuIcons';
 import {
-  modaleOpen, modaleClose, randomStuff, emptyArray, buyItem, allObject,
+  modaleOpen, modaleClose, emptyArray, buyItem, allObject, getCharacterMoney,
 } from '../../actions/shop';
 
 export default function Shop() {
@@ -17,24 +17,12 @@ export default function Shop() {
     isOpen,
     money,
   } = useSelector((state) => state.shop);
-  // console.log(stuffs);
-  // on gère le fait d'avoir un équipement de manière aléatoire à mettre dans la boutique
-  /* const getRandomStuff = () => {
-    for (let i = 0; i < 9; i++) {
-      const randomNumber = Math.floor(Math.random() * stuffs.length);
-      // console.log(randomNumber);
-      const randomStuffs = stuffs[randomNumber];
-      // console.log(randomStuff);
-      dispatch(randomStuff(randomStuffs));
-      // newShopArray.push(randomStuffs);
-    }
-  }; */
   // je veux que le chargement de la boutique ne se fasse qu'une fois,
   // au chargement initial de la page
   useEffect(() => {
+    dispatch(getCharacterMoney());
     dispatch(emptyArray());
     dispatch(allObject());
-    // getRandomStuff();
   }, []);
   // console.log(stuffs.length);
   // };
@@ -42,10 +30,11 @@ export default function Shop() {
   const closeModale = () => {
     dispatch(modaleClose());
   };
-
+  // je compare si l'utilisateur a assez d'argent ou pas pour acheter un objet,
+  // si c'est positif, ça retire l'argent de sa bourse, sinon ça ferme juste la modale sans action
   const buyingItem = () => {
-    if (money >= stuffs.find((stuff) => stuff.id == isOpen.id).attribute[0].value) {
-      dispatch(buyItem(stuffs.find((stuff) => stuff.id == isOpen.id).attribute[0].value));
+    if (money >= stuffs.find((stuff) => stuff.id == isOpen.id).attribute[1].value) {
+      dispatch(buyItem(stuffs.find((stuff) => stuff.id == isOpen.id).attribute[1].value));
     }
     else {
       dispatch(modaleClose());
@@ -58,6 +47,7 @@ export default function Shop() {
     const selectedId = document.getElementById(e.target.parentElement.id).id;
     dispatch(modaleOpen(selectedId));
   };
+
   return (
     <>
       <div className="background-shop" />
@@ -72,15 +62,20 @@ export default function Shop() {
           { newShopArray.map((stuff) => (
             <div className="stuff" id={stuff.id} key={uuidv4()}>
               <div className="shop-stuff">
-                {stuff.name}
+                <p>{stuff.name} </p>
+                <p className="stuff-stat">
+                  {
+                    stuff.attribute.map((elem) => elem.name !== "prix" ? `${elem.name.replace('_', ' ')}: ${elem.value} ` : '')
+                }
+                </p>
               </div>
-              <button onClick={getIdOfButtonParent} className="buy-button" type="button"> Acheter </button>
+              <button onClick={getIdOfButtonParent} className="buy-button" type="button"> Acheter pour {stuff.attribute[1].value} <img className="money-image" src={boutiqueLogo} alt="or" /></button>
             </div>
           ))}
         </div>
         {isOpen.open && stuffs.find((stuff) => stuff.id == isOpen.id)
           ? (
-            <div className="buying-modal">Êtes-vous sûr de vouloir acheter "{stuffs.find((stuff) => stuff.id == isOpen.id).name}"
+            <div className="buying-modal">Êtes-vous sûr de vouloir acheter "{stuffs.find((stuff) => stuff.id == isOpen.id).name}" pour {stuffs.find((stuff) => stuff.id == isOpen.id).attribute[1].value}<img src={boutiqueLogo} alt="or" />
               <div className="button-container"><button className="buying-button" type="button" onClick={buyingItem}>oui</button>
                 <button className="buying-button" type="button" onClick={closeModale}>non</button>
               </div>

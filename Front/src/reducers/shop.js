@@ -1,5 +1,12 @@
 import {
-  RANDOM_STUFF, MODALE_OPEN, MODALE_CLOSE, EMPTY_ARRAY, BUY_ITEM, ALL_OBJECT, ALL_BUYABLE_OBJECTS,
+  RANDOM_STUFF,
+  MODALE_OPEN,
+  MODALE_CLOSE,
+  EMPTY_ARRAY,
+  BUY_ITEM,
+  ALL_OBJECT,
+  GET_CHARACTER_MONEY,
+  CHARACTER_MONEY,
 } from '../actions/shop';
 
 const initialState = {
@@ -59,12 +66,14 @@ const shop = (state = initialState, action = {}) => {
       return {
         ...state,
       };
-    case ALL_BUYABLE_OBJECTS:
+    case GET_CHARACTER_MONEY:
       return {
         ...state,
-        stuffs: [
-          ...action.payload.data,
-        ],
+      };
+    case CHARACTER_MONEY:
+      return {
+        ...state,
+        money: action.payload.data,
       };
     default:
       return state;
