@@ -1,7 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
+import { NavLink } from 'react-router-dom';
 import "./style.scss";
 import { setModale, setUpdateField, connectUser } from "../../actions/user";
 import imageTop from "../../assets/titleLogo.png";
+import logo from '../../assets/logo.png';
 import Register from "./register";
 import ModalImgLog from "/src/assets/ImgModal/Modal-Log.png";
 
@@ -31,7 +33,13 @@ export default function Header(props) {
   
   return (
     <div className="connect">
-      <img className="title-logo" src={imageTop} />
+      <NavLink
+        key="/"
+        to="/"
+      >
+        <img className="logo-rpg" src={logo} alt="Logo" />
+      </NavLink>
+      {/* <img className="title-logo" src={imageTop} /> */}
       {modal == "" && (
         <button onClick={displayModale} name="connexion" className="btn-log">
           Se connecter
@@ -82,7 +90,7 @@ export default function Header(props) {
         </div>
       )}
       
-      <Register />
+      {modal == "inscription" &&<Register />}
     </div>
   );
 }

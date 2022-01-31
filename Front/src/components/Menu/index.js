@@ -24,7 +24,7 @@ export default function Menu() {
   }
 
   return (
-    <><button className="mobile-menu" onClick={seeMenu}>
+    <><button className={mobMenu ? "mobile-menu on" : "mobile-menu"} onClick={seeMenu}>
       <span></span>
       <span></span>
       <span></span>
@@ -37,46 +37,53 @@ export default function Menu() {
         <img className="logo-rpg" src={logo} alt="Logo" />
       </NavLink>
       <NavLink
+        key="/"
+        to="/"
+      >
+        <img className="navHidden" src={accueilLogo}/>
+        <button className="accueil" onClick={seeMenu}>Accueil</button>
+      </NavLink>
+      <NavLink
         key="/shop"
         to="/shop"
       >
         <img className="navHidden" src={boutiqueLogo}></img>
-        <button className="boutique">Boutique</button>
+        <button className="boutique" onClick={seeMenu}>Boutique</button>
       </NavLink>
       <NavLink
         key="/inventory"
         to="/inventory"
       >
         <img className="navHidden" src={inventoryLogo}></img>
-        <button className="inventory">Profil</button>
+        <button className="inventory" onClick={seeMenu}>Profil</button>
       </NavLink>
       <NavLink
         key="/fighting"
         to="/fighting"
       >
         <img className="navHidden" src={combatLogo}></img>
-        <button className="combat">Combat</button>
+        <button className="combat" onClick={seeMenu}>Combat</button>
       </NavLink>
       <NavLink
         key="/craft"
         to="/craft"
       >
         <img className="navHidden" src={craftLogo}></img>
-        <button className="craft">Craft</button>
+        <button className="craft" onClick={seeMenu}>Craft</button>
       </NavLink>
       <NavLink
         key="/jobs/mining"
         to="/jobs/mining"
       >
         <img className="navHidden" src={miningLogo}></img>
-        <button className="minerai">Minage</button>
+        <button className="minerai" onClick={seeMenu}>Minage</button>
       </NavLink>
       <NavLink
         key="/jobs/fishing"
         to="/jobs/fishing"
       >
         <img className="navHidden" src={fishingLogo}></img>
-        <button className="fishing">Pêche</button>
+        <button className="fishing" onClick={seeMenu}>Pêche</button>
       </NavLink>
       {/* <iframe width="100%" height="450" scrolling="no" allow="autoplay"
       src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1233926452&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">

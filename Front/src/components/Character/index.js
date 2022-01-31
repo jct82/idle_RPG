@@ -73,6 +73,9 @@ const Inventory = () => {
   });
 
   return (
+    <><div className="title-page">
+      <div className="title">PROFIL</div>
+    </div>
     <div className="character">
       <div className="panel inventory-panel">
         <div className="inner-panel">
@@ -139,8 +142,7 @@ const Inventory = () => {
           {JSXaccessories}
         </div>
       </div>
-    </div>
-   
+    </div></>
   );
   
 };
