@@ -1,9 +1,39 @@
+@use 'src/styles/vars';
+
+.background-fight {
+  background-image: url('../../assets/Battleground.png');
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  background-repeat: repeat;
+  top: 0;
+  left:0;
+}
 .fight {
+  &-title {
+    border: 1px rgba(0, 4, 255, 0.2) solid;
+    background: vars.$baseColor;
+    box-shadow: inset 1px 1px 5px white;
+    border-radius: 10px;
+    overflow: hidden;
+    width: fit-content;
+    display: flex;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    font-size: 2rem;
+
+  }
   &-container {
-    border: 1px black solid;
-    width: 80vw;
-    margin: 10px auto;
-    background-color: hotpink;
+    width: 87%;
+    margin: 10% auto;
+    border: 1px rgba(0, 4, 255, 0.2) solid;
+    background: vars.$baseColor;
+    box-shadow: inset 1px 1px 5px white;
+    border-radius: 10px;
+    overflow: hidden;
     padding-top: 15px;
     &--characters {
       display: flex;
@@ -39,7 +69,6 @@
 
   }
   &-container{
-
     &--stats{
       display: flex;
       justify-content: space-around;
@@ -52,11 +81,26 @@
     border: 1px solid black;
   }
   &--stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     padding: 15px;
     margin: 1.5% 0;
     border: 1px solid black;
     width: 40%;
+    &-player {
+      text-align: right;
+    }
+    & .fight--stat {
+      padding: 0.4rem;
+    }
   }
+}
+.fight--button {
+  display: flex;
+  margin: 2% auto;
+  padding: 1.5rem;
+  font-size: 1.5rem;
 }
 
 #healthBarContainer--player {
@@ -67,6 +111,9 @@
   border-radius: 10px;
   height: 20px;
   background-color: rgba(0, 0, 0, 0.24);
+  & .healthBar--percentage {
+    position: absolute;
+  }
 }
 
 #healthBar--player {

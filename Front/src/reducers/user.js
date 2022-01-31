@@ -18,6 +18,7 @@ const user = (state = initialState, action = {}) => {
         modal: action.modal,
       };
     case UPDATE_FIELD:
+      console.log(state.logged);
       return {
         ...state,
         [action.name]: action.value,
