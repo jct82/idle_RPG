@@ -27,9 +27,9 @@ const Fight = () => {
   const attack = attackSpeed - (dexterite * 2);
 
   // Calcul de pourcentage
-  const percentage = (partialValue) => (100 * partialValue) / 100;
+  const percentage = (partialValue, maxLife) => (100 * partialValue) / maxLife;
   useEffect(() => {
-    dispatch(updateHealthPlayer(percentage(100)));
+    dispatch(updateHealthPlayer(percentage(100, 100)));
     dispatch(getNewMonster());
   }, []);
 
@@ -48,7 +48,10 @@ const Fight = () => {
         // console.log(newLife);
         if (newLife <= 0) {
           dispatch(getNewMonster());
-        } else {
+        } else if (newLife >= currentMonster.life) {
+          console.log('pas taper');
+        }
+        else {
           dispatch(dealDamage(newLife));
         }
       }, attack);
@@ -76,16 +79,20 @@ const Fight = () => {
               <span id="healthBar--player" style={{ width: `${vie}%` }} />
             </span>
             <span id="atkSpeedContainer--player">
-              <span id="atkSpeed--player" />
+              <span id="atkSpeed--player" style={ isFighting ? { animation: `atkSpeedActive ${2000 - dexterite}ms infinite linear`} : {}}/>
             </span>
           </div>
+          <div className="noDamageNotify">{ currentMonster.attributes[0].value >= force && "Tu es trop faible !" } </div>
           <div className="fight-profile">
             <div className="fight-enemy--img" />
             <span id="healthBarContainer--enemy">
-              <span id="healthBar--enemy" />
+            <span className="healthBar--percentage">
+              {currentMonster.life}
+            </span>
+              <span id="healthBar--enemy" style={{ width: `${percentage(currentMonster.life, currentMonster.maxLife)}%` }}/>
             </span>
             <span id="atkSpeedContainer--enemy">
-              <span id="atkSpeed--enemy" />
+              <span id="atkSpeed--enemy" style={ isFighting ? { animation: `atkSpeedActive ${2000 - currentMonster.attributes[2].value}ms infinite linear`} : {}} />
             </span>
           </div>
         </div>
@@ -116,7 +123,7 @@ const Fight = () => {
             </div>
           </div>
         </div>
-        <button type="button" className="fight--button" onClick={playerStartsFight}> {buttonTitle} </button>
+        <button type="button" className= "fight--button" onClick={playerStartsFight}> {buttonTitle} </button>
       </div>
     </>
   );

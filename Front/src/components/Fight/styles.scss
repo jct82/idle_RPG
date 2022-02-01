@@ -111,9 +111,10 @@
   border-radius: 10px;
   height: 20px;
   background-color: rgba(0, 0, 0, 0.24);
-  & .healthBar--percentage {
-    position: absolute;
-  }
+}
+
+.healthBar--percentage {
+  position: absolute;
 }
 
 #healthBar--player {
@@ -140,10 +141,10 @@
   display: block;
   height: 100%;
   border-radius: 10px;
-  width: 50%;
   max-width: 100%;
   background-color: rgba(0, 17, 255, 0.377);
   transition: width 100ms;
+  // animation: atkSpeedActive 2s infinite linear;
 }
 
 #healthBarContainer--enemy {
@@ -160,7 +161,7 @@
   display: block;
   height: 100%;
   border-radius: 10px;
-  width: 50%;
+  // width: 50%;
   max-width: 100%;
   background-color: rgb(255, 0, 0);
   transition: width 100ms;
@@ -180,8 +181,28 @@
   display: block;
   height: 100%;
   border-radius: 10px;
-  width: 50%;
+  // animation: atkSpeedActive 2s infinite linear;
   max-width: 100%;
   background-color: rgba(0, 17, 255, 0.377);
   transition: width 100ms;
+}
+
+.noDamageNotify {
+  color: red;
+  position: relative;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: fit-content;
+  width: fit-content;
+}
+
+@keyframes atkSpeedActive {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
 }

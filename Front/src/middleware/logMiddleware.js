@@ -73,16 +73,44 @@ const logMiddleware = (store) => (next) => (action) => {
     }
     case CHECK_USER:
       next(action);
+      // TODO refresh ne marche qu'une fois, à fix
       const foundToken = localStorage.getItem('profile');
-      const foundName = localStorage.getItem('name');
-      const foundId = localStorage.getItem('userId')
-      if (foundToken && foundName && foundId) {
-        const user = JSON.parse(foundToken);
-        const name = JSON.parse(foundName);
-        const id = JSON.parse(foundId);
-        const userAction = logUser(user, name, id);
-        store.dispatch(userAction);
-      }
+      // console.log(foundToken);
+      // console.log(JSON.parse(localStorage.getItem('name')));
+      // console.log(JSON.parse(localStorage.getItem('userId')));
+      const config = {
+        method:'post',
+        url:'/user/checklogin',
+        headers: {
+          // Je mets mon token dans le header "Authorization"
+          authorization: `${foundToken}`,
+        },
+      };
+      API(config)
+      .then((response) => {
+        
+        const foundName = JSON.parse(localStorage.getItem('name'));
+        const foundId = JSON.parse(localStorage.getItem('userId'));
+        if (foundName && foundId) {
+          const name = foundName;
+          const id = foundId;
+          const userAction = logUser(JSON.parse(foundToken), name, id);
+          store.dispatch(userAction);
+        };
+        console.log(response.data);
+          store.dispatch(getMonster(response.data.entities));
+          store.dispatch(getNewMonster());
+          store.dispatch(getPlayerStats(response.data.character.attributes));
+          store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
+          store.dispatch(getInventoryOnLogin(response.data.character.inventory));
+          // store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
+          store.dispatch(characterMoney(response.data.character.gold));
+        })
+        .catch((error)=> {
+          console.log(error);
+        })
+
+
       break;
     case LOGOUT:
       next(action);
@@ -90,6 +118,7 @@ const logMiddleware = (store) => (next) => (action) => {
       localStorage.removeItem('name');
       localStorage.removeItem('userId');
       break;
+    
     default:
       next(action);
   }
@@ -97,3 +126,38 @@ const logMiddleware = (store) => (next) => (action) => {
 
 export default logMiddleware;
 
+
+// case LOGIN_SUCCESS:
+//   // Je laisse passer l'action car ici c'est grâce à elle
+//   // que mon token arrive dans le state. Sinon je peux aussi
+//   // récupérer le token accroché à l'action pour l'utiliser
+//   next(action);
+//   // Suite à l'action que je viens de laisser passer
+//   // mon state contient les infos de l'user (pseudo et son token)
+//   const { user } = store.getState();
+//   // J'en profite pour stocker dans mon localStorage
+//   // les infos de mon user
+//   // POUR RAPPEL, on ne peut stocker en localStorage que des strings
+//   // on doit donc convertir notre objet user en string
+//   const stringUser = JSON.stringify(user);
+//   localStorage.setItem('user', stringUser);
+//   // Je lance la requête pour aller chercher ses recettes favories
+//   axios({
+//     method: 'get',
+//     url: 'http://localhost:3001/favorites',
+//     headers: {
+//       // Je mets mon token dans le header "Authorization"
+//       Authorization: `Bearer ${user.token}`,
+//     },
+//   })
+//     .then((res) => {
+//       console.log(res.data.favorites);
+//       // J'ai maintenant la liste des fav de l'user, j'aiemrais la mettre
+//       // dans le state.
+//       const actionFavRecipes = receivedUserFav(res.data.favorites);
+//       store.dispatch(actionFavRecipes);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+//   break;
