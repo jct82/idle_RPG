@@ -1,4 +1,4 @@
-import { LOGMODALE, UPDATE_FIELD, LOG_USER, POSTER_MENU, DARK_MODE } from "../actions/user";
+import { LOGMODALE, UPDATE_FIELD, LOG_USER, POSTER_MENU, DARK_MODE, LOGOUT } from "../actions/user";
 const initialState = {
   modal: "",
   email: "",
@@ -26,12 +26,12 @@ const user = (state = initialState, action = {}) => {
       };
     case LOG_USER:
       localStorage.setItem('profile', JSON.stringify(action.token));
-      localStorage.setItem('name', action.userData.name);
-      localStorage.setItem('userId', action.userData.id);
+      localStorage.setItem('name', JSON.stringify(action.userName));
+      localStorage.setItem('userId', JSON.stringify(action.userId));
       return {
         ...state,
-        loggedName : action.userData.name,
-        userId: action.userData.id,
+        loggedName : action.userName,
+        userId: action.userId,
         name:'',
         email: '',
         password: '',
@@ -48,6 +48,13 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         darkMode: !state.darkMode,
+      };
+      case LOGOUT:
+      return {
+        ...state,
+        logged: false,
+        name: '',
+        userId: '',
       };
     default:
       return state;

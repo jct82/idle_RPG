@@ -5,8 +5,12 @@ export const LOG_USER = "LOG_USER";
 export const LOGIN_USER = "LOGIN_USER";
 export const POSTER_MENU = "POSTER_MENU";
 export const DARK_MODE = "DARK_MODE";
+export const CHECK_USER = 'CHECK_USER';
+export const LOGOUT = 'LOGOUT';
 
-
+export const checkUser = () => ({ 
+  type: CHECK_USER,
+});
 
 export const setModale = (modal) => ({
   type: LOGMODALE,
@@ -23,10 +27,11 @@ export const subscribeUser = () => ({
   type: SUBSCRIBE_USER,
 });
 
-export const logUser = (token, userData) => ({
+export const logUser = (token, userName, userId) => ({
   type: LOG_USER,
   token,
-  userData,
+  userName,
+  userId,
 })
 
 export const connectUser = () => ({
@@ -40,3 +45,7 @@ export const posterMenu = () => ({
 export const setDarkMode = () => ({
   type: DARK_MODE,
 })
+
+export const logout = () => ({
+  type: LOGOUT,
+});

@@ -51,7 +51,7 @@ const fight = (state = initialState, action = {}) => {
     case GET_NEW_RANDOM_MONSTER:
       return {
         ...state,
-        currentMonster: { ...state.monsters[Math.floor(Math.random() * state.monsters.length)], life: 100 },
+        currentMonster: { ...state.monsters[Math.floor(Math.random() * state.monsters.length)], life: 200 },
         // currentMonster: {...state.monsters.find((monster) => monster.name === state.currentMonsterName)},
       };
     case GET_MONSTER:

@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import Craft from "src/components/Craft";
 import Fight from "src/components/Fight";
 import NotFound from "src/components/NotFound";
@@ -12,18 +13,20 @@ import Mining from "../Mining";
 import "./style.scss";
 import Inventory from "../Character";
 import BtnDark from "../BtnDark/BtnDark";
-
-
-import { useSelector } from 'react-redux';
+import { checkUser } from 'src/actions/user';
 
 // == Composant
 const App = () => {
+  const dispatch = useDispatch();
   const { logged } = useSelector((state) => (state.user));
   // const audio = new Audio('https://api.soundcloud.com/tracks/1018153165');
   // audio.volume = 0.10;
   // audio.play();
-  const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.user.darkMode);
+
+  useEffect(() => {
+      dispatch(checkUser());
+  }, []);
 
   return (
     <div className={darkMode ? "app dark" : "app"}>

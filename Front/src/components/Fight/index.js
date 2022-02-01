@@ -39,8 +39,13 @@ const Fight = () => {
       const interval = setInterval(() => {
         // const currentMonsterFight = monsters.find((monster) => monster.name === currentMonsterName);
         // const { name, id, item_type_id, type } = currentMonster;
-        const newLife = currentMonster.life - (force - currentMonster.endurance);
+        console.log(currentMonster.life);
+        console.log(force);
+        console.log(currentMonster.endurance);
         console.log(currentMonster);
+        const newLife = currentMonster.life - (force - currentMonster.attributes[0].value);
+        // console.log(currentMonster);
+        // console.log(newLife);
         if (newLife <= 0) {
           dispatch(getNewMonster());
         } else {

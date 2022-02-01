@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import "./style.scss";
-import { setModale, setUpdateField, connectUser } from "../../actions/user";
+import { setModale, setUpdateField, connectUser, logout } from "../../actions/user";
 import imageTop from "../../assets/titleLogo.png";
 import logo from '../../assets/logo.png';
 import Register from "./register";
@@ -10,8 +10,9 @@ import ModalImgLog from "/src/assets/ImgModal/Modal-Log.png";
 
 
 
+
 export default function Header(props) {
-  const { modal, mail, password } = useSelector((state) => state.user);
+  const { modal, mail, password, logged } = useSelector((state) => state.user);
   // Je sélectionne log,mail,password qui se trouve dans mon reducer user
   const dispatch = useDispatch();
   // Je crée ma méthode useDispatch
@@ -32,8 +33,11 @@ export default function Header(props) {
   const getConnected = (e) => {
     e.preventDefault();
     dispatch(connectUser());
-  }
+  };
   
+  const logOutUser = () => {
+    dispatch(logout());
+  };
   return (
     <div className="connect">
       <NavLink
@@ -44,8 +48,8 @@ export default function Header(props) {
       </NavLink>
       {/* <img className="title-logo" src={imageTop} /> */}
       {modal == "" && (
-        <button onClick={displayModale} name="connexion" className="btn-log">
-          Se connecter
+        <button onClick={logged ? logOutUser : displayModale } name="connexion" className="btn-log">
+          {`${logged ? 'Se déconnecter' : 'Se connecter'}`}
         </button>
       )}
       {modal == "connexion" && (
