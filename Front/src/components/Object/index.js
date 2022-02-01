@@ -10,9 +10,8 @@ const Objects = (object) => {
   const dispatch = useDispatch();
   const  selected  = useSelector(state => state.character.selected);
 
-  console.log('object', object);
   const posterEquipMenu = (e) => {
-    dispatch(posterEquipment(object.nom));
+    dispatch(posterEquipment(object.name));
     activeThumb(e.currentTarget.parentElement.parentElement);
   }
 
@@ -24,18 +23,14 @@ const Objects = (object) => {
   }
 
   return (
-    <div className={selected == object.nom ? "object on" : "object"}>
+    <div className={selected == object.name ? "object on" : "object"}>
       <div className="inner">
         { equipObject ?
-        <div className="view-wrapper" onClick={posterEquipMenu}>
-            <img className="view" src={object.image} />
-        </div> :
-        <div className="view-wrapper" onClick={updateDetails}>
-            <img className="view" src={object.image} />
-        </div>}
-        { object.quantite && <div className="nbr">{object.quantite}</div>}
+        <div className={`view-wrapper ${object.img_path}`} onClick={posterEquipMenu}></div> :
+        <div className={`view-wrapper ${object.img_path}`} onClick={updateDetails}></div>}
+        { object.quantity && <div className="nbr">{object.quantity}</div>}
         { object.statistique &&
-        <div className="stat">X{object.statistique}</div>}
+        <div className="stat">{object.statistique}P</div>}
       </div>
     </div>
   );

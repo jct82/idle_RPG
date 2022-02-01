@@ -1,12 +1,30 @@
 import { craftItem, GET_CRAFTABLE_ITEMS, updateRecipes } from "../actions/craft";
 import { GET_ALL_FISH_RESOURCES, updateFishResources } from "../actions/fishing";
 import { GET_ALL_MINE_RESOURCES, updateMineResources } from "../actions/mining";
+
+import { GET_ALL_ITEMS, setInventoryData} from "../actions/character";
 import API from './api';
 
 const inventoryMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
   switch (action.type) {
     // TEST BASE DE DONNEE
+    case GET_ALL_ITEMS: {
+      const config = {
+        method: 'get',
+        url: '/items',
+      };
+      API(config)
+        .then((response) => {
+          store.dispatch(setInventoryData(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+          //store.dispatch(loginErrors(error.response.data));
+        });
+      next(action);
+      break;
+    };
     case GET_CRAFTABLE_ITEMS: {
       const config = {
         method: 'get',

@@ -1,4 +1,4 @@
-import { getInventoryOnLogin } from "../actions/character";
+import { getInventoryOnLogin, setCharacterData } from "../actions/character";
 import { GET_ITEMS } from "../actions/craft";
 import { SUBSCRIBE_USER, LOG_USER, LOGIN_USER, logUser, } from "../actions/user";
 import { characterMoney } from '../actions/shop';
@@ -45,6 +45,8 @@ const logMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           if (response.status === 200) {
             console.log(response.data.character);
+            store.dispatch(setCharacterData(response.data.character));
+
             store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
             store.dispatch(getInventoryOnLogin(response.data.character.inventory));
             store.dispatch(logUser(response.headers.authorization, {...response.data}));
