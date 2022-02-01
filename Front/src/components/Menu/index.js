@@ -37,7 +37,7 @@ export default function Menu() {
         <img className="logo-rpg" src={logo} alt="Logo" />
       </NavLink>
       <NavLink
-        key="/"
+        key="logo"
         to="/"
       >
         <img className="navHidden" src={accueilLogo}/>
