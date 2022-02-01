@@ -1,10 +1,20 @@
 // == Import : npm
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateHealthPlayer, startFighting, dealDamage, getNewMonster } from '../../actions/fight';
+import {
+  updateHealthPlayer,
+  startFighting,
+  dealDamage,
+  getNewMonster,
+  addLogMessageDmgDealt,
+  addLogMessageDmgReceived,
+  receiveDamage,
+  playerDeath,
+} from '../../actions/fight';
 // == Import : local
 import './styles.scss';
 // == Composant
+
 const Fight = () => {
   const dispatch = useDispatch();
   const {
@@ -21,44 +31,60 @@ const Fight = () => {
     monsters,
     currentMonster,
     currentMonsterName,
+    logMessages
   } = useSelector((state) => state.fight);
 
   // Vitesse d'attaque
-  const attack = attackSpeed - (dexterite * 2);
+  // const attackSpeedPlayer = attackSpeed - (dexterite);
 
-  // Calcul de pourcentage
+  // Calcul de pourcentage de la vie
   const percentage = (partialValue, maxLife) => (100 * partialValue) / maxLife;
   useEffect(() => {
-    dispatch(updateHealthPlayer(percentage(100, 100)));
+    // dispatch(updateHealthPlayer(percentage(100, 100)));
     dispatch(getNewMonster());
   }, []);
 
-  // Intervalle d'attaque
+  // Intervalle d'attaque pour le JOUEUR
   useEffect(() => {
     if (isFighting) {
       const interval = setInterval(() => {
-        // const currentMonsterFight = monsters.find((monster) => monster.name === currentMonsterName);
-        // const { name, id, item_type_id, type } = currentMonster;
-        console.log(currentMonster.life);
-        console.log(force);
-        console.log(currentMonster.endurance);
-        console.log(currentMonster);
-        const newLife = currentMonster.life - (force - currentMonster.attributes[0].value);
-        // console.log(currentMonster);
-        // console.log(newLife);
-        if (newLife <= 0) {
+        console.log('atk joueur');
+        const newLifeOfMonster = currentMonster.life - (force - currentMonster.attributes[0].value);
+        if (newLifeOfMonster <= 0) {
           dispatch(getNewMonster());
-        } else if (newLife >= currentMonster.life) {
-          console.log('pas taper');
+        } else if (newLifeOfMonster >= currentMonster.life) {
+          dispatch(addLogMessageDmgDealt(0));
         }
         else {
-          dispatch(dealDamage(newLife));
+          dispatch(dealDamage(newLifeOfMonster));
+          dispatch(addLogMessageDmgDealt(force - currentMonster.attributes[0].value))
         }
-      }, attack);
+      }, 2000 - dexterite);
 
       return () => clearInterval(interval);
     }
   }, [isFighting, monsters, currentMonster]);
+
+  // Intervalle d'attaque pour le MONSTRE
+  useEffect(() => {
+    if (isFighting) {
+      const intervalMonster = setInterval(() => {
+        const newLifeOfPlayer = vie - (currentMonster.attributes[1].value - endurance);
+        if (newLifeOfPlayer <= 0) {
+          dispatch(receiveDamage(0));
+          dispatch(playerDeath());
+        } else if (newLifeOfPlayer >= vie) {
+          dispatch(addLogMessageDmgReceived(0));
+        } else {
+          dispatch(receiveDamage(newLifeOfPlayer));
+          dispatch(addLogMessageDmgReceived(currentMonster.attributes[1].value - endurance));
+        }
+        console.log('atk monstre');
+      }, 2000 - currentMonster.attributes[2].value);
+
+      return () => clearInterval(intervalMonster);
+    }
+  }, [isFighting, vie]);
 
   const playerStartsFight = () => {
     dispatch(startFighting());
@@ -70,8 +96,8 @@ const Fight = () => {
       <h1 className="fight-title">Combat</h1>
       <div className="fight-container">
         <div className="fight-container--characters">
-          <div className="fight-profile">
-            <div className="fight-player--img" />
+          <div className="fight-profile fight-profile--player" style={ isFighting ? { animation: `playerAttacksMonster ${2000 - dexterite}ms infinite ease-in-out`} : {}}>
+            <div className={isFighting ? "playerAttack" : vie <= 0 ? "playerDeath" : "playerIdle"} />
             <span id="healthBarContainer--player">
               <span className="healthBar--percentage">
                 {vie}
@@ -83,7 +109,7 @@ const Fight = () => {
             </span>
           </div>
           <div className="noDamageNotify">{ currentMonster.attributes[0].value >= force && "Tu es trop faible !" } </div>
-          <div className="fight-profile">
+          <div className="fight-profile fight-profile--enemy" style={ isFighting ? { animation: `monsterAttacksPlayer ${2000 - currentMonster.attributes[2].value}ms infinite ease-in-out`} : {}}>
             <div className="fight-enemy--img" />
             <span id="healthBarContainer--enemy">
             <span className="healthBar--percentage">
@@ -98,7 +124,7 @@ const Fight = () => {
         </div>
         <div className="fight-container--stats">
           <div className="fight--logs">
-            LOGS DYNAMIQUES
+            {logMessages}
           </div>
           <div className="fight--stats">
             <div className="fight--stats-player">
@@ -123,7 +149,7 @@ const Fight = () => {
             </div>
           </div>
         </div>
-        <button type="button" className= "fight--button" onClick={playerStartsFight}> {buttonTitle} </button>
+        <button type="button" className= "fight--button" onClick={vie !== 0 ? playerStartsFight : undefined}> {vie === 0 ? "Vous êtes K.O" : buttonTitle} </button>
       </div>
     </>
   );

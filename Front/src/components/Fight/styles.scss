@@ -42,10 +42,15 @@
     }
   }
   &-profile {
+    position: relative;
     width: 25%;
     text-align: center;
-    border: 1px black solid;
     padding: 1rem;
+    border: 1px rgba(0, 4, 255, 0.2) solid;
+    background: vars.$baseColor;
+    box-shadow: inset 1px 1px 5px white;
+    border-radius: 10px;
+    overflow: hidden;
   }
   &-player {
 
@@ -75,10 +80,16 @@
     }
   }
   &--logs {
-    padding: 15px;
     width: 40%;
     margin: 1.5% 0;
-    border: 1px solid black;
+    border: 1px rgba(0, 4, 255, 0.2) solid;
+    background: vars.$baseColor;
+    box-shadow: inset 1px 1px 5px white;
+    border-radius: 10px;
+    padding: 10px;
+    line-height: 1.9rem;
+    max-height: 200px;
+    overflow-y: scroll;
   }
   &--stats {
     display: flex;
@@ -86,7 +97,11 @@
     justify-content: space-between;
     padding: 15px;
     margin: 1.5% 0;
-    border: 1px solid black;
+    border: 1px rgba(0, 4, 255, 0.2) solid;
+    background: vars.$baseColor;
+    box-shadow: inset 1px 1px 5px white;
+    border-radius: 10px;
+    overflow: hidden;
     width: 40%;
     &-player {
       text-align: right;
@@ -204,5 +219,96 @@
   }
   100% {
     width: 100%;
+  }
+}
+
+@keyframes playerAttacksMonster {
+  0% {
+    left: 0%;
+  }
+  5% {
+    left: 15%;
+  }
+  50% {
+    left: 7%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+
+@keyframes monsterAttacksPlayer {
+  0% {
+    right: 0%;
+  }
+  5% {
+    right: 15%;
+  }
+  50% {
+    right: 7%;
+  }
+  100% {
+    right: 0%;
+  }
+}
+
+.redLog {
+  color: rgb(255, 96, 96);
+  text-shadow: 2px 2px black;
+}
+
+.greenLog {
+  color: limegreen;
+  text-shadow: 2px 2px black;
+}
+
+.playerIdle {
+  width: 48px;
+  height: 48px;
+  margin: auto;
+  background: url('../../assets/player/idle.png');
+  animation: idle 500ms steps(4) infinite;
+}
+
+.playerAttack {
+  width: 48px;
+  height: 48px;
+  margin: auto;
+  background: url('../../assets/player/attack1.png');
+  animation: attack 500ms steps(6) infinite;
+}
+
+.playerDeath {
+  width: 48px;
+  height: 48px;
+  margin: auto;
+  background: url('../../assets/player/death.png');
+  // background-position: -288px;
+  animation: death 500ms steps(5) forwards;
+}
+@keyframes idle {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: -194px;
+  }
+}
+
+@keyframes attack {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: -288px;
+  }
+}
+
+@keyframes death {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: -244px;
   }
 }

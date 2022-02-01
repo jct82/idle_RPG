@@ -4,6 +4,7 @@ import {
 import {
   GET_PLAYER_STATS,
   UPDATE_HEALTH_BAR_PLAYER,
+  RECEIVE_DAMAGE
 } from '../actions/fight';
 import {
   SET_INVENTORY,
@@ -198,6 +199,11 @@ const character = (state = initialState, action = {}) => {
         dexterite: action.payload.data[2].value,
       };
     case UPDATE_HEALTH_BAR_PLAYER:
+      return {
+        ...state,
+        vie: action.payload.newHealth,
+      };
+    case RECEIVE_DAMAGE:
       return {
         ...state,
         vie: action.payload.newHealth,

@@ -1,8 +1,12 @@
+import { v4 as uuidv4 } from 'uuid';
 import {
   START_FIGHTING,
   DEAL_DAMAGE,
   GET_NEW_RANDOM_MONSTER,
   GET_MONSTER,
+  ADD_LOG_MESSAGE_DMG_DEALT,
+  ADD_LOG_MESSAGE_DMG_RECEIVED,
+  DEATH_OF_PLAYER,
 
 } from '../actions/fight';
 
@@ -12,6 +16,7 @@ const initialState = {
   isFighting: false,
   buttonTitle: 'Attaque !',
   currentMonster: {},
+  logMessages: [],
   currentMonsterName: "fred l'abominable",
   monsters: [
     {
@@ -59,6 +64,31 @@ const fight = (state = initialState, action = {}) => {
         ...state,
         monsters: action.payload.data,
       };
+      case ADD_LOG_MESSAGE_DMG_DEALT:
+        return {
+          ...state,
+            logMessages: [
+              <p key={uuidv4()} className="greenLog">Vous avez infligé {action.payload.damageDealt} de dégâts</p>,
+              ...state.logMessages.slice(0, 99),
+            ],
+        };
+      case ADD_LOG_MESSAGE_DMG_RECEIVED:
+        return {
+          ...state,
+          logMessages: [
+            <p key={uuidv4()} className="redLog">Vous avez reçu {action.payload.damageReceived} de dégâts</p>,
+            ...state.logMessages.slice(0, 99),
+          ],
+        };
+      case DEATH_OF_PLAYER:
+        return {
+          ...state,
+          isFighting: false,
+          logMessages: [
+            <p key={uuidv4()} className="redLog">Vous êtes tombé K.O !</p>,
+            ...state.logMessages.slice(0, 99),
+          ],
+        };
     default:
       return state;
   }
