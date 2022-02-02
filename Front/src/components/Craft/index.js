@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // == Import : local
 import './style.scss';
 import '../../styles/allitems.scss';
-import { craftItem, sendCraftedItem, getCraftableItems } from '../../actions/craft';
+import { craftItem, sendCraftedItem, getCraftableItems, sendCraftedItemToDb } from '../../actions/craft';
 import { useEffect } from 'react';
 
 // == Composant
@@ -17,9 +17,8 @@ const Craft = () => {
   }, []);
   
   const craftButtonOnClick = (e) => {
-
-     const currentRecipe = recipes.find((recipe) => recipe.id == e.target.id);
-    
+    const currentRecipe = recipes.find((recipe) => recipe.id == e.target.id);
+    console.log(currentRecipe);
     let nbrResource = 0;
     currentRecipe.ingredients.forEach(substance => {
       for (let i = 0; i < inventory.ressource.length; i++) {
@@ -29,6 +28,7 @@ const Craft = () => {
       }
     });
     if (nbrResource == currentRecipe.ingredients.length) {
+      dispatch(sendCraftedItemToDb(currentRecipe.id, currentRecipe.ingredients[0].id, currentRecipe.ingredients[0].quantity));
       dispatch(craftItem(currentRecipe));
     } else {
       e.target.style.backgroundColor = 'red';

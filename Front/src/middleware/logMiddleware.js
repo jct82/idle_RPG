@@ -49,8 +49,10 @@ const logMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
+          console.log(response);
           if (response.status === 200) {
             console.log(response.data.character);
+            console.log(response);
             store.dispatch(setCharacterData(response.data.character));
             
             store.dispatch(getMonster(response.data.entities));
@@ -59,6 +61,7 @@ const logMiddleware = (store) => (next) => (action) => {
             store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
             store.dispatch(getInventoryOnLogin(response.data.character.inventory));
             store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
+            localStorage.setItem('characterId', response.data.character.id);
             store.dispatch(characterMoney(response.data.character.gold));
           }
         })
@@ -86,6 +89,7 @@ const logMiddleware = (store) => (next) => (action) => {
       };
       API(config)
       .then((response) => {
+        console.log(response);
         if (response.headers.authorization) {
           const newToken = response.headers.authorization;
           const foundName = JSON.parse(localStorage.getItem('name'));
