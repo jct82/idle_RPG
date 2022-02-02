@@ -11,6 +11,7 @@ export const GET_INVENTORY_ON_LOGIN = 'GET_INVENTORY_ON_LOGIN';
 export const GET_ALL_ITEMS = 'GET_ALL_ITEMS';
 export const SET_INVENTORY_DATA = 'SET_INVENTORY_DATA';
 export const SET_CHARACTER_DATA = 'SET_CHARACTER_DATA';
+export const BUY_ITEM = 'BUY_ITEM';
 
 export const setInventoryObjects = (inventory) => ({
   type: SET_INVENTORY,
@@ -83,3 +84,9 @@ export const setCharacterData = (data) => ({
   data: data,
 });
 
+export const buyItem = (gold) => ({
+  type: BUY_ITEM,
+  payload: {
+    gold,
+  },
+});

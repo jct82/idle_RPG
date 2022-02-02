@@ -3,14 +3,10 @@ import {
   MODALE_OPEN,
   MODALE_CLOSE,
   EMPTY_ARRAY,
-  BUY_ITEM,
   ALL_OBJECT,
-  GET_CHARACTER_MONEY,
-  CHARACTER_MONEY,
 } from '../actions/shop';
 
 const initialState = {
-  money: 400,
   isOpen: {
     open: false,
     id: 0,
@@ -53,27 +49,9 @@ const shop = (state = initialState, action = {}) => {
           open: false,
         },
       };
-    case BUY_ITEM:
-      return {
-        ...state,
-        isOpen: {
-          ...state.isOpen,
-          open: false,
-        },
-        money: state.money - action.payload.price,
-      };
     case ALL_OBJECT:
       return {
         ...state,
-      };
-    case GET_CHARACTER_MONEY:
-      return {
-        ...state,
-      };
-    case CHARACTER_MONEY:
-      return {
-        ...state,
-        money: action.payload.data,
       };
     default:
       return state;

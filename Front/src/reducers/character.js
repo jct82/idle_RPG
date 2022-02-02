@@ -1,7 +1,7 @@
 import { SEND_RESOURCE_TO_INVENTORY } from "../actions/mining";
 import { SET_INVENTORY, POSTER_CATEGORY, POSTER_EQUIP, SET_DETAILS,
   CLOSE_DETAILS, UPDATE_EQUIPMENT,UPDATE_VIVRE, SPARE_POINTS, UPDATE_NBR_FIELD,
-  GET_INVENTORY_ON_LOGIN, SET_INVENTORY_DATA, SET_CHARACTER_DATA } from '../actions/character';
+  GET_INVENTORY_ON_LOGIN, SET_INVENTORY_DATA, SET_CHARACTER_DATA, BUY_ITEM } from '../actions/character';
 import { SEND_CRAFTED_ITEM_TO_PLAYER, SPEND_RESOURCES_FOR_CRAFT } from "../actions/craft";
 import {
   GET_PLAYER_STATS,
@@ -361,6 +361,11 @@ const character = (state = initialState, action = {}) => {
       return {
         ...state,
         vie: action.payload.newHealth,
+      };
+    case BUY_ITEM:
+      return {
+        ...state,
+        gold: state.gold - action.payload.gold,
       };
     default:
       return state;
