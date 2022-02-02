@@ -4,6 +4,8 @@ export const SUBSCRIBE_USER = "SUBSCRIBE_USER";
 export const LOG_USER = "LOG_USER";
 export const LOGIN_USER = "LOGIN_USER";
 export const POSTER_MENU = "POSTER_MENU";
+export const DARK_MODE = "DARK_MODE";
+
 
 
 export const setModale = (modal) => ({
@@ -35,3 +37,6 @@ export const posterMenu = () => ({
   type: POSTER_MENU,
 })
 
+export const setDarkMode = () => ({
+  type: DARK_MODE,
+})

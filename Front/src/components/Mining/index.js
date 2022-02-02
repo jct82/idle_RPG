@@ -66,9 +66,10 @@ export default function Mining({job}) {
           dispatch(addLevelUpMessage());
         };
         const workingResource = resources.find(resource => resource.name === currentResource);
-        console.log(workingResource);
+        
         const { name, id, item_type_id, type } = workingResource;
-        dispatch(sendResourceToInventory(name, id, item_type_id, type));
+
+        dispatch(sendResourceToInventory(name, id, 'ressource'));
         //-------------------------------------vvv quantité récupérée -----------vvv exp récupérée
         dispatch(addLogMessage(workingResource.attribute[0].value, workingResource.attribute[0].value));
         dispatch(updateExpBar(percentage(experience, levelUpReq)));

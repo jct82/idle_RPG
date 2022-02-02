@@ -17,17 +17,13 @@ const Inventory = () => {
   const { inventory, posterCat, posterEquip, detailsObj, selected, equipments } = useSelector(
     (state) => state.character
   );
-
-  const inventoryData = characterData[0].inventory;
-  const equipmentData = inventoryData.equipment;
   
-
   useEffect(() => {
     dispatch(getAllitems());
-    //dispatch(setInventoryObjects(inventoryData));
   }, []);
 
-  const jsxRessource = inventory.ressources.map((object) => {if (object.quantity > 0) return <Objects key={object.name} {...object} type="ressources" />});
+  console.log('inventory', inventory);
+  const jsxRessource = inventory.ressource.map((object) => {if (object.quantity > 0) return <Objects key={object.name} {...object} type="ressources" />});
   const jsxVivre = inventory.consommable.map((object) => {if (object.quantity > 0) return <Objects key={object.name} {...object} type="consommable" />});
   const jsxEquipement = inventory.equipment.map((object) => <Objects key={object.name} {...object}/>);
 

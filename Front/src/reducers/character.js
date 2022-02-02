@@ -1,7 +1,12 @@
 import { SEND_RESOURCE_TO_INVENTORY } from "../actions/mining";
 import { SET_INVENTORY, POSTER_CATEGORY, POSTER_EQUIP, SET_DETAILS,
-  CLOSE_DETAILS, UPDATE_EQUIPMENT,UPDATE_VIVRE, SPARE_POINTS, UPDATE_NBR_FIELD, SET_INVENTORY_DATA, SET_CHARACTER_DATA } from '../actions/character';
+  CLOSE_DETAILS, UPDATE_EQUIPMENT,UPDATE_VIVRE, SPARE_POINTS, UPDATE_NBR_FIELD,
+  GET_INVENTORY_ON_LOGIN, SET_INVENTORY_DATA, SET_CHARACTER_DATA } from '../actions/character';
 import { SEND_CRAFTED_ITEM_TO_PLAYER, SPEND_RESOURCES_FOR_CRAFT } from "../actions/craft";
+import {
+  GET_PLAYER_STATS,
+  UPDATE_HEALTH_BAR_PLAYER,
+} from '../actions/fight';
 
 const initialState = {
   nom: 'The Counter',
@@ -16,7 +21,6 @@ const initialState = {
         img_path: '',
         quantity: 0,
         statistique: 0,
-        type_statistique: '',
       },
     ],
     equipment: [
@@ -53,7 +57,7 @@ const initialState = {
         reserve: [],
       },
     ],
-    ressources: [
+    ressource: [
       {
         item_id:1,
         name: '',
@@ -74,10 +78,11 @@ const initialState = {
     type:'',
   },
   vie: 60,
-  force: 40,
+  force: 150,
   endurance: 75,
   dextérité: 35,
   gold: 6500,
+  attackSpeed: 2000,
   points: 50,
   posterCat: '',
   posterEquip: '',
@@ -86,88 +91,81 @@ const initialState = {
   pointsforce: 0,
   pointsdextérité: 0,
 };
+
 const character = (state = initialState, action = {}) => {
   switch (action.type) {
-  case SEND_RESOURCE_TO_INVENTORY:
-    const findExistingItem = state.inventory.ressources.find((i) => i.nom === action.payload.nom);
-    // Si l'objet existe déjà
-    if (findExistingItem) {
-      console.log('yes');
-      return {
-        ...state,
-        inventory: {
-          ...state.inventory,
-          ressources: state.inventory.ressources.map(
-            (item) => item.nom === action.payload.nom ?
-            {...item, quantite: item.quantite + action.payload.quantite}
-            : item)
+      case SEND_RESOURCE_TO_INVENTORY:
+        let addInventory = state.inventory[action.obj_type];
+        let addObject = addInventory.find(obj => obj.item_id == action.item_id);
+        if (addObject == undefined) {
+          addObject = {
+            item_id: action.item_id, 
+            name: action.name, 
+            description: 'lorem ipsum lorem ipsum', 
+            img_path: action.name.replace(/['"]+/g, "").replace(/\s/g, ""), 
+            quantity: 1,
+          }
+          if (action.obj_type == "consommable") addObject.statistique = action.stat
+          addInventory.push(addObject);
+        } else {
+          for (let i = 0; i < addInventory.length; i++) {
+            if (addInventory[i].item_id == addObject.item_id) {
+              addInventory[i].quantity += 1;
+            }
+          }
         }
-      };
-    } else {
-      console.log('no');
-      // Sinon crée un objet
-      return {
-        ...state,
-        inventory: {
-          ...state.inventory,
-          ressources: [
-            ...state.inventory.ressources,
-            {...action.payload}
-          ]
-        }
-      };
-    };
+        return {
+          ...state,
+          inventory: {
+            ...state.inventory,
+            [action.obj_type]: addInventory,
+          }
+        };
     case SPEND_RESOURCES_FOR_CRAFT:
+      let spendRessources = state.inventory.ressource;
+      action.recipe.ingredients.forEach(substance => {
+        for (let i = 0; i < spendRessources.length; i++) {
+          if (substance.component_id == spendRessources[i].item_id) {
+            spendRessources[i].quantity -= substance.quantity;
+          }
+        }
+      });
+
+      let craftedEquipments = state.inventory.equipment;
+      craftedEquipments.forEach(elem => {
+        if (elem.name == action.recipe.type) {
+          elem.quantity += 1;
+          let crafted = {
+            item_id: action.recipe.id, 
+            name: action.recipe.name, 
+            description: 'lorem ipsum ipsum ipsum ipsum ipsum ipsum ipsum', 
+            img_path: action.recipe.name.replace(/['"]+/g, "").replace(/\s/g, ""),
+          }
+          if (elem.name == "arme") {
+            crafted.degat_min = action.recipe.attribute.find(att => att.name == 'degat_min');
+            crafted.degat_min = crafted.degat_min.value;
+            crafted.statistique = action.recipe.attribute.find(att => att.name == 'degat_max');
+            crafted.degat_max = crafted.statistique.value;
+          } else if (elem.name == "armure") {
+            crafted.statistique = action.recipe.attribute.filter(att => att.name == 'endurance');
+          } else if (elem.name == "casque") {
+            crafted.statistique = action.recipe.attribute.filter(att => att.name == 'force');
+          } else if (elem.name == "bottes") {
+            crafted.statistique = action.recipe.attribute.filter(att => att.name == 'dextérité');
+          }
+          crafted.statistique = crafted.statistique.value;
+          elem.reserve.push(crafted);
+        }
+      });
+
       return {
         ...state,
         inventory: {
           ...state.inventory,
-          ressources: state.inventory.ressources.map(
-            (item) => item.nom === action.payload.name ?
-            {...item, quantite: item.quantite - action.payload.quantity}
-            : item)
+          ressource: spendRessources,
+          equipment: craftedEquipments,
         }
       };
-      case SEND_CRAFTED_ITEM_TO_PLAYER:
-        const findExistingEquipment = state.inventory.equipment.find((i) => i.name === action.payload.name);
-    // Si l'objet existe déjà
-    if (findExistingEquipment) {
-      return {
-        ...state,
-        inventory: {
-          ...state.inventory,
-          equipment: state.inventory.equipment.map(
-            (item) => item.name === action.payload.name ?
-            {...item, quantite: item.quantite + 1}
-            : item)
-        }
-      };
-    } else {
-      // Sinon crée un objet
-      return {
-        ...state,
-        inventory: {
-          ...state.inventory,
-          equipment: [
-            ...state.inventory.equipment,
-            {...action.payload}
-          ]
-        },
-      };
-    };
-        // return {
-        //   ...state,
-        //   inventory: {
-        //     ...state.inventory,
-        //     equipment: state.inventory.equipment.map(
-        //       (item) => item.nom === action.payload.name ?
-        //       {...item, quantite: item.quantite + 1}
-        //       :
-        //       // TODO DOESNT WORK AS INTENDED
-        //       [...state.inventory.equipment, {...action.payload}]),
-        //   }
-        // }
-        
     case SET_CHARACTER_DATA:
       const feelObj = (id, name, img, desc) => {
         return {item_id: id, name: name, img_path: img, description: desc};
@@ -225,7 +223,7 @@ const character = (state = initialState, action = {}) => {
         return equip;
       });
 
-      let inventoryData = {ressources:newRessource, consommable:newConsommable, equipment:newEquip};
+      let inventoryData = {ressource:newRessource, consommable:newConsommable, equipment:newEquip};
 
       let equipmentData = {};
       action.data.equipments.forEach(object => {
@@ -313,15 +311,15 @@ const character = (state = initialState, action = {}) => {
         if (vivre.name == action.name) vivre.quantity = stockVivre.quantity;
         return vivre;
       });
-      //mettre à jour l'inventaire avec les vivres mis à jour
+      // mettre à jour l'inventaire avec les vivres mis à jour
       let newInventory = {
         ...state.inventory,
         newVivres,
       }
       return {
         ...state,
-        inventory : newInventory,
-        vie: state.life + action.statistique > 100 ?  100 : state.vie + action.statistique,
+        inventory: newInventory,
+        vie: state.life + action.statistique > 100 ? 100 : state.vie + action.statistique,
         selected: '',
       };
     case SPARE_POINTS:
@@ -343,8 +341,28 @@ const character = (state = initialState, action = {}) => {
         ...state,
         [action.name]: newValStat,
       };
+    // case GET_INVENTORY_ON_LOGIN:
+    //   return {
+    //     ...state,
+    //     inventory: [
+    //       ...action.payload.inv,
+    //     ],
+    //   };
+    // case GET_PLAYER_STATS:
+    //   return {
+    //     ...state,
+    //     endurance: action.payload.data[0].value,
+    //     force: action.payload.data[1].value,
+    //     dexterite: action.payload.data[2].value,
+    //   };
+    case UPDATE_HEALTH_BAR_PLAYER:
+      return {
+        ...state,
+        vie: action.payload.newHealth,
+      };
     default:
       return state;
   }
 };
+
 export default character;

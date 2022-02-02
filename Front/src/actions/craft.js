@@ -4,12 +4,9 @@ export const UPDATE_RECIPES_LIST = 'UPDATE_RECIPES_LIST';
 // TEST BASE DE DONNEE
 export const GET_CRAFTABLE_ITEMS = 'GET_CRAFTABLE_ITEMS';
 
-export const craftItem = (name, quantity) => ({
+export const craftItem = (recipe) => ({
   type: SPEND_RESOURCES_FOR_CRAFT,
-  payload: {
-    name,
-    quantity,
-  }
+  recipe: recipe
 });
 
 export const sendCraftedItem = (name, type_name, item_type_id) => ({

@@ -58,14 +58,12 @@ export const addLevelUpMessage = () => ({
   type: ADD_LEVEL_UP_MESSAGE_MINE,
 });
 
-export const sendResourceToInventory = (name, item_id, type_id, type_name = 'ressource') => ({
+export const sendResourceToInventory = (name, item_id, obj_type, stat) => ({
   type: SEND_RESOURCE_TO_INVENTORY,
-  payload: {
-    name,
-    item_id,
-    type_id,
-    type_name,
-  }
+  name: name,
+  item_id: item_id,
+  obj_type: obj_type,
+  stat: stat,
 });
 
 export const getAllMineResources = () => ({
