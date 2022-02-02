@@ -94,10 +94,9 @@ const logMiddleware = (store) => (next) => (action) => {
           const foundName = JSON.parse(localStorage.getItem('name'));
           const foundId = JSON.parse(localStorage.getItem('userId'));
           if (foundName && foundId) {
-            console.log('ça passe ici');
             const name = foundName;
             const id = foundId;
-            const userAction = logUser(JSON.parse(newToken), name, id);
+            const userAction = logUser(newToken, name, id);
             store.dispatch(userAction);
           };
           console.log(response);
@@ -129,39 +128,3 @@ const logMiddleware = (store) => (next) => (action) => {
 };
 
 export default logMiddleware;
-
-
-// case LOGIN_SUCCESS:
-//   // Je laisse passer l'action car ici c'est grâce à elle
-//   // que mon token arrive dans le state. Sinon je peux aussi
-//   // récupérer le token accroché à l'action pour l'utiliser
-//   next(action);
-//   // Suite à l'action que je viens de laisser passer
-//   // mon state contient les infos de l'user (pseudo et son token)
-//   const { user } = store.getState();
-//   // J'en profite pour stocker dans mon localStorage
-//   // les infos de mon user
-//   // POUR RAPPEL, on ne peut stocker en localStorage que des strings
-//   // on doit donc convertir notre objet user en string
-//   const stringUser = JSON.stringify(user);
-//   localStorage.setItem('user', stringUser);
-//   // Je lance la requête pour aller chercher ses recettes favories
-//   axios({
-//     method: 'get',
-//     url: 'http://localhost:3001/favorites',
-//     headers: {
-//       // Je mets mon token dans le header "Authorization"
-//       Authorization: `Bearer ${user.token}`,
-//     },
-//   })
-//     .then((res) => {
-//       console.log(res.data.favorites);
-//       // J'ai maintenant la liste des fav de l'user, j'aiemrais la mettre
-//       // dans le state.
-//       const actionFavRecipes = receivedUserFav(res.data.favorites);
-//       store.dispatch(actionFavRecipes);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-//   break;

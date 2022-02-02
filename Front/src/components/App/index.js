@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Craft from "src/components/Craft";
 import Fight from "src/components/Fight";
 import NotFound from "src/components/NotFound";
+import NotAuthorize from 'src/components/NotAuthorize'
 import Home from "src/components/Home";
 import Menu from "../Menu";
 import Header from "../Header";
@@ -50,6 +51,18 @@ const App = () => {
           <Route path="/jobs/fishing" element={<Fishing job="fishing" />} />
         </>
         )
+        }
+        { !logged &&
+         (
+          <>
+            <Route path="/shop" element={<NotAuthorize />} />
+            <Route exact path="/inventory" element={<NotAuthorize />} />
+            <Route exact path="/fighting" element={<NotAuthorize />} />
+            <Route path="/craft" element={<NotAuthorize />} />
+            <Route path="/jobs/mining" element={<NotAuthorize job="mining" />} />
+            <Route path="/jobs/fishing" element={<NotAuthorize job="fishing" />} />
+          </>
+          )
         }
         <Route path="*" element={<NotFound />} />
 

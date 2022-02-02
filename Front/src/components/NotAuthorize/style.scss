@@ -1,7 +1,7 @@
 @use 'src/styles/vars';
 
-.background-404 {
-  background-image: url('../../assets/Scared.png');
+.background-401 {
+  background-image: url('../../assets/Irritated.png');
   width: 200px;
   height: 200px;
   display: inline-block;
@@ -35,7 +35,7 @@
     font-size: 2rem;
   }
 }
-.error_404{
+.error_401{
   display: inline;
   font-size:13rem;
 }
