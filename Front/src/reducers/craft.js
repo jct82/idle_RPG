@@ -18,6 +18,11 @@ const initialState = {
     //      name: fer,
     //      quantity: 5,
     //      component_id: 1,
+    //    },{
+    //      id: 3,
+    //      name: bronze,
+    //      quantity: 2,
+    //      component_id: 3,
     //    }
     //   ]
     // },

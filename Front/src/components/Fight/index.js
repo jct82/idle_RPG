@@ -21,10 +21,9 @@ const Fight = () => {
     vie,
     force,
     endurance,
-    dexterite,
-    attackSpeed,
+    dextérité,
   } = useSelector((state) => state.character);
-
+  console.log('vie,force, endurance,dextérité', vie,force, endurance,dextérité);
   const {
     isFighting,
     buttonTitle,
@@ -35,7 +34,7 @@ const Fight = () => {
   } = useSelector((state) => state.fight);
 
   // Vitesse d'attaque
-  // const attackSpeedPlayer = attackSpeed - (dexterite);
+  // const attackSpeedPlayer = attackSpeed - (dextérité);
 
   // Calcul de pourcentage de la vie
   const percentage = (partialValue, maxLife) => (100 * partialValue) / maxLife;
@@ -59,7 +58,7 @@ const Fight = () => {
           dispatch(dealDamage(newLifeOfMonster));
           dispatch(addLogMessageDmgDealt(force - currentMonster.attributes[0].value))
         }
-      }, 2000 - dexterite);
+      }, 2000 - dextérité);
 
       return () => clearInterval(interval);
     }
@@ -96,7 +95,7 @@ const Fight = () => {
       <h1 className="fight-title">Combat</h1>
       <div className="fight-container">
         <div className="fight-container--characters">
-          <div className="fight-profile fight-profile--player" style={ isFighting ? { animation: `playerAttacksMonster ${2000 - dexterite}ms infinite ease-in-out`} : {}}>
+          <div className="fight-profile fight-profile--player" style={ isFighting ? { animation: `playerAttacksMonster ${2000 - dextérité}ms infinite ease-in-out`} : {}}>
             <div className={isFighting ? "playerAttack" : vie <= 0 ? "playerDeath" : "playerIdle"} />
             <span id="healthBarContainer--player">
               <span className="healthBar--percentage">
@@ -105,7 +104,7 @@ const Fight = () => {
               <span id="healthBar--player" style={{ width: `${vie}%` }} />
             </span>
             <span id="atkSpeedContainer--player">
-              <span id="atkSpeed--player" style={ isFighting ? { animation: `atkSpeedActive ${2000 - dexterite}ms infinite linear`} : {}}/>
+              <span id="atkSpeed--player" style={ isFighting ? { animation: `atkSpeedActive ${2000 - dextérité}ms infinite linear`} : {}}/>
             </span>
           </div>
           <div className="noDamageNotify">{ currentMonster.attributes[0].value >= force && "Tu es trop faible !" } </div>
@@ -132,7 +131,7 @@ const Fight = () => {
               <p className="fight--stat">PDV : {vie}</p>
               <p className="fight--stat">Attaque : {force}</p>
               <p className="fight--stat">Endurance : {endurance}</p>
-              <p className="fight--stat">Dextérité : {dexterite}</p>
+              <p className="fight--stat">Dextérité : {dextérité}</p>
             </div>
             <div className="fight--stats-enemy">
               <p className="fight--stat">Monstre : {currentMonster.name}</p>

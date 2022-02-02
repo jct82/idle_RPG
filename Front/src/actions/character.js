@@ -8,6 +8,9 @@ export const UPDATE_VIVRE = 'UPDATE_VIVRE';
 export const SPARE_POINTS = 'SPARE_POINTS';
 export const UPDATE_NBR_FIELD = 'UPDATE_NBR_FIELD';
 export const GET_INVENTORY_ON_LOGIN = 'GET_INVENTORY_ON_LOGIN';
+export const GET_ALL_ITEMS = 'GET_ALL_ITEMS';
+export const SET_INVENTORY_DATA = 'SET_INVENTORY_DATA';
+export const SET_CHARACTER_DATA = 'SET_CHARACTER_DATA';
 
 export const setInventoryObjects = (inventory) => ({
   type: SET_INVENTORY,
@@ -39,22 +42,22 @@ export const updateEquip = (id, objType) => ({
   objType: objType,
 });
 
-export const updateVivre = (nom, statistique) => ({
+export const updateVivre = (name, statistique) => ({
   type: UPDATE_VIVRE,
-  nom:nom,
+  name:name,
   statistique: statistique,
 });
 
-export const sparePoints = (nom, statistique) => ({
+export const sparePoints = (name, statistique) => ({
   type: SPARE_POINTS,
-  nom:nom,
+  name:name,
   statistique: statistique,
 });
 
-export const updateNbrField = (value, nom, min, max) => ({
+export const updateNbrField = (value, name, min, max) => ({
   type: UPDATE_NBR_FIELD,
   value : value, 
-  nom: nom,
+  name: name,
   min: min, 
   max: max,
 });
@@ -65,3 +68,18 @@ export const getInventoryOnLogin = (inv) => ({
     inv,
   },
 });
+
+export const getAllitems = () => ({
+  type: GET_ALL_ITEMS,
+});
+
+export const setInventoryData = (data) => ({
+  type: SET_INVENTORY_DATA,
+  data: data,
+});
+
+export const setCharacterData = (data) => ({
+  type: SET_CHARACTER_DATA,
+  data: data,
+});
+

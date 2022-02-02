@@ -16,14 +16,14 @@ import Inventory from "../Character";
 import BtnDark from "../BtnDark/BtnDark";
 import { checkUser } from 'src/actions/user';
 
+
 // == Composant
 const App = () => {
-  const dispatch = useDispatch();
-  const { logged } = useSelector((state) => (state.user));
+  const { logged, darkMode } = useSelector((state) => (state.user));
   // const audio = new Audio('https://api.soundcloud.com/tracks/1018153165');
   // audio.volume = 0.10;
   // audio.play();
-  const darkMode = useSelector((state) => state.user.darkMode);
+  const dispatch = useDispatch();
 
   useEffect(() => {
       dispatch(checkUser());

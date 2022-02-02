@@ -14,26 +14,26 @@ const Details = ({object}) => {
   }
 
   const changeEquip = () => {
-    dispatch(updateEquip(object.id, object.type));
+    dispatch(updateEquip(object.item_id, object.type));
   }
   
   const consommer = () => {
-    dispatch(updateVivre(object.nom,object.statistique));
+    dispatch(updateVivre(object.name,object.statistique));
   }
 
   return (
       <div className="details">
         <div className="close-details" onClick={shutDetails}>X</div>
-        <p className="details-name">{object.nom}</p>
-        <img className="details-view" src={object.image}/>
+        <p className="details-name">{object.name}</p>
+        <div className={`details-view ${object.img_path}`}></div>
         <div className="detail-description">
           {object.description}
         </div>
-        { object.quantite == undefined ?
+        { object.quantity == undefined ?
         <><div className="statistique">Stats : {object.statistique}</div>
         <button className="cta" onClick={changeEquip}>Enfiler</button></> :
-        <><div className="quantity">Quantité : {object.quantite}</div></> }
-        { object.type == 'vivres' && vie < 100 && <><button className="cta" onClick={consommer}>Consommer</button></>}
+        <><div className="quantity">Quantité : {object.quantity}</div></> }
+        { object.type == 'consommable' && vie < 100 && <><button className="cta" onClick={consommer}>Consommer</button></>}
       </div>
   );
 };

@@ -4,12 +4,10 @@ import './style.scss';
 const Equipment = (object) => {
   
   return (
-    <div className="equip-block" key={object.nom}>
-      <div className="name-equip">{object.nom}</div>
-      <div className="img-equip">
-        <img src={object.image}/>
-      </div>
-      <div className="stat-equip">{object.statistique} P</div>
+    <div className="equip-block" key={object.name}>
+      <div className="name-equip">{object.name}</div>
+      <div className={`img-equip ${object.img_path}`}> </div>
+      <div className="stat-equip">{object.statistique}P</div>
     </div>
   );
 };

@@ -2,7 +2,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import characterData from "../../../data/character";
-import { setInventoryObjects, posterCategory, posterEquipment } from "../../actions/character";
+import { setInventoryObjects, posterCategory, posterEquipment, getAllitems } from "../../actions/character";
 import Objects from "../Object";
 import Details from "./details";
 import Equipment from "./equipment";
@@ -14,44 +14,39 @@ import "./style.scss";
 // == Composant
 const Inventory = () => {
   const dispatch = useDispatch();
-  const { inventory, posterCat, posterEquip, detailsObj, selected, equipment } = useSelector(
+  const { inventory, posterCat, posterEquip, detailsObj, selected, equipments } = useSelector(
     (state) => state.character
   );
-
-  const inventoryData = characterData[0].inventory;
-  const equipmentData = inventoryData.equipment;
   
-
   useEffect(() => {
-    dispatch(setInventoryObjects(inventoryData));
+    dispatch(getAllitems());
   }, []);
 
-  inventory.ressources.sort((a, b) => a.categorie - b.categorie);
-
-  const jsxRessource = inventory.ressources.map((object) => {if (object.quantite > 0) return <Objects key={object.nom} {...object} type="ressources" />});
-  const jsxVivre = inventory.vivres.map((object) => {if (object.quantite > 0) return <Objects key={object.nom} {...object} type="vivres" />});
-  const jsxEquipement = inventory.equipment.map((object) => <Objects key={object.nom} {...object}/>);
+  console.log('inventory', inventory);
+  const jsxRessource = inventory.ressource.map((object) => {if (object.quantity > 0) return <Objects key={object.name} {...object} type="ressources" />});
+  const jsxVivre = inventory.consommable.map((object) => {if (object.quantity > 0) return <Objects key={object.name} {...object} type="consommable" />});
+  const jsxEquipement = inventory.equipment.map((object) => <Objects key={object.name} {...object}/>);
 
   let jsxHelmet = [],
     jsxArmor = [],
     jsxWeapon = [],
     jsxShoes = [];
   inventory.equipment.forEach((equip) => {
-    if (equip.nom == "casque") {
+    if (equip.name == "casque") {
       jsxHelmet = equip.reserve.map((item) => (
-        <Objects key={item.id} {...item} type={equip.nom}/>
+        <Objects key={item.id} {...item} type={equip.name}/>
       ));
-    } else if (equip.nom == "armure") {
+    } else if (equip.name == "armure") {
       jsxArmor = equip.reserve.map((item) => (
-        <Objects key={item.id} {...item} type={equip.nom}/>
+        <Objects key={item.id} {...item} type={equip.name}/>
       ));
-    } else if (equip.nom == "arme") {
+    } else if (equip.name == "arme") {
       jsxWeapon = equip.reserve.map((item) => (
-        <Objects key={item.id} {...item} type={equip.nom} />
+        <Objects key={item.id} {...item} type={equip.name} />
       ));
-    } else if (equip.nom == "bottes") {
+    } else if (equip.name == "bottes") {
       jsxShoes = equip.reserve.map((item) => (
-        <Objects key={item.id} {...item} type={equip.nom} />
+        <Objects key={item.id} {...item} type={equip.name} />
       ));
     }
   });
@@ -64,11 +59,11 @@ const Inventory = () => {
     activeThumb(e.currentTarget);
   };
 
-  const JSXaccessories = Object.keys(equipment).map(function(key) {
-    let equipType = equipmentData.find(item => item.nom == key);
-    let equipObj = equipType.reserve.find(item => item.id == equipment[key]);
+  const JSXaccessories = Object.keys(equipments).map(function(key) {
+    let equipType = inventory.equipment.find(item => item.name == key);
+    let equipObj = equipType.reserve.find(item => item.item_id == equipments[key]);
     return (
-      <Equipment key={equipObj.nom} {...equipObj} />
+      <Equipment key={equipObj.name} {...equipObj} />
     )
   });
 
@@ -83,7 +78,7 @@ const Inventory = () => {
             <div className="category-title">{posterCat}</div>
             <div className="inventory-category">
               <ul className="menu-inventory">
-                <li className="cat-name vivres" onClick={posterCatMenu} name="vivre">
+                <li className="cat-name vivres" onClick={posterCatMenu} name="consommable">
                   <div className="inner"></div>
                   {/* <span>
                     <span>Vivre</span>
@@ -102,7 +97,7 @@ const Inventory = () => {
                   </span> */}
                 </li>
               </ul>
-              {posterCat == "vivre" && (
+              {posterCat == "consommable" && (
                 <div className="category-block vivre">{jsxVivre}</div>
               )}
               {posterCat == "ressources" && (

@@ -66,9 +66,11 @@ export default function Fishing({job}) {
           dispatch(addLevelUpMessage());
         };
         const workingResource = resources.find(resource => resource.name === currentResource);
-        console.log(workingResource);
-        const { name, id, item_type_id, type } = workingResource;
-        dispatch(sendResourceToInventory(name, id, item_type_id, type));
+        
+        const { name, id, item_type_id, type, attribute } = workingResource;
+        const stat = attribute.find(att => att.name == "soins");
+
+        dispatch(sendResourceToInventory(name, id, 'consommable', stat.value));
         //-------------------------------------vvv quantité récupérée -----------vvv exp récupérée
         dispatch(addLogMessage(workingResource.attribute[0].value, workingResource.attribute[0].value));
         dispatch(updateExpBar(percentage(experience, levelUpReq)));

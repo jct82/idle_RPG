@@ -9,14 +9,14 @@ export default function Stats() {
     vie,
     force,
     endurance,
-    dexterite,
-    argent,
+    dextérité,
+    gold,
     level,
-    experience,
+    exp,
     points, 
     pointsendurance,
     pointsforce,
-    pointsdexterite,
+    pointsdextérité,
   } = useSelector((state) => state.character);
 
   const lifeCount = () => {
@@ -47,22 +47,22 @@ export default function Stats() {
         </li>
         <li className="stat-block stat-experience">
           <div className="gauge">
-            <div className="filled" style={{ width: `${experience}%` }}></div>
+            <div className="filled" style={{ width: `${exp}%` }}></div>
             <div className="info-gauge">
               <span>Experience</span>
-              <span>{experience}</span>
+              <span>{exp}</span>
             </div>
           </div>
         </li>
         <li className="stat-block stat-dexterite">
           <div className="info-stat">
             <span className="stat-name"> Dextérité</span>
-            <span className="stat-nbr">{dexterite}</span>
+            <span className="stat-nbr">{dextérité}</span>
           </div>
           {points > 0 && 
           <div className="add-stat">
-            <input type="number" value={pointsdexterite} onChange={nbrField} name="pointsdexterite" min="0" max={points}></input>
-            <button className="btn-stats" onClick={addPoint} stat-type="dexterite">+</button>
+            <input type="number" value={pointsdextérité} onChange={nbrField} name="pointsdextérité" min="0" max={points}></input>
+            <button className="btn-stats" onClick={addPoint} stat-type="dextérité">+</button>
           </div>}
         </li>
         <li className="stat-block stat-force">
@@ -96,7 +96,7 @@ export default function Stats() {
         <li className="stat-block stat-money">
           <div className="info-stat">
             <span className="stat-name">Stock d'or</span>
-            <span className="stat-nbr">{argent}</span>
+            <span className="stat-nbr">{gold}</span>
           </div>
         </li>
         <li className="stat-block stat-points">

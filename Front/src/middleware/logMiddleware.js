@@ -1,13 +1,7 @@
-import { getInventoryOnLogin } from '../actions/character';
-import { GET_ITEMS } from '../actions/craft';
-import {
-  SUBSCRIBE_USER,
-  LOG_USER,
-  LOGIN_USER,
-  logUser,
-  CHECK_USER,
-  LOGOUT,
-} from '../actions/user';
+
+import { getInventoryOnLogin, setCharacterData } from "../actions/character";
+import { GET_ITEMS } from "../actions/craft";
+import { SUBSCRIBE_USER, LOG_USER, LOGIN_USER, logUser, CHECK_USER, LOGOUT,} from "../actions/user";
 import { characterMoney } from '../actions/shop';
 import { getMineNameAndLvl } from '../actions/mining';
 import { getPlayerStats, getMonster, getNewMonster } from '../actions/fight';
@@ -56,6 +50,9 @@ const logMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           if (response.status === 200) {
+            console.log(response.data.character);
+            store.dispatch(setCharacterData(response.data.character));
+            
             store.dispatch(getMonster(response.data.entities));
             store.dispatch(getNewMonster());
             store.dispatch(getPlayerStats(response.data.character.attributes));
@@ -100,6 +97,8 @@ const logMiddleware = (store) => (next) => (action) => {
             store.dispatch(userAction);
           };
           console.log(response);
+
+            store.dispatch(setCharacterData(response.data.character));
             store.dispatch(getMonster(response.data.entities));
             store.dispatch(getNewMonster());
             store.dispatch(getPlayerStats(response.data.character.attributes));
