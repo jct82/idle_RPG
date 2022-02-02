@@ -14,7 +14,7 @@ import Inventory from "../Character";
 import BtnDark from "../BtnDark/BtnDark";
 
 
-import { useSelector } from 'react-redux';
+
 
 // == Composant
 const App = () => {
@@ -32,7 +32,7 @@ const App = () => {
       
       <Header/>
       <Menu />
-    
+      <div className="background-bg"></div>
       {/* <h1>Jeu IDLE</h1> */}
       <Routes>
         <Route exact path="/" element={<Home />} />

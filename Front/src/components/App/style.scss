@@ -28,10 +28,51 @@ body {
   padding-left: 20%;
 }
 
+.background-bg{
+  display: none;
+  background-image: url('../../assets/game_backgrounddark.png');
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  background-repeat: repeat;
+  top: 0;
+  left:0;
+  .dark &{
+    display: block;
+  }
+}
+
 .app.dark {
-    background-color: #2d2d2d;
+  .navBarContainer{
+    background: rgb(12 13 13 / 50%);
+  }
+  button{
+    background: rgb(12 13 13 / 50%);
+  }
+  .stuff{
+    background: rgb(12 12 12 / 50%);
     color: #f2f2f2;
   }
+  .shop-main {
+    background: rgb(12 12 12 / 50%);
+    color: #f2f2f2;
+  }
+  .money,.buying-modal  {
+    background: rgb(12 12 12 / 50%);
+    color: #f2f2f2;
+  }
+  .craft-container,.craft-display {
+    background: rgb(12 12 12 / 50%);
+    color: #f2f2f2;
+  }
+  .fight-title,.fight-container{
+    background: rgb(12 12 12 / 50%);
+    color: #f2f2f2;
+  }
+}
 
 .title-page{
   margin: 25px 0;
