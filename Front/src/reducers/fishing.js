@@ -8,7 +8,9 @@ import {
   LEVEL_UP_PLAYER_JOB_FISH,
   ADD_LEVEL_UP_MESSAGE_FISH,
   UPDATE_EXPERIENCE_BAR_PROGRESS_FISH,
-  UPDATE_FISH_RESOURCES
+  UPDATE_FISH_RESOURCES,
+  GET_FISH_NAME_AND_LEVEL,
+  UPDATE_FISHING_LEVEL
 } from '../actions/fishing';
 
 const initialState = {
@@ -87,7 +89,30 @@ const jobs = (state = initialState, action = {}) => {
               resources: [
                 ...action.payload.fishes,
               ]
-            }
+            };
+            case GET_FISH_NAME_AND_LEVEL:
+              return {
+                ...state,
+                name: action.payload.data.name,
+                level: action.payload.data.level,
+                experience: action.payload.data.exp,
+              };
+            case UPDATE_FISHING_LEVEL:
+              if (state.level !== action.payload.newLevel) {
+                return {
+                  ...state,
+                  level: action.payload.newLevel,
+                  logMessages: [
+                    <p key={uuidv4()}>Vous êtes passé niveau {action.payload.newLevel} en Pêche !</p>,
+                ...state.logMessages.slice(0, 99),
+                  ],
+                };
+              } else {
+                return {
+                  ...state,
+                  level: action.payload.newLevel,
+                };
+              };
     default:
       return state;
 };

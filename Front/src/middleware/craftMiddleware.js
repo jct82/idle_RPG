@@ -19,7 +19,6 @@ const craftMiddleware = (store) => (next) => (action) => {
         headers: {
           // Je mets mon token dans le header "Authorization"
           authorization: `${foundToken}`,
-          // 'Content-Type' : 'application/json',
         },
         data: {
           characterId: parseInt(characterId, 10),

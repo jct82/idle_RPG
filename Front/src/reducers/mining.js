@@ -9,7 +9,8 @@ import {
   ADD_LEVEL_UP_MESSAGE_MINE,
   UPDATE_EXPERIENCE_BAR_PROGRESS_MINE,
   UPDATE_MINE_RESOURCES,
-  GET_MINE_NAME_AND_LEVEL
+  GET_MINE_NAME_AND_LEVEL,
+  UPDATE_MINING_LEVEL,
 } from '../actions/mining';
 
 const initialState = {
@@ -97,6 +98,22 @@ const jobs = (state = initialState, action = {}) => {
               level: action.payload.data.level,
               experience: action.payload.data.exp,
             };
+            case UPDATE_MINING_LEVEL:
+              if (state.level !== action.payload.newLevel) {
+                return {
+                  ...state,
+                  level: action.payload.newLevel,
+                  logMessages: [
+                    <p key={uuidv4()}>Vous êtes passé niveau {action.payload.newLevel} en Minage !</p>,
+                ...state.logMessages.slice(0, 99),
+                  ],
+                };
+              } else {
+                return {
+                  ...state,
+                  level: action.payload.newLevel,
+                };
+              };
     default:
       return state;
 };

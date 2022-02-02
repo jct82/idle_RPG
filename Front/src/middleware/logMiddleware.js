@@ -24,8 +24,12 @@ const logMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           if (response.status === 201) {
+            store.dispatch(setCharacterData(response.data.character));
             store.dispatch(getMonster(response.data.entities));
+            store.dispatch(getNewMonster());
             store.dispatch(getPlayerStats(response.data.character.attributes));
+            store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
+            store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));
             store.dispatch(getInventoryOnLogin(response.data.character.inventory));
             store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
             store.dispatch(characterMoney(response.data.character.gold));
@@ -54,11 +58,11 @@ const logMiddleware = (store) => (next) => (action) => {
             console.log(response.data.character);
             console.log(response);
             store.dispatch(setCharacterData(response.data.character));
-            
             store.dispatch(getMonster(response.data.entities));
             store.dispatch(getNewMonster());
             store.dispatch(getPlayerStats(response.data.character.attributes));
             store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
+            store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));
             store.dispatch(getInventoryOnLogin(response.data.character.inventory));
             store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
             localStorage.setItem('characterId', response.data.character.id);
@@ -107,8 +111,8 @@ const logMiddleware = (store) => (next) => (action) => {
             store.dispatch(getNewMonster());
             store.dispatch(getPlayerStats(response.data.character.attributes));
             store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
+            store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));
             store.dispatch(getInventoryOnLogin(response.data.character.inventory));
-            // store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
             store.dispatch(characterMoney(response.data.character.gold));
         }
         })

@@ -11,6 +11,8 @@ export const SEND_RESOURCE_TO_INVENTORY = 'SEND_RESOURCE_TO_INVENTORY';
 export const GET_ALL_MINE_RESOURCES = 'GET_ALL_MINE_RESOURCES';
 export const UPDATE_MINE_RESOURCES = 'UPDATE_MINE_RESOURCES';
 export const GET_MINE_NAME_AND_LEVEL = 'GET_MINE_NAME_AND_LEVEL';
+export const SEND_GATHERED_ORE_TO_DB = 'SEND_GATHERED_ORE_TO_DB';
+export const UPDATE_MINING_LEVEL = 'UPDATE_MINING_LEVEL';
 
 export const setWorking = () => ({
   type: SET_WORKING_MINE,
@@ -82,4 +84,20 @@ export const getMineNameAndLvl = (data) => ({
   payload: {
     data,
   }
+});
+
+export const sendOreToDb = (itemId, quantity, plusExp) => ({
+  type: SEND_GATHERED_ORE_TO_DB,
+  payload: {
+    itemId,
+    quantity,
+    plusExp,
+  },
+});
+
+export const updateMiningLevel = (newLevel) => ({
+  type: UPDATE_MINING_LEVEL,
+  payload: {
+    newLevel,
+  },
 });

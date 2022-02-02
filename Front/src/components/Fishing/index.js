@@ -8,7 +8,8 @@ import {
   addLevelUpMessage,
   levelUpJob,
   updateExpBar,
-  getAllFishResources
+  getAllFishResources,
+  sendFishToDb,
 } from '../../actions/fishing';
 import { sendResourceToInventory } from '../../actions/mining';
 import '../../styles/allitems.scss';
@@ -69,10 +70,10 @@ export default function Fishing({job}) {
         
         const { name, id, item_type_id, type, attribute } = workingResource;
         const stat = attribute.find(att => att.name == "soins");
-
-        dispatch(sendResourceToInventory(name, id, 'consommable', stat.value));
-        //-------------------------------------vvv quantité récupérée -----------vvv exp récupérée
-        dispatch(addLogMessage(workingResource.attribute[0].value, workingResource.attribute[0].value));
+        dispatch(sendFishToDb(id, 1, attribute[0].value));
+        // dispatch(sendResourceToInventory(name, id, 'consommable', stat.value));
+        //-------------------vvv quantité récupérée -----------vvv exp récupérée
+        dispatch(addLogMessage(1, workingResource.attribute[0].value));
         dispatch(updateExpBar(percentage(experience, levelUpReq)));
       }, actionTime);
 

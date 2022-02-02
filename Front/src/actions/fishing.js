@@ -10,7 +10,9 @@ export const UPDATE_EXPERIENCE_BAR_PROGRESS_FISH = 'UPDATE_EXPERIENCE_BAR_PROGRE
 export const ALLOW_GATHER_RESOURCES = 'ALLOW_GATHER_RESOURCES_FISH';
 export const GET_ALL_FISH_RESOURCES = 'GET_ALL_FISH_RESOURCES';
 export const UPDATE_FISH_RESOURCES = 'UPDATE_FISH_RESOURCES';
-export const GET_MINE_FISH_AND_LEVEL = 'GET_MINE_FISH_AND_LEVEL';
+export const GET_FISH_NAME_AND_LEVEL = 'GET_FISH_NAME_AND_LEVEL';
+export const SEND_GATHERED_FISH_TO_DB = 'SEND_GATHERED_FISH_TO_DB';
+export const UPDATE_FISHING_LEVEL = 'UPDATE_FISHING_LEVEL';
 
 export const setWorking = () => ({
   type: SET_WORKING_FISH,
@@ -28,14 +30,14 @@ export const addExperienceToPlayer = (experience) => ({
   type: ADD_RESOURCE_EXPERIENCE_TO_PLAYER_FISH,
   payload: {
     experience,
-  }
+  },
 });
 
 export const updateExpBar = (newExpPercentage) => ({
   type: UPDATE_EXPERIENCE_BAR_PROGRESS_FISH,
   payload: {
     newExpPercentage,
-  }
+  },
 });
 
 export const setCurrentResource = (currentResource, currentResourceExperience) => ({
@@ -43,7 +45,7 @@ export const setCurrentResource = (currentResource, currentResourceExperience) =
   payload: {
     currentResource,
     currentResourceExperience,
-  }
+  },
 });
 
 export const allowGatherResources = () => ({
@@ -55,7 +57,7 @@ export const addLogMessage = (experience, amount) => ({
   payload: {
     experience,
     amount,
-  }
+  },
 });
 
 export const addLevelUpMessage = () => ({
@@ -70,12 +72,28 @@ export const updateFishResources = (fishes) => ({
   type: UPDATE_FISH_RESOURCES,
   payload: {
     fishes,
-  }
+  },
 });
 
 export const getFishNameAndLvl = (data) => ({
-  type: GET_MINE_FISH_AND_LEVEL,
+  type: GET_FISH_NAME_AND_LEVEL,
   payload: {
     data,
-  }
+  },
+});
+
+export const sendFishToDb = (itemId, quantity, plusExp) => ({
+  type: SEND_GATHERED_FISH_TO_DB,
+  payload: {
+    itemId,
+    quantity,
+    plusExp,
+  },
+});
+
+export const updateFishingLevel = (newLevel) => ({
+  type: UPDATE_FISHING_LEVEL,
+  payload: {
+    newLevel,
+  },
 });
