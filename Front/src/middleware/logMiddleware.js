@@ -12,6 +12,7 @@ import { characterMoney } from '../actions/shop';
 import { getMineNameAndLvl } from '../actions/mining';
 import { getPlayerStats, getMonster, getNewMonster } from '../actions/fight';
 import API from './api';
+import { getFishNameAndLvl } from '../actions/fishing';
 
 const logMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
@@ -75,7 +76,7 @@ const logMiddleware = (store) => (next) => (action) => {
       next(action);
       // TODO refresh ne marche qu'une fois, à fix
       const foundToken = localStorage.getItem('profile');
-      // console.log(foundToken);
+      console.log(foundToken);
       // console.log(JSON.parse(localStorage.getItem('name')));
       // console.log(JSON.parse(localStorage.getItem('userId')));
       const config = {
@@ -88,23 +89,26 @@ const logMiddleware = (store) => (next) => (action) => {
       };
       API(config)
       .then((response) => {
-        
-        const foundName = JSON.parse(localStorage.getItem('name'));
-        const foundId = JSON.parse(localStorage.getItem('userId'));
-        if (foundName && foundId) {
-          const name = foundName;
-          const id = foundId;
-          const userAction = logUser(JSON.parse(foundToken), name, id);
-          store.dispatch(userAction);
-        };
-        console.log(response.data);
-          store.dispatch(getMonster(response.data.entities));
-          store.dispatch(getNewMonster());
-          store.dispatch(getPlayerStats(response.data.character.attributes));
-          store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
-          store.dispatch(getInventoryOnLogin(response.data.character.inventory));
-          // store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
-          store.dispatch(characterMoney(response.data.character.gold));
+        if (response.headers.authorization) {
+          const newToken = response.headers.authorization;
+          const foundName = JSON.parse(localStorage.getItem('name'));
+          const foundId = JSON.parse(localStorage.getItem('userId'));
+          if (foundName && foundId) {
+            console.log('ça passe ici');
+            const name = foundName;
+            const id = foundId;
+            const userAction = logUser(JSON.parse(newToken), name, id);
+            store.dispatch(userAction);
+          };
+          console.log(response);
+            store.dispatch(getMonster(response.data.entities));
+            store.dispatch(getNewMonster());
+            store.dispatch(getPlayerStats(response.data.character.attributes));
+            store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
+            store.dispatch(getInventoryOnLogin(response.data.character.inventory));
+            // store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
+            store.dispatch(characterMoney(response.data.character.gold));
+        }
         })
         .catch((error)=> {
           console.log(error);

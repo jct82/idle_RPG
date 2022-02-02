@@ -25,6 +25,9 @@ const user = (state = initialState, action = {}) => {
         [action.name]: action.value,
       };
     case LOG_USER:
+      localStorage.removeItem('profile');
+      localStorage.removeItem('name');
+      localStorage.removeItem('userId');
       localStorage.setItem('profile', JSON.stringify(action.token));
       localStorage.setItem('name', JSON.stringify(action.userName));
       localStorage.setItem('userId', JSON.stringify(action.userId));
