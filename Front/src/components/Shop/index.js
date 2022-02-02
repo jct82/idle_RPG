@@ -1,6 +1,7 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-plusplus */
 import './style.scss';
+import '../../styles/allitems.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
@@ -63,11 +64,14 @@ export default function Shop() {
           { newShopArray.map((stuff) => (
             <div className="stuff" id={stuff.id} key={uuidv4()}>
               <div className="shop-stuff">
-                <p>{stuff.name} </p>
+                <div className="stuff-image">
+                  <div className={stuff.name.replace(/['"]+/g, "").replace(/\s/g, "")} />
+                </div>
+                <p className="stuff-name">{stuff.name} </p>
                 <p className="stuff-stat">
                   {
                     stuff.attribute.map((elem) => elem.name !== "prix" ? `${elem.name.replace('_', ' ')}: ${elem.value} ` : '')
-                }
+                  }
                 </p>
               </div>
               <button onClick={getIdOfButtonParent} className="buy-button" type="button"> Acheter pour {stuff.attribute[1].value} <img className="money-image" src={boutiqueLogo} alt="or" /></button>
