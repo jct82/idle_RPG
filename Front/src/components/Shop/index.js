@@ -1,13 +1,15 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-plusplus */
 import './style.scss';
+import '../../styles/allitems.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
 import { boutiqueLogo } from 'src/assets/idleMenuIcons';
 import {
-  modaleOpen, modaleClose, emptyArray, buyItem, allObject, getCharacterMoney,
+  modaleOpen, modaleClose, emptyArray, allObject,
 } from '../../actions/shop';
+import { buyItem } from '../../actions/character';
 
 export default function Shop() {
   const dispatch = useDispatch();
@@ -15,12 +17,11 @@ export default function Shop() {
     newShopArray,
     stuffs,
     isOpen,
-    money,
   } = useSelector((state) => state.shop);
+  const { gold } = useSelector((state) => state.character);
   // je veux que le chargement de la boutique ne se fasse qu'une fois,
   // au chargement initial de la page
   useEffect(() => {
-    dispatch(getCharacterMoney());
     dispatch(emptyArray());
     dispatch(allObject());
   }, []);
@@ -33,8 +34,9 @@ export default function Shop() {
   // je compare si l'utilisateur a assez d'argent ou pas pour acheter un objet,
   // si c'est positif, ça retire l'argent de sa bourse, sinon ça ferme juste la modale sans action
   const buyingItem = () => {
-    if (money >= stuffs.find((stuff) => stuff.id == isOpen.id).attribute[1].value) {
+    if (gold >= stuffs.find((stuff) => stuff.id == isOpen.id).attribute[1].value) {
       dispatch(buyItem(stuffs.find((stuff) => stuff.id == isOpen.id).attribute[1].value));
+      dispatch(modaleClose());
     }
     else {
       dispatch(modaleClose());
@@ -56,17 +58,20 @@ export default function Shop() {
           <p>Boutique</p>
         </div>
         <div className="money">
-          {money} <img className="money-image" src={boutiqueLogo} alt="or" />
+          {gold} <img className="money-image" src={boutiqueLogo} alt="or" />
         </div>
         <div className="shop-inventory">
           { newShopArray.map((stuff) => (
             <div className="stuff" id={stuff.id} key={uuidv4()}>
               <div className="shop-stuff">
-                <p>{stuff.name} </p>
+                <div className="stuff-image">
+                  <div className={stuff.name.replace(/['"]+/g, "").replace(/\s/g, "")} />
+                </div>
+                <p className="stuff-name">{stuff.name} </p>
                 <p className="stuff-stat">
                   {
                     stuff.attribute.map((elem) => elem.name !== "prix" ? `${elem.name.replace('_', ' ')}: ${elem.value} ` : '')
-                }
+                  }
                 </p>
               </div>
               <button onClick={getIdOfButtonParent} className="buy-button" type="button"> Acheter pour {stuff.attribute[1].value} <img className="money-image" src={boutiqueLogo} alt="or" /></button>

@@ -2,7 +2,6 @@
 import { getInventoryOnLogin, setCharacterData } from "../actions/character";
 import { GET_ITEMS } from "../actions/craft";
 import { SUBSCRIBE_USER, LOG_USER, LOGIN_USER, logUser, CHECK_USER, LOGOUT,} from "../actions/user";
-import { characterMoney } from '../actions/shop';
 import { getMineNameAndLvl } from '../actions/mining';
 import { getPlayerStats, getMonster, getNewMonster } from '../actions/fight';
 import API from './api';
@@ -32,6 +31,7 @@ const logMiddleware = (store) => (next) => (action) => {
             store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));
             store.dispatch(getInventoryOnLogin(response.data.character.inventory));
             store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
+            localStorage.setItem('characterId', response.data.character.id);
             store.dispatch(characterMoney(response.data.character.gold));
           }
         })

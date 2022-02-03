@@ -40,8 +40,10 @@
     flex-wrap: wrap;
   }
   &-stuff{
-    padding: 10%;
+    margin: 1rem;
+    padding: 5%;
     display: flex;
+    justify-content: space-around;
   }
 }
 .money {
@@ -100,6 +102,14 @@
   .buy-button {
   display: flex;
 }
+  &-name{
+    margin: 1rem;
+    text-align: center;
+}
+  &-stat{
+    margin: 1rem;
+    justify-content: center;
+  }
 }
 
 
