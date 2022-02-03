@@ -8,12 +8,14 @@ import inventoryMiddleware from '../middleware/inventoryMiddleware';
 import jobMiddleware from '../middleware/jobMiddleware';
 import logMiddleware from '../middleware/logMiddleware';
 import shopMiddleware from '../middleware/shopMiddleware';
+import characterMiddleware from '../middleware/characterMiddleware';
+
 
 // == Enhancers
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const enhancers = composeEnhancers(
-  applyMiddleware(logMiddleware, inventoryMiddleware, shopMiddleware, craftMiddleware, jobMiddleware),
+  applyMiddleware(logMiddleware, inventoryMiddleware, shopMiddleware, craftMiddleware, jobMiddleware, characterMiddleware),
 );
 
 // == Store

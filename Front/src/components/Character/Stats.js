@@ -28,7 +28,7 @@ export default function Stats() {
   }
 
   const addPoint = (e) => {
-    dispatch(sparePoints(e.target.getAttribute('stat-type'), Number(e.target.previousElementSibling.value)));
+    dispatch(sparePoints(e.target.getAttribute('stat-type'), Number(e.target.previousElementSibling.value), Number(e.target.getAttribute('stat-id'))));
   }
 
   
@@ -62,7 +62,7 @@ export default function Stats() {
           {points > 0 && 
           <div className="add-stat">
             <input type="number" value={pointsdextérité} onChange={nbrField} name="pointsdextérité" min="0" max={points}></input>
-            <button className="btn-stats" onClick={addPoint} stat-type="dextérité">+</button>
+            <button className="btn-stats" onClick={addPoint} stat-type="dextérité" stat-id="3">+</button>
           </div>}
         </li>
         <li className="stat-block stat-force">
@@ -73,7 +73,7 @@ export default function Stats() {
           {points > 0 && 
           <div className="add-stat">
             <input type="number" value={pointsforce} onChange={nbrField} name="pointsforce" min="0" max={points}></input>
-            <button className="btn-stats" onClick={addPoint} stat-type="force">+</button>
+            <button className="btn-stats" onClick={addPoint} stat-type="force" stat-id="2">+</button>
           </div>}
         </li>
         <li className="stat-block stat-endurance">
@@ -84,7 +84,7 @@ export default function Stats() {
           {points > 0 && 
           <div className="add-stat">
             <input type="number" value={pointsendurance} onChange={nbrField} name="pointsendurance" min="0" max={points}></input>
-            <button className="btn-stats" onClick={addPoint} stat-type="endurance">+</button>
+            <button className="btn-stats" onClick={addPoint} stat-type="endurance" stat-id="1">+</button>
           </div>}
         </li>
         <li className="stat-block stat-level">

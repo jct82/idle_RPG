@@ -95,34 +95,35 @@ const initialState = {
 
 const character = (state = initialState, action = {}) => {
   switch (action.type) {
-      case SEND_RESOURCE_TO_INVENTORY:
-        let addInventory = state.inventory[action.obj_type];
-        let addObject = addInventory.find(obj => obj.item_id == action.item_id);
-        if (addObject == undefined) {
-          addObject = {
-            item_id: action.item_id, 
-            name: action.name, 
-            description: 'lorem ipsum lorem ipsum', 
-            img_path: action.name.replace(/['"]+/g, "").replace(/\s/g, ""), 
-            quantity: 1,
-          }
-          if (action.obj_type == "consommable") addObject.statistique = action.stat
-          addInventory.push(addObject);
-        } else {
-          for (let i = 0; i < addInventory.length; i++) {
-            if (addInventory[i].item_id == addObject.item_id) {
-              addInventory[i].quantity += 1;
-            }
+    case SEND_RESOURCE_TO_INVENTORY:
+      let addInventory = state.inventory[action.obj_type];
+      let addObject = addInventory.find(obj => obj.item_id == action.item_id);
+      if (addObject == undefined) {
+        addObject = {
+          item_id: action.item_id, 
+          name: action.name, 
+          description: 'lorem ipsum lorem ipsum', 
+          img_path: action.name.replace(/['"]+/g, "").replace(/\s/g, ""), 
+          quantity: 1,
+        }
+        if (action.obj_type == "consommable") addObject.statistique = action.stat
+        addInventory.push(addObject);
+      } else {
+        for (let i = 0; i < addInventory.length; i++) {
+          if (addInventory[i].item_id == addObject.item_id) {
+            addInventory[i].quantity += 1;
           }
         }
-        return {
-          ...state,
-          inventory: {
-            ...state.inventory,
-            [action.obj_type]: addInventory,
-          }
-        };
+      }
+      return {
+        ...state,
+        inventory: {
+          ...state.inventory,
+          [action.obj_type]: addInventory,
+        }
+      };
     case SPEND_RESOURCES_FOR_CRAFT:
+      //substract used ressources for crafting of inventory ressources
       let spendRessources = state.inventory.ressource;
       action.recipe.ingredients.forEach(substance => {
         for (let i = 0; i < spendRessources.length; i++) {
@@ -131,31 +132,40 @@ const character = (state = initialState, action = {}) => {
           }
         }
       });
-
+      //add new crafted equipment to inventory equipment
       let craftedEquipments = state.inventory.equipment;
       craftedEquipments.forEach(elem => {
         if (elem.name == action.recipe.type) {
           elem.quantity += 1;
-          let crafted = {
-            item_id: action.recipe.id, 
-            name: action.recipe.name, 
-            description: 'lorem ipsum ipsum ipsum ipsum ipsum ipsum ipsum', 
-            img_path: action.recipe.name.replace(/['"]+/g, "").replace(/\s/g, ""),
+          if (elem.reserve.find(weapon => weapon.item_id == action.recipe.id) == undefined) {
+            let crafted = {
+              item_id: action.recipe.id, 
+              name: action.recipe.name, 
+              description: 'lorem ipsum ipsum ipsum ipsum ipsum ipsum ipsum', 
+              img_path: action.recipe.name.replace(/['"]+/g, "").replace(/\s/g, ""),
+            }
+            if (elem.name == "arme") {
+              crafted.degat_min = action.recipe.attribute.find(att => att.name == 'degat_min');
+              crafted.degat_min = crafted.degat_min.value;
+              crafted.statistique = action.recipe.attribute.find(att => att.name == 'degat_max');
+              crafted.degat_max = crafted.statistique.value;
+            } else if (elem.name == "armure") {
+              crafted.statistique = action.recipe.attribute.filter(att => att.name == 'endurance');
+            } else if (elem.name == "casque") {
+              crafted.statistique = action.recipe.attribute.filter(att => att.name == 'force');
+            } else if (elem.name == "bottes") {
+              crafted.statistique = action.recipe.attribute.filter(att => att.name == 'dextérité');
+            }
+            crafted.statistique = crafted.statistique.value;
+            elem.reserve.push(crafted);
+          } else {
+            for (let i = 0; i < elem.reserve.length; i++) {
+              if (elem.reserve[i].item_id == action.recipe.id) {
+                elem.reserve[i].quantity += 1;
+                break;
+              }
+            }
           }
-          if (elem.name == "arme") {
-            crafted.degat_min = action.recipe.attribute.find(att => att.name == 'degat_min');
-            crafted.degat_min = crafted.degat_min.value;
-            crafted.statistique = action.recipe.attribute.find(att => att.name == 'degat_max');
-            crafted.degat_max = crafted.statistique.value;
-          } else if (elem.name == "armure") {
-            crafted.statistique = action.recipe.attribute.filter(att => att.name == 'endurance');
-          } else if (elem.name == "casque") {
-            crafted.statistique = action.recipe.attribute.filter(att => att.name == 'force');
-          } else if (elem.name == "bottes") {
-            crafted.statistique = action.recipe.attribute.filter(att => att.name == 'dextérité');
-          }
-          crafted.statistique = crafted.statistique.value;
-          elem.reserve.push(crafted);
         }
       });
 
@@ -168,42 +178,40 @@ const character = (state = initialState, action = {}) => {
         }
       };
     case SET_CHARACTER_DATA:
-      const feelObj = (id, name, img, desc) => {
-        return {item_id: id, name: name, img_path: img, description: desc};
+      const feelObj = (id, name, img, desc, quantity) => {
+        return {item_id: id, name: name, img_path: img, description: desc, quantity: quantity};
       }
       let newConsommable = [], newRessource = [], newArme = [], newCasque = [], newArmure = [], newBottes = [];
       action.data.inventory.forEach((object) => {
         if (object.type_name == "ressource") {
-            let currentRessource = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem');
-            currentRessource.quantity = object.quantity;
+            let currentRessource = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
             newRessource.push(currentRessource);
         } else if (object.type_name == "consommable") {
             let stat = object.attributes.find(item => item.name == "soins");
-            let currentConso = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem');
+            let currentConso = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
             currentConso.statistique = stat.value; 
-            currentConso.quantity = object.quantity;
             newConsommable.push(currentConso);
         } else if (object.type_name == "arme") {
             let degatMin = object.attributes.find(item => item.name == "degat_min");
             let degatMax = object.attributes.find(item => item.name == "degat_max");
-            let currentArme = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem');
+            let currentArme = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
             currentArme.statistique = degatMax.value;
             currentArme.degat_min = degatMin.value;
             currentArme.degat_max = degatMax.value;
             newArme.push(currentArme);
         } else if (object.type_name == "casque") {
             let stat = object.attributes.find(item => item.name == "force");
-            let currentCasque = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem');
+            let currentCasque = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
             currentCasque.statistique = stat.value;
             newCasque.push(currentCasque);
         } else if (object.type_name == "bottes") {
             let stat = object.attributes.find(item => item.name == "dextérité");
-            let currentBottes = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem');
+            let currentBottes = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
             currentBottes.statistique = stat.value;
             newBottes.push(currentBottes);
         } else if (object.type_name == "armure") {
             let stat = object.attributes.find(item => item.name == "endurance");
-            let currentArmure = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem');
+            let currentArmure = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
             currentArmure.statistique = stat.value;
             newArmure.push(currentArmure);
         }
@@ -231,6 +239,7 @@ const character = (state = initialState, action = {}) => {
       const dataEndurance = action.data.attributes.find(obj => obj.name == "endurance");
       const dataDextérité = action.data.attributes.find(obj => obj.name == "dextérité");
       const dataPoints = action.data.attributes.find(obj => obj.name == "points de caractéristiques");
+      const dataVie = action.data.attributes.find(obj => obj.name == "points de vie");
       return {
         ...state,
         inventory: inventoryData,
@@ -238,6 +247,7 @@ const character = (state = initialState, action = {}) => {
         force: dataForce.value,
         endurance: dataEndurance.value,
         dextérité: dataDextérité.value,
+        vie: dataVie.value,
         points: dataPoints.value,
         exp:action.data.exp,
         gold:action.data.gold,
@@ -283,16 +293,34 @@ const character = (state = initialState, action = {}) => {
         selected: '',
       };
     case UPDATE_EQUIPMENT:
+      let equipInvent = state.inventory.equipment;
+      equipInvent.forEach(equip => {
+        if (equip.name == action.objType) {
+          for (let i = 0; i < equip.reserve.length; i++) {
+            if (equip.reserve[i].item_id == action.id) {
+              equip.reserve[i].quantity -= 1;
+            } else if (equip.reserve[i].item_id == state.equipments[action.objType]) {
+              equip.reserve[i].quantity += 1;
+            }
+          }
+        }
+      });
       let oldStuff = state.equipments[action.objType];
       let stuffType = state.inventory.equipment.find(item => item.name == action.objType);
+
       let oldVal = stuffType.reserve.find(item => item.item_id  == oldStuff);
       let newVal = stuffType.reserve.find(item => item.item_id == action.id);
+
       let newEquipment = {
         ...state.equipments,
         [action.objType]: action.id,
       }
       return {
         ...state,
+        inventory: {
+          ...state.inventory,
+          equipment: equipInvent,
+        },
         equipments: newEquipment,
         [stuffType.type_statistique]: state[stuffType.type_statistique] + (newVal.statistique - oldVal.statistique),
         selected: '',

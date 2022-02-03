@@ -1,15 +1,11 @@
+import { SPARE_POINTS, UPDATE_EQUIPMENT } from '../actions/character';
 import API from './api';
 
+const foundToken = localStorage.getItem('profile');
 const characterMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
   switch (action.type) {
-    case 'SPARE_POINTS': {
-      // Attend dans le header le token
-      // Attend dans le body l'id du personnage : characterId
-      // Attend dans le body l'id de l'attribut modifié : attributeId
-
-      const attributeId = action.attrId;
-      const characterId = action.persoId;
+    case SPARE_POINTS: {
       const config = {
         method: 'patch',
         url: '/attribute/augment',
@@ -17,24 +13,43 @@ const characterMiddleware = (store) => (next) => (action) => {
           authorization: `${foundToken}`,
         },
         data: {
-          characterId: characterId,
-          attributeId: attributeId,
+          characterId: Number(localStorage.characterId),
+          attributeId: action.id,
+          quantity: action.statistique,
         },
       };
-
       API(config)
         .then((response) => {
           if (response.status === 204) {
-            store.dispatch(getMonster(response.data.entities));
-            store.dispatch(getPlayerStats(response.data.character.attributes));
-            store.dispatch(getInventoryOnLogin(response.data.character.inventory));
-            store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
-            store.dispatch(characterMoney(response.data.character.gold));
+            console.log('done');
           }
         })
         .catch((error) => {
           console.log(error);
-          // store.dispatch(loginErrors(error.response.data));
+        });
+      next(action);
+      break;
+    }
+    case UPDATE_EQUIPMENT: {
+      const config = {
+        method: 'patch',
+        url: '/equipment/equipItem',
+        headers: {
+          authorization: `${foundToken}`,
+        },
+        data: {
+          characterId: Number(localStorage.characterId),
+          itemId: action.id,
+        },
+      };
+      API(config)
+        .then((response) => {
+          if (response.status === 204) {
+            console.log('done');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
         });
       next(action);
       break;

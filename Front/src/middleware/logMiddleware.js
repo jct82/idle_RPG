@@ -56,6 +56,7 @@ const logMiddleware = (store) => (next) => (action) => {
           console.log(response);
           if (response.status === 200) {
             console.log(response.data.character);
+            
             store.dispatch(setCharacterData(response.data.character));
             store.dispatch(getMonster(response.data.entities));
             store.dispatch(getNewMonster());
@@ -105,14 +106,14 @@ const logMiddleware = (store) => (next) => (action) => {
           };
           console.log(response);
 
-            store.dispatch(setCharacterData(response.data.character));
-            store.dispatch(getMonster(response.data.entities));
-            store.dispatch(getNewMonster());
-            store.dispatch(getPlayerStats(response.data.character.attributes));
-            store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
-            store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));
-            store.dispatch(getInventoryOnLogin(response.data.character.inventory));
-            store.dispatch(characterMoney(response.data.character.gold));
+          store.dispatch(setCharacterData(response.data.character));
+          store.dispatch(getMonster(response.data.entities));
+          store.dispatch(getNewMonster());
+          store.dispatch(getPlayerStats(response.data.character.attributes));
+          store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
+          store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));
+          store.dispatch(getInventoryOnLogin(response.data.character.inventory));
+          store.dispatch(characterMoney(response.data.character.gold));
         }
         })
         .catch((error)=> {

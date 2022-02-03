@@ -49,10 +49,11 @@ export const updateVivre = (name, statistique) => ({
   statistique: statistique,
 });
 
-export const sparePoints = (name, statistique) => ({
+export const sparePoints = (name, statistique, id) => ({
   type: SPARE_POINTS,
   name:name,
   statistique: statistique,
+  id: id,
 });
 
 export const updateNbrField = (value, name, min, max) => ({

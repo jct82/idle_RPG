@@ -70,7 +70,7 @@ export default function Mining({job}) {
         
         const { name, id, item_type_id, type, attribute } = workingResource;
         dispatch(sendOreToDb(id, 1, attribute[0].value))
-        // dispatch(sendResourceToInventory(name, id, 'ressource'));
+        dispatch(sendResourceToInventory(name, id, 'ressource'));
         //-------------------vvv quantité récupérée -----------vvv exp récupérée
         dispatch(addLogMessage(1, workingResource.attribute[0].value));
         dispatch(updateExpBar(percentage(experience, levelUpReq)));

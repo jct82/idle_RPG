@@ -11,6 +11,8 @@ import Header from "../Header";
 import Shop from "../Shop";
 import Fishing from "../Fishing";
 import Mining from "../Mining";
+
+
 import "./style.scss";
 import Inventory from "../Character";
 import BtnDark from "../BtnDark/BtnDark";
@@ -31,6 +33,7 @@ const App = () => {
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
+
       <BtnDark/>
       
       

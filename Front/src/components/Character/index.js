@@ -25,7 +25,11 @@ const Inventory = () => {
   console.log('inventory', inventory);
   const jsxRessource = inventory.ressource.map((object) => {if (object.quantity > 0) return <Objects key={object.name} {...object} type="ressources" />});
   const jsxVivre = inventory.consommable.map((object) => {if (object.quantity > 0) return <Objects key={object.name} {...object} type="consommable" />});
-  const jsxEquipement = inventory.equipment.map((object) => <Objects key={object.name} {...object}/>);
+  const jsxEquipement = inventory.equipment.map((object) => {
+    object.quantity = 0;
+    object.reserve.forEach(equip => {object.quantity += equip.quantity});
+    return(<Objects key={object.name} {...object}/>);
+  });
 
   let jsxHelmet = [],
     jsxArmor = [],
@@ -33,19 +37,23 @@ const Inventory = () => {
     jsxShoes = [];
   inventory.equipment.forEach((equip) => {
     if (equip.name == "casque") {
-      jsxHelmet = equip.reserve.map((item) => (
+      jsxHelmet = equip.reserve.filter(item => item.quantity > 0);
+      jsxHelmet = jsxHelmet.map((item) => (
         <Objects key={item.id} {...item} type={equip.name}/>
       ));
     } else if (equip.name == "armure") {
-      jsxArmor = equip.reserve.map((item) => (
+      jsxArmor = equip.reserve.filter(item => item.quantity > 0);
+      jsxArmor = jsxArmor.map((item) => (
         <Objects key={item.id} {...item} type={equip.name}/>
       ));
     } else if (equip.name == "arme") {
-      jsxWeapon = equip.reserve.map((item) => (
+      jsxWeapon = equip.reserve.filter(item => item.quantity > 0);
+      jsxWeapon = jsxWeapon.map((item) => (
         <Objects key={item.id} {...item} type={equip.name} />
       ));
     } else if (equip.name == "bottes") {
-      jsxShoes = equip.reserve.map((item) => (
+      jsxShoes = equip.reserve.filter(item => item.quantity > 0);
+      jsxShoes = jsxShoes.map((item) => (
         <Objects key={item.id} {...item} type={equip.name} />
       ));
     }

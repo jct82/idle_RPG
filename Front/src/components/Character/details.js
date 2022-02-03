@@ -6,6 +6,8 @@ import './style.scss';
 // == Composant
 const Details = ({object}) => {
 
+  console.log('object', object);
+
   const vie = useSelector((state) => state.character.vie);
   const dispatch = useDispatch();
 
@@ -29,11 +31,11 @@ const Details = ({object}) => {
         <div className="detail-description">
           {object.description}
         </div>
-        { object.quantity == undefined ?
-        <><div className="statistique">Stats : {object.statistique}</div>
-        <button className="cta" onClick={changeEquip}>Enfiler</button></> :
-        <><div className="quantity">Quantité : {object.quantity}</div></> }
+        <div className="quantity">Quantité : {object.quantity}</div>
         { object.type == 'consommable' && vie < 100 && <><button className="cta" onClick={consommer}>Consommer</button></>}
+        { object.type != 'consommable' && object.type != 'ressources' &&
+        <><div className="statistique">Stats : {object.statistique}</div>
+        <button className="cta" onClick={changeEquip}>Enfiler</button></>}
       </div>
   );
 };
