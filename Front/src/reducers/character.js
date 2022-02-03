@@ -230,7 +230,7 @@ const character = (state = initialState, action = {}) => {
       const dataForce = action.data.attributes.find(obj => obj.name == "force");
       const dataEndurance = action.data.attributes.find(obj => obj.name == "endurance");
       const dataDextérité = action.data.attributes.find(obj => obj.name == "dextérité");
-      const dataPoints = action.data.attributes.find(obj => obj.name == "points");
+      const dataPoints = action.data.attributes.find(obj => obj.name == "points de caractéristiques");
       return {
         ...state,
         inventory: inventoryData,

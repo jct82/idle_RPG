@@ -56,7 +56,6 @@ const logMiddleware = (store) => (next) => (action) => {
           console.log(response);
           if (response.status === 200) {
             console.log(response.data.character);
-            console.log(response);
             store.dispatch(setCharacterData(response.data.character));
             store.dispatch(getMonster(response.data.entities));
             store.dispatch(getNewMonster());
