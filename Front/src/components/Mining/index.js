@@ -70,7 +70,7 @@ export default function Mining({job}) {
         
         const { name, id, item_type_id, type, attribute } = workingResource;
         dispatch(sendOreToDb(id, 1, attribute[0].value))
-        // dispatch(sendResourceToInventory(name, id, 'ressource'));
+        dispatch(sendResourceToInventory(name, id, 'ressource'));
         //-------------------vvv quantité récupérée -----------vvv exp récupérée
         dispatch(addLogMessage(1, workingResource.attribute[0].value));
         dispatch(updateExpBar(percentage(experience, levelUpReq)));
@@ -100,7 +100,7 @@ export default function Mining({job}) {
       <div className="jobMain jobMain-mining">
         <button className="jobStartAction" onMouseDown={buttonOnClick}>{buttonTitle}</button>
         <span id="progressContainer">
-          <span id="progress" style={{width: experiencePercentage + "%"}}></span>
+          <span id="progress" style={isWorking ? { animation: `playerWorking 2000ms infinite linear`} : {}}></span>
         </span>
         <p className="jobLevel">Niveau {level}</p>
         <div className="playerWorkContainer">

@@ -32,7 +32,7 @@ const logMiddleware = (store) => (next) => (action) => {
             store.dispatch(getInventoryOnLogin(response.data.character.inventory));
             store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
             localStorage.setItem('characterId', response.data.character.id);
-            store.dispatch(characterMoney(response.data.character.gold));
+            // store.dispatch(characterMoney(response.data.character.gold));
           }
         })
         .catch((error) => {
@@ -65,7 +65,7 @@ const logMiddleware = (store) => (next) => (action) => {
             store.dispatch(getInventoryOnLogin(response.data.character.inventory));
             store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
             localStorage.setItem('characterId', response.data.character.id);
-            store.dispatch(characterMoney(response.data.character.gold));
+            // store.dispatch(characterMoney(response.data.character.gold));
           }
         })
         .catch((error) => {
@@ -112,7 +112,7 @@ const logMiddleware = (store) => (next) => (action) => {
             store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
             store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));
             store.dispatch(getInventoryOnLogin(response.data.character.inventory));
-            store.dispatch(characterMoney(response.data.character.gold));
+            // store.dispatch(characterMoney(response.data.character.gold));
         }
         })
         .catch((error)=> {

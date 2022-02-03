@@ -10,6 +10,9 @@ import {
   addLogMessageDmgReceived,
   receiveDamage,
   playerDeath,
+  playerTooWeak,
+  manualChangeMonsterBefore,
+  manualChangeMonsterAfter,
 } from '../../actions/fight';
 // == Import : local
 import './styles.scss';
@@ -22,6 +25,7 @@ const Fight = () => {
     force,
     endurance,
     dextérité,
+    level,
   } = useSelector((state) => state.character);
   console.log('vie,force, endurance,dextérité', vie,force, endurance,dextérité);
   const {
@@ -30,6 +34,9 @@ const Fight = () => {
     monsters,
     currentMonster,
     currentMonsterName,
+    newMonsterIndex,
+    autoMonsterSwitch,
+    tooWeak,
     logMessages
   } = useSelector((state) => state.fight);
 
@@ -39,19 +46,22 @@ const Fight = () => {
   // Calcul de pourcentage de la vie
   const percentage = (partialValue, maxLife) => (100 * partialValue) / maxLife;
   useEffect(() => {
-    // dispatch(updateHealthPlayer(percentage(100, 100)));
-    dispatch(getNewMonster());
-  }, []);
+    dispatch(getNewMonster(false, level));
+    console.log(level);
+    // Se lance quand les monstres sont bien récupérés en bdd
+  }, [monsters]);
 
   // Intervalle d'attaque pour le JOUEUR
   useEffect(() => {
     if (isFighting) {
       const interval = setInterval(() => {
-        console.log('atk joueur');
+        // console.log(currentMonster);
+        // console.log((Math.random() * 100).toFixed(1));
         const newLifeOfMonster = currentMonster.life - (force - currentMonster.attributes[0].value);
         if (newLifeOfMonster <= 0) {
-          dispatch(getNewMonster());
+          dispatch(autoMonsterSwitch ? getNewMonster(false, level) : getNewMonster(true, level));
         } else if (newLifeOfMonster >= currentMonster.life) {
+          dispatch(playerTooWeak());
           dispatch(addLogMessageDmgDealt(0));
         }
         else {
@@ -88,6 +98,17 @@ const Fight = () => {
   const playerStartsFight = () => {
     dispatch(startFighting());
   };
+
+  const playerSwitchesMonsterBefore = () => {
+    dispatch(manualChangeMonsterBefore());
+    dispatch(getNewMonster(true, level));
+    console.log(newMonsterIndex);
+  };
+  const playerSwitchesMonsterAfter = () => {
+    dispatch(manualChangeMonsterAfter());
+    dispatch(getNewMonster(true, level));
+    console.log(newMonsterIndex);
+  };
     console.log(monsters);
   return (
     <>
@@ -107,7 +128,11 @@ const Fight = () => {
               <span id="atkSpeed--player" style={ isFighting ? { animation: `atkSpeedActive ${2000 - dextérité}ms infinite linear`} : {}}/>
             </span>
           </div>
-          <div className="noDamageNotify">{ currentMonster.attributes[0].value >= force && "Tu es trop faible !" } </div>
+          <div className="noDamageNotify">{ tooWeak && currentMonster.attributes[0].value >= force && "Tu es trop faible !" } </div>
+          <div className="flexMonsterButtons">
+          <button className={isFighting ? "hidden" : "themed-button"} onClick={playerSwitchesMonsterBefore}>←</button>
+          <button className={isFighting ? "hidden" : "themed-button"} onClick={playerSwitchesMonsterAfter}>→</button>
+          </div>
           <div className="fight-profile fight-profile--enemy" style={ isFighting ? { animation: `monsterAttacksPlayer ${2000 - currentMonster.attributes[2].value}ms infinite ease-in-out`} : {}}>
             <div className="fight-enemy--img" />
             <span id="healthBarContainer--enemy">

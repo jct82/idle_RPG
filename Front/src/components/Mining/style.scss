@@ -95,10 +95,11 @@
 #progress {
   display: block;
   height: 100%;
+  width: 0%;
   // width: 50%;
-  max-width: 100%;
+  // max-width: 100%;
   background-color: green;
-  transition: width 100ms;
+  // transition: width 100ms;
 }
 
 .currentResource {
@@ -229,5 +230,14 @@
   }
   100% {
     background-position: -194px;
+  }
+}
+
+@keyframes playerWorking {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
   }
 }

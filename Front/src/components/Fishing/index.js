@@ -7,7 +7,6 @@ import {
   addLogMessage,
   addLevelUpMessage,
   levelUpJob,
-  updateExpBar,
   getAllFishResources,
   sendFishToDb,
 } from '../../actions/fishing';
@@ -27,7 +26,6 @@ export default function Fishing({job}) {
     experience,
     level,
     levelUpReq,
-    experiencePercentage,
   } = useSelector((state) => job === 'mining' ? state.mining : state.fishing);
 
   const { inventory } = useSelector((state) => state.character);
@@ -71,10 +69,9 @@ export default function Fishing({job}) {
         const { name, id, item_type_id, type, attribute } = workingResource;
         const stat = attribute.find(att => att.name == "soins");
         dispatch(sendFishToDb(id, 1, attribute[0].value));
-        // dispatch(sendResourceToInventory(name, id, 'consommable', stat.value));
+        dispatch(sendResourceToInventory(name, id, 'consommable', stat.value));
         //-------------------vvv quantité récupérée -----------vvv exp récupérée
         dispatch(addLogMessage(1, workingResource.attribute[0].value));
-        dispatch(updateExpBar(percentage(experience, levelUpReq)));
       }, actionTime);
 
       return () => clearInterval(interval)
@@ -100,7 +97,7 @@ export default function Fishing({job}) {
       <div className="jobMain jobMain-fishing">
         <button className="jobStartAction" onMouseDown={buttonOnClick}>{buttonTitle}</button>
         <span id="progressContainer">
-          <span id="progress" style={{width: experiencePercentage + "%"}}></span>
+          <span id="progress" style={isWorking ? { animation: `playerWorking 2000ms infinite linear`} : undefined}></span>
         </span>
         <p className="jobLevel">Niveau {level}</p>
         <div className="playerWorkContainer">

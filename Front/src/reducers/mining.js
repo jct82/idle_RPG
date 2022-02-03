@@ -18,7 +18,7 @@ const initialState = {
     level: 5,
     experience: 0,
     experiencePurcentage: 0,
-    levelUpReq: 100,
+    levelUpReq: 10000,
     currentResource: '',
     currentResourceExperience: 0,
     isWorking: false,
