@@ -36,7 +36,7 @@
     display: flex;
     width: 70%;
     height: 50%;
-    margin: 2% auto;
+    margin: 6% auto;
     flex-wrap: wrap;
   }
   &-stuff{
@@ -52,7 +52,7 @@
   width: 100px;
   margin-left: 70%;
   position: absolute;
-  top: 18%;
+  top: 10%;
   right: 12%;
   text-align: center;
   border: 1px rgba(0, 4, 255, 0.2) solid;
@@ -143,7 +143,14 @@
 @media screen and (max-width: 600px) {
   .money{
     top: 25%;
-    right: 14%; 
+    right: 8%; 
+  }
+}
+@media screen and (max-width: 500px) {
+  .money{
+    top: 12%;
+    right: 5%;
+     
   }
 }
 
