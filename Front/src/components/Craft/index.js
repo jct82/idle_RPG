@@ -53,9 +53,13 @@ const Craft = () => {
       </div>
   )
   return (
+    <>
+    <div className="title-page">
+      <div className="title">CRAFT</div>
+    </div>
     <div className="craft-container">
       {recipes && fillRecipes}
-    </div>
+    </div></>
   );
 };
 
