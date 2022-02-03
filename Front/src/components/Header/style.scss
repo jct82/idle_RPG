@@ -175,3 +175,15 @@
   line-height: 1;
   text-align: center;
 }
+
+@media screen and (max-width: 550px){
+  .btn-log {
+    width: 50px;
+    height: 36px;
+    font-size: 0;
+    background-image: url('../../../public/images/logMobil.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25px;
+  }
+}

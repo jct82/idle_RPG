@@ -99,8 +99,6 @@ export default function Header(props) {
       
       {modal == "inscription" &&<Register />}
       
-      
-      
     </div>
   );
 }
