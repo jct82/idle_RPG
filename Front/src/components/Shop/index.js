@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
 import { boutiqueLogo } from 'src/assets/idleMenuIcons';
 import {
-  modaleOpen, modaleClose, emptyArray, allObject,
+  modaleOpen, modaleClose, emptyArray, allObject, sendBuyItemToDb,
 } from '../../actions/shop';
 import { buyItem } from '../../actions/character';
 
@@ -31,11 +31,16 @@ export default function Shop() {
   const closeModale = () => {
     dispatch(modaleClose());
   };
+
+  
   // je compare si l'utilisateur a assez d'argent ou pas pour acheter un objet,
   // si c'est positif, ça retire l'argent de sa bourse, sinon ça ferme juste la modale sans action
   const buyingItem = () => {
+    const currentItem = stuffs.find((stuff) => stuff.id == isOpen.id);
     if (gold >= stuffs.find((stuff) => stuff.id == isOpen.id).attribute[1].value) {
       dispatch(buyItem(stuffs.find((stuff) => stuff.id == isOpen.id).attribute[1].value));
+      console.log(stuffs.find((stuff) => stuff.id == isOpen.id));
+      dispatch(sendBuyItemToDb(currentItem.id, currentItem.attribute[1].value, 1));
       dispatch(modaleClose());
     }
     else {

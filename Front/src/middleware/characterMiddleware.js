@@ -29,7 +29,7 @@ const characterMiddleware = (store) => (next) => (action) => {
             store.dispatch(getPlayerStats(response.data.character.attributes));
             store.dispatch(getInventoryOnLogin(response.data.character.inventory));
             store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
-            store.dispatch(characterMoney(response.data.character.gold));
+            // store.dispatch(characterMoney(response.data.character.gold));
           }
         })
         .catch((error) => {
