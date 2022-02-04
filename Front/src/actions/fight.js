@@ -12,6 +12,7 @@ export const UPDATE_AFTER_FIGHT = 'UPDATE_AFTER_FIGHT';
 export const PLAYER_TOO_WEAK = 'PLAYER_TOO_WEAK';
 export const MANUAL_CHANGE_MONSTER_BEFORE = 'MANUAL_CHANGE_MONSTER_BEFORE';
 export const MANUAL_CHANGE_MONSTER_AFTER = 'MANUAL_CHANGE_MONSTER_AFTER';
+export const UPDATE_MONSTER_HP = 'UPDATE_MONSTER_HP';
 
 export const getPlayerStats = (data) => ({
   type: GET_PLAYER_STATS,
@@ -44,6 +45,10 @@ export const getNewMonster = (manual, level) => ({
     manual,
     level,
   },
+});
+
+export const updateMonsterHp = () => ({
+  type: UPDATE_MONSTER_HP,
 });
 
 export const getMonster = (data) => ({

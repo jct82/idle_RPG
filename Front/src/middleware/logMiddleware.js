@@ -58,7 +58,7 @@ const logMiddleware = (store) => (next) => (action) => {
             
             store.dispatch(setCharacterData(response.data.character));
             store.dispatch(getMonster(response.data.entities));
-            store.dispatch(getNewMonster());
+            store.dispatch(getNewMonster(false));
             store.dispatch(getPlayerStats(response.data.character.attributes));
             store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
             store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));

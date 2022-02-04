@@ -10,6 +10,7 @@ import {
   PLAYER_TOO_WEAK,
   MANUAL_CHANGE_MONSTER_BEFORE,
   MANUAL_CHANGE_MONSTER_AFTER,
+  UPDATE_MONSTER_HP,
 
 } from '../actions/fight';
 
@@ -19,6 +20,10 @@ const initialState = {
   isFighting: false,
   buttonTitle: 'Attaque !',
   currentMonster: {},
+  currentMonsterHP: 1,
+  currentMonsterMaxHP: 1,
+  currentMonsterClass: '',
+  monsterLoaded: false,
   tooWeak: false,
   logMessages: [],
   newMonsterIndex: 0,
@@ -32,14 +37,12 @@ const initialState = {
       endurance: 1,
       dexterite: 0,
       level: 1,
-    },
-    {
-      name: "Valentin l'affreux",
-      life: 100,
-      attack: 6,
-      endurance: 15,
-      dexterite: 0,
-      level: 5,
+      attributes: [
+        {value: 1},
+        {value: 1},
+        {value: 1},
+        {value: 1}
+      ],
     },
   ],
 };
@@ -56,7 +59,8 @@ const fight = (state = initialState, action = {}) => {
       // const currentMonster = state.monsters.find((monster) => monster.name === state.currentMonster);
       return {
         ...state,
-        currentMonster: { ...state.currentMonster, life: action.payload.data },
+        // currentMonster: { ...state.currentMonster, life: action.payload.data },
+        currentMonsterHP: action.payload.data
         // state.monsters.map(
         //   (monster) => monster.name === state.currentMonsterName ? {...monster, life: action.payload.data} : monster
         // ),
@@ -64,14 +68,23 @@ const fight = (state = initialState, action = {}) => {
     case GET_NEW_RANDOM_MONSTER:
       const filteredMonsters = state.monsters.filter((monster) => monster.level <= action.payload.level);
       const lastIndexOfMons = filteredMonsters.length - 1;
+      console.log(state.monsters);
       return {
         ...state,
         tooWeak: false,
         newMonsterIndex: action.payload.manual ? state.newMonsterIndex : lastIndexOfMons,
         autoMonsterSwitch: action.payload.manual ? false : true,
+        monsterLoaded: true,
         currentMonster: {...state.monsters[action.payload.manual ? state.newMonsterIndex : lastIndexOfMons], life: 200, maxLife: 200},
-        // currentMonster: { ...state.monsters[Math.floor(Math.random() * state.monsters.length)], life: 200, maxLife: 200 },
-        // currentMonster: {...state.monsters.find((monster) => monster.name === state.currentMonsterName)},
+        // currentMonsterHP: state.monsters[action.payload.manual ? state.newMonsterIndex : lastIndexOfMons].attributes[3].value,
+      };
+    case UPDATE_MONSTER_HP:
+      console.log(state.currentMonster);
+      return {
+        ...state,
+        currentMonsterHP: state.currentMonster.attributes[3].value,
+        currentMonsterMaxHP: state.currentMonster.attributes[3].value,
+        currentMonsterClass: state.currentMonster.name.replace(/['"]+/g, "").replace(/\s/g, ""),
       };
     case MANUAL_CHANGE_MONSTER_BEFORE:
       return {
@@ -108,6 +121,7 @@ const fight = (state = initialState, action = {}) => {
         return {
           ...state,
           isFighting: false,
+          buttonTitle: 'Attaque !',
           logMessages: [
             <p key={uuidv4()} className="redLog">Vous êtes tombé K.O !</p>,
             ...state.logMessages.slice(0, 99),
