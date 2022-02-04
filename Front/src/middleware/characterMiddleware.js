@@ -45,7 +45,10 @@ const characterMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           if (response.status === 204) {
-            console.log('done');
+            store.dispatch(getMonster(response.data.entities));
+            store.dispatch(getPlayerStats(response.data.character.attributes));
+            store.dispatch(getInventoryOnLogin(response.data.character.inventory));
+            store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
           }
         })
         .catch((error) => {

@@ -4,6 +4,7 @@ export const MODALE_CLOSE = 'MODALE_CLOSE';
 export const EMPTY_ARRAY = 'EMPTY_ARRAY';
 export const BUY_ITEM = 'BUY_ITEM';
 export const ALL_OBJECT = 'ALL_OBJECT';
+export const SEND_BUY_ITEM_TO_DB = 'SEND_BUY_ITEM_TO_DB';
 
 export const randomStuff = (stuffs) => ({
   type: RANDOM_STUFF,
@@ -27,14 +28,15 @@ export const modaleClose = () => ({
   type: MODALE_CLOSE,
 });
 
-/* export const buyItem = (price) => ({
-  type: BUY_ITEM,
-  payload: {
-    price,
-  },
-}); */
-
 export const allObject = () => ({
   type: ALL_OBJECT,
 });
 
+export const sendBuyItemToDb = (itemId, goldValue, quantity = 1) => ({
+  type: SEND_BUY_ITEM_TO_DB,
+  payload: {
+    itemId,
+    goldValue,
+    quantity,
+  },
+});

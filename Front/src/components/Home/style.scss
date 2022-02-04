@@ -118,3 +118,37 @@
   }
 }
 
+.contact {
+  border: 1px rgba(0, 4, 255, 0.2) solid;
+  background: vars.$baseColor;
+  box-shadow: inset 1px 1px 5px white;
+  border-radius: 10px;
+  width: 20%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  position: absolute;
+  right : 5%;
+  .dev {
+    margin: 3rem;
+  }
+}
+
+.lore {
+  border: 1px rgba(0, 4, 255, 0.2) solid;
+  background: vars.$baseColor;
+  box-shadow: inset 1px 1px 5px white;
+  border-radius: 10px;
+  height: auto;
+  width: 20%;
+  position: absolute;
+
+  p {
+    margin: 1rem;
+    padding: 0.5rem;
+    line-height: 1.5rem;
+  }
+}
