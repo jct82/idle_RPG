@@ -32,7 +32,7 @@ const initialState = {
         description: '',
         img_path: 'épéedefer',
         quantity: 0,
-        type_statistique: '',
+        type_statistique: 'force',
         reserve: [],
       },
       {
@@ -40,7 +40,7 @@ const initialState = {
         description: '',
         img_path: 'casquedefer',
         quantity: 0,
-        type_statistique: 'force',
+        type_statistique: 'endurance',
         reserve: [],
       },
       {
@@ -147,14 +147,11 @@ const character = (state = initialState, action = {}) => {
               img_path: action.recipe.name.replace(/['"]+/g, "").replace(/\s/g, ""),
             }
             if (elem.name == "arme") {
-              crafted.degat_min = action.recipe.attribute.find(att => att.name == 'degat_min');
-              crafted.degat_min = crafted.degat_min.value;
-              crafted.statistique = action.recipe.attribute.find(att => att.name == 'degat_max');
-              crafted.degat_max = crafted.statistique.value;
+              crafted.statistique = action.recipe.attribute.filter(att => att.name == 'force');
             } else if (elem.name == "armure") {
               crafted.statistique = action.recipe.attribute.filter(att => att.name == 'endurance');
             } else if (elem.name == "casque") {
-              crafted.statistique = action.recipe.attribute.filter(att => att.name == 'force');
+              crafted.statistique = action.recipe.attribute.filter(att => att.name == 'endurance');
             } else if (elem.name == "bottes") {
               crafted.statistique = action.recipe.attribute.filter(att => att.name == 'dextérité');
             }
@@ -292,7 +289,6 @@ const character = (state = initialState, action = {}) => {
         selected: '',
       };
     case UPDATE_EQUIPMENT:
-      console.log('tttttttt');
       let equipInvent = state.inventory.equipment;
       equipInvent.forEach(equip => {
         if (equip.name == action.objType) {
@@ -305,6 +301,7 @@ const character = (state = initialState, action = {}) => {
           }
         }
       });
+
       let oldStuff = state.equipments[action.objType];
       let stuffType = state.inventory.equipment.find(item => item.name == action.objType);
 
@@ -437,7 +434,7 @@ const character = (state = initialState, action = {}) => {
       case UPDATE_CHARACTER_LEVEL:
           return {
             ...state,
-            level: action.payload.newLevel,
+            level: action.payload.newLvl,
       };
     default:
       return state;
