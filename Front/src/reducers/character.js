@@ -342,7 +342,7 @@ const character = (state = initialState, action = {}) => {
       return {
         ...state,
         inventory: newInventory,
-        vie: state.life + action.statistique > 100 ? 100 : state.vie + action.statistique,
+        vie: state.vie + action.statistique > 100 ? 100 : state.vie + action.statistique,
         selected: '',
       };
     case SPARE_POINTS:

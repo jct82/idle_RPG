@@ -64,13 +64,6 @@ export const updateNbrField = (value, name, min, max) => ({
   max: max,
 });
 
-export const getInventoryOnLogin = (inv) => ({
-  type: GET_INVENTORY_ON_LOGIN,
-  payload: {
-    inv,
-  },
-});
-
 export const getAllitems = () => ({
   type: GET_ALL_ITEMS,
 });

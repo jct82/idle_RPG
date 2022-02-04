@@ -24,7 +24,7 @@
     display: flex;
     justify-content: center;
     font-size: 2rem;
-    margin: 0 auto;
+    margin: 0 auto 70px;
     padding: 2rem;
     border: 1px rgba(0, 4, 255, 0.2) solid;
     background: vars.$baseColor;
@@ -34,26 +34,23 @@
   }
   &-inventory{
     display: flex;
-    width: 70%;
+    justify-content: center;
+    width: 100%;
     height: 50%;
-    margin: 6% auto;
     flex-wrap: wrap;
-  }
-  &-stuff{
-    margin: 1rem;
-    padding: 5%;
-    display: flex;
-    justify-content: space-around;
   }
 }
 .money {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
   padding: 1.15rem;
   width: 100px;
   margin-left: 70%;
   position: absolute;
   top: 10%;
-  right: 12%;
+  right: 40px;
   text-align: center;
   border: 1px rgba(0, 4, 255, 0.2) solid;
   background: vars.$baseColor;
@@ -62,21 +59,28 @@
   overflow: hidden;
 }
 .buying-modal{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  height: 210px;;
   font-size: 1.3rem;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   text-align: center;
   width: 50%;
-  margin: 0 auto;
   border: 1px rgba(0, 4, 255, 0.2) solid;
-  background: vars.$baseColor;
+  background: rgba(91, 123, 149, 0.8);
   box-shadow: inset 1px 1px 5px white;
   border-radius: 10px;
   overflow: hidden;
+  color: #fff;
   img{
-    height: 5%;
-    width: 5%;
+    position: relative;
+    top: 7px;
   }
   .button-container {
     text-align: center;
@@ -87,70 +91,62 @@
   }
 }
 .stuff{
-  display: flex;
-  flex-direction: column;
-  width: 33.33%;
+  width: 250px;
   min-height: 33.33%;
   max-height: 33.33%;
+  margin: 12px;
   padding: 1em;
   border: 1px rgba(0, 4, 255, 0.2) solid;
   background: vars.$baseColor;
   box-shadow: inset 1px 1px 5px white;
   border-radius: 10px;
   overflow: hidden;
-
-  .buy-button {
-  display: flex;
-}
-  &-name{
-    margin: 1rem;
+  .btn-wrapper{
     text-align: center;
-}
+  }
+  &-name{
+    margin: 10px 0;
+    text-align: center;
+  }
+  &-info{
+    display:flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
+  }
   &-stat{
-    margin: 1rem;
-    justify-content: center;
+    flex-grow: 1;
+    padding-bottom: 3px;
+  }
+  &-val{
+    flex-shrink:1;
+    flex-grow:0;
+    padding-bottom: 3px;
+  }
+  &-money{
+    flex-basis:33px;
+    padding-left: 3px;
+  }
+  &-image{
+    width: auto;
+    height: 60px;
+    margin-bottom: 12px;
+    background-position: center;
+    background-size: auto 90%;
+    background-repeat: no-repeat;
   }
 }
 
-
-@media screen and (max-width: 1100px) {
-  .stuff{
-    width: 50%;
-  }
-  .money{
-    padding: 1rem;
-    top: 20%;
-    right: 14%;
-  }
-}
-@media screen and (max-width: 800px) {
-  .stuff{
-    width: 100%;
-  }
+@media screen and (max-width: 768px) {
   .buying-modal{
-    position: absolute;
-    top: 40%;
-    left: 30%;
   }
   .money{
     padding: 0.5rem;
-    top: 15%;
+    top: 232px;
+    right: 20px;
   }
   .shop-main{
     padding: 1rem;
   }
 }
-@media screen and (max-width: 600px) {
-  .money{
-    top: 25%;
-    right: 8%; 
-  }
-}
-@media screen and (max-width: 500px) {
-  .money{
-    top: 12%;
-    right: 5%;
-     
-  }
-}
+
 
