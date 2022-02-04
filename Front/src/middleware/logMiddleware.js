@@ -25,7 +25,7 @@ const logMiddleware = (store) => (next) => (action) => {
           if (response.status === 201) {
             store.dispatch(setCharacterData(response.data.character));
             store.dispatch(getMonster(response.data.entities));
-            store.dispatch(getNewMonster());
+            store.dispatch(getNewMonster(false));
             store.dispatch(getPlayerStats(response.data.character.attributes));
             store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
             store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));
@@ -58,7 +58,7 @@ const logMiddleware = (store) => (next) => (action) => {
             
             store.dispatch(setCharacterData(response.data.character));
             store.dispatch(getMonster(response.data.entities));
-            store.dispatch(getNewMonster());
+            store.dispatch(getNewMonster(false));
             store.dispatch(getPlayerStats(response.data.character.attributes));
             store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
             store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));
@@ -76,11 +76,7 @@ const logMiddleware = (store) => (next) => (action) => {
     }
     case CHECK_USER:
       next(action);
-      // TODO refresh ne marche qu'une fois, à fix
       const foundToken = localStorage.getItem('profile');
-      console.log(foundToken);
-      // console.log(JSON.parse(localStorage.getItem('name')));
-      // console.log(JSON.parse(localStorage.getItem('userId')));
       const config = {
         method:'post',
         url:'/user/checklogin',
@@ -111,6 +107,7 @@ const logMiddleware = (store) => (next) => (action) => {
             store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
             store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));
             store.dispatch(getInventoryOnLogin(response.data.character.inventory));
+            localStorage.setItem('characterId', response.data.character.id);
         }
         })
         .catch((error)=> {

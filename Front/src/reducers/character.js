@@ -7,7 +7,8 @@ import { SEND_BUY_ITEM_TO_DB } from "../actions/shop";
 import {
   GET_PLAYER_STATS,
   UPDATE_HEALTH_BAR_PLAYER,
-  RECEIVE_DAMAGE
+  RECEIVE_DAMAGE,
+  UPDATE_CHARACTER_LEVEL
 } from '../actions/fight';
 
 const initialState = {
@@ -429,10 +430,14 @@ const character = (state = initialState, action = {}) => {
         let equipIndex = boughtInventory.equipment.findIndex(elem => elem.name == product.type);
         addBoughtToInvent(boughtInventory.equipment[equipIndex].reserve, product.id, product.name, stat);
       }
-
       return {
         ...state,
         inventory: boughtInventory,
+      }
+      case UPDATE_CHARACTER_LEVEL:
+          return {
+            ...state,
+            level: action.payload.newLevel,
       };
     default:
       return state;

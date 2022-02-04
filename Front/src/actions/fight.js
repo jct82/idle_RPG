@@ -12,6 +12,8 @@ export const UPDATE_AFTER_FIGHT = 'UPDATE_AFTER_FIGHT';
 export const PLAYER_TOO_WEAK = 'PLAYER_TOO_WEAK';
 export const MANUAL_CHANGE_MONSTER_BEFORE = 'MANUAL_CHANGE_MONSTER_BEFORE';
 export const MANUAL_CHANGE_MONSTER_AFTER = 'MANUAL_CHANGE_MONSTER_AFTER';
+export const UPDATE_MONSTER_HP = 'UPDATE_MONSTER_HP';
+export const UPDATE_CHARACTER_LEVEL = 'UPDATE_CHARACTER_LEVEL';
 
 export const getPlayerStats = (data) => ({
   type: GET_PLAYER_STATS,
@@ -46,6 +48,10 @@ export const getNewMonster = (manual, level) => ({
   },
 });
 
+export const updateMonsterHp = () => ({
+  type: UPDATE_MONSTER_HP,
+});
+
 export const getMonster = (data) => ({
   type: GET_MONSTER,
   payload: {
@@ -78,14 +84,23 @@ export const playerDeath = () => ({
   type: DEATH_OF_PLAYER,
 });
 
-export const updateAfterFight = (newExp, newGold, newItem, newHp, newCurrentMonster) => ({
+export const updateAfterFight = (expValue, goldValue, hasLoot, itemId, newHp, hasWin, quantity) => ({
   type: UPDATE_AFTER_FIGHT,
   payload: {
-    newExp,
-    newGold,
-    newItem,
+    expValue,
+    goldValue,
+    hasLoot,
+    itemId,
     newHp,
-    newCurrentMonster,
+    hasWin,
+    quantity,
+  },
+});
+
+export const updateCharacterLevel = (newLvl) => ({
+  type: UPDATE_CHARACTER_LEVEL,
+  payload: {
+    newLvl,
   },
 });
 

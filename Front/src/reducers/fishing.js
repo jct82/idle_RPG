@@ -52,7 +52,7 @@ const jobs = (state = initialState, action = {}) => {
             ...state,
               experience: state.experience + state.currentResourceExperience,
               logMessages: [
-                <p key={uuidv4()}>Vous avez récupéré {action.payload.amount} {state.currentResource} et {state.currentResourceExperience} points d'expérience</p>,
+                <p key={uuidv4()}>Vous avez récupéré {action.payload.amount} {state.currentResource} et {action.payload.experience} points d'expérience</p>,
                 ...state.logMessages.slice(0, 99),
               ],
           };

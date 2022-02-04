@@ -70,8 +70,8 @@ export default function Fishing({job}) {
         const stat = attribute.find(att => att.name == "soins");
         dispatch(sendFishToDb(id, 1, attribute[0].value));
         dispatch(sendResourceToInventory(name, id, 'consommable', stat.value));
-        //-------------------vvv quantité récupérée -----------vvv exp récupérée
-        dispatch(addLogMessage(1, workingResource.attribute[0].value));
+        //-------------------vvv exp récupérée -----------vvv quantité récupérée
+        dispatch(addLogMessage(workingResource.attribute[0].value, 1));
       }, actionTime);
 
       return () => clearInterval(interval)

@@ -13,9 +13,13 @@ import {
   playerTooWeak,
   manualChangeMonsterBefore,
   manualChangeMonsterAfter,
+  updateMonsterHp,
+  updateAfterFight,
 } from '../../actions/fight';
 // == Import : local
 import './styles.scss';
+import '../../styles/allmonsters.scss';
+import { sendResourceToInventory } from '../../actions/mining';
 // == Composant
 
 const Fight = () => {
@@ -33,33 +37,41 @@ const Fight = () => {
     monsters,
     currentMonster,
     currentMonsterName,
+    currentMonsterHP,
+    currentMonsterMaxHP,
+    monsterLoaded,
+    currentMonsterClass,
     newMonsterIndex,
     autoMonsterSwitch,
     tooWeak,
     logMessages
   } = useSelector((state) => state.fight);
 
-  // Vitesse d'attaque
-  // const attackSpeedPlayer = attackSpeed - (dextérité);
-
   // Calcul de pourcentage de la vie
   const percentage = (partialValue, maxLife) => (100 * partialValue) / maxLife;
   useEffect(() => {
     dispatch(getNewMonster(false, level));
-    console.log(level);
+    // console.log();
     // Se lance quand les monstres sont bien récupérés en bdd
   }, [monsters]);
+
+  useEffect(() => {
+    dispatch(updateMonsterHp());
+  }, [currentMonster]);
 
   // Intervalle d'attaque pour le JOUEUR
   useEffect(() => {
     if (isFighting) {
       const interval = setInterval(() => {
         // console.log(currentMonster);
-        // console.log((Math.random() * 100).toFixed(1));
-        const newLifeOfMonster = currentMonster.life - (force - currentMonster.attributes[0].value);
+        const dropChance = ((Math.random() * 100) / 100).toFixed(2)
+        const newLifeOfMonster = currentMonsterHP - (force - currentMonster.attributes[0].value);
+        const cm = currentMonster;
+        const cmr = cm.rewards_items[0];
         if (newLifeOfMonster <= 0) {
+          dispatch(updateAfterFight(cm.reward_exp, cm.reward_gold, dropChance <= cmr.drop_rate, cmr.item_id, vie, true, cmr.quantity));
           dispatch(autoMonsterSwitch ? getNewMonster(false, level) : getNewMonster(true, level));
-        } else if (newLifeOfMonster >= currentMonster.life) {
+        } else if (newLifeOfMonster >= currentMonsterHP) {
           dispatch(playerTooWeak());
           dispatch(addLogMessageDmgDealt(0));
         }
@@ -71,14 +83,18 @@ const Fight = () => {
 
       return () => clearInterval(interval);
     }
-  }, [isFighting, monsters, currentMonster]);
+  }, [isFighting, monsters, currentMonster, currentMonsterHP]);
 
   // Intervalle d'attaque pour le MONSTRE
   useEffect(() => {
     if (isFighting) {
       const intervalMonster = setInterval(() => {
+        const cm = currentMonster;
+        const cmr = cm.rewards_items[0];
+        console.log(currentMonster);
         const newLifeOfPlayer = vie - (currentMonster.attributes[1].value - endurance);
         if (newLifeOfPlayer <= 0) {
+          dispatch(updateAfterFight(cm.reward_exp, cm.reward_gold, false, cmr.item_id, 0, false, cmr.quantity));
           dispatch(receiveDamage(0));
           dispatch(playerDeath());
         } else if (newLifeOfPlayer >= vie) {
@@ -133,12 +149,12 @@ const Fight = () => {
           <button className={isFighting ? "hidden" : "themed-button"} onClick={playerSwitchesMonsterAfter}>→</button>
           </div>
           <div className="fight-profile fight-profile--enemy" style={ isFighting ? { animation: `monsterAttacksPlayer ${2000 - currentMonster.attributes[2].value}ms infinite ease-in-out`} : {}}>
-            <div className="fight-enemy--img" />
+            <div className={isFighting ? `${currentMonsterClass}--fight` : currentMonsterClass} />
             <span id="healthBarContainer--enemy">
             <span className="healthBar--percentage">
-              {currentMonster.life}
+              {currentMonsterHP}
             </span>
-              <span id="healthBar--enemy" style={{ width: `${percentage(currentMonster.life, currentMonster.maxLife)}%` }}/>
+              <span id="healthBar--enemy" style={{ width: `${percentage(currentMonsterHP, currentMonsterMaxHP)}%` }}/>
             </span>
             <span id="atkSpeedContainer--enemy">
               <span id="atkSpeed--enemy" style={ isFighting ? { animation: `atkSpeedActive ${2000 - currentMonster.attributes[2].value}ms infinite linear`} : {}} />
@@ -152,6 +168,7 @@ const Fight = () => {
           <div className="fight--stats">
             <div className="fight--stats-player">
               <p className="fight--stat">Personnage :</p>
+              <p className="fight--stat">Niveau : {level}</p>
               <p className="fight--stat">PDV : {vie}</p>
               <p className="fight--stat">Attaque : {force}</p>
               <p className="fight--stat">Endurance : {endurance}</p>
@@ -162,7 +179,8 @@ const Fight = () => {
               {currentMonster.attributes && 
               (
                 <>
-                <p className="fight--stat">{currentMonster.life} : PDV</p>
+                <p className="fight--stat">{currentMonster.level} : Niveau </p>
+                <p className="fight--stat">{currentMonsterHP} : PDV</p>
                 <p className="fight--stat">{currentMonster.attributes[1].value} : Attaque </p>
                 <p className="fight--stat">{currentMonster.attributes[0].value} : Endurance </p>
                 <p className="fight--stat">{currentMonster.attributes[2].value} : Dextérité</p>
