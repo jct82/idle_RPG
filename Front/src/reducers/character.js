@@ -184,15 +184,15 @@ const character = (state = initialState, action = {}) => {
             currentConso.quantity = object.quantity;
             newConsommable.push(currentConso);
         } else if (object.type_name == "arme") {
-            let degatMin = object.attributes.find(item => item.name == "degat_min");
+           /* let degatMin = object.attributes.find(item => item.name == "degat_min");
             let degatMax = object.attributes.find(item => item.name == "degat_max");
             let currentArme = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem');
             currentArme.statistique = degatMax.value;
             currentArme.degat_min = degatMin.value;
             currentArme.degat_max = degatMax.value;
-            newArme.push(currentArme);
+            newArme.push(currentArme);*/
         } else if (object.type_name == "casque") {
-            let stat = object.attributes.find(item => item.name == "force");
+            let stat = object.attributes.find(item => item.name == "endurance");
             let currentCasque = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem');
             currentCasque.statistique = stat.value;
             newCasque.push(currentCasque);
