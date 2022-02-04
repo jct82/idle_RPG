@@ -23,7 +23,6 @@ const Fight = () => {
     endurance,
     dextérité,
   } = useSelector((state) => state.character);
-  console.log('vie,force, endurance,dextérité', vie,force, endurance,dextérité);
   const {
     isFighting,
     buttonTitle,
