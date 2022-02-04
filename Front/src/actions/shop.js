@@ -32,11 +32,8 @@ export const allObject = () => ({
   type: ALL_OBJECT,
 });
 
-export const sendBuyItemToDb = (itemId, goldValue, quantity = 1) => ({
+export const sendBuyItemToDb = (product, quantity) => ({
   type: SEND_BUY_ITEM_TO_DB,
-  payload: {
-    itemId,
-    goldValue,
-    quantity,
-  },
+  product: product,
+  quantity: quantity,
 });

@@ -3,6 +3,7 @@ import { SET_INVENTORY, POSTER_CATEGORY, POSTER_EQUIP, SET_DETAILS,
   CLOSE_DETAILS, UPDATE_EQUIPMENT,UPDATE_VIVRE, SPARE_POINTS, UPDATE_NBR_FIELD,
   GET_INVENTORY_ON_LOGIN, SET_INVENTORY_DATA, SET_CHARACTER_DATA, BUY_ITEM } from '../actions/character';
 import { SEND_CRAFTED_ITEM_TO_PLAYER, SPEND_RESOURCES_FOR_CRAFT } from "../actions/craft";
+import { SEND_BUY_ITEM_TO_DB } from "../actions/shop";
 import {
   GET_PLAYER_STATS,
   UPDATE_HEALTH_BAR_PLAYER,
@@ -392,6 +393,46 @@ const character = (state = initialState, action = {}) => {
       return {
         ...state,
         gold: state.gold - action.payload.gold,
+      };
+    case SEND_BUY_ITEM_TO_DB:
+
+      const addBoughtToInvent = (list, id, name, stat) => {
+        if (list.find(elem => elem.item_id == product.id) == undefined) {
+          let newObj = {
+            item_id: product.id,
+            name: product.name,
+            img_path: product.name.replace(/['"]+/g, "").replace(/\s/g, ""),
+            description: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+            quantity: 1,
+          }
+          if (stat != undefined) newObj.statistique = stat.value;
+          list.push(newObj);
+        } else {
+          for (let i = 0; i < list.length; i++) {
+            if (list[i].item_id == product.id) {
+              list[i].quantity += 1;
+              break;
+            }
+          }
+        }
+      }
+      
+      let boughtInventory = state.inventory;
+      let product = action.product; 
+      if (product.type == 'consommable') {
+        let stat = product.attribute[2];
+        addBoughtToInvent(boughtInventory.consommable, product.id, product.name, stat);
+      } else if (product.type == 'ressource') {
+        addBoughtToInvent(boughtInventory.ressource, product.id, product.name);
+      } else {
+        let stat = product.attribute[2];
+        let equipIndex = boughtInventory.equipment.findIndex(elem => elem.name == product.type);
+        addBoughtToInvent(boughtInventory.equipment[equipIndex].reserve, product.id, product.name, stat);
+      }
+
+      return {
+        ...state,
+        inventory: boughtInventory,
       };
     default:
       return state;

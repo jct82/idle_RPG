@@ -38,6 +38,9 @@ const shopMiddleware = (store) => (next) => (action) => {
     case SEND_BUY_ITEM_TO_DB: {
       const characterId = localStorage.getItem('characterId');
       const foundToken = localStorage.getItem('profile');
+
+      const { product, quantity } = action;
+
       const config = {
         method: 'patch',
         url: '/shop',
@@ -47,9 +50,9 @@ const shopMiddleware = (store) => (next) => (action) => {
         },
         data: {
           characterId: parseInt(characterId, 10),
-          itemId: action.payload.itemId,
-          goldValue: -action.payload.goldValue,
-          quantity: action.payload.quantity,
+          itemId: product.id,
+          goldValue: -product.attribute[1].value,
+          quantity: quantity,
         },
       };
       API(config)

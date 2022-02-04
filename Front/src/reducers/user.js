@@ -1,4 +1,4 @@
-import { LOGMODALE, UPDATE_FIELD, LOG_USER, POSTER_MENU, DARK_MODE, LOGOUT } from "../actions/user";
+import { LOGMODALE, UPDATE_FIELD, LOG_USER, POSTER_MENU, DARK_MODE, LOGOUT, SUBSCRIBE_USER } from "../actions/user";
 const initialState = {
   modal: "",
   email: "",
@@ -52,12 +52,17 @@ const user = (state = initialState, action = {}) => {
         ...state,
         darkMode: !state.darkMode,
       };
-      case LOGOUT:
+    case LOGOUT:
       return {
         ...state,
         logged: false,
         name: '',
         userId: '',
+      };
+    case SUBSCRIBE_USER:
+      return {
+        ...state,
+        modal: '',
       };
     default:
       return state;
