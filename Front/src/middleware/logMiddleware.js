@@ -76,11 +76,7 @@ const logMiddleware = (store) => (next) => (action) => {
     }
     case CHECK_USER:
       next(action);
-      // TODO refresh ne marche qu'une fois, à fix
       const foundToken = localStorage.getItem('profile');
-      console.log(foundToken);
-      // console.log(JSON.parse(localStorage.getItem('name')));
-      // console.log(JSON.parse(localStorage.getItem('userId')));
       const config = {
         method:'post',
         url:'/user/checklogin',
