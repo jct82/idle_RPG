@@ -31,6 +31,8 @@ const App = () => {
       dispatch(checkUser());
   }, []);
 
+
+  console.log('logged', logged);
   return (
     <div className={darkMode ? "app dark" : "app"}>
 
