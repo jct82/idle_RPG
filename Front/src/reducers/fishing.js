@@ -5,7 +5,6 @@ import {
   ALERT_PLAYER_NEEDS_RESOURCE_FISH,
   ADD_LOG_MESSAGE_FISH,
   ADD_RESOURCE_EXPERIENCE_TO_PLAYER_FISH,
-  LEVEL_UP_PLAYER_JOB_FISH,
   ADD_LEVEL_UP_MESSAGE_FISH,
   UPDATE_EXPERIENCE_BAR_PROGRESS_FISH,
   UPDATE_FISH_RESOURCES,
@@ -17,8 +16,6 @@ const initialState = {
     name: 'Pêche',
     level: 1,
     experience: 0,
-    experiencePercentage: 0,
-    levelUpReq: 100,
     currentResource: '',
     currentResourceExperience: 0,
     isWorking: false,
@@ -70,18 +67,6 @@ const jobs = (state = initialState, action = {}) => {
           case ADD_RESOURCE_EXPERIENCE_TO_PLAYER_FISH:
             return {
               ...state,
-            };
-          case LEVEL_UP_PLAYER_JOB_FISH:
-            return {
-              ...state,
-                level: state.level + 1,
-                experience: 0,
-                levelUpReq: state.levelUpReq * 1.10,
-            };
-          case UPDATE_EXPERIENCE_BAR_PROGRESS_FISH:
-            return {
-              ...state,
-                experiencePercentage: action.payload.newExpPercentage,
             };
           case UPDATE_FISH_RESOURCES:
             return {

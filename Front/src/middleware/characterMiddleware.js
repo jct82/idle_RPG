@@ -1,8 +1,9 @@
 import { SPARE_POINTS, UPDATE_EQUIPMENT } from '../actions/character';
+import { logUser } from '../actions/user';
 import API from './api';
 
-const foundToken = localStorage.getItem('profile');
 const characterMiddleware = (store) => (next) => (action) => {
+  const foundToken = localStorage.getItem('profile');
   const state = store.getState();
   switch (action.type) {
     case SPARE_POINTS: {
@@ -21,7 +22,13 @@ const characterMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           if (response.status === 204) {
-            console.log('done');
+            if (response.headers.authorization) {
+              const newToken = response.headers.authorization;
+              const foundName = JSON.parse(localStorage.getItem('name'));
+              const foundId = JSON.parse(localStorage.getItem('userId'));
+              const userAction = logUser(newToken, foundName, foundId);
+              store.dispatch(userAction);
+            }
           }
         })
         .catch((error) => {
@@ -31,6 +38,7 @@ const characterMiddleware = (store) => (next) => (action) => {
       break;
     }
     case UPDATE_EQUIPMENT: {
+      const foundToken = localStorage.getItem('profile');
       const config = {
         method: 'patch',
         url: '/equipment/equipItem',
@@ -45,10 +53,14 @@ const characterMiddleware = (store) => (next) => (action) => {
       API(config)
         .then((response) => {
           if (response.status === 204) {
-            store.dispatch(getMonster(response.data.entities));
-            store.dispatch(getPlayerStats(response.data.character.attributes));
-            store.dispatch(getInventoryOnLogin(response.data.character.inventory));
-            store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
+            if (response.headers.authorization) {
+              const newToken = response.headers.authorization;
+              const foundName = JSON.parse(localStorage.getItem('name'));
+              const foundId = JSON.parse(localStorage.getItem('userId'));
+              const userAction = logUser(newToken, foundName, foundId);
+              store.dispatch(userAction);
+              // store.dispatch(getPlayerStats(response.data.character.attributes));
+            }
           }
         })
         .catch((error) => {

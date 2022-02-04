@@ -204,8 +204,9 @@
 
 .noDamageNotify {
   color: red;
-  position: relative;
-  top: 100px;
+  position: absolute;
+  // position: relative;
+  // top: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -213,6 +214,23 @@
   width: fit-content;
 }
 
+.flexMonsterButtons {
+  position: relative;
+  left: 8%;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.themed-button {
+  font-size: 3rem;
+  width: fit-content;
+  height: fit-content;
+}
+
+.hidden {
+  display: none;
+}
 @keyframes atkSpeedActive {
   0% {
     width: 0%;

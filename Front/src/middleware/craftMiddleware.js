@@ -8,11 +8,6 @@ const craftMiddleware = (store) => (next) => (action) => {
     case SEND_CRAFTED_ITEM_TO_DB: {
       const characterId = localStorage.getItem('characterId');
       const foundToken = localStorage.getItem('profile');
-      console.log(parseInt(characterId, 10));
-      console.log(action.payload.itemId);
-      console.log(action.payload.quantity);
-      console.log(action.payload.componentId);
-      console.log(-action.payload.componentQuantity);
       const config = {
         method: 'patch',
         url: '/craft',

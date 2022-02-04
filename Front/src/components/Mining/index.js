@@ -100,7 +100,7 @@ export default function Mining({job}) {
       <div className="jobMain jobMain-mining">
         <button className="jobStartAction" onMouseDown={buttonOnClick}>{buttonTitle}</button>
         <span id="progressContainer">
-          <span id="progress" style={{width: experiencePercentage + "%"}}></span>
+          <span id="progress" style={isWorking ? { animation: `playerWorking 2000ms infinite linear`} : {}}></span>
         </span>
         <p className="jobLevel">Niveau {level}</p>
         <div className="playerWorkContainer">
