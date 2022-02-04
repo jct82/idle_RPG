@@ -6,7 +6,8 @@ import { SEND_CRAFTED_ITEM_TO_PLAYER, SPEND_RESOURCES_FOR_CRAFT } from "../actio
 import {
   GET_PLAYER_STATS,
   UPDATE_HEALTH_BAR_PLAYER,
-  RECEIVE_DAMAGE
+  RECEIVE_DAMAGE,
+  UPDATE_CHARACTER_LEVEL
 } from '../actions/fight';
 
 const initialState = {
@@ -392,6 +393,11 @@ const character = (state = initialState, action = {}) => {
       return {
         ...state,
         gold: state.gold - action.payload.gold,
+      };
+      case UPDATE_CHARACTER_LEVEL:
+          return {
+            ...state,
+            level: action.payload.newLevel,
       };
     default:
       return state;

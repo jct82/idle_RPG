@@ -2,7 +2,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import characterData from "../../../data/character";
-import { setInventoryObjects, posterCategory, posterEquipment, getAllitems } from "../../actions/character";
+import { setInventoryObjects, posterCategory, posterEquipment, getAllitems, setCharacterData } from "../../actions/character";
 import Objects from "../Object";
 import Details from "./details";
 import Equipment from "./equipment";
@@ -19,6 +19,7 @@ const Inventory = () => {
   );
   
   useEffect(() => {
+    // dispatch(setCharacterData());
     dispatch(getAllitems());
   }, []);
 
