@@ -8,7 +8,8 @@ import {
   GET_PLAYER_STATS,
   UPDATE_HEALTH_BAR_PLAYER,
   RECEIVE_DAMAGE,
-  UPDATE_CHARACTER_LEVEL
+  UPDATE_CHARACTER_LEVEL,
+  ADD_STATS_POINTS_AFTER_LVL_UP
 } from '../actions/fight';
 
 const initialState = {
@@ -106,14 +107,14 @@ const character = (state = initialState, action = {}) => {
           name: action.name, 
           description: 'lorem ipsum lorem ipsum', 
           img_path: action.name.replace(/['"]+/g, "").replace(/\s/g, ""), 
-          quantity: 1,
+          quantity: action.quantity,
         }
         if (action.obj_type == "consommable") addObject.statistique = action.stat
         addInventory.push(addObject);
       } else {
         for (let i = 0; i < addInventory.length; i++) {
           if (addInventory[i].item_id == addObject.item_id) {
-            addInventory[i].quantity += 1;
+            addInventory[i].quantity += action.quantity;
           }
         }
       }
@@ -181,37 +182,40 @@ const character = (state = initialState, action = {}) => {
         return {item_id: id, name: name, img_path: img, description: desc, quantity: quantity};
       }
       let newConsommable = [], newRessource = [], newArme = [], newCasque = [], newArmure = [], newBottes = [];
-      action.data.inventory.forEach((object) => {
-        if (object.type_name == "ressource") {
-            let currentRessource = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
-            newRessource.push(currentRessource);
-        } else if (object.type_name == "consommable") {
-            let stat = object.attributes.find(item => item.name == "soins");
-            let currentConso = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
-            currentConso.statistique = stat.value; 
-            newConsommable.push(currentConso);
-        } else if (object.type_name == "arme") {
-            let stat = object.attributes.find(item => item.name == "force");
-            let currentArme = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
-            currentArme.statistique = stat.value;
-            newArme.push(currentArme);
-        } else if (object.type_name == "casque") {
-            let stat = object.attributes.find(item => item.name == "endurance");
-            let currentCasque = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
-            currentCasque.statistique = stat.value;
-            newCasque.push(currentCasque);
-        } else if (object.type_name == "bottes") {
-            let stat = object.attributes.find(item => item.name == "dextérité");
-            let currentBottes = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
-            currentBottes.statistique = stat.value;
-            newBottes.push(currentBottes);
-        } else if (object.type_name == "armure") {
-            let stat = object.attributes.find(item => item.name == "endurance");
-            let currentArmure = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
-            currentArmure.statistique = stat.value;
-            newArmure.push(currentArmure);
-        }
-      });
+      if (action.data.inventory[0] !== null) {
+        action.data.inventory.forEach((object) => {
+          if (object.type_name == "ressource") {
+              let currentRessource = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
+              newRessource.push(currentRessource);
+          } else if (object.type_name == "consommable") {
+              let stat = object.attributes.find(item => item.name == "soins");
+              let currentConso = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
+              currentConso.statistique = stat.value; 
+              newConsommable.push(currentConso);
+          } else if (object.type_name == "arme") {
+              let stat = object.attributes.find(item => item.name == "force");
+              console.log(object);
+              let currentArme = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
+              currentArme.statistique = stat.value;
+              newArme.push(currentArme);
+          } else if (object.type_name == "casque") {
+              let stat = object.attributes.find(item => item.name == "endurance");
+              let currentCasque = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
+              currentCasque.statistique = stat.value;
+              newCasque.push(currentCasque);
+          } else if (object.type_name == "bottes") {
+              let stat = object.attributes.find(item => item.name == "dextérité");
+              let currentBottes = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
+              currentBottes.statistique = stat.value;
+              newBottes.push(currentBottes);
+          } else if (object.type_name == "armure") {
+              let stat = object.attributes.find(item => item.name == "endurance");
+              let currentArmure = feelObj(object.item_id, object.name, object.name.replace(/['"]+/g, "").replace(/\s/g, ""), 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem', object.quantity);
+              currentArmure.statistique = stat.value;
+              newArmure.push(currentArmure);
+          }
+        });
+      }
       let newEquip = state.inventory.equipment.map(equip => {
         if (equip.name == 'arme') {
             equip.reserve = [...equip.reserve, ...newArme];
@@ -291,7 +295,7 @@ const character = (state = initialState, action = {}) => {
     case UPDATE_EQUIPMENT:
       let equipInvent = state.inventory.equipment;
       equipInvent.forEach(equip => {
-        if (equip.name == action.objType) {
+        if (equip.name !== undefined && equip.name == action.objType) {
           for (let i = 0; i < equip.reserve.length; i++) {
             if (equip.reserve[i].item_id == action.id) {
               equip.reserve[i].quantity -= 1;
@@ -319,7 +323,7 @@ const character = (state = initialState, action = {}) => {
           equipment: equipInvent,
         },
         equipments: newEquipment,
-        [stuffType.type_statistique]: state[stuffType.type_statistique] + (newVal.statistique - oldVal.statistique),
+        [stuffType.type_statistique]: oldVal !== undefined ? state[stuffType.type_statistique] + (newVal.statistique - oldVal.statistique) : state[stuffType.type_statistique] + newVal.statistique,
         selected: '',
       };
     case UPDATE_VIVRE:
@@ -435,6 +439,12 @@ const character = (state = initialState, action = {}) => {
           return {
             ...state,
             level: action.payload.newLvl,
+      };
+      // TODO FIX FIGHTMIDDLEWARE
+    case ADD_STATS_POINTS_AFTER_LVL_UP:
+      return {
+        ...state,
+        points: state.points + 5,
       };
     default:
       return state;

@@ -36,7 +36,6 @@ const Craft = () => {
     
   };
   
-  console.log(recipes);
   const fillRecipes = recipes.map(item => 
     
     <div className={`craft-display`} key={uuidv4()}>
@@ -46,8 +45,8 @@ const Craft = () => {
                         {/* vvvv enlève les quotes et les espaces vvvvvv */}
         <div className={item.name.replace(/['"]+/g, "").replace(/\s/g, "")} />
         <div className="craft-display-recipe">
-        {/* Liste les effets des objets */}
-        {item.attribute.map((attribute, i) => i > 1 ? (
+        {/* Liste les effets des objets ---------- vvv 2 = le prix, inutile ici*/}
+        {item.attribute.map((attribute, i) => i !== 2 ? (
           <p className="craft-display-text item-effects" key={uuidv4()}>{attribute.name.replace('_', ' ')} : {attribute.value}</p>
         ) : undefined)}
         {/* Liste les ingrédients recquis pour craft */}

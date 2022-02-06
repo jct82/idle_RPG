@@ -15,6 +15,8 @@ import {
   manualChangeMonsterAfter,
   updateMonsterHp,
   updateAfterFight,
+  addLogMessageDrop,
+  addStatsPoints,
 } from '../../actions/fight';
 // == Import : local
 import './styles.scss';
@@ -69,6 +71,9 @@ const Fight = () => {
         const cm = currentMonster;
         const cmr = cm.rewards_items[0];
         if (newLifeOfMonster <= 0) {
+          if(dropChance <= cmr.drop_rate) {
+            dispatch(addLogMessageDrop(cmr.item_name, cmr.quantity));
+          };
           dispatch(updateAfterFight(cm.reward_exp, cm.reward_gold, dropChance <= cmr.drop_rate, cmr.item_id, vie, true, cmr.quantity));
           dispatch(autoMonsterSwitch ? getNewMonster(false, level) : getNewMonster(true, level));
         } else if (newLifeOfMonster >= currentMonsterHP) {

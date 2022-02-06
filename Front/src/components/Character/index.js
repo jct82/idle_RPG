@@ -68,11 +68,14 @@ const Inventory = () => {
   };
 
   const JSXaccessories = Object.keys(equipments).map(function(key) {
+    console.log(inventory.equipment);
     let equipType = inventory.equipment.find(item => item.name == key);
     let equipObj = equipType.reserve.find(item => item.item_id == equipments[key]);
-    return (
-      <Equipment key={equipObj.name} {...equipObj} />
-    )
+    if (equipObj !== undefined) {
+      return (
+        <Equipment key={equipObj.name} {...equipObj} />
+      )
+    }
   });
 
   return (

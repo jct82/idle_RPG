@@ -66,6 +66,7 @@ const logMiddleware = (store) => (next) => (action) => {
             store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
             localStorage.setItem('characterId', response.data.character.id);
           }
+          console.log(response);
         })
         .catch((error) => {
           console.log(error);

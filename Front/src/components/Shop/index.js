@@ -56,7 +56,7 @@ export default function Shop() {
     const selectedId = e.target.parentElement.parentElement.id;
     dispatch(modaleOpen(selectedId));
   };
-
+newShopArray && console.log(newShopArray);
   return (
     <>
       <div className="background-shop" />
@@ -78,7 +78,8 @@ export default function Shop() {
                       stuff.attribute.map((elem) => elem.name !== "prix" ? (<div>{`${elem.name.replace('_', ' ')}: ${elem.value} `}</div>) : '')
                     }
                   </div>
-                  <div className="stuff-val">{stuff.attribute[1].value}</div><img className="stuff-money" src={boutiqueLogo} alt="or" />
+                  <div className="stuff-val">{stuff.attribute.find((att) => att.name === "prix").value}</div><img className="stuff-money" src={boutiqueLogo} alt="or" />
+                  {/* <div className="stuff-val">{stuff.attribute[1].value}</div><img className="stuff-money" src={boutiqueLogo} alt="or" /> */}
                 </div>
                 <div className="btn-wrapper">
                   <button onClick={getIdOfButtonParent} className="buy-button" type="button">Acheter</button>

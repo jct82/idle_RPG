@@ -7,6 +7,7 @@ export const GET_NEW_RANDOM_MONSTER = 'GET_NEW_RANDOM_MONSTER';
 export const GET_MONSTER = 'GET_MONSTER';
 export const ADD_LOG_MESSAGE_DMG_DEALT = 'ADD_LOG_MESSAGE_DMG_DEALT';
 export const ADD_LOG_MESSAGE_DMG_RECEIVED = 'ADD_LOG_MESSAGE_DMG_RECEIVED';
+export const ADD_LOG_MESSAGE_DROP_SUCCESS = 'ADD_LOG_MESSAGE_DROP_SUCCESS';
 export const DEATH_OF_PLAYER = 'DEATH_OF_PLAYER';
 export const UPDATE_AFTER_FIGHT = 'UPDATE_AFTER_FIGHT';
 export const PLAYER_TOO_WEAK = 'PLAYER_TOO_WEAK';
@@ -14,6 +15,7 @@ export const MANUAL_CHANGE_MONSTER_BEFORE = 'MANUAL_CHANGE_MONSTER_BEFORE';
 export const MANUAL_CHANGE_MONSTER_AFTER = 'MANUAL_CHANGE_MONSTER_AFTER';
 export const UPDATE_MONSTER_HP = 'UPDATE_MONSTER_HP';
 export const UPDATE_CHARACTER_LEVEL = 'UPDATE_CHARACTER_LEVEL';
+export const ADD_STATS_POINTS_AFTER_LVL_UP = 'ADD_STATS_POINTS_AFTER_LVL_UP';
 
 export const getPlayerStats = (data) => ({
   type: GET_PLAYER_STATS,
@@ -73,6 +75,14 @@ export const addLogMessageDmgReceived = (damageReceived) => ({
   },
 });
 
+export const addLogMessageDrop = (item, quantity) => ({
+  type: ADD_LOG_MESSAGE_DROP_SUCCESS,
+  payload: {
+    item,
+    quantity,
+  },
+});
+
 export const receiveDamage = (newHealth) => ({
   type: RECEIVE_DAMAGE,
   payload: {
@@ -95,6 +105,10 @@ export const updateAfterFight = (expValue, goldValue, hasLoot, itemId, newHp, ha
     hasWin,
     quantity,
   },
+});
+
+export const addStatsPoints = () => ({
+  type: ADD_STATS_POINTS_AFTER_LVL_UP,
 });
 
 export const updateCharacterLevel = (newLvl) => ({

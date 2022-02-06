@@ -11,6 +11,8 @@ import {
   MANUAL_CHANGE_MONSTER_BEFORE,
   MANUAL_CHANGE_MONSTER_AFTER,
   UPDATE_MONSTER_HP,
+  ADD_LOG_MESSAGE_DROP_SUCCESS,
+  UPDATE_CHARACTER_LEVEL,
 
 } from '../actions/fight';
 
@@ -25,6 +27,7 @@ const initialState = {
   currentMonsterClass: '',
   monsterLoaded: false,
   tooWeak: false,
+  hasLeveledUp: false,
   logMessages: [],
   newMonsterIndex: 0,
   autoMonsterSwitch: true,
@@ -117,6 +120,22 @@ const fight = (state = initialState, action = {}) => {
             ...state.logMessages.slice(0, 99),
           ],
         };
+      case ADD_LOG_MESSAGE_DROP_SUCCESS:
+        return {
+          ...state,
+          logMessages: [
+            <p key={uuidv4()} className="dropLog">Vous avez droppé {action.payload.quantity} {action.payload.item} !</p>,
+            ...state.logMessages.slice(0, 99),
+          ],
+        };
+      //   case UPDATE_CHARACTER_LEVEL:
+      //     return {
+      //       ...state,
+      //       logMessages: [
+      //         <p key={uuidv4()} className="greenLog">Vous avez gagné un niveau !</p>,
+      //         ...state.logMessages.slice(0, 99),
+      //       ],
+      // };
       case DEATH_OF_PLAYER:
         return {
           ...state,
