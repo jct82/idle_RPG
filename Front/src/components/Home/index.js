@@ -49,31 +49,31 @@ export default function Home() {
         <h3>Les développeurs&nbsp;:</h3>
         <div className="dev-group">
           <div className="dev">
-            <div className="identity">nom prénom</div> 
+            <div className="identity">Derennes Valentin</div>
             <div className="medail-img">
               <img src={image4}/>
             </div>
           </div>
           <div className="dev">
-            <div className="identity">nom prénom</div> 
+            <div className="identity">a6kc4e</div>
             <div className="medail-img">
               <img src={image4}/>
             </div>
           </div>
           <div className="dev">
-            <div className="identity">nom prénom</div> 
+            <div className="identity">Jean Trinquet</div>
             <div className="medail-img">
               <img src={image4}/>
             </div>
           </div>
           <div className="dev">
-            <div className="identity">nom prénom</div> 
+            <div className="identity">Mathias Benmansour</div>
             <div className="medail-img">
               <img src={image4}/>
             </div>
           </div>
           <div className="dev">
-            <div className="identity">nom prénom</div>
+            <div className="identity">Castellan</div>
             <div className="medail-img">
               <img src={image4}/>
             </div>
