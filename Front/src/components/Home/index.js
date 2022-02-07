@@ -4,6 +4,8 @@ import image1 from '../../assets/mario1.jpg';
 import image2 from '../../assets/mario2.jpg';
 import image3 from '../../assets/mario3.jpg';
 import image4 from '../../assets/Scared.png';
+import image5 from '../../assets/Calm.png';
+import image6 from '../../assets/Caste.png';
 
 export default function Home() {
   return (
@@ -51,7 +53,7 @@ export default function Home() {
           <div className="dev">
             <div className="identity">Derennes Valentin</div>
             <div className="medail-img">
-              <img src={image4}/>
+              <img src={image6}/>
             </div>
           </div>
           <div className="dev">
@@ -75,7 +77,7 @@ export default function Home() {
           <div className="dev">
             <div className="identity">Castellan</div>
             <div className="medail-img">
-              <img src={image4}/>
+              <img src={image5}/>
             </div>
           </div>
         </div>
