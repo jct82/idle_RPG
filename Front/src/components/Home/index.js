@@ -25,7 +25,7 @@ export default function Home() {
             <div className="frame">
               <div className="frame-inner">
                 <div className="video">
-                  <iframe src="https://www.youtube.com/embed/JNl1_hRwpXE" title="YouTube video player" allowFullScreen />
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/TSYGiQ-1Vi4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
               </div>
             </div>
