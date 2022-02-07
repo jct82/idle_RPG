@@ -17,6 +17,10 @@
 }
 
 .btn-log {
+  transform: skewX( 15deg);
+  font-family: system-ui;
+  font-size: 18px;
+  box-shadow: 10px 5px 5px #020202;
   position: absolute;
   top: 40px;
   right: 40px;
