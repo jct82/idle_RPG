@@ -104,8 +104,11 @@
     overflow: hidden;
     width: 40%;
     &-player {
-      border-right: 1px black solid;
+      border-right: 1px rgba(0, 0, 0, 0.205) solid;
       text-align: right;
+    }
+    &-enemy {
+      border-left: 1px rgba(0, 0, 0, 0.205) solid;
     }
     & .fight--stat {
       padding: 0.4rem;
@@ -343,10 +346,12 @@
     flex-direction: column;
     &-player {
       border-right: none;
-      border-bottom: 1px black solid;
+      border-bottom: 1px rgba(0, 0, 0, 0.205) solid;
       text-align: left;
     }
     &-enemy {
+      border-left: none;
+      border-top: 1px rgba(0, 0, 0, 0.205) solid;
       text-align: right;
     }
   }
@@ -362,6 +367,11 @@
     // position: relative;
     right: 25px;
     font-size: 0.7rem;
+  }
+
+  .fight--logs {
+    line-height: 1.4rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -392,5 +402,17 @@
   .Roidesgoblins {
     position: relative;
     right: 20px;
+  }
+  .Golemmatriarche {
+    position: relative;
+    right: 20px;
+  }
+  .Statueantique {
+    position: relative;
+    right: 20px;
+  }
+  .fight--logs {
+    line-height: 0.8rem;
+    font-size: 0.5rem;
   }
 }

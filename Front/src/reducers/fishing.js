@@ -48,11 +48,15 @@ const jobs = (state = initialState, action = {}) => {
             buttonTitle: 'Choisissez un poisson',
         };
         case ADD_LOG_MESSAGE_FISH:
+          const am = action.payload.amount;
+          const xp = action.payload.experience;
           return {
             ...state,
               experience: state.experience + state.currentResourceExperience,
               logMessages: [
-                <p key={uuidv4()}>Vous avez récupéré {action.payload.amount} {state.currentResource} et {action.payload.experience} points d'expérience</p>,
+                <p key={uuidv4()}>
+                  Vous avez récupéré {am} {state.currentResource}{am > 1 && 's'} et {xp} point{xp > 1 && 's'} d'expérience
+                </p>,
                 ...state.logMessages.slice(0, 99),
               ],
           };

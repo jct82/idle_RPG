@@ -62,13 +62,13 @@ export default function Mining({job}) {
       const interval = setInterval(() => {
         const workingResource = resources.find(resource => resource.name === currentResource);
         const wr = workingResource;
-        const { name, id, item_type_id, type, attribute } = wr;
-        const quantity = Math.floor((level / 4) + 1);
-        // id de l'item, quantité, exp gagnée
-        dispatch(sendOreToDb(id, quantity, Math.floor(1 + (wr.attribute[0].value / 3))))
+        const { name, id } = wr;
+        // Calculs des quantités et de l'exp
+        const quantity = Math.floor((level / 6) + 1);
+        const exp = Math.floor(1 + (wr.attribute[0].value / 8));
+        dispatch(sendOreToDb(id, quantity, exp));
         dispatch(sendResourceToInventory(name, id, 'ressource', quantity));
-        //-------------------vvv exp récupérée -----------vvv quantité récupérée
-        dispatch(addLogMessage(Math.floor(1 + (wr.attribute[0].value / 3)), Math.floor((level / 4) + 1)));
+        dispatch(addLogMessage(exp, quantity));
       }, actionTime);
 
       return () => clearInterval(interval)

@@ -18,7 +18,6 @@ const Craft = () => {
 
   const craftButtonOnClick = (e) => {
       const currentRecipe = recipes.find((recipe) => recipe.id == e.target.id);
-      console.log(currentRecipe);
       let nbrResource = 0;
       currentRecipe.ingredients.forEach(substance => {
         for (let i = 0; i < inventory.ressource.length; i++) {
@@ -31,13 +30,14 @@ const Craft = () => {
         // Limitation pour empêcher de spam la base de données
         if (canCraft) {
           dispatch(setCooldownCraft());
-          dispatch(sendCraftedItemToDb(currentRecipe.id, currentRecipe.ingredients[0].id, currentRecipe.ingredients[0].quantity));
+          dispatch(sendCraftedItemToDb(currentRecipe.id, currentRecipe.ingredients[0].component_id, currentRecipe.ingredients[0].quantity));
           dispatch(craftItem(currentRecipe));
           setTimeout(() => {
             dispatch(setCooldownCraft());
           }, 2000);
         };
       } else {
+        // Si le joueur n'a pas assez de ressources
         e.target.style.backgroundColor = 'red';
       }
   };
@@ -59,7 +59,8 @@ const Craft = () => {
         { item.ingredients.map((ingredient) => (
           <p className="craft-display-text" key={uuidv4()}>{ingredient.quantity} {ingredient.name}</p>
         )) }
-          <button id={item.id} className="testanim" onClick={craftButtonOnClick}>{buttonTitle}</button>
+        <p className="smallText">{item.desc}</p>
+          <button id={item.id} onClick={craftButtonOnClick}>{buttonTitle}</button>
         </div>
       </div>
   )

@@ -58,22 +58,16 @@ export default function Fishing({job}) {
   useEffect(() => {
     if (isWorking) {
       const interval = setInterval(() => {
-        // TODO A MODIFIER QUAND LA BDD SERA FINALISÉE
-        console.log(inventory);
-        if (experience >= levelUpReq) {
-          dispatch(levelUpJob());
-          dispatch(addLevelUpMessage());
-        };
         const workingResource = resources.find(resource => resource.name === currentResource);
         const wr = workingResource;
-        const { name, id, item_type_id, type, attribute } = wr;
+        const { name, id, attribute } = wr;
         const stat = attribute.find(att => att.name == "soins");
-        const quantity = Math.floor((level / 4) + 1);
-        // id de l'item, quantité, exp gagnée
-        dispatch(sendFishToDb(id, quantity, Math.floor(1 + (wr.attribute[0].value / 3))));
+        // Calculs des quantités et de l'exp
+        const quantity = Math.floor((level / 6) + 1);
+        const exp = Math.floor(1 + (wr.attribute[0].value / 8));
+        dispatch(sendFishToDb(id, quantity, exp));
         dispatch(sendResourceToInventory(name, id, 'consommable', quantity, stat.value));
-        //-------------------vvv exp récupérée -----------vvv quantité récupérée
-        dispatch(addLogMessage(Math.floor(1 + (wr.attribute[0].value / 3)), Math.floor((level / 4) + 1)));
+        dispatch(addLogMessage(exp, quantity));
       }, actionTime);
 
       return () => clearInterval(interval)
