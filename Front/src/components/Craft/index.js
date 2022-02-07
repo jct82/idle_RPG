@@ -4,36 +4,42 @@ import { useSelector, useDispatch } from 'react-redux';
 // == Import : local
 import './style.scss';
 import '../../styles/allitems.scss';
-import { craftItem, sendCraftedItem, getCraftableItems, sendCraftedItemToDb } from '../../actions/craft';
+import { craftItem, sendCraftedItem, getCraftableItems, sendCraftedItemToDb, setCooldownCraft } from '../../actions/craft';
 import { useEffect } from 'react';
 
 // == Composant
 const Craft = () => {
   const dispatch = useDispatch();
-  const { recipes } = useSelector((state) => state.craft);
+  const { recipes, canCraft, buttonTitle } = useSelector((state) => state.craft);
   const { inventory } = useSelector((state) => state.character);
   useEffect(() => {
     dispatch(getCraftableItems());
   }, []);
-  
+
   const craftButtonOnClick = (e) => {
-    const currentRecipe = recipes.find((recipe) => recipe.id == e.target.id);
-    console.log(currentRecipe);
-    let nbrResource = 0;
-    currentRecipe.ingredients.forEach(substance => {
-      for (let i = 0; i < inventory.ressource.length; i++) {
-        if (substance.component_id == inventory.ressource[i].item_id && substance.quantity <= inventory.ressource[i].quantity) {
-          nbrResource++;
+      const currentRecipe = recipes.find((recipe) => recipe.id == e.target.id);
+      console.log(currentRecipe);
+      let nbrResource = 0;
+      currentRecipe.ingredients.forEach(substance => {
+        for (let i = 0; i < inventory.ressource.length; i++) {
+          if (substance.component_id == inventory.ressource[i].item_id && substance.quantity <= inventory.ressource[i].quantity) {
+            nbrResource++;
+          }
         }
+      });
+      if (nbrResource == currentRecipe.ingredients.length) {
+        // Limitation pour empêcher de spam la base de données
+        if (canCraft) {
+          dispatch(setCooldownCraft());
+          dispatch(sendCraftedItemToDb(currentRecipe.id, currentRecipe.ingredients[0].id, currentRecipe.ingredients[0].quantity));
+          dispatch(craftItem(currentRecipe));
+          setTimeout(() => {
+            dispatch(setCooldownCraft());
+          }, 2000);
+        };
+      } else {
+        e.target.style.backgroundColor = 'red';
       }
-    });
-    if (nbrResource == currentRecipe.ingredients.length) {
-      dispatch(sendCraftedItemToDb(currentRecipe.id, currentRecipe.ingredients[0].id, currentRecipe.ingredients[0].quantity));
-      dispatch(craftItem(currentRecipe));
-    } else {
-      e.target.style.backgroundColor = 'red';
-    }
-    
   };
   
   const fillRecipes = recipes.map(item => 
@@ -53,7 +59,7 @@ const Craft = () => {
         { item.ingredients.map((ingredient) => (
           <p className="craft-display-text" key={uuidv4()}>{ingredient.quantity} {ingredient.name}</p>
         )) }
-          <button id={item.id} onClick={craftButtonOnClick}>Craft</button>
+          <button id={item.id} className="testanim" onClick={craftButtonOnClick}>{buttonTitle}</button>
         </div>
       </div>
   )

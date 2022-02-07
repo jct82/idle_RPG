@@ -1,32 +1,9 @@
-import { UPDATE_RECIPES_LIST } from "../actions/craft";
+import { COOLDOWN_CRAFT_ITEM, UPDATE_RECIPES_LIST } from "../actions/craft";
 
 const initialState = {
-  name: 'Minage',
-  type: 'minerai',
-  quantité: 0,
-  level: 0,
-  currentType: 'fer',
-  // TEST
-  recipes: [
-    // {
-    //   id: 5,
-    //   name: 'armure rouillée',
-    //   item_type_id: 5,
-    //   ingredients: [
-    //    {
-    //      id: 2,
-    //      name: fer,
-    //      quantity: 5,
-    //      component_id: 1,
-    //    },{
-    //      id: 3,
-    //      name: bronze,
-    //      quantity: 2,
-    //      component_id: 3,
-    //    }
-    //   ]
-    // },
-  ],
+  recipes: [],
+  buttonTitle: 'Craft',
+  canCraft: true,
 };
 
 const craft = (state = initialState, action = {}) => {
@@ -36,11 +13,17 @@ const craft = (state = initialState, action = {}) => {
         ...state,
         recipes: [
           ...action.payload.recipes,
-        ]
-      }
+        ],
+      };
+    case COOLDOWN_CRAFT_ITEM:
+      return {
+        ...state,
+        buttonTitle: state.buttonTitle === 'Veuillez patienter' ? 'Craft' : 'Veuillez patienter',
+        canCraft: !state.canCraft,
+      };
     default:
       return state;
-  }
+  };
 };
 
 export default craft;

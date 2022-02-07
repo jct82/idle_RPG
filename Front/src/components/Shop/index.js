@@ -37,8 +37,8 @@ export default function Shop() {
   // si c'est positif, ça retire l'argent de sa bourse, sinon ça ferme juste la modale sans action
   const buyingItem = () => {
     const currentItem = stuffs.find((stuff) => stuff.id == isOpen.id);
-    if (gold >= stuffs.find((stuff) => stuff.id == isOpen.id).attribute[1].value) {
-      dispatch(buyItem(stuffs.find((stuff) => stuff.id == isOpen.id).attribute[1].value));
+    if (gold >= stuffs.find((stuff) => stuff.id == isOpen.id).attribute.find((att) => att.name === "prix").value) {
+      dispatch(buyItem(stuffs.find((stuff) => stuff.id == isOpen.id).attribute.find((att) => att.name === "prix").value));
       console.log(stuffs.find((stuff) => stuff.id == isOpen.id));
       console.log('currentItem', currentItem);
 
@@ -89,7 +89,11 @@ newShopArray && console.log(newShopArray);
           </div>
           {isOpen.open && stuffs.find((stuff) => stuff.id == isOpen.id)
             ? (
-              <div className="buying-modal">Êtes-vous sûr de vouloir acheter "{stuffs.find((stuff) => stuff.id == isOpen.id).name}" pour <span>{stuffs.find((stuff) => stuff.id == isOpen.id).attribute[1].value}&nbsp;<img src={boutiqueLogo} alt="or"/></span>
+              <div className="buying-modal">Êtes-vous sûr de vouloir acheter "{stuffs.find((stuff) => stuff.id == isOpen.id).name}" pour
+              <span>
+                {stuffs.find((stuff) => stuff.id == isOpen.id).attribute.find((att) => att.name === "prix").value}&nbsp;
+                <img src={boutiqueLogo} alt="or"/>
+              </span>
                 <div className="button-container"><button className="buying-button" type="button" onClick={buyingItem}>oui</button>
                   <button className="buying-button" type="button" onClick={closeModale}>non</button>
                 </div>

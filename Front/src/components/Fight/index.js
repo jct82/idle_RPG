@@ -99,7 +99,7 @@ const Fight = () => {
         console.log(currentMonster);
         const newLifeOfPlayer = vie - (currentMonster.attributes[1].value - endurance);
         if (newLifeOfPlayer <= 0) {
-          dispatch(updateAfterFight(cm.reward_exp, cm.reward_gold, false, cmr.item_id, 0, false, cmr.quantity));
+          dispatch(updateAfterFight(0, 0, false, cmr.item_id, 0, false, cmr.quantity));
           dispatch(receiveDamage(0));
           dispatch(playerDeath());
         } else if (newLifeOfPlayer >= vie) {
