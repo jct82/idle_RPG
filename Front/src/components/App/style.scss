@@ -46,6 +46,23 @@ body {
 }
 
 .app.dark {
+
+  .lore , .contact,.update,.form-log,.title{
+    background-color: rgb(12 13 13 / 50%);
+    color: #f2f2f2;
+  }
+
+.modale-register {
+  background-image: url('../../assets/game_backgrounddark.png');
+ 
+  
+}
+  .sun{
+    color: #f2f2f2;
+  }
+  .moon {
+   color: #f2f2f2;
+  }
   .navBarContainer{
     background-color: rgb(12 13 13 / 50%);
   }
@@ -69,6 +86,10 @@ body {
     color: #f2f2f2;
   }
   .fight-title,.fight-container{
+    background-color: rgb(12 12 12 / 50%);
+    color: #f2f2f2;
+  }
+  .errorpage-content{
     background-color: rgb(12 12 12 / 50%);
     color: #f2f2f2;
   }
