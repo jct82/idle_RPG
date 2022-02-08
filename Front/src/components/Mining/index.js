@@ -80,8 +80,7 @@ export default function Mining({job}) {
     const workingResource = resources.find(resource => resource.name === e.target.className.split(' ')[1]);
     if (level >= workingResource.attribute[0].value) {
       dispatch(setCurrentResource(e.target.className.split(' ')[1], workingResource.attribute[0].value));
-    }; //------------------------------------------------------------^^^^^^^^ Peut-être à modifier
-      // l'exp qu'on récupère est pareil que le niveau requis
+    };
   };
 
   // Remplissage de la liste des ressources
