@@ -1,4 +1,4 @@
-import { addStatsPoints, ADD_STATS_POINTS_AFTER_LVL_UP, updateCharacterLevel, UPDATE_AFTER_FIGHT } from '../actions/fight';
+import { addStatsPoints, ADD_STATS_POINTS_AFTER_LVL_UP, updateCharacterLevel, updateLevel, UPDATE_AFTER_FIGHT } from '../actions/fight';
 import { logUser } from '../actions/user';
 import API from './api';
 
@@ -35,9 +35,10 @@ const fightMiddleware = (store) => (next) => (action) => {
             const foundId = JSON.parse(localStorage.getItem('userId'));
             const userAction = logUser(newToken, foundName, foundId);
             store.dispatch(userAction);
-            store.dispatch(updateCharacterLevel(response.data.getlevelcharacter));
-            if(state.character.level !== response.data.getlevelcharacter) {
-                store.dispatch(addStatsPoints());
+            if(state.character.level !== response.data.level) {
+              store.dispatch(updateCharacterLevel(response.data.level));
+              store.dispatch(updateLevel(response.data));
+              store.dispatch(addStatsPoints());
             }
           }
           // console.log(response);

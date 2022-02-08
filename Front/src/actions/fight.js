@@ -15,6 +15,7 @@ export const MANUAL_CHANGE_MONSTER_AFTER = 'MANUAL_CHANGE_MONSTER_AFTER';
 export const UPDATE_MONSTER_HP = 'UPDATE_MONSTER_HP';
 export const UPDATE_CHARACTER_LEVEL = 'UPDATE_CHARACTER_LEVEL';
 export const ADD_STATS_POINTS_AFTER_LVL_UP = 'ADD_STATS_POINTS_AFTER_LVL_UP';
+export const UPDATE_LEVEL = 'UPDATE_LEVEL';
 
 export const updateHealthPlayer = (newHealth) => ({
   type: UPDATE_HEALTH_BAR_PLAYER,
@@ -122,4 +123,11 @@ export const manualChangeMonsterBefore = () => ({
 
 export const manualChangeMonsterAfter = () => ({
   type: MANUAL_CHANGE_MONSTER_AFTER,
+});
+
+export const updateLevel = ({level, exp_up, exp_floor}) => ({
+  type: UPDATE_LEVEL,
+  level: level,
+  exp_up: exp_up,
+  exp_floor: exp_floor,
 });

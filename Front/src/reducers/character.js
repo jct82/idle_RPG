@@ -10,6 +10,7 @@ import {
   RECEIVE_DAMAGE,
   UPDATE_CHARACTER_LEVEL,
   ADD_STATS_POINTS_AFTER_LVL_UP,
+  UPDATE_LEVEL,
 } from "../actions/fight";
 
 const initialState = {
@@ -109,7 +110,7 @@ const character = (state = initialState, action = {}) => {
         addObject = {
           item_id: action.item_id,
           name: action.name,
-          description: "lorem ipsum lorem ipsum",
+          description: action.desc,
           img_path: action.name.replace(/['"]+/g, "").replace(/\s/g, ""),
           quantity: action.quantity,
         };
@@ -161,7 +162,7 @@ const character = (state = initialState, action = {}) => {
             let crafted = {
               item_id: action.recipe.id, 
               name: action.recipe.name, 
-              description: 'lorem ipsum ipsum ipsum ipsum ipsum ipsum ipsum', 
+              description: action.recipe.desc, 
               quantity: 1,
               img_path: action.recipe.name.replace(/['"]+/g, "").replace(/\s/g, ""),
               statistique: stat.value,
@@ -187,6 +188,7 @@ const character = (state = initialState, action = {}) => {
         },
       };
     case SET_CHARACTER_DATA:
+      console.log('action',action);
       //Récupérer inventaire de la BDD
       const feelObj = (id, name, img, desc, quantity) => {
         return {
@@ -210,7 +212,7 @@ const character = (state = initialState, action = {}) => {
               object.item_id,
               object.name,
               object.name.replace(/['"]+/g, "").replace(/\s/g, ""),
-              "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem",
+              object.item_desc,
               object.quantity
             );
             newRessource.push(currentRessource);
@@ -220,7 +222,7 @@ const character = (state = initialState, action = {}) => {
               object.item_id,
               object.name,
               object.name.replace(/['"]+/g, "").replace(/\s/g, ""),
-              "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem",
+              object.item_desc,
               object.quantity
             );
             currentConso.statistique = stat.value;
@@ -231,7 +233,7 @@ const character = (state = initialState, action = {}) => {
               object.item_id,
               object.name,
               object.name.replace(/['"]+/g, "").replace(/\s/g, ""),
-              "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem",
+              object.item_desc,
               object.quantity
             );
             currentArme.statistique = stat.value;
@@ -244,7 +246,7 @@ const character = (state = initialState, action = {}) => {
               object.item_id,
               object.name,
               object.name.replace(/['"]+/g, "").replace(/\s/g, ""),
-              "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem",
+              object.item_desc,
               object.quantity
             );
             currentCasque.statistique = stat.value;
@@ -257,7 +259,7 @@ const character = (state = initialState, action = {}) => {
               object.item_id,
               object.name,
               object.name.replace(/['"]+/g, "").replace(/\s/g, ""),
-              "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem",
+              object.item_desc,
               object.quantity
             );
             currentBottes.statistique = stat.value;
@@ -270,7 +272,7 @@ const character = (state = initialState, action = {}) => {
               object.item_id,
               object.name,
               object.name.replace(/['"]+/g, "").replace(/\s/g, ""),
-              "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem",
+              object.item_desc,
               object.quantity
             );
             currentArmure.statistique = stat.value;
@@ -478,14 +480,15 @@ const character = (state = initialState, action = {}) => {
       };
     case SEND_BUY_ITEM_TO_DB:
       //MAJ inventaire après achat objet
-      const addBoughtToInvent = (list, id, name, stat) => {
+      
+      const addBoughtToInvent = (list, id, name, stat, desc) => {
         if (list.find(elem => elem.item_id == id) == undefined) {
           //si n'est pas dans l'inventaire, le crééer et l'y ajouter
           let newObj = {
             item_id: id,
             name: name,
             img_path: name.replace(/['"]+/g, "").replace(/\s/g, ""),
-            description: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+            description: desc,
             quantity: 1,
           };
           if (stat != undefined) newObj.statistique = stat.value;
@@ -509,10 +512,11 @@ const character = (state = initialState, action = {}) => {
           boughtInventory.consommable,
           product.id,
           product.name,
+          product.desc,
           stat
         );
       } else if (product.type == "ressource") {
-        addBoughtToInvent(boughtInventory.ressource, product.id, product.name);
+        addBoughtToInvent(boughtInventory.ressource, product.id, product.name, product.desc);
       } else {
         let stat = product.attribute[2];
         let equipIndex = boughtInventory.equipment.findIndex(
@@ -522,6 +526,7 @@ const character = (state = initialState, action = {}) => {
           boughtInventory.equipment[equipIndex].reserve,
           product.id,
           product.name,
+          product.desc,
           stat
         );
       }
@@ -542,8 +547,10 @@ const character = (state = initialState, action = {}) => {
         points: state.points + 5,
       };
     case UPDATE_AFTER_FIGHT:
+      //MAJ inventaire avec objets gagnés lors du combat
       const changeInventory = (inventory, id, name, quantity) => {
         if (inventory.find(obj => obj.item_id == id) == undefined) {
+          //créer objet et l'ajouter dans l'inventaire si il n'y est pas
           let fightObj = {
             item_id: id,
             name: name,
@@ -553,6 +560,7 @@ const character = (state = initialState, action = {}) => {
           }
           inventory.push(fightObj);
         } else {
+          //si objet dans l'inventaire, augmenter sa quantité
           for (let i = 0; i < inventory.length; i++) {
             if (inventory[i].item_id == id) {
               inventory[i].quantity += quantity;
@@ -561,25 +569,38 @@ const character = (state = initialState, action = {}) => {
         }
         return inventory;
       }
+      //si combat perdu il se passe rien
+      if (!action.payload.hasWin) return;
 
       let fightInventory = state.inventory;
-      if (action.payload.obj_type == 'consommable' || action.payload.obj_type == 'ressource') {
-        fightInventory[action.obj_type] = changeInventory(fightInventory[action.payload.obj_type], action.payload.itemId, action.payload.name, action.payload.quantity);
-      }  else {
-        for (let i = 0; i < fightInventory.equipment.length; i++) {
-          if (fightInventory.equipment[i].name == action.payload.obj_type) {
-            fightInventory.equipment[i] = changeInventory(fightInventory.equipment[i].reserve, action.payload.itemId, action.payload.name, action.payload.quantity);
-            break;
+      if (action.payload.hasLoot) {
+        //si objet gagner lors du combat MAJ inventaire
+        if (action.payload.obj_type == 'consommable' || action.payload.obj_type == 'ressource') {
+          fightInventory[action.obj_type] = changeInventory(fightInventory[action.payload.obj_type], action.payload.itemId, action.payload.name, action.payload.quantity);
+        }  else {
+          for (let i = 0; i < fightInventory.equipment.length; i++) {
+            if (fightInventory.equipment[i].name == action.payload.obj_type) {
+              fightInventory.equipment[i] = changeInventory(fightInventory.equipment[i].reserve, action.payload.itemId, action.payload.name, action.payload.quantity);
+              break;
+            }
           }
         }
       }
-      
+     
       return {
         ...state,
         vie: action.payload.newHp,
         gold: state.gold + action.payload.goldValue,
-        exp: state.exp_up <= state.exp + action.payload.expValue ? state.exp_up : state.exp + action.payload.expValue,
+        exp: state.exp + action.payload.expValue,
         inventory: fightInventory,
+      };
+    case UPDATE_LEVEL:
+      //ajout de points après changement de niveau
+      return {
+        ...state,
+        exp_up: action.exp_up,
+        exp_floor: action.exp_floor,
+        level: action.level,
       };
     default:
       return state;
