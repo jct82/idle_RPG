@@ -47,16 +47,36 @@ body {
 
 .app.dark {
 
-  .lore , .contact,.update,.form-log,.title{
-    background-color: rgb(12 13 13 / 50%);
+  .lore , .contact,.update,.form-log,.title,.inner-panel{
+    background-color: rgba(12,13,13, 0.5);
     color: #f2f2f2;
   }
 
-.modale-register {
-  background-image: url('../../assets/game_backgrounddark.png');
- 
+  .character{
+    .panel .inner-panel{
+      background-color: rgba(12,13,13, 0.5);
+      color: #f2f2f2;
+
+    }
+  }
+
+  .fight-profile,.fight--logs, .fight--stats{
+    
+    background-color: rgba(12,13,13, 0.5);
+    color: #f2f2f2;
+
   
-}
+  }
+  .jobMain button, .jobSmall{
+    background-color: rgba(12,13,13, 0.5);
+    color: #f2f2f2;
+
+  }
+
+
+  .modale-register {
+    background-image: url('../../assets/game_backgrounddark.png');
+  }
   .sun{
     color: #f2f2f2;
   }
