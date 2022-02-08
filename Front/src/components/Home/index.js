@@ -1,8 +1,10 @@
 import './style.scss';
+import image1 from '../../assets/Talking.png';
+import image2 from '../../assets/Furious.png';
+import image3 from '../../assets/wizard.png';
 import image4 from '../../assets/Scared.png';
 import image5 from '../../assets/Calm.png';
 import image6 from '../../assets/frog.png';
-import image7 from '../../assets/wizard.png';
 import imageSlide1 from '../../assets/metier.png';
 import imageSlide2 from '../../assets/image combat.png';
 import imageSlide3 from '../../assets/image mobile.png';
@@ -60,19 +62,19 @@ export default function Home() {
           <div className="dev">
             <div className="identity">a6kc4e</div>
             <div className="medail-img">
-              <img src={image4}/>
+              <img src={image2}/>
             </div>
           </div>
           <div className="dev">
             <div className="identity">Jean Trinquet</div>
             <div className="medail-img">
-              <img src={image4}/>
+              <img src={image1}/>
             </div>
           </div>
           <div className="dev">
             <div className="identity">Mathias Benmansour</div>
             <div className="medail-img">
-              <img src={image7}/>
+              <img src={image3}/>
             </div>
           </div>
           <div className="dev">
