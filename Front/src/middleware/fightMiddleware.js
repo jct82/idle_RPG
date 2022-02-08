@@ -1,4 +1,4 @@
-import { addStatsPoints, ADD_STATS_POINTS_AFTER_LVL_UP, updateCharacterLevel, UPDATE_AFTER_FIGHT } from '../actions/fight';
+import { addStatsPoints, ADD_STATS_POINTS_AFTER_LVL_UP, updateCharacterLevel, updateLevel, UPDATE_AFTER_FIGHT } from '../actions/fight';
 import { logUser } from '../actions/user';
 import API from './api';
 
@@ -29,19 +29,19 @@ const fightMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log(response.data);
           if (response.headers.authorization) {
             const newToken = response.headers.authorization;
             const foundName = JSON.parse(localStorage.getItem('name'));
             const foundId = JSON.parse(localStorage.getItem('userId'));
             const userAction = logUser(newToken, foundName, foundId);
             store.dispatch(userAction);
-            if(state.character.level !== response.data.getlevelcharacter) {
+            if(state.character.level !== response.data.level) {
               store.dispatch(updateCharacterLevel(response.data.level));
-                store.dispatch(addStatsPoints());
+              store.dispatch(updateLevel(response.data));
+              store.dispatch(addStatsPoints());
             }
           }
-          console.log(response);
+          //console.log(response);
         })
         .catch((error) => {
           console.log(error);
