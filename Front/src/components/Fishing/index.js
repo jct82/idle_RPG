@@ -59,7 +59,6 @@ export default function Fishing({job}) {
     if (isWorking) {
       const interval = setInterval(() => {
         // TODO A MODIFIER QUAND LA BDD SERA FINALISÉE
-        console.log(inventory);
         if (experience >= levelUpReq) {
           dispatch(levelUpJob());
           dispatch(addLevelUpMessage());

@@ -71,7 +71,6 @@ const fight = (state = initialState, action = {}) => {
     case GET_NEW_RANDOM_MONSTER:
       const filteredMonsters = state.monsters.filter((monster) => monster.level <= action.payload.level);
       const lastIndexOfMons = filteredMonsters.length - 1;
-      console.log(state.monsters);
       return {
         ...state,
         tooWeak: false,

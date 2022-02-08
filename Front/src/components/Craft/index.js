@@ -18,7 +18,6 @@ const Craft = () => {
   
   const craftButtonOnClick = (e) => {
     const currentRecipe = recipes.find((recipe) => recipe.id == e.target.id);
-    console.log(currentRecipe);
     let nbrResource = 0;
     currentRecipe.ingredients.forEach(substance => {
       for (let i = 0; i < inventory.ressource.length; i++) {

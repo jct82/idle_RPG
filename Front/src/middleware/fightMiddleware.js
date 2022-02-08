@@ -8,6 +8,7 @@ const fightMiddleware = (store) => (next) => (action) => {
     case UPDATE_AFTER_FIGHT: {
       const characterId = localStorage.getItem('characterId');
       const foundToken = localStorage.getItem('profile');
+
       const config = {
         method: 'patch',
         url: '/fight',
@@ -40,7 +41,6 @@ const fightMiddleware = (store) => (next) => (action) => {
                 store.dispatch(addStatsPoints());
             }
           }
-          // store.dispatch(setInventoryData(response.data));
           console.log(response);
         })
         .catch((error) => {

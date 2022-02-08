@@ -32,7 +32,6 @@ const craftMiddleware = (store) => (next) => (action) => {
             const userAction = logUser(newToken, foundName, foundId);
             store.dispatch(userAction);
           }
-          // store.dispatch(setInventoryData(response.data));
           console.log(response);
         })
         .catch((error) => {

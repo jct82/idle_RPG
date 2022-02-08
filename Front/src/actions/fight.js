@@ -1,4 +1,3 @@
-export const GET_PLAYER_STATS = 'GET_PLAYER_STATS';
 export const UPDATE_HEALTH_BAR_PLAYER = 'UPDATE_HEALTH_BAR_PLAYER';
 export const START_FIGHTING = 'START_FIGHTING';
 export const DEAL_DAMAGE = 'DEAL_DAMAGE';
@@ -16,13 +15,6 @@ export const MANUAL_CHANGE_MONSTER_AFTER = 'MANUAL_CHANGE_MONSTER_AFTER';
 export const UPDATE_MONSTER_HP = 'UPDATE_MONSTER_HP';
 export const UPDATE_CHARACTER_LEVEL = 'UPDATE_CHARACTER_LEVEL';
 export const ADD_STATS_POINTS_AFTER_LVL_UP = 'ADD_STATS_POINTS_AFTER_LVL_UP';
-
-export const getPlayerStats = (data) => ({
-  type: GET_PLAYER_STATS,
-  payload: {
-    data,
-  },
-});
 
 export const updateHealthPlayer = (newHealth) => ({
   type: UPDATE_HEALTH_BAR_PLAYER,
@@ -94,7 +86,7 @@ export const playerDeath = () => ({
   type: DEATH_OF_PLAYER,
 });
 
-export const updateAfterFight = (expValue, goldValue, hasLoot, itemId, newHp, hasWin, quantity) => ({
+export const updateAfterFight = (expValue, goldValue, hasLoot, itemId, newHp, hasWin, quantity, obj_type, name) => ({
   type: UPDATE_AFTER_FIGHT,
   payload: {
     expValue,
@@ -104,6 +96,8 @@ export const updateAfterFight = (expValue, goldValue, hasLoot, itemId, newHp, ha
     newHp,
     hasWin,
     quantity,
+    obj_type,
+    name,
   },
 });
 

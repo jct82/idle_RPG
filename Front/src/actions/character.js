@@ -1,4 +1,3 @@
-export const SET_INVENTORY = 'SET_INVENTORY';
 export const POSTER_CATEGORY = 'POSTER_CATEGORY';
 export const POSTER_EQUIP = 'POSTER_EQUIP';
 export const SET_DETAILS = 'SET_DETAILS';
@@ -7,16 +6,9 @@ export const UPDATE_EQUIPMENT = 'UPDATE_EQUIPMENT';
 export const UPDATE_VIVRE = 'UPDATE_VIVRE';
 export const SPARE_POINTS = 'SPARE_POINTS';
 export const UPDATE_NBR_FIELD = 'UPDATE_NBR_FIELD';
-export const GET_INVENTORY_ON_LOGIN = 'GET_INVENTORY_ON_LOGIN';
-export const GET_ALL_ITEMS = 'GET_ALL_ITEMS';
-export const SET_INVENTORY_DATA = 'SET_INVENTORY_DATA';
 export const SET_CHARACTER_DATA = 'SET_CHARACTER_DATA';
 export const BUY_ITEM = 'BUY_ITEM';
 
-export const setInventoryObjects = (inventory) => ({
-  type: SET_INVENTORY,
-  inventory: inventory,
-});
 
 export const posterCategory = (category) => ({
   type: POSTER_CATEGORY,
@@ -43,10 +35,11 @@ export const updateEquip = (id, objType) => ({
   objType: objType,
 });
 
-export const updateVivre = (name, statistique) => ({
+export const updateVivre = (name, statistique, id) => ({
   type: UPDATE_VIVRE,
   name:name,
   statistique: statistique,
+  id: id,
 });
 
 export const sparePoints = (name, statistique, id) => ({
@@ -62,15 +55,6 @@ export const updateNbrField = (value, name, min, max) => ({
   name: name,
   min: min, 
   max: max,
-});
-
-export const getAllitems = () => ({
-  type: GET_ALL_ITEMS,
-});
-
-export const setInventoryData = (data) => ({
-  type: SET_INVENTORY_DATA,
-  data: data,
 });
 
 export const setCharacterData = (data) => ({

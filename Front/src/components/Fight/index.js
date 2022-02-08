@@ -53,7 +53,6 @@ const Fight = () => {
   const percentage = (partialValue, maxLife) => (100 * partialValue) / maxLife;
   useEffect(() => {
     dispatch(getNewMonster(false, level));
-    // console.log();
     // Se lance quand les monstres sont bien récupérés en bdd
   }, [monsters]);
 
@@ -65,16 +64,16 @@ const Fight = () => {
   useEffect(() => {
     if (isFighting) {
       const interval = setInterval(() => {
-        // console.log(currentMonster);
         const dropChance = ((Math.random() * 100) / 100).toFixed(2)
         const newLifeOfMonster = currentMonsterHP - (force - currentMonster.attributes[0].value);
         const cm = currentMonster;
         const cmr = cm.rewards_items[0];
+        console.log('cmr', cmr);
         if (newLifeOfMonster <= 0) {
           if(dropChance <= cmr.drop_rate) {
             dispatch(addLogMessageDrop(cmr.item_name, cmr.quantity));
           };
-          dispatch(updateAfterFight(cm.reward_exp, cm.reward_gold, dropChance <= cmr.drop_rate, cmr.item_id, vie, true, cmr.quantity));
+          dispatch(updateAfterFight(cm.reward_exp, cm.reward_gold, dropChance <= cmr.drop_rate, cmr.item_id, vie, true, cmr.quantity, cmr.item_type_name, cmr.item_name));
           dispatch(autoMonsterSwitch ? getNewMonster(false, level) : getNewMonster(true, level));
         } else if (newLifeOfMonster >= currentMonsterHP) {
           dispatch(playerTooWeak());
@@ -96,7 +95,6 @@ const Fight = () => {
       const intervalMonster = setInterval(() => {
         const cm = currentMonster;
         const cmr = cm.rewards_items[0];
-        console.log(currentMonster);
         const newLifeOfPlayer = vie - (currentMonster.attributes[1].value - endurance);
         if (newLifeOfPlayer <= 0) {
           dispatch(updateAfterFight(cm.reward_exp, cm.reward_gold, false, cmr.item_id, 0, false, cmr.quantity));
@@ -108,7 +106,6 @@ const Fight = () => {
           dispatch(receiveDamage(newLifeOfPlayer));
           dispatch(addLogMessageDmgReceived(currentMonster.attributes[1].value - endurance));
         }
-        console.log('atk monstre');
       }, 2000 - currentMonster.attributes[2].value);
 
       return () => clearInterval(intervalMonster);
@@ -122,14 +119,11 @@ const Fight = () => {
   const playerSwitchesMonsterBefore = () => {
     dispatch(manualChangeMonsterBefore());
     dispatch(getNewMonster(true, level));
-    console.log(newMonsterIndex);
   };
   const playerSwitchesMonsterAfter = () => {
     dispatch(manualChangeMonsterAfter());
     dispatch(getNewMonster(true, level));
-    console.log(newMonsterIndex);
   };
-    console.log(monsters);
   return (
     <>
       <div className="background-fight" />

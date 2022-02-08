@@ -84,7 +84,6 @@ const jobs = (state = initialState, action = {}) => {
                 experiencePercentage: action.payload.newExpPercentage,
             };
           case UPDATE_MINE_RESOURCES:
-            console.log(action.payload.ores);
             return {
               ...state,
               resources: [
