@@ -87,21 +87,14 @@ export const playerDeath = () => ({
   type: DEATH_OF_PLAYER,
 });
 
-export const updateAfterFight = (expValue, goldValue, hasLoot, itemId, newHp, hasWin, quantity, obj_type, name, desc, attr) => ({
+export const updateAfterFight = (expValue, goldValue, hasLoot, newHp, hasWin, cmr) => ({
   type: UPDATE_AFTER_FIGHT,
-  payload: {
-    expValue,
-    goldValue,
-    hasLoot,
-    itemId,
-    newHp,
-    hasWin,
-    quantity,
-    obj_type,
-    name,
-    desc,
-    attr,
-  },
+  expValue,
+  goldValue,
+  hasLoot,
+  newHp,
+  hasWin,
+  cmr,
 });
 
 export const addStatsPoints = () => ({
@@ -127,9 +120,9 @@ export const manualChangeMonsterAfter = () => ({
   type: MANUAL_CHANGE_MONSTER_AFTER,
 });
 
-export const updateLevel = ({level, exp_up, exp_floor}) => ({
+export const updateLevel = ({level, exp_floor, exp_up}) => ({
   type: UPDATE_LEVEL,
   level: level,
-  exp_up: exp_up,
   exp_floor: exp_floor,
+  exp_up: exp_up,
 });

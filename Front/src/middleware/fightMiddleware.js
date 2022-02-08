@@ -18,13 +18,13 @@ const fightMiddleware = (store) => (next) => (action) => {
         },
         data: {
           characterId: parseInt(characterId, 10),
-          newHp: action.payload.newHp,
-          hasWin: action.payload.hasWin,
-          expValue: action.payload.expValue,
-          goldValue: action.payload.goldValue,
-          hasLoot: action.payload.hasLoot,
-          itemId: action.payload.itemId,
-          quantity: action.payload.quantity,
+          newHp: action.newHp,
+          hasWin: action.hasWin,
+          expValue: action.expValue,
+          goldValue: action.goldValue,
+          hasLoot: action.hasLoot,
+          itemId: action.cmr.item_id,
+          quantity: action.cmr.quantity,
         }
       };
       API(config)

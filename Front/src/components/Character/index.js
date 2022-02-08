@@ -19,8 +19,11 @@ const Inventory = () => {
   );
 
   //création objets JSX pour afficher les catégories dans l'inventaire
-  const jsxRessource = inventory.ressource.map((object) => <Objects key={object.name} {...object} type="ressources" />);
-  const jsxVivre = inventory.consommable.map((object) => <Objects key={object.name} {...object} type="consommable" />);
+  let jsxRessource = inventory.ressource.filter((object) => object.quantity > 0);
+  let jsxVivre = inventory.consommable.filter((object) => object.quantity > 0);
+
+  jsxRessource = jsxRessource.map((object) => <Objects key={object.name} {...object} type="ressources" />);
+  jsxVivre = jsxVivre.map((object) => <Objects key={object.name} {...object} type="consommable" />);
   const jsxEquipement = inventory.equipment.map((object) => {
     object.quantity = 0;
     object.reserve.forEach(equip => {object.quantity += equip.quantity});
