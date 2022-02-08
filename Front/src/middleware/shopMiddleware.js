@@ -51,7 +51,7 @@ const shopMiddleware = (store) => (next) => (action) => {
         data: {
           characterId: parseInt(characterId, 10),
           itemId: product.id,
-          goldValue: -product.attribute[1].value,
+          goldValue: -product.attribute.find((att) => att.name === 'prix').value,
           quantity: quantity,
         },
       };

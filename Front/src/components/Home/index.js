@@ -1,9 +1,12 @@
 import './style.scss';
-
-import image1 from '../../assets/mario1.jpg';
-import image2 from '../../assets/mario2.jpg';
-import image3 from '../../assets/mario3.jpg';
 import image4 from '../../assets/Scared.png';
+import image5 from '../../assets/Calm.png';
+import image6 from '../../assets/frog.png';
+import image7 from '../../assets/wizard.png';
+import imageSlide1 from '../../assets/metier.png';
+import imageSlide2 from '../../assets/image combat.png';
+import imageSlide3 from '../../assets/image mobile.png';
+
 
 export default function Home() {
   return (
@@ -25,7 +28,7 @@ export default function Home() {
             <div className="frame">
               <div className="frame-inner">
                 <div className="video">
-                  <iframe src="https://www.youtube.com/embed/JNl1_hRwpXE" title="YouTube video player" allowFullScreen />
+                  <iframe width="560" height="315" src="https://www.youtube.com/embed/TSYGiQ-1Vi4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
                 </div>
               </div>
             </div>
@@ -35,9 +38,9 @@ export default function Home() {
               <div className="frame-inner">
                 <div className="slides">
                   <div className="slide-container">
-                    <div className="slide"><img src={image1} alt="slide mario et donkey kong" /></div>
-                    <div className="slide"><img src={image2} alt="slide mario et luigi" /></div>
-                    <div className="slide"><img src={image3} alt="slide mario et une banane" /></div>
+                    <div className="slide"><img src={imageSlide1} alt="slide métier" /></div>
+                    <div className="slide"><img src={imageSlide2} alt="slide combat" /></div>
+                    <div className="slide"><img src={imageSlide3} alt="slide mobile" /></div>
                   </div>
                 </div>
               </div>
@@ -49,42 +52,42 @@ export default function Home() {
         <h3>Les développeurs&nbsp;:</h3>
         <div className="dev-group">
           <div className="dev">
-            <div className="identity">nom prénom</div> 
+            <div className="identity">Derennes Valentin</div>
+            <div className="medail-img">
+              <img src={image6}/>
+            </div>
+          </div>
+          <div className="dev">
+            <div className="identity">a6kc4e</div>
             <div className="medail-img">
               <img src={image4}/>
             </div>
           </div>
           <div className="dev">
-            <div className="identity">nom prénom</div> 
+            <div className="identity">Jean Trinquet</div>
             <div className="medail-img">
               <img src={image4}/>
             </div>
           </div>
           <div className="dev">
-            <div className="identity">nom prénom</div> 
+            <div className="identity">Mathias Benmansour</div>
             <div className="medail-img">
-              <img src={image4}/>
+              <img src={image7}/>
             </div>
           </div>
           <div className="dev">
-            <div className="identity">nom prénom</div> 
+            <div className="identity">Castellan</div>
             <div className="medail-img">
-              <img src={image4}/>
-            </div>
-          </div>
-          <div className="dev">
-            <div className="identity">nom prénom</div>
-            <div className="medail-img">
-              <img src={image4}/>
+              <img src={image5}/>
             </div>
           </div>
         </div>
         <span className="mail">Contactez-nous&nbsp;: Idle.RPG.fr@gmail.com</span>
       </div>
       <div className="update">
-        <span className="update-text">Le jeu est en cours de maintenance, merci de bien vouloir patientez et de revenir ultérieurement ...&nbsp;</span>
-        <span className="update-text">Le jeu est en cours de maintenance, merci de bien vouloir patientez et de revenir ultérieurement ...&nbsp;</span>
-        <span className="update-text">Le jeu est en cours de maintenance, merci de bien vouloir patientez et de revenir ultérieurement ...&nbsp;</span>
+        <span className="update-text">Le jeu est en cours de maintenance, mise à jour à la version 0.0.5, merci de bien vouloir patienter et de revenir ultérieurement ...&nbsp;</span>
+        <span className="update-text">Le jeu est en cours de maintenance, mise à jour à la version 0.0.5, merci de bien vouloir patienter et de revenir ultérieurement ...&nbsp;</span>
+        <span className="update-text">Le jeu est en cours de maintenance, mise à jour à la version 0.0.5, merci de bien vouloir patienter et de revenir ultérieurement ...&nbsp;</span>
       </div>
     </div>
   );
