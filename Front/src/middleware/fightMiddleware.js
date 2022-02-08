@@ -36,12 +36,10 @@ const fightMiddleware = (store) => (next) => (action) => {
             store.dispatch(userAction);
             store.dispatch(updateCharacterLevel(response.data.getlevelcharacter));
             if(state.character.level !== response.data.getlevelcharacter) {
-              console.log('newToken', newToken);
                 store.dispatch(addStatsPoints());
             }
           }
-          // store.dispatch(setInventoryData(response.data));
-          console.log(response);
+          // console.log(response);
         })
         .catch((error) => {
           console.log(error);
@@ -53,7 +51,6 @@ const fightMiddleware = (store) => (next) => (action) => {
     case ADD_STATS_POINTS_AFTER_LVL_UP: {
       const characterId = localStorage.getItem('characterId');
       const foundToken = localStorage.getItem('profile');
-      console.log('foundToken', foundToken);
       const config = {
         method: 'patch',
         url: '/addstatspoints',
@@ -74,7 +71,7 @@ const fightMiddleware = (store) => (next) => (action) => {
             const userAction = logUser(newToken, foundName, foundId);
             store.dispatch(userAction);
           }
-          console.log(response);
+          // console.log(response);
         })
         .catch((error) => {
           console.log(error);

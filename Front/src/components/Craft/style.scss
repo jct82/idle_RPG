@@ -29,7 +29,7 @@
     border-radius: 10px;
     margin: 30px 0;
     width: 30%;
-    height: 30vh;
+    height: 35vh;
     padding: 1%;
     overflow: hidden;
     & button {
@@ -71,6 +71,12 @@
 
 .item-effects {
   margin-bottom: 10px;
+}
+
+.smallText {
+  font-size: 0.7rem;
+  text-align: center;
+  margin-top: 10px;
 }
 
 @media screen and (max-width: 700px) {

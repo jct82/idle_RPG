@@ -2,7 +2,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  updateHealthPlayer,
   startFighting,
   dealDamage,
   getNewMonster,
@@ -16,12 +15,10 @@ import {
   updateMonsterHp,
   updateAfterFight,
   addLogMessageDrop,
-  addStatsPoints,
 } from '../../actions/fight';
 // == Import : local
 import './styles.scss';
 import '../../styles/allmonsters.scss';
-import { sendResourceToInventory } from '../../actions/mining';
 // == Composant
 
 const Fight = () => {
@@ -38,12 +35,9 @@ const Fight = () => {
     buttonTitle,
     monsters,
     currentMonster,
-    currentMonsterName,
     currentMonsterHP,
     currentMonsterMaxHP,
-    monsterLoaded,
     currentMonsterClass,
-    newMonsterIndex,
     autoMonsterSwitch,
     tooWeak,
     logMessages
@@ -53,7 +47,6 @@ const Fight = () => {
   const percentage = (partialValue, maxLife) => (100 * partialValue) / maxLife;
   useEffect(() => {
     dispatch(getNewMonster(false, level));
-    // console.log();
     // Se lance quand les monstres sont bien récupérés en bdd
   }, [monsters]);
 
@@ -65,17 +58,18 @@ const Fight = () => {
   useEffect(() => {
     if (isFighting) {
       const interval = setInterval(() => {
-        // console.log(currentMonster);
         const dropChance = ((Math.random() * 100) / 100).toFixed(2)
         const newLifeOfMonster = currentMonsterHP - (force - currentMonster.attributes[0].value);
         const cm = currentMonster;
         const cmr = cm.rewards_items[0];
+        // A la mort du monstre
         if (newLifeOfMonster <= 0) {
           if(dropChance <= cmr.drop_rate) {
             dispatch(addLogMessageDrop(cmr.item_name, cmr.quantity));
           };
           dispatch(updateAfterFight(cm.reward_exp, cm.reward_gold, dropChance <= cmr.drop_rate, cmr.item_id, vie, true, cmr.quantity));
           dispatch(autoMonsterSwitch ? getNewMonster(false, level) : getNewMonster(true, level));
+          // Si le monstre n'a pas perdu de vie
         } else if (newLifeOfMonster >= currentMonsterHP) {
           dispatch(playerTooWeak());
           dispatch(addLogMessageDmgDealt(0));
@@ -96,19 +90,18 @@ const Fight = () => {
       const intervalMonster = setInterval(() => {
         const cm = currentMonster;
         const cmr = cm.rewards_items[0];
-        console.log(currentMonster);
         const newLifeOfPlayer = vie - (currentMonster.attributes[1].value - endurance);
         if (newLifeOfPlayer <= 0) {
-          dispatch(updateAfterFight(cm.reward_exp, cm.reward_gold, false, cmr.item_id, 0, false, cmr.quantity));
+          dispatch(updateAfterFight(0, 0, false, cmr.item_id, 0, false, cmr.quantity));
           dispatch(receiveDamage(0));
           dispatch(playerDeath());
+          // Si le joueur n'a pas perdu de vie
         } else if (newLifeOfPlayer >= vie) {
           dispatch(addLogMessageDmgReceived(0));
         } else {
           dispatch(receiveDamage(newLifeOfPlayer));
           dispatch(addLogMessageDmgReceived(currentMonster.attributes[1].value - endurance));
         }
-        console.log('atk monstre');
       }, 2000 - currentMonster.attributes[2].value);
 
       return () => clearInterval(intervalMonster);
@@ -119,17 +112,15 @@ const Fight = () => {
     dispatch(startFighting());
   };
 
+  // Switch le monstre manuellement
   const playerSwitchesMonsterBefore = () => {
     dispatch(manualChangeMonsterBefore());
     dispatch(getNewMonster(true, level));
-    console.log(newMonsterIndex);
   };
   const playerSwitchesMonsterAfter = () => {
     dispatch(manualChangeMonsterAfter());
     dispatch(getNewMonster(true, level));
-    console.log(newMonsterIndex);
   };
-    console.log(monsters);
   return (
     <>
       <div className="background-fight" />

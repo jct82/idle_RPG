@@ -81,7 +81,7 @@
   }
   &--logs {
     width: 40%;
-    margin: 1.5% 0;
+    margin: 3.5% 0;
     border: 1px rgba(0, 4, 255, 0.2) solid;
     background: vars.$baseColor;
     box-shadow: inset 1px 1px 5px white;
@@ -96,7 +96,7 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 15px;
-    margin: 1.5% 0;
+    margin: 3.5% 0;
     border: 1px rgba(0, 4, 255, 0.2) solid;
     background: vars.$baseColor;
     box-shadow: inset 1px 1px 5px white;
@@ -104,7 +104,11 @@
     overflow: hidden;
     width: 40%;
     &-player {
+      border-right: 1px rgba(0, 0, 0, 0.205) solid;
       text-align: right;
+    }
+    &-enemy {
+      border-left: 1px rgba(0, 0, 0, 0.205) solid;
     }
     & .fight--stat {
       padding: 0.4rem;
@@ -333,5 +337,82 @@
   }
   100% {
     background-position: -244px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .fight--stats {
+    display: flex;
+    flex-direction: column;
+    &-player {
+      border-right: none;
+      border-bottom: 1px rgba(0, 0, 0, 0.205) solid;
+      text-align: left;
+    }
+    &-enemy {
+      border-left: none;
+      border-top: 1px rgba(0, 0, 0, 0.205) solid;
+      text-align: right;
+    }
+  }
+  .themed-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+  }
+
+  .healthBar--percentage {
+    // position: relative;
+    right: 25px;
+    font-size: 0.7rem;
+  }
+
+  .fight--logs {
+    line-height: 1.4rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .fight--stats {
+    font-size: 0.6rem;
+  }
+  .Démonmatriarche {
+    position: relative;
+    right: 30px;
+  }
+  .Nécromant {
+    position: relative;
+    right: 20px;
+  }
+  .Rhino {
+    position: relative;
+    right: 20px;
+  }
+  .Amphibienmatriarche {
+    position: relative;
+    right: 20px;
+  }
+  .Oeilmatriarche {
+    position: relative;
+    right: 20px;
+  }
+  .Roidesgoblins {
+    position: relative;
+    right: 20px;
+  }
+  .Golemmatriarche {
+    position: relative;
+    right: 20px;
+  }
+  .Statueantique {
+    position: relative;
+    right: 20px;
+  }
+  .fight--logs {
+    line-height: 0.8rem;
+    font-size: 0.5rem;
   }
 }

@@ -59,19 +59,13 @@ const fight = (state = initialState, action = {}) => {
         buttonTitle: !state.isFighting ? 'Arrêter de combattre' : 'Attaque !',
       };
     case DEAL_DAMAGE:
-      // const currentMonster = state.monsters.find((monster) => monster.name === state.currentMonster);
       return {
         ...state,
-        // currentMonster: { ...state.currentMonster, life: action.payload.data },
         currentMonsterHP: action.payload.data
-        // state.monsters.map(
-        //   (monster) => monster.name === state.currentMonsterName ? {...monster, life: action.payload.data} : monster
-        // ),
       };
     case GET_NEW_RANDOM_MONSTER:
       const filteredMonsters = state.monsters.filter((monster) => monster.level <= action.payload.level);
       const lastIndexOfMons = filteredMonsters.length - 1;
-      console.log(state.monsters);
       return {
         ...state,
         tooWeak: false,
@@ -79,10 +73,8 @@ const fight = (state = initialState, action = {}) => {
         autoMonsterSwitch: action.payload.manual ? false : true,
         monsterLoaded: true,
         currentMonster: {...state.monsters[action.payload.manual ? state.newMonsterIndex : lastIndexOfMons], life: 200, maxLife: 200},
-        // currentMonsterHP: state.monsters[action.payload.manual ? state.newMonsterIndex : lastIndexOfMons].attributes[3].value,
       };
     case UPDATE_MONSTER_HP:
-      console.log(state.currentMonster);
       return {
         ...state,
         currentMonsterHP: state.currentMonster.attributes[3].value,
@@ -128,14 +120,6 @@ const fight = (state = initialState, action = {}) => {
             ...state.logMessages.slice(0, 99),
           ],
         };
-      //   case UPDATE_CHARACTER_LEVEL:
-      //     return {
-      //       ...state,
-      //       logMessages: [
-      //         <p key={uuidv4()} className="greenLog">Vous avez gagné un niveau !</p>,
-      //         ...state.logMessages.slice(0, 99),
-      //       ],
-      // };
       case DEATH_OF_PLAYER:
         return {
           ...state,

@@ -55,7 +55,7 @@ const jobs = (state = initialState, action = {}) => {
             ...state,
               experience: state.experience + state.currentResourceExperience,
               logMessages: [
-                <p key={uuidv4()}>Vous avez récupéré {action.payload.amount} {state.currentResource} et {action.payload.experience} points d'expérience</p>,
+                <p key={uuidv4()}>Vous avez récupéré {action.payload.amount} {state.currentResource} et {action.payload.experience} point{action.payload.experience > 1 && 's'} d'expérience</p>,
                 ...state.logMessages.slice(0, 99),
               ],
           };
@@ -84,7 +84,6 @@ const jobs = (state = initialState, action = {}) => {
                 experiencePercentage: action.payload.newExpPercentage,
             };
           case UPDATE_MINE_RESOURCES:
-            console.log(action.payload.ores);
             return {
               ...state,
               resources: [
