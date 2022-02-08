@@ -34,7 +34,6 @@ const jobMiddleware = (store) => (next) => (action) => {
             store.dispatch(userAction);
             store.dispatch(updateFishingLevel(response.data.level.getjoblevelcharacter));
           };
-          // store.dispatch(setInventoryData(response.data));
           console.log(response);
         })
         .catch((error) => {
@@ -71,7 +70,6 @@ const jobMiddleware = (store) => (next) => (action) => {
             store.dispatch(userAction);
             store.dispatch(updateMiningLevel(response.data.level.getjoblevelcharacter));
           }
-          // store.dispatch(setInventoryData(response.data));
           console.log(response);
         })
         .catch((error) => {

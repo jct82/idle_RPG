@@ -10,6 +10,7 @@ const Objects = (object) => {
   const dispatch = useDispatch();
   const  selected  = useSelector(state => state.character.selected);
 
+  //poster details of equipment and highlight equipment thumb
   const posterEquipMenu = (e) => {
     dispatch(posterEquipment(object.name));
     activeThumb(e.currentTarget.parentElement.parentElement);
@@ -18,6 +19,7 @@ const Objects = (object) => {
   let equipObject;
   object.reserve == undefined ? equipObject = false : equipObject = true;
 
+  //poster details of object
   const updateDetails = (e) => {
     dispatch(setDetails(object));
   }
@@ -28,7 +30,7 @@ const Objects = (object) => {
         { equipObject ?
         <div className={`view-wrapper ${object.img_path}`} onClick={posterEquipMenu}></div> :
         <div className={`view-wrapper ${object.img_path}`} onClick={updateDetails}></div>}
-        { object.quantity && <div className="nbr">{object.quantity}</div>}
+        { object.quantity > 0 && <div className="nbr">{object.quantity}</div>}
         { object.statistique &&
         <div className="stat">{object.statistique}P</div>}
       </div>

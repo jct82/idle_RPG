@@ -8,6 +8,7 @@ const fightMiddleware = (store) => (next) => (action) => {
     case UPDATE_AFTER_FIGHT: {
       const characterId = localStorage.getItem('characterId');
       const foundToken = localStorage.getItem('profile');
+
       const config = {
         method: 'patch',
         url: '/fight',

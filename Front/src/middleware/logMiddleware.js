@@ -3,7 +3,7 @@ import { setCharacterData } from "../actions/character";
 import { GET_ITEMS } from "../actions/craft";
 import { SUBSCRIBE_USER, LOG_USER, LOGIN_USER, logUser, CHECK_USER, LOGOUT,} from "../actions/user";
 import { getMineNameAndLvl } from '../actions/mining';
-import { getPlayerStats, getMonster, getNewMonster } from '../actions/fight';
+import { getMonster, getNewMonster } from '../actions/fight';
 import API from './api';
 import { getFishNameAndLvl } from '../actions/fishing';
 
@@ -22,12 +22,10 @@ const logMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
             store.dispatch(setCharacterData(response.data.character));
             store.dispatch(getMonster(response.data.entities));
             store.dispatch(getNewMonster(false));
-            store.dispatch(getPlayerStats(response.data.character.attributes));
             store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
             store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));
             store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
@@ -53,25 +51,19 @@ const logMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
-            console.log(response.data.character);
-            
             store.dispatch(setCharacterData(response.data.character));
             store.dispatch(getMonster(response.data.entities));
             store.dispatch(getNewMonster(false));
-            store.dispatch(getPlayerStats(response.data.character.attributes));
             store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
             store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));
             store.dispatch(logUser(response.headers.authorization, response.data.user.name, response.data.user.id));
             localStorage.setItem('characterId', response.data.character.id);
           }
-          console.log(response);
         })
         .catch((error) => {
           console.log(error);
-          // store.dispatch(loginErrors(error.response.data));
-        });
+        })
       next(action);
       break;
     }
@@ -88,7 +80,6 @@ const logMiddleware = (store) => (next) => (action) => {
       };
       API(config)
       .then((response) => {
-        console.log(response);
         if (response.headers.authorization) {
           const newToken = response.headers.authorization;
           const foundName = JSON.parse(localStorage.getItem('name'));
@@ -101,20 +92,17 @@ const logMiddleware = (store) => (next) => (action) => {
           };
           console.log(response);
 
-            store.dispatch(setCharacterData(response.data.character));
-            store.dispatch(getMonster(response.data.entities));
-            store.dispatch(getNewMonster());
-            store.dispatch(getPlayerStats(response.data.character.attributes));
-            store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
-            store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));
-            localStorage.setItem('characterId', response.data.character.id);
+          store.dispatch(setCharacterData(response.data.character));
+          store.dispatch(getMonster(response.data.entities));
+          store.dispatch(getNewMonster());
+          store.dispatch(getMineNameAndLvl(response.data.character.jobs[0]));
+          store.dispatch(getFishNameAndLvl(response.data.character.jobs[1]));
+          localStorage.setItem('characterId', response.data.character.id);
         }
-        })
-        .catch((error)=> {
-          console.log(error);
-        })
-
-
+      })
+      .catch((error)=> {
+        console.log(error);
+      })
       break;
     case LOGOUT:
       next(action);

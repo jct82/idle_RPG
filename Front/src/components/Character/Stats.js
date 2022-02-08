@@ -13,25 +13,22 @@ export default function Stats() {
     gold,
     level,
     exp,
+    exp_up,
+    exp_floor,
     points, 
     pointsendurance,
     pointsforce,
     pointsdextérité,
   } = useSelector((state) => state.character);
 
-  const lifeCount = () => {
-    dispatch(lifePoints());
-  };
-
+  //champ contrôlé pour répartition des points dans les stats de performance du personnage
   const nbrField = (e) => {
     dispatch(updateNbrField(Number(e.target.value), e.target.name, Number(e.target.getAttribute('min')), Number(e.target.getAttribute('max'))));
   }
-
+  //ajout points de stats dans performances du personnage
   const addPoint = (e) => {
     dispatch(sparePoints(e.target.getAttribute('stat-type'), Number(e.target.previousElementSibling.value), Number(e.target.getAttribute('stat-id'))));
   }
-
-  
 
   return (
     <div className="container-stat">
@@ -47,7 +44,7 @@ export default function Stats() {
         </li>
         <li className="stat-block stat-experience">
           <div className="gauge">
-            <div className="filled" style={{ width: `${exp}%` }}></div>
+            <div className="filled" style={{ width: `${((exp - exp_floor) / (exp_up - exp_floor)) * 100}%` }}></div>
             <div className="info-gauge">
               <span>Experience</span>
               <span>{exp}</span>

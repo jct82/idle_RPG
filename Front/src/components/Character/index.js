@@ -2,7 +2,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import characterData from "../../../data/character";
-import { setInventoryObjects, posterCategory, posterEquipment, getAllitems } from "../../actions/character";
+import { posterCategory, posterEquipment } from "../../actions/character";
 import Objects from "../Object";
 import Details from "./details";
 import Equipment from "./equipment";
@@ -17,20 +17,17 @@ const Inventory = () => {
   const { inventory, posterCat, posterEquip, detailsObj, selected, equipments } = useSelector(
     (state) => state.character
   );
-  
-  useEffect(() => {
-    dispatch(getAllitems());
-  }, []);
 
-  console.log('inventory', inventory);
-  const jsxRessource = inventory.ressource.map((object) => {if (object.quantity > 0) return <Objects key={object.name} {...object} type="ressources" />});
-  const jsxVivre = inventory.consommable.map((object) => {if (object.quantity > 0) return <Objects key={object.name} {...object} type="consommable" />});
+  //création objets JSX pour afficher les catégories dans l'inventaire
+  const jsxRessource = inventory.ressource.map((object) => <Objects key={object.name} {...object} type="ressources" />);
+  const jsxVivre = inventory.consommable.map((object) => <Objects key={object.name} {...object} type="consommable" />);
   const jsxEquipement = inventory.equipment.map((object) => {
     object.quantity = 0;
     object.reserve.forEach(equip => {object.quantity += equip.quantity});
     return(<Objects key={object.name} {...object}/>);
   });
 
+  //création object JSX pour afficher les catégories d'équipement dans l'inventaire
   let jsxHelmet = [],
     jsxArmor = [],
     jsxWeapon = [],
@@ -58,17 +55,16 @@ const Inventory = () => {
       ));
     }
   });
-
+  //trier arme par type
   jsxWeapon.sort((a, b) => a.type - b.type);
-
+  //menu affichage des catégories dans le panneau d'inventaire
   const posterCatMenu = (e) => {
     dispatch(posterCategory(e.currentTarget.getAttribute("name")));
     if (e.currentTarget.getAttribute("name") != 'equipement') dispatch(posterEquipment(''));
     activeThumb(e.currentTarget);
   };
-
+  //création object JSX pour afficher des équipements portés
   const JSXaccessories = Object.keys(equipments).map(function(key) {
-    console.log(inventory.equipment);
     let equipType = inventory.equipment.find(item => item.name == key);
     let equipObj = equipType.reserve.find(item => item.item_id == equipments[key]);
     if (equipObj !== undefined) {

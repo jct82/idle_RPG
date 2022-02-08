@@ -9,16 +9,17 @@ const Details = ({object}) => {
   const { vie, equipments } = useSelector((state) => state.character);
   const dispatch = useDispatch();
 
+  //shut details window
   const shutDetails = () => {
     dispatch(closeDetails());
   }
-
+  //update equipment and stats after puting on some equipment
   const changeEquip = () => {
     dispatch(updateEquip(object.item_id, object.type));
   }
-  
+  //update inventory an life after consumming concommable object
   const consommer = () => {
-    dispatch(updateVivre(object.name,object.statistique));
+    dispatch(updateVivre(object.name, object.statistique, object.item_id));
   }
 
   return (

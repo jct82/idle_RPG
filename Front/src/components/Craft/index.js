@@ -17,29 +17,29 @@ const Craft = () => {
   }, []);
 
   const craftButtonOnClick = (e) => {
-      const currentRecipe = recipes.find((recipe) => recipe.id == e.target.id);
-      let nbrResource = 0;
-      currentRecipe.ingredients.forEach(substance => {
-        for (let i = 0; i < inventory.ressource.length; i++) {
-          if (substance.component_id == inventory.ressource[i].item_id && substance.quantity <= inventory.ressource[i].quantity) {
-            nbrResource++;
-          }
+    const currentRecipe = recipes.find((recipe) => recipe.id == e.target.id);
+    let nbrResource = 0;
+    currentRecipe.ingredients.forEach(substance => {
+      for (let i = 0; i < inventory.ressource.length; i++) {
+        if (substance.component_id == inventory.ressource[i].item_id && substance.quantity <= inventory.ressource[i].quantity) {
+          nbrResource++;
         }
-      });
-      if (nbrResource == currentRecipe.ingredients.length) {
-        // Limitation pour empêcher de spam la base de données
-        if (canCraft) {
-          dispatch(setCooldownCraft());
-          dispatch(sendCraftedItemToDb(currentRecipe.id, currentRecipe.ingredients[0].component_id, currentRecipe.ingredients[0].quantity));
-          dispatch(craftItem(currentRecipe));
-          setTimeout(() => {
-            dispatch(setCooldownCraft());
-          }, 2000);
-        };
-      } else {
-        // Si le joueur n'a pas assez de ressources
-        e.target.style.backgroundColor = 'red';
       }
+    });
+    if (nbrResource == currentRecipe.ingredients.length) {
+      // Limitation pour empêcher de spam la base de données
+      if (canCraft) {
+        dispatch(setCooldownCraft());
+        dispatch(sendCraftedItemToDb(currentRecipe.id, currentRecipe.ingredients[0].component_id, currentRecipe.ingredients[0].quantity));
+        dispatch(craftItem(currentRecipe));
+        setTimeout(() => {
+          dispatch(setCooldownCraft());
+        }, 2000);
+      };
+    } else {
+      // Si le joueur n'a pas assez de ressources
+      e.target.style.backgroundColor = 'red';
+    }
   };
   
   const fillRecipes = recipes.map(item => 
