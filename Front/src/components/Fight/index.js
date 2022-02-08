@@ -67,7 +67,7 @@ const Fight = () => {
           if(dropChance <= cmr.drop_rate) {
             dispatch(addLogMessageDrop(cmr.item_name, cmr.quantity));
           };
-          dispatch(updateAfterFight(cm.reward_exp, cm.reward_gold, dropChance <= cmr.drop_rate, cmr.item_id, vie, true, cmr.quantity, cmr.item_type_name, cmr.item_name));
+          dispatch(updateAfterFight(cm.reward_exp, cm.reward_gold, dropChance <= cmr.drop_rate, cmr.item_id, vie, true, cmr.quantity, cmr.item_type_name, cmr.item_name, cmr.item_desc, cmr.attributes));
           dispatch(autoMonsterSwitch ? getNewMonster(false, level) : getNewMonster(true, level));
           // Si le monstre n'a pas perdu de vie
         } else if (newLifeOfMonster >= currentMonsterHP) {

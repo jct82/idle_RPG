@@ -31,10 +31,10 @@ const Details = ({object}) => {
           {object.description}
         </div>
         <div className="quantity">Quantité : {object.quantity}</div>
+        { object.type != 'ressources' && <><div className="statistique">Stats : {object.statistique}</div></>}
         { object.type == 'consommable' && vie < 100 && <><button className="cta" onClick={consommer}>Consommer</button></>}
         { object.type != 'consommable' && object.type != 'ressources' && equipments[object.type] != object.item_id &&
-        <><div className="statistique">Stats : {object.statistique}</div>
-        <button className="cta" onClick={changeEquip}>Enfiler</button></>}
+        <><button className="cta" onClick={changeEquip}>Enfiler</button></>}
       </div>
   );
 };

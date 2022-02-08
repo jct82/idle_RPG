@@ -161,7 +161,7 @@
   position: relative;
   width: 362px;
   margin: 0 auto;
-  padding: 8px 12px;
+  padding: 12px;
   background: rgba(125,125,125,.5);
   border: 1px solid rgba(0,0,0,.164);
   border-radius: 10px;
@@ -185,6 +185,7 @@
   .details-view {
     width: 70px;
     height: 70px;
+    margin-bottom: 10px;
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
@@ -193,11 +194,11 @@
     margin-bottom: 10px;
   }
   .detail-description {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .quantity, .statistique{
-    margin-bottom: 15px;
+    margin-bottom: 12px;
   }
 }
 

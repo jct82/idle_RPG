@@ -322,7 +322,7 @@ const character = (state = initialState, action = {}) => {
         force: dataForce,
         endurance: dataEndurance,
         dextérité: dataDextérité,
-        vie: dataVie.value,
+        vie: dataVie.value > 100 ? 100 : dataVie.value,
         points: dataPoints.value,
         exp:action.data.exp,
         exp_up:action.data.exp_up,
@@ -548,16 +548,17 @@ const character = (state = initialState, action = {}) => {
       };
     case UPDATE_AFTER_FIGHT:
       //MAJ inventaire avec objets gagnés lors du combat
-      const changeInventory = (inventory, id, name, quantity) => {
+      const changeInventory = (inventory, id, name, quantity, desc, stat) => {
         if (inventory.find(obj => obj.item_id == id) == undefined) {
           //créer objet et l'ajouter dans l'inventaire si il n'y est pas
           let fightObj = {
             item_id: id,
             name: name,
             img_path: name.replace(/['"]+/g, "").replace(/\s/g, ""),
-            description: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+            description: desc,
             quantity: quantity,
           }
+          if (action.payload.obj_type != 'ressource') fightObj.statistique = stat;
           inventory.push(fightObj);
         } else {
           //si objet dans l'inventaire, augmenter sa quantité
@@ -575,12 +576,13 @@ const character = (state = initialState, action = {}) => {
       let fightInventory = state.inventory;
       if (action.payload.hasLoot) {
         //si objet gagner lors du combat MAJ inventaire
+        let stat = action.payload.attr.find(attr => (attr.name != 'niveau' && attr.name != 'prix'));
         if (action.payload.obj_type == 'consommable' || action.payload.obj_type == 'ressource') {
-          fightInventory[action.obj_type] = changeInventory(fightInventory[action.payload.obj_type], action.payload.itemId, action.payload.name, action.payload.quantity);
+          fightInventory[action.obj_type] = changeInventory(fightInventory[action.payload.obj_type], action.payload.itemId, action.payload.name, action.payload.quantity, action.payload.desc, stat.value);
         }  else {
           for (let i = 0; i < fightInventory.equipment.length; i++) {
             if (fightInventory.equipment[i].name == action.payload.obj_type) {
-              fightInventory.equipment[i] = changeInventory(fightInventory.equipment[i].reserve, action.payload.itemId, action.payload.name, action.payload.quantity);
+              fightInventory.equipment[i] = changeInventory(fightInventory.equipment[i].reserve, action.payload.itemId, action.payload.name, action.payload.quantity, action.payload.desc, stat.value);
               break;
             }
           }

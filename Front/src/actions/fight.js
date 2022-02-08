@@ -87,7 +87,7 @@ export const playerDeath = () => ({
   type: DEATH_OF_PLAYER,
 });
 
-export const updateAfterFight = (expValue, goldValue, hasLoot, itemId, newHp, hasWin, quantity, obj_type, name) => ({
+export const updateAfterFight = (expValue, goldValue, hasLoot, itemId, newHp, hasWin, quantity, obj_type, name, desc, attr) => ({
   type: UPDATE_AFTER_FIGHT,
   payload: {
     expValue,
@@ -99,6 +99,8 @@ export const updateAfterFight = (expValue, goldValue, hasLoot, itemId, newHp, ha
     quantity,
     obj_type,
     name,
+    desc,
+    attr,
   },
 });
 
