@@ -73,7 +73,7 @@ const fightMiddleware = (store) => (next) => (action) => {
           //   const userAction = logUser(newToken, foundName, foundId);
           //   store.dispatch(userAction);
           // }
-          console.log(response);
+          // console.log(response);
         })
         .catch((error) => {
           console.log(error);

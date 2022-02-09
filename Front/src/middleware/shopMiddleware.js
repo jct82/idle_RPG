@@ -22,7 +22,7 @@ const shopMiddleware = (store) => (next) => (action) => {
               const randomStuffs = response.data[randomNumber];
               // console.log(randomStuff);
               store.dispatch(randomStuff(randomStuffs));
-              console.log(randomStuffs);
+              // console.log(randomStuffs);
             }
           };
           // store.dispatch(allBuyableObject(response.data));
@@ -64,7 +64,7 @@ const shopMiddleware = (store) => (next) => (action) => {
             const userAction = logUser(newToken, foundName, foundId);
             store.dispatch(userAction);
           }
-          console.log(response);
+          // console.log(response);
         })
         .catch((error) => {
           console.log(error);

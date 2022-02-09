@@ -188,7 +188,7 @@ const character = (state = initialState, action = {}) => {
         },
       };
     case SET_CHARACTER_DATA:
-      console.log('action',action);
+      // console.log('action',action);
       //Récupérer inventaire de la BDD
       const feelObj = (id, name, img, desc, quantity) => {
         return {

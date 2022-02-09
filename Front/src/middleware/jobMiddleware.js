@@ -34,7 +34,7 @@ const jobMiddleware = (store) => (next) => (action) => {
             store.dispatch(userAction);
             store.dispatch(updateFishingLevel(response.data.level.getjoblevelcharacter));
           };
-          console.log(response);
+          // console.log(response);
         })
         .catch((error) => {
           console.log(error);
@@ -70,7 +70,7 @@ const jobMiddleware = (store) => (next) => (action) => {
             store.dispatch(userAction);
             store.dispatch(updateMiningLevel(response.data.level.getjoblevelcharacter));
           }
-          console.log(response);
+          // console.log(response);
         })
         .catch((error) => {
           console.log(error);

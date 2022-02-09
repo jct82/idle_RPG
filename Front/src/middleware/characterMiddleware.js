@@ -54,7 +54,7 @@ const characterMiddleware = (store) => (next) => (action) => {
       };
       API(config)
         .then((response) => {
-          console.log('response',response);
+          // console.log('response',response);
           if (response.status === 204) {
             if (response.headers.authorization) {
               const newToken = response.headers.authorization;
