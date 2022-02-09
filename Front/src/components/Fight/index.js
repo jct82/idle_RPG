@@ -92,7 +92,7 @@ const Fight = () => {
         const cmr = cm.rewards_items[0];
         const newLifeOfPlayer = vie - (currentMonster.attributes[1].value - endurance);
         if (newLifeOfPlayer <= 0) {
-          dispatch(updateAfterFight(0, 0, false, cmr.item_id, 0, false, cmr.quantity));
+          dispatch(updateAfterFight(0, 0, false, 0, false, cmr));
           dispatch(receiveDamage(0));
           dispatch(playerDeath());
           // Si le joueur n'a pas perdu de vie

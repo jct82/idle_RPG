@@ -574,7 +574,10 @@ const character = (state = initialState, action = {}) => {
         return inventory;
       }
       //si combat perdu il se passe rien
-      if (!action.hasWin) return state;
+      if (!action.hasWin) return {
+        state,
+        vie: 0,
+      };
 
       let fightInventory = state.inventory;
       if (action.hasLoot) {
